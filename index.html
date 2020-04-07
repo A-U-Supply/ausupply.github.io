@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AU.Supply</title>
+    <script src="https://unpkg.com/webamp@1.4.0/built/webamp.bundle.min.js"></script>
+  </head>
+
+  <body background="https://archive.org/download/au_immalerria-draft/au_immalerria-draft.jpg" style='background-size: 70%; background-position: center' >
+
+    <h1>IMMALERRIA</h1>
+    <h2>e.SSSTDyIT</h2>
+
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="log.html">Log</a></li>
+      <li><a href="modes.hmtl">Modes</a></li>
+      <li><a href="connect.html">Connect</a></li>
+    </ul>
+
+    <!-- Webamp Player -->
+    <div id="app" style="height: 50vh">
+        <!-- Webamp will attempt to center itself within this div -->
+    </div>
+    <script>
+        const Webamp = window.Webamp;
+        new Webamp({
+            initialTracks: [
+            	{"url": "http://archive.org/download/au_immalerria-draft/01 ellcom.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/02 ....mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/03 Singing in a Car.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/04 Shaker.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/05 Split1.3.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/06 Thread.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/07 Dead Animal.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/08 yzarC tonK.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/09 Immalerria.mp3"},
+                {"url": "http://archive.org/download/au_immalerria-draft/10 Tearing.mp3"}
+            ],
+        }).renderWhenReady(document.getElementById('app'));
+    </script>
+    <!-- ENDOF Webamp Player -->
+
+  </body>
+</html>
