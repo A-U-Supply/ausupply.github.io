@@ -138,7 +138,17 @@ div.ex2 {background-color: darkgrey;
 
       <hr color=black size=4px>
 
-    </div>
+    <button onclick="myFunction()">Last Modified</button>
+
+<p id="date"></p>
+
+<script>
+function myFunction() {
+  var x = document.lastModified;
+  document.getElementById("date").innerHTML = x;
+}
+</script>
+
   </body>
 <!DOCTYPE html>
 <html>
