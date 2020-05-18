@@ -27,6 +27,10 @@
             margin-top: 10px;
             margin-right: 10px;
         }
+	.wrapper:hover h1{
+            transition: all 0.4s ease;
+            transform: scaleY(-1);
+        }
         #titlebackwards {
 	    transform: rotateX(150deg);
 	    margin-top: 0px;
@@ -39,7 +43,7 @@
 
   <body bgcolor="#C1C1C1">
     <img id=logo src="/img/logo.png">
-      <div id="titlebackwards"><h1>A-U.Supply</h1></div>
+      <div class="wrapper"><div id="titlebackwards"><h1>A-U.Supply</h1></div></div
     <div id="content">
 	        <hr class="hrline" color=black size=4px>
       <h3 style="float: left; width: 34%; text-align: left;">A-U# 01</h3>
@@ -51,7 +55,7 @@
 
 <style>
 table, td, td {
-  border: 1px solid maroon;
+  border: 1px solid blue;
 }
 </style>
 <style>
