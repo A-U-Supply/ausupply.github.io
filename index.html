@@ -16,10 +16,30 @@
         body {
             font-family: 'Source Code Pro', monospace;
         }
-        #content {
-            max-width: 900px;
-            margin-top: 0px;
-            float: left;
+        {
+          box-sizing: border-box;
+        }
+        .column {
+          float: left;
+        }
+        .left {
+          width: 6%;
+        }
+        .right {
+          width: 24%;
+          float: left;
+          height: 2700px;
+        }
+        .middle {
+          width: 70%;
+          max-width: 900px;
+          margin-top: 0px;
+          float: left;
+        }
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
         }
         #logo {
             width: 70px;
@@ -36,7 +56,7 @@
             margin-top: 0px;
         }
         table, td, td {
-            border: 1px solid blue;
+            border: 1px solid #21a0db;
         }
         tr:hover {background-color:#C1C1C1;}
   hr.hrline {
@@ -44,31 +64,31 @@
         }
         div.ex1 {
   background-color: #ccff00;
-  width: 384px;
+  width: 357px;
   height: 400px;
   overflow: scroll;
 }
 div.ex2 {background-color: darkgrey;
          opacity: 0.5;}
+        
+p.ex2 { 
+  padding: 15px;
+
     </style>
   </head>
 
   <body bgcolor="#A4A4A4">
+
+    <div class="row">
+  <div class="column left" style="background-color:#A4A4A4;">
     <img id=logo src="/img/logo.png">
+  </div>
+  <div class="column middle" style="background-color:#A4A4A4;">
       <div class="wrapper"><div id="titlebackwards"><h1>A-U.Supply</h1></div></div>
-    <div id="content">
           <hr class="hrline" color=black size=4px>
       <h3 style="float: left; width: 34%; text-align: left;">A-U# 01</h3>
       <h3 style="float: left; width: 33%; text-align: center;">Eonnot: Erkind NOS</h3>
       <h3 style="float: left; width: 33%; text-align: right;">4.15.20</h3>
-<br>
-
-<p>
-
-<style>
-p.ex2 { 
-  padding: 15px;
-</style>
 
 <table style="height:200px">
   <tr>
@@ -138,8 +158,10 @@ function myFunction() {
   document.getElementById("date").innerHTML = x;
 }
 </script>
-<pre>
-                         
+</div>
+<div class="column right" style="background-color:#A4A4A4;">
+    <pre>
+        
              
                
               :   :/  .'   
@@ -171,9 +193,10 @@ function myFunction() {
            `:_____A_____>
 
 
+
 </pre>
+</div>
+</div>
 
-
-  </body>
-
+</body>
 </html>
