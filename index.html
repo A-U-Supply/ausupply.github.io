@@ -24,9 +24,6 @@
             position: relative;
             font-family: 'Source Code Pro', monospace;
         }
-        {
-          box-sizing: border-box;
-        }
         .column {
           float: left;
         }
@@ -74,7 +71,8 @@
             transform: scaleY(-1);
         }
         .overlay {
-            margin-top: 150;
+            position: absolute;
+            margin-top: -150;
             margin-right: 350;
             z-index: 100;
             opacity: 0.5;
