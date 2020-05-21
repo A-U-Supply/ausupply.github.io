@@ -9,7 +9,7 @@
     <link rel="icon" href="https://ausupply.github.io/img/logo.png">
     <link rel="list" href="https//ausupply.github.io/img/list4.png">
     <link rel="dog" href="https//ausupply.github.io/img/dog.png">
-    
+    <link rel="dog" href="https//ausupply.github.io/img/yellowshape.png">
 
 
     <title>A-U.Supply</title>
@@ -68,6 +68,14 @@
         .wrapper:hover h1{
             transition: all 0.4s ease;
             transform: scaleY(-1);
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 10;
         }
         #titlebackwards {
             transform: rotateX(150deg);
@@ -170,6 +178,7 @@ a.ani {
     <img id=list src="/img/list4.png">
 
   </div>
+  <div class="overlay"><img id=yellowshape src="/img/yellowshape.png"></div>
   <div class="column middle" style="background-color:#A4A4A4;">
       <div class="wrapper"><div id="titlebackwards"><h1>A-U.Supply</h1></div></div>
           <hr class="hrline" color=black size=4px>
