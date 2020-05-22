@@ -165,13 +165,13 @@ a.ani {
 } 
     </style>
     
-    <script>
+      <script>
     let currentDroppable = null;
 
     yellowshape.onmousedown = function(event) {
 
-      let shiftX = event.clientX - ball.getBoundingClientRect().left;
-      let shiftY = event.clientY - ball.getBoundingClientRect().top;
+      let shiftX = event.clientX - yellowshape.getBoundingClientRect().left;
+      let shiftY = event.clientY - yellowshape.getBoundingClientRect().top;
 
       yellowshape.style.position = 'absolute';
       yellowshape.style.zIndex = 1000;
@@ -192,6 +192,16 @@ a.ani {
         yellowshape.hidden = false;
 
         if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
           }
         }
       }
@@ -204,10 +214,6 @@ a.ani {
       };
 
     };
-
-    function leaveDroppable(elem) {
-      elem.style.background = '';
-    }
 
     yellowshape.ondragstart = function() {
       return false;
