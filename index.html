@@ -71,7 +71,8 @@
             transform: scaleY(-1);
         }
         #yellowshape {
-            position: absolute;
+            position: -webkit-sticky;
+            position: sticky;
             left: 350px;
             top: 200px;
             z-index: 20;
@@ -170,7 +171,7 @@ a.ani {
   </head>
 
   <body bgcolor="#A4A4A4">
-<img id=yellowshape src="/img/yellowshape.png">
+<img id=yellowshape class=sticky src="/img/yellowshape.png">
     <div class="row">
   <div class="column left" style="background-color:#A4A4A4;">
     <img id=logo src="/img/logo.png">
