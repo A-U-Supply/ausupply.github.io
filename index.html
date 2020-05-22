@@ -68,7 +68,7 @@
             transform: scaleY(-1);
         }
         #yellowshape {
-            position: sticky;
+            cursor: pointer;
             left: 350px;
             top: 200px;
             z-index: 20;
@@ -163,6 +163,55 @@ a.ani {
     opacity: 0;
   }
 }
+<script>
+    let currentDroppable = null;
+
+    yellowshape.onmousedown = function(event) {
+
+      let shiftX = event.clientX - ball.getBoundingClientRect().left;
+      let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+      yellowshape.style.position = 'absolute';
+      yellowshape.style.zIndex = 1000;
+      document.body.append(yellowshape);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        yellowshape.style.left = pageX - shiftX + 'px';
+        yellowshape.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        yellowshape.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        yellowshape.hidden = false;
+
+        if (!elemBelow) return;
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      yellowshape.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        yellowshape.onmouseup = null;
+      };
+
+    };
+
+    function leaveDroppable(elem) {
+      elem.style.background = '';
+    }
+
+    yellowshape.ondragstart = function() {
+      return false;
+    };
+  </script>
+      
     </style>
   </head>
 
