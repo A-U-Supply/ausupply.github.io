@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -21,7 +20,7 @@
         html body { position: relative; 
                     top: -157px;
                     margin-left: 0px;
-                    height: 2500px;
+                    height: 2800px;
                     min-width: 1100px;
                     margin-top: 0;
                     margin-bottom: 0;
@@ -51,7 +50,7 @@
             width: 70px;
         }
         #list {
-          margin-top; -40;
+          margin-top; -20;
           width: 30px;
           float: left;
         }
@@ -62,6 +61,12 @@
         .wrapper:hover h1{
             transition: all 0.4s ease;
             transform: scaleY(-1);
+        }
+        #whiteshape {
+            position: sticky;
+            left: 710px;
+            top: 50px;
+            z-index: 1;
         }
         #titlebackwards {
             transform: rotateX(150deg);
@@ -138,11 +143,57 @@
             letter-spacing: 10px;
             text-indent: 120px;
         }
+a.ani {
+  -moz-animation-duration: 400ms;
+  -moz-animation-name: blink;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: alternate;
+  
+  -webkit-animation-duration: 400ms;
+  -webkit-animation-name: blink;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  
+  animation-duration: 400ms;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
 
+@-moz-keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
     </style>
   </head>
 
   <body bgcolor="#A4A4A4">
+<img id=whiteshape class=sticky src="/img/whiteshape.png">
     <div class="row">
   <div class="column left" style="background-color:#A4A4A4;">
     
