@@ -19,7 +19,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <style>
-        html body { position: relative; 
+        html body { position: relative;
+                    top: -14px;
                     min-width: 1100px;
                     margin-left: 0px;
                     margin-bottom: 0;
@@ -35,8 +36,9 @@
         }
         .left {
           width: 12%;
+          margin-top: 0;
         }
-        .middle {
+          .middle {
           width: 80%;
           max-width: 900px;
           margin-top: 0px;
@@ -131,7 +133,59 @@
             letter-spacing: 10px;
             text-indent: 120px;
         }
+   a.ani {
+            position: fixed;
+            top: 25%;
+            left: 77%;
+            margin-left: -150px;
+            margin-top: -100px;
+            z-index: 10;
+      
+  -moz-animation-duration: 400ms;
+  -moz-animation-name: blink;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: alternate;
+  
+  -webkit-animation-duration: 400ms;
+  -webkit-animation-name: blink;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  
+  animation-duration: 400ms;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
 
+@-moz-keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
     </style>
   </head>
 
@@ -223,7 +277,22 @@ function myFunction() {
 </script>
 
 </div>
-
+<pre><a class="ani"; href="#">
+             
+               
+              :   :/  .'   
+         \ 3 ;-.'     
+           .--..__/     4`.    
+         .' --"""".'`o \   
+        /   `   0;  
+       :    \      :  
+        .-;     -. `.__.-'  
+         2 :  ;5         \,;       
+       '._:        ; 3 :(        
+        \/.__    ;    \ `-.     
+         ;"-,/_..--"`-_)    
+         '""--.._:1
+</a></pre> 
 
 </div>
 </body>
