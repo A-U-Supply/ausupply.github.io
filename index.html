@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <!--
                                     .-')                  _ (`-.                        
-                                   ( OO ).                 (OO  )                       
+                                   ( OO ).                 (O0  )                       
     . --.           ,--. ,--.     (_)---\_) ,--. ,--.   _.`     \ _....--   ,--.       ,--.   ,--.
-   |  -.  \         |  | |  |     /    _ |  |  | |  |  (__...--'' (   __ '' |  |        \  `.'  / 
-  ' '  |  |         |  | | .-')   \  :`     |  | |  -   |  /  | | |  /  | | |  |         )     /  
-  | |_.'  | ,------.|  | |( OO )   '..`''.  |  | |  (   |  |_.' | |  |_.' | |  |          \   /   
+   |  -.  \         |  | |  |     /    _ |  |  | |  |  (__...--'' (   __ '' |  |.-')    \  `.'  / 
+  ' '  |  |         |  | | .-')   \  :`     |  | |  -   |  /  | | |  /  | | |  | 00 )    )     /  
+  | |_.'  | ,------.|  | |( OO )   '..`''.  |  | |  (   |  |_.' | |  |_.' | |  |`-'       \   /   
   |  .-.  | '------'|  | | `-' /  .-._)   \ |  | |  .   |  .___.' |  .___.' |  '---.      /  / 
   |  | |  |         '  '-'(_.-'.-.\       / '  '-'  (   |  |      |  |      |      |     /  / 
   `--' `--'          `-----'   `-' `-----'   `-----'    `--'      `--'      `------'    `--'  
@@ -42,6 +42,7 @@
             font-family: 'Source Code Pro', monospace;
             overflow: auto
         }
+      
         .column {
           float: left;
         }
@@ -146,7 +147,7 @@
         }
         #overlay  {
             position: fixed;
-            left: 45%;
+            left: 43%;
             top: 20%;
             margin-left: -50px;
             margin-top: -400px
@@ -294,15 +295,14 @@ m. I - H n g n m III II r'\\l m I... l .u urna
 
 
       <hr class="hrline2" color=black size=4px>
-    <p align="center"><img id=logo src="/img/logo.png"></p>
-    <p align="center"><button onclick="myFunction()">Last Modified</button></p>
+    
+    <p align="center"><p align="center"><img id=logo src="/img/logo.png" onclick="myFunction()" />
 
-<p id="date" align="center"></p>
+      <script>
+window.onclick = myFunction;
 
-<script>
 function myFunction() {
-  var x = document.lastModified;
-  document.getElementById("date").innerHTML = x;
+  document.getElementsByTagName("body")[0].style.backgroundColor = "black";
 }
 </script>
 
@@ -360,7 +360,6 @@ function myFunction() {
 　
 　　　　　⎳　　　⎳
 ⠀</div></pre>
-
 </div>
 </body>
 </html>
