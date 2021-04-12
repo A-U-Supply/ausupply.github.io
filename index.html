@@ -46,18 +46,74 @@ filter: blur(0);
    width: 300px;
    height: 100%;
    margin: 20px 20px;
-   text-align: center;
+    text-align: center;}
+      
+  a.ani {
+            position: fixed;
+            top: 25%;
+            left: 30%;
+            margin-left: -150px;
+            margin-top: -100px;
+            z-index: 10;
+            color: #0000ff;
+            transform: rotate(20deg);
+      
+  -moz-animation-duration: 400ms;
+  -moz-animation-name: blink;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: alternate;
+  
+  -webkit-animation-duration: 400ms;
+  -webkit-animation-name: blink;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  
+  animation-duration: 400ms;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@-moz-keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  
+  to {
+    opacity: 0;
+  }
+}
 
 </style>
   
 </head>
 <body>
-  
+  <a class="ani"; href="#"><img src="/img/noise.png"></a>
   <div id="main">
   <div style="background-color:coral;" ><pre>  
   
   
-  </pre></div>
+ </pre></div>
   <div style="background-color:lightblue;"> <div class="wrapper"><div id="titlebackwards"><h1>A-U.Supply</h1></div></div></div>
   <div style="background-color:khaki;"><img src="/img/elmers-glue.png"><img src="/img/logo4.png" alt="" width="64" height="64"><a href="/contact.html"><img src="/img/logo3.png" alt="" width="64" height="64"></a></div>
   <div style="background-color:pink;"><img src="/img/notebook-paper.png"><a href="/audex.html"><img src="/img/logo.png" alt="" width="76" height="64"></a>
