@@ -1,1 +1,51 @@
 
+<!DOCTYPE html>
+<head>
+  
+  p {
+  text-align: center;
+  font-size: 200%;
+  margin-top: 0px;
+}
+  
+const DAYS = 24 * 3600 * 1000;
+
+const countdowns = [{
+    id: "mcReset",
+    timestamp: new Date("Oct 14, 2019 9:28:00").getTime(),
+    interval: 7 * DAYS
+  },
+  {
+    id: "onyReset",
+    timestamp: new Date("Oct  17, 2019 12:00:00").getTime(),
+    interval: 5 * DAYS
+  },
+  {
+    id: "demo",
+    timestamp: new Date(new Date().getTime() + 5000).getTime(),
+    interval: 5000
+  }
+];
+
+setInterval(() => {
+  const now = new Date().getTime();
+  countdowns.forEach(c => {
+    while (c.timestamp < now) c.timestamp += c.interval; // set target to future date
+    const tSecs = Math.floor((c.timestamp - now) / 1000);
+    const secs = tSecs % 60;
+    const tMins = (tSecs - secs) / 60;
+    const mins = tMins % 60;
+    const tHours = (tMins - mins) / 60;
+    const hours = tHours % 24;
+    const days = (tHours - hours) / 24;
+    document.getElementById(c.id).textContent = `${days}d ${hours}h ${mins}m ${secs}s`;
+  });
+}, 1000);
+</head>
+                             
+<body>
+  <p id="mcReset"></p>
+<p id="onyReset"></p>
+<p id="demo"></p>
+</body>
+  </html>
