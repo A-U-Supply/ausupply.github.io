@@ -7,13 +7,14 @@
 body {font-family: Verdana, sans-serif; margin:0}
 .mySlides {display: none}
 img {vertical-align: middle;}
+  
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 334px;
+  max-width: 434px;
   position: relative;
   margin: auto;
-  z-index: -1;
+
 }
 
 /* Next & previous buttons */
@@ -76,6 +77,7 @@ div.gallery {
   border: 1px solid #ccc;
   float: left;
   width: 180px;
+  z-index: 1;
 }
 
 div.gallery:hover {
@@ -98,17 +100,17 @@ div.desc {
 
 <div class="mySlides fade">
   <img src="/CSimages/CS108.jpg" style="width:100%">
-  <div class="text">Caption Text</div>
+  <div class="text">CS108</div>
 </div>
 
 <div class="mySlides fade">
   <img src="/CSimages/CS106.jpg" style="width:100%">
-  <div class="text">Caption Two</div>
+  <div class="text">CS106</div>
 </div>
 
 <div class="mySlides fade">
   <img src="/CSimages/CS103.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
+  <div class="text">CS103</div>
 </div>
 
 <a class="prev" onclick="plusSlides(-1)">❮</a>
