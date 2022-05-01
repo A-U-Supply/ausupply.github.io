@@ -95,11 +95,22 @@ filter: blur(0);
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+  
+.aimless {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    border: 2px solid red;
+    position: absolute;
+    top: 100px; left: 100px;
+    z-index: 5;
+}
 
 </style>
   
 </head>
 <body>
+  <div class="aimless"><img src="/img/dismantiling_the_sun.png" alt="" width="300" height="300"></div>
   <div id="main">
   <div style="background-color:coral;" ><pre>  
   
@@ -140,6 +151,25 @@ window.onclick = function(event) {
     }
   }
 }
+$(function() {
+  var timeout;
+
+  function moveAimlessly() {
+    $(".aimless").each(function() {
+      $(this).stop().animate({
+        top: Math.floor(Math.random() * 2) == 1 ? "+=" + Math.floor(Math.random() * 41).toString() : "-=" + Math.floor(Math.random() * 41).toString(),
+        left: Math.floor(Math.random() * 2) == 1 ? "+=" + Math.floor(Math.random() * 41).toString() : "-=" + Math.floor(Math.random() * 41).toString()
+      }, 4000);
+    });
+    timeout = setTimeout(moveAimlessly, 4000);
+  }
+  moveAimlessly();
+
+  $(".aimless").on("hover", function() {
+    clearTimeout(timeout);
+    $(".aimless").stop();
+  });
+});
 </script>
 
 </body>
