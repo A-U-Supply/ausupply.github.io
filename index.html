@@ -149,25 +149,6 @@ window.onclick = function(event) {
     }
   }
 }
-$(function() {
-  var timeout;
-
-  function moveAimlessly() {
-    $(".aimless").each(function() {
-      $(this).stop().animate({
-        top: Math.floor(Math.random() * 2) == 1 ? "+=" + Math.floor(Math.random() * 41).toString() : "-=" + Math.floor(Math.random() * 41).toString(),
-        left: Math.floor(Math.random() * 2) == 1 ? "+=" + Math.floor(Math.random() * 41).toString() : "-=" + Math.floor(Math.random() * 41).toString()
-      }, 4000);
-    });
-    timeout = setTimeout(moveAimlessly, 4000);
-  }
-  moveAimlessly();
-
-  window.onload = function() {
-  yourFunction(param1, param2);
-};
-  });
-});
 </script>
 
 </body>
