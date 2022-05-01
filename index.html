@@ -99,8 +99,6 @@ filter: blur(0);
 .aimless {
     width: 100px;
     height: 100px;
-    background: blue;
-    border: 2px solid red;
     position: absolute;
     top: 100px; left: 100px;
     z-index: 5;
@@ -165,9 +163,9 @@ $(function() {
   }
   moveAimlessly();
 
-  $(".aimless").on("hover", function() {
-    clearTimeout(timeout);
-    $(".aimless").stop();
+  window.onload = function() {
+  yourFunction(param1, param2);
+};
   });
 });
 </script>
