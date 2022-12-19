@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chaotic Home Page</title>
+	<style>
+		/* Add some style to the page */
+		body {
+			background-color: black;
+			color: white;
+			font-family: sans-serif;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		.text {
+			font-size: 36px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		.image {
+			display: block;
+			margin: 0 auto;
+			max-width: 100%;
+			height: auto;
+			border: 10px solid white;
+			border-radius: 10px;
+			box-shadow: 0 0 10px white;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1 class="text">Welcome to the Chaos!</h1>
+		<!-- Add a random image to the page -->
+		<img class="image" src="https://picsum.photos/800/600?random=1" alt="Random Image">
+	</div>
+	<script>
+		// Use JavaScript to change the text color every 500 milliseconds
+		setInterval(function() {
+			var textElements = document.getElementsByClassName('text');
+			for (var i = 0; i < textElements.length; i++) {
+				textElements[i].style.color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+			}
+		}, 500);
+	</script>
+</body>
+</html>
