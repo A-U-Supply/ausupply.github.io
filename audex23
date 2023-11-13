@@ -1,0 +1,217 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>Audex 2023</title>
+ <link rel="stylesheet" type="text/css" href="vcfmw.css">
+ <script async="" src="//www.google-analytics.com/analytics.js"></script><script>
+  function startTime() {
+   var today = new Date();
+   var h = today.getHours();
+   var m = today.getMinutes();
+   var s = today.getSeconds();
+   h = checkTime(h);
+   m = checkTime(m);
+   s = checkTime(s);
+   document.getElementById('clock').innerHTML =
+   h + ":" + m + ":" + s;
+   var t = setTimeout(startTime, 500);
+   document.onkeydown = fkeys;
+  }
+ function checkTime(i) {
+  if (i < 10) {i = "0" + i};
+  return i;
+ }
+ 
+ function fkeys(key_event) {
+			if (!key_event) {
+				key_event = window.event;
+			}
+			var key;
+			if (key_event.which) {
+				key = key_event.which;
+//				key_event.preventDefault();
+			} else if (key_event.keyCode) {
+				key = key_event.keyCode;
+//				key_event.preventDefault();
+			}
+			switch (key) {
+//              case 38:   //Up
+//					window.scrollBy(-20);
+//					break;
+//				case 40:   //Down
+//					window.scrollBy(20);
+//					break;
+				case 33:  //PgUp
+					window.history.back();
+					break;
+				case 34:  //PgDn
+					window.history.forward();
+					break;
+				case 112:  //F1
+					window.location.href="index.html";
+					break;
+				case 113:  //F2
+					window.location.href="hotel.html";
+					break;
+				case 114:  //F3
+					window.location.href="donate.html";
+					break;
+				case 115:  //F4
+					window.location.href="ex.html";
+					break;
+				case 116:  //F5
+					window.location.href="talks.html";
+					break;
+				case 117:  //F6
+					window.location.href="signup.html";
+					break;
+				case 118:  //F7
+					window.location.href="past.html";
+					break;
+				case 119:  //F8
+//					window.location.href="";
+					break;
+				case 120:  //F9
+					window.location.href="sponsor.html";
+					break;
+				case 121:  //F10
+//					window.location.href="";
+					break;
+				case 122:  //F11
+					window.focus()
+					window.location.href="faq.html";
+					break;
+				case 123:  //F12
+					window.location.href="friends.html";
+					break;
+				default:
+					key_event.cancelBubble = false;
+					return;
+			}
+			key_event.preventDefault();
+			return;
+		}
+		
+</script>
+</head>
+<body bgcolor="444455" onload="startTime()">
+<center>
+
+<table width="1024" height="25" border="0">
+<tbody><tr align="center">
+<!-- <td><h2>HEADER GFX HERE</h2></td> -->
+</tr>
+</tbody></table>
+
+<table width="1300" height="975" class="master">
+<tbody><tr><td align="center">
+
+<table width="1024" height="675" border="0">
+<!--- <tr height=25 valign=top><td colspan=3></td></tr> -->
+<tbody><tr valign="top" height="25">
+ <td width="33%" align="left"> <font color="bb9c00"> <div id="clock">22:06:59</div> </font> </td>
+ <td width="33%" align="center">
+  <span class="inv">VCFMW e-Business Console</span>
+ </td>
+ <td width="33%" align="right">
+ <p id="vcftimer">VCF IN OVER :(</p>
+<script>
+var countDownDate = new Date("Dec 31, 2023 09:00:00").getTime();
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  document.getElementById("vcftimer").innerHTML = "<font color=bb9c00>" + days + ":" + ("0"+hours).slice(-2) + ":" + ("0"+minutes).slice(-2) + ":" + ("0"+seconds).slice(-2) + "</font>";
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("vcftimer").innerHTML = "VCF IN OVER :(";
+  }
+}, 1000);
+</script>
+ </td>
+</tr>
+<tr height="200" valign="top">
+ <td colspan="3" align="">
+
+<br>
+<center>V I N T A G E&nbsp;&nbsp;C O M P U T E R&nbsp;&nbsp;F E S T I V A L&nbsp;&nbsp;M I D W E S T&nbsp;&nbsp;1 4</center>
+<pre> 
+                                                         // MM     MM MM      WW
+                                                        //  MMM   MMM WW  WW  WW    
+                         VV     VV  CCCCCC  FFFFFFFF   //   MMMM MMMM WW  WW  WW
+                         VV     VV CC    CC FF        //    MM MMM MM WW  WW  WW
+                          VV   VV  CC       FFFFFF   //     MM     MM WW  WW  WW
+                           VV VV   CC    CC FF      //      MM     MM WW  WW  WW
+                            VVV     CCCCCC  FF     //       MM     MM  WWW  WWW 
+						   
+</pre>
+<center>S E P T E M B E R&nbsp;&nbsp;14 - 15&nbsp;&nbsp;2019&nbsp;&nbsp;&nbsp;E L M H U R S T, I L<br>
+[ SATURDAY 9:00-MIDNIGHT SUNDAY 9-3 ]</center><br>
+ </td>
+</tr>
+<tr valign="top"><td colspan="3" align="center">The fourteenth edition of <b>VCF Midwest</b> took place at <a target="_" href="http://waterfordbanquet.com"><u>Waterford Banquets</u></a>/<a target="_" href="https://www.clarioninnelmhurst.com"><u>Clarion Inn</u></a>, 933 S. Riverside Drive, Elmhurst, IL in conjunction with the <a target="_" href="http://starbase.globalpc.net/eccc"><u>Fall Commodore Expo/ECCC</u></a>. You may visit our <a target="_" href="https://www.facebook.com/events/342920329690394/">Facebook event page</a> or <a target="_" href="https://www.facebook.com/events/2374335516171210">ECCC</a>'s to connect with us on social media.<br><br>
+
+Subscribe to our <a target="_" href="https://www.youtube.com/vcfmidwest">YouTube channel</a> for videos of VCFMW talks and other events.<br><br>
+
+Sign up for the VCFMW <a target="_" href="http://eepurl.com/dyuzub"><b>mailing list</b></a> to be notified of future events. We won't spam you!<br><br>
+
+VCF Midwest is a <b>FREE</b> admission, community-supported event. Your kind donation is an essential part of keeping the show going and is very much appreciated. <a href="donate.html"><u>Learn how</u></a> you can support VCFMW.<br><br>
+
+Coming from out of town? Or just want to stay up all night? Reserve a room at the <a href="hotel.html"><u>hotel</u></a>.<br><br>
+
+Need a table for sales, exhibition or both? We'll be taking <a href="signup.html"><u>table reservations</u></a> soon!<br><br><br>
+<b>CONTACT</b>: <a href="mailto:info@vcfmw.org">info@vcfmw.org</a>&nbsp;&nbsp; <a href="https://twitter.com/vcfmidwest">Twitter</a>&nbsp;&nbsp;#vcfmw on <a target="_" href="https://webchat.freenode.net/">Freenode</a> IRC
+
+</td></tr>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54530348-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<!-- ᚖ     ᚑ  -->
+
+</tbody></table>
+<table width="1024" height="80" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr valign="center" height="">
+<td colspan="6" align="center"><span style="background-color:currentColor"><span style="color:222230">Donate-o-Meter: 0% ᚑ                        ᚑ    ᚑ    ᚑ    ᚑ    ᚑ    ᚑ 100%</span></span>
+</td></tr><tr>
+</tr><tr align="center" valign="top">
+ <td>PF1=<a href="index.html">Main Page</a></td>
+ <td>PF2=<a href="hotel.html">Hotel Info</a></td>
+ <td>PF3=<a href="donate.html">Donate!</a></td>
+ <td>PF4=<a href="ex.html">Exhibits</a></td>
+ <td>PF5=<a href="talks.html">Talks</a></td>
+ <td>PF6=<a href="signup.html">Tables</a></td>
+ </tr>
+<tr align="center" valign="top">
+ <td>PF7=<a href="past.html">Past Events</a></td>
+ <td>PF8=NOTHING</td>
+ <td>PF9=<a href="sponsor.html">Sponsors</a></td>
+ <td>PF10=ALSO NOTHING</td>
+ <td>PF11=<a href="faq.html">FAQ</a></td>
+ <td>PF12=<a href="friends.html">Friends</a></td>
+</tr>
+</tbody></table>
+
+<table width="1024" height="25" border="0" cellpadding="0" cellspacing="0" frame="above" bordercolor="ffbf00">
+<tbody><tr align="center">
+<td width="33%" align="left"><span class="blink1">S<sup>R</sup>S B<sup>Z</sup>NS</span></td>
+<td width="33%" align="center">
+<font color="bb9c00">CLIENTID: 24.152.157.140</font></td><td width="33%" align="right">
+ <font color="bb9c00">APPLID: </font> </td>
+</tr>
+ 
+</tbody></table>
+</td></tr></tbody></table>
+
+
+</center></body>
