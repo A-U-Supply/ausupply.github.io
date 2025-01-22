@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: "Comic Sans MS", cursive, sans-serif;
-      background-color: #ffccff;
+      background-color: #f0f0f0; /* Light grey background */
       color: #0000ff;
       margin: 20px;
     }
@@ -133,6 +133,10 @@
     </select>
 
     <label>
+      <input type="checkbox" id="random-pitch"> Randomize Kick Drum Pitch
+    </label>
+
+    <label>
       <input type="checkbox" id="pause"> Pause Everything
     </label>
   </div>
@@ -216,7 +220,12 @@
       oscillator.type = waveform;
 
       // Set pitch
-      const pitch = document.getElementById("kick-pitch").value;
+      let pitch;
+      if (document.getElementById("random-pitch").checked) {
+        pitch = Math.random() * (500 - 50) + 50; // Random pitch between 50Hz and 500Hz
+      } else {
+        pitch = document.getElementById("kick-pitch").value;
+      }
       oscillator.frequency.setValueAtTime(pitch, audioContext.currentTime);
 
       // Set envelope size
