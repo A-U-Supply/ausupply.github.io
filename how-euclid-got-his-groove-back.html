@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Euclidean Rhythm Generator</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background-color: #f0f0f0;
+      color: #0000ff;
+      margin: 20px;
+    }
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      color: #ff00ff;
+      text-shadow: 2px 2px #0000ff;
+    }
+    .controls {
+      background-color: #ffff99;
+      padding: 20px;
+      border: 5px dashed #ff00ff;
+      margin-bottom: 20px;
+    }
+    .controls label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    .grid {
+      display: flex;
+      gap: 5px;
+      margin-top: 20px;
+    }
+    .grid div {
+      width: 40px;
+      height: 40px;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      border: 2px solid #000;
+    }
+    .grid div.active {
+      background-color: #00ff00;
+    }
+    .description {
+      background-color: #ffcc99;
+      padding: 20px;
+      border: 5px solid #ff6600;
+      margin-top: 20px;
+    }
+    .description h2 {
+      margin-bottom: 10px;
+    }
+    .description ul {
+      margin-top: 0;
+    }
+    .marquee {
+      font-size: 24px;
+      color: #ff0000;
+      background-color: #0000ff;
+      padding: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="marquee">
+    <span>🎵 Welcome to the Euclidean Rhythm Generator! 🎵</span>
+  </div>
+  <h1>Euclidean Rhythm Generator</h1>
+  <div class="controls">
+    <h2>Kick 1</h2>
+    <label for="steps1">Number of Steps: <span id="steps1-value">16</span></label>
+    <input type="range" id="steps1" min="4" max="32" value="16">
+
+    <label for="beats1">Number of Beats: <span id="beats1-value">4</span></label>
+    <input type="range" id="beats1" min="1" max="16" value="4">
+
+    <label for="rotation1">Rotation: <span id="rotation1-value">0</span></label>
+    <input type="range" id="rotation1" min="0" max="15" value="0">
+
+    <label for="kick1-pitch">Kick Drum Pitch (Hz): <span id="kick1-pitch-value">100</span></label>
+    <input type="range" id="kick1-pitch" min="50" max="500" value="100">
+
+    <label for="kick1-envelope">Kick Drum Envelope Size (ms): <span id="kick1-envelope-value">500</span></label>
+    <input type="range" id="kick1-envelope" min="100" max="1000" value="500">
+
+    <label for="kick1-waveform">Kick Drum Waveform:</label>
+    <select id="kick1-waveform">
+      <option value="sine">Sine</option>
+      <option value="square">Square</option>
+      <option value="sawtooth">Sawtooth</option>
+      <option value="triangle">Triangle</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="random1-pitch"> Randomize Kick Drum Pitch
+    </label>
+
+    <label>
+      <input type="checkbox" id="mute1"> Mute Kick 1
+    </label>
+
+    <h2>Kick 2</h2>
+    <label for="steps2">Number of Steps: <span id="steps2-value">16</span></label>
+    <input type="range" id="steps2" min="4" max="32" value="16">
+
+    <label for="beats2">Number of Beats: <span id="beats2-value">4</span></label>
+    <input type="range" id="beats2" min="1" max="16" value="4">
+
+    <label for="rotation2">Rotation: <span id="rotation2-value">0</span></label>
+    <input type="range" id="rotation2" min="0" max="15" value="0">
+
+    <label for="kick2-pitch">Kick Drum Pitch (Hz): <span id="kick2-pitch-value">100</span></label>
+    <input type="range" id="kick2-pitch" min="50" max="500" value="100">
+
+    <label for="kick2-envelope">Kick Drum Envelope Size (ms): <span id="kick2-envelope-value">500</span></label>
+    <input type="range" id="kick2-envelope" min="100" max="1000" value="500">
+
+    <label for="kick2-waveform">Kick Drum Waveform:</label>
+    <select id="kick2-waveform">
+      <option value="sine">Sine</option>
+      <option value="square">Square</option>
+      <option value="sawtooth">Sawtooth</option>
+      <option value="triangle">Triangle</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="random2-pitch"> Randomize Kick Drum Pitch
+    </label>
+
+    <label>
+      <input type="checkbox" id="mute2"> Mute Kick 2
+    </label>
+
+    <h2>Global Controls</h2>
+    <label for="tempo">Tempo (ms): <span id="tempo-value">200</span></label>
+    <input type="range" id="tempo" min="100" max="1000" value="200">
+
+    <label>
+      <input type="checkbox" id="pause"> Pause Everything
+    </label>
+  </div>
+
+  <div class="grid" id="grid1"></div>
+  <div class="grid" id="grid2"></div>
+
+  <div class="description">
+    <h2>How It Works</h2>
+    <p>
+      Euclidean rhythms are patterns of beats distributed as evenly as possible across a number of steps. They are commonly used in music to create interesting and complex rhythms.
+    </p>
+    <ul>
+      <li><strong>Steps</strong>: The total number of steps in the rhythm.</li>
+      <li><strong>Beats</strong>: The number of beats to distribute across the steps.</li>
+      <li><strong>Rotation</strong>: Rotates the rhythm pattern by a number of steps.</li>
+      <li><strong>Tempo</strong>: Controls the speed of the rhythm.</li>
+    </ul>
+
+    <h2>How to Use</h2>
+    <ul>
+      <li>Adjust the <strong>Steps</strong> and <strong>Beats</strong> sliders to create different rhythms.</li>
+      <li>Use the <strong>Rotation</strong> slider to rotate the rhythm pattern.</li>
+      <li>Adjust the <strong>Tempo</strong> slider to control the speed of the rhythm.</li>
+      <li>Tweak the kick drum sound using the <strong>Pitch</strong>, <strong>Envelope Size</strong>, and <strong>Waveform</strong> controls.</li>
+      <li>Check the <strong>Randomize Kick Drum Pitch</strong> checkbox to randomize the pitch of the kick drum.</li>
+      <li>Check the <strong>Mute</strong> checkbox to mute a kick drum.</li>
+      <li>Check the <strong>Pause Everything</strong> checkbox to pause the rhythm.</li>
+    </ul>
+
+    <h2>Euclidean Rhythm Formula</h2>
+    <p>
+      The Euclidean rhythm algorithm distributes a number of beats (<code>k</code>) as evenly as possible across a number of steps (<code>n</code>). The formula is:
+    </p>
+    <pre>
+E(k, n) = [1 if (i * k) % n < k else 0 for i in range(n)]
+    </pre>
+    <p>
+      Where:
+      <ul>
+        <li><code>k</code> = number of beats</li>
+        <li><code>n</code> = number of steps</li>
+        <li><code>i</code> = current step index</li>
+      </ul>
+    </p>
+  </div>
+
+  <script>
+    // Audio context for playing sounds
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Generate a Euclidean rhythm pattern
+    function generateEuclideanRhythm(steps, beats, rotation) {
+      const rhythm = Array(steps).fill(0);
+      for (let i = 0; i < beats; i++) {
+        rhythm[(i * steps / beats + rotation) % steps | 0] = 1;
+      }
+      return rhythm;
+    }
+
+    // Kick drum sound
+    function playKickDrum(pitch, envelopeSize, waveform, randomPitch) {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      // Set waveform type
+      oscillator.type = waveform;
+
+      // Set pitch
+      let finalPitch = randomPitch ? Math.random() * (500 - 50) + 50 : pitch;
+      oscillator.frequency.setValueAtTime(finalPitch, audioContext.currentTime);
+
+      // Set envelope size
+      gainNode.gain.setValueAtTime(1, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + envelopeSize / 1000);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + envelopeSize / 1000);
+    }
+
+    // Display rhythm in grid format
+    function updateGrid(gridId, rhythm) {
+      const grid = document.getElementById(gridId);
+      grid.innerHTML = "";
+      rhythm.forEach((beat, index) => {
+        const cell = document.createElement("div");
+        cell.textContent = beat ? "X" : "";
+        if (beat) cell.classList.add("active");
+        grid.appendChild(cell);
+      });
+    }
+
+    // Update rhythm
+    function updateRhythm() {
+      if (document.getElementById("pause").checked) return; // Pause everything
+
+      const steps1 = parseInt(document.getElementById("steps1").value);
+      const beats1 = parseInt(document.getElementById("beats1").value);
+      const rotation1 = parseInt(document.getElementById("rotation1").value);
+      const rhythm1 = generateEuclideanRhythm(steps1, beats1, rotation1);
+
+      const steps2 = parseInt(document.getElementById("steps2").value);
+      const beats2 = parseInt(document.getElementById("beats2").value);
+      const rotation2 = parseInt(document.getElementById("rotation2").value);
+      const rhythm2 = generateEuclideanRhythm(steps2, beats2, rotation2);
+
+      if (rhythm1[currentStep % rhythm1.length] && !document.getElementById("mute1").checked) {
+        playKickDrum(
+          document.getElementById("kick1-pitch").value,
+          document.getElementById("kick1-envelope").value,
+          document.getElementById("kick1-waveform").value,
+          document.getElementById("random1-pitch").checked
+        );
+      }
+
+      if (rhythm2[currentStep % rhythm2.length] && !document.getElementById("mute2").checked) {
+        playKickDrum(
+          document.getElementById("kick2-pitch").value,
+          document.getElementById("kick2-envelope").value,
+          document.getElementById("kick2-waveform").value,
+          document.getElementById("random2-pitch").checked
+        );
+      }
+
+      updateGrid("grid1", rhythm1);
+      updateGrid("grid2", rhythm2);
+
+      currentStep = (currentStep + 1) % Math.max(rhythm1.length, rhythm2.length);
+    }
+
+    // Start the rhythm loop
+    let rhythmInterval;
+    let currentStep = 0;
+    function startRhythm() {
+      const tempo = document.getElementById("tempo").value;
+      clearInterval(rhythmInterval);
+      rhythmInterval = setInterval(updateRhythm, tempo);
+    }
+
+    // Initialize the grid and rhythm
+    function initialize() {
+      const steps1 = parseInt(document.getElementById("steps1").value);
+      const beats1 = parseInt(document.getElementById("beats1").value);
+      const rotation1 = parseInt(document.getElementById("rotation1").value);
+      const rhythm1 = generateEuclideanRhythm(steps1, beats1, rotation1);
+
+      const steps2 = parseInt(document.getElementById("steps2").value);
+      const beats2 = parseInt(document.getElementById("beats2").value);
+      const rotation2 = parseInt(document.getElementById("rotation2").value);
+      const rhythm2 = generateEuclideanRhythm(steps2, beats2, rotation2);
+
+      updateGrid("grid1", rhythm1);
+      updateGrid("grid2", rhythm2);
+      startRhythm();
+    }
+
+    // Event listeners
+    document.getElementById("steps1").addEventListener("input", (e) => {
+      document.getElementById("steps1-value").textContent = e.target.value;
+      initialize();
+    });
+    document.getElementById("beats1").addEventListener("input", (e) => {
+      document.getElementById("beats1-value").textContent = e.target.value;
+      initialize();
+    });
+    document.getElementById("rotation1").addEventListener("input", (e) => {
+      document.getElementById("rotation1-value").textContent = e.target.value;
+      initialize();
+    });
+    document.getElementById("kick1-pitch").addEventListener("input", (e) => {
+      document.getElementById("kick1-pitch-value").textContent = e.target.value;
+    });
+    document.getElementById("kick1-envelope").addEventListener("input", (e) => {
+      document.getElementById("kick1-envelope-value").textContent = e.target.value;
+    });
+    document.getElementById("mute1").addEventListener("change", (e) => {
+      initialize();
+    });
+
+    document.getElementById("steps2").addEventListener("input", (e) => {
+      document.getElementById("steps2-value").textContent = e.target.value;
+      initialize();
+    });
+    document.getElementById("beats2").addEventListener("input", (e) => {
+      document.getElementById("beats2-value").textContent = e.target.value;
+      initialize();
+    });
+    document.getElementById("rotation2").addEventListener("input", (e) => {
+      document.getElementById("rotation2-value").textContent = e.target.value;
+      initialize();
+    });
+    document.getElementById("kick2-pitch").addEventListener("input", (e) => {
+      document.getElementById("kick2-pitch-value").textContent = e.target.value;
+    });
+    document.getElementById("kick2-envelope").addEventListener("input", (e) => {
+      document.getElementById("kick2-envelope-value").textContent = e.target.value;
+    });
+    document.getElementById("mute2").addEventListener("change", (e) => {
+      initialize();
+    });
+
+    document.getElementById("tempo").addEventListener("input", (e) => {
+      document.getElementById("tempo-value").textContent = e.target.value;
+      startRhythm();
+    });
+    document.getElementById("pause").addEventListener("change", (e) => {
+      if (e.target.checked) {
+        clearInterval(rhythmInterval);
+      } else {
+        startRhythm();
+      }
+    });
+
+    // Initialize on page load
+    initialize();
+  </script>
+</body>
+</html>
