@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logic Gates with Kick Drum and Oscilloscope</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    canvas {
+      border: 1px solid #000;
+      margin-top: 20px;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    .controls label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    .description {
+      margin-top: 20px;
+      max-width: 800px;
+    }
+    .description h2 {
+      margin-bottom: 10px;
+    }
+    .description ul {
+      margin-top: 0;
+    }
+    .key {
+      margin-top: 20px;
+    }
+    .key span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+    .key .steady-clock {
+      background-color: blue;
+    }
+    .key .random-clock {
+      background-color: green;
+    }
+    .key .logic-output {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Logic Gates with Kick Drum and Oscilloscope</h1>
+  <div class="controls">
+    <label for="gate-select">Select Logic Gate:</label>
+    <select id="gate-select">
+      <option value="AND">AND</option>
+      <option value="OR">OR</option>
+      <option value="XOR">XOR</option>
+      <option value="NAND">NAND</option>
+      <option value="NOR">NOR</option>
+      <option value="NOT">NOT</option>
+    </select>
+
+    <label for="steady-clock-tempo">Steady Clock Tempo (ms):</label>
+    <input type="range" id="steady-clock-tempo" min="100" max="1000" value="500">
+
+    <label for="random-clock-probability">Random Clock Probability (%):</label>
+    <input type="range" id="random-clock-probability" min="0" max="100" value="50">
+  </div>
+
+  <canvas id="oscilloscope" width="800" height="300"></canvas>
+
+  <div class="key">
+    <h2>Oscilloscope Key</h2>
+    <p>
+      <span class="steady-clock"></span> <strong>Steady Clock (Blue)</strong>: A regular clock signal that toggles between 0 and 1 at a fixed tempo.
+    </p>
+    <p>
+      <span class="random-clock"></span> <strong>Random Clock (Green)</strong>: A random signal that toggles between 0 and 1 based on a configurable probability.
+    </p>
+    <p>
+      <span class="logic-output"></span> <strong>Logic Output (Red)</strong>: The result of applying the selected logic gate to the two input signals.
+    </p>
+  </div>
+
+  <div class="description">
+    <h2>How It Works</h2>
+    <p>
+      This interactive tool demonstrates how logic gates work using two input signals:
+    </p>
+    <ul>
+      <li><strong>Steady Clock (Blue)</strong>: A regular clock signal that toggles between 0 and 1 at a fixed tempo.</li>
+      <li><strong>Random Clock (Green)</strong>: A random signal that toggles between 0 and 1 based on a configurable probability.</li>
+    </ul>
+    <p>
+      The selected logic gate combines these two signals to produce an output, which is displayed as a <strong>Logic Output (Red)</strong> signal. When the logic output is 1, a kick drum sound is played.
+    </p>
+
+    <h2>How to Use</h2>
+    <ul>
+      <li><strong>Select a Logic Gate</strong>: Use the dropdown menu to choose between AND, OR, XOR, NAND, NOR, and NOT gates.</li>
+      <li><strong>Adjust the Steady Clock Tempo</strong>: Use the "Steady Clock Tempo" slider to control the speed of the steady clock.</li>
+      <li><strong>Adjust the Random Clock Probability</strong>: Use the "Random Clock Probability" slider to control how often the random clock toggles.</li>
+    </ul>
+
+    <h2>Logic Gates Explained</h2>
+    <ul>
+      <li><strong>AND</strong>: Outputs 1 only if both inputs are 1.</li>
+      <li><strong>OR</strong>: Outputs 1 if at least one input is 1.</li>
+      <li><strong>XOR</strong>: Outputs 1 if the inputs are different.</li>
+      <li><strong>NAND</strong>: Outputs 0 only if both inputs are 1 (opposite of AND).</li>
+      <li><strong>NOR</strong>: Outputs 0 if at least one input is 1 (opposite of OR).</li>
+      <li><strong>NOT</strong>: Outputs the opposite of the input (only uses the steady clock).</li>
+    </ul>
+  </div>
+
+  <script>
+    // Audio context for playing sounds
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Kick drum sound
+    function playKickDrum() {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      oscillator.frequency.setValueAtTime(100, audioContext.currentTime);
+      gainNode.gain.setValueAtTime(1, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.5);
+    }
+
+    // Logic gates
+    const logicGates = {
+      AND: (a, b) => a && b,
+      OR: (a, b) => a || b,
+      XOR: (a, b) => a !== b,
+      NAND: (a, b) => !(a && b),
+      NOR: (a, b) => !(a || b),
+      NOT: (a, b) => !a, // Ignores the second input
+    };
+
+    // Clock signals
+    let steadyClock = 0;
+    let randomClock = 0;
+    let logicOutput = 0;
+
+    // Oscilloscope visualization
+    const canvas = document.getElementById("oscilloscope");
+    const ctx = canvas.getContext("2d");
+    const signalHistory = [];
+
+    function drawOscilloscope() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw grid
+      ctx.strokeStyle = "#ccc";
+      ctx.beginPath();
+      for (let x = 0; x < canvas.width; x += 50) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+      }
+      for (let y = 0; y < canvas.height; y += 50) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+      }
+      ctx.stroke();
+
+      // Draw signals as square waves
+      const historyLength = signalHistory.length;
+      const stepX = canvas.width / 100;
+
+      // Steady clock (blue)
+      ctx.strokeStyle = "blue";
+      ctx.beginPath();
+      for (let i = 0; i < historyLength; i++) {
+        const x = i * stepX;
+        const y = 50 - signalHistory[i].steadyClock * 40;
+        ctx.moveTo(x, 50);
+        ctx.lineTo(x, y);
+        ctx.moveTo(x, y);
+        ctx.lineTo((i + 1) * stepX, y);
+      }
+      ctx.stroke();
+
+      // Random clock (green)
+      ctx.strokeStyle = "green";
+      ctx.beginPath();
+      for (let i = 0; i < historyLength; i++) {
+        const x = i * stepX;
+        const y = 150 - signalHistory[i].randomClock * 40;
+        ctx.moveTo(x, 150);
+        ctx.lineTo(x, y);
+        ctx.moveTo(x, y);
+        ctx.lineTo((i + 1) * stepX, y);
+      }
+      ctx.stroke();
+
+      // Logic output (red)
+      ctx.strokeStyle = "red";
+      ctx.beginPath();
+      for (let i = 0; i < historyLength; i++) {
+        const x = i * stepX;
+        const y = 250 - signalHistory[i].logicOutput * 40;
+        ctx.moveTo(x, 250);
+        ctx.lineTo(x, y);
+        ctx.moveTo(x, y);
+        ctx.lineTo((i + 1) * stepX, y);
+      }
+      ctx.stroke();
+    }
+
+    // Update signals
+    function updateSignals() {
+      const gate = document.getElementById("gate-select").value;
+      steadyClock = 1 - steadyClock; // Toggle steady clock
+      randomClock = Math.random() < document.getElementById("random-clock-probability").value / 100 ? 1 : 0;
+      logicOutput = logicGates[gate](steadyClock, randomClock);
+
+      if (logicOutput) {
+        playKickDrum();
+      }
+
+      // Add signals to history
+      signalHistory.push({ steadyClock, randomClock, logicOutput });
+      if (signalHistory.length > 100) signalHistory.shift();
+
+      drawOscilloscope();
+    }
+
+    // Start the steady clock
+    let steadyClockInterval;
+    function startSteadyClock() {
+      const tempo = document.getElementById("steady-clock-tempo").value;
+      clearInterval(steadyClockInterval);
+      steadyClockInterval = setInterval(updateSignals, tempo);
+    }
+
+    // Event listeners
+    document.getElementById("steady-clock-tempo").addEventListener("input", startSteadyClock);
+    document.getElementById("random-clock-probability").addEventListener("input", updateSignals);
+    document.getElementById("gate-select").addEventListener("change", updateSignals);
+
+    // Initialize
+    startSteadyClock();
+    drawOscilloscope();
+  </script>
+</body>
+</html>
