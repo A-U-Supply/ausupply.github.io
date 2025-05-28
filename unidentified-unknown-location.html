@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wild West Historical Image Rodeo</title>
+    <style>
+        body {
+            background: url('https://i.imgur.com/8QZQZ.gif') #000066 repeat;
+            font-family: "Comic Sans MS", cursive;
+            color: #FFD700;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .marquee-banner {
+            background: linear-gradient(to right, #B22234, #3C3B6E);
+            border: 5px double #FFFFFF;
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        #content {
+            border: 15px ridge #B22234;
+            background: #FFFFFF;
+            padding: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .cowboy-gif {
+            border: none;
+            margin: 10px;
+        }
+
+        .counter {
+            background: #000000;
+            border: 3px solid #FFFFFF;
+            padding: 5px;
+            color: #00FF00;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <!-- Animated Star Banner -->
+        <img src="https://i.imgur.com/7QbTf.gif" class="cowboy-gif">
+        <img src="https://i.imgur.com/7QbTf.gif" class="cowboy-gif">
+
+        <div class="marquee-banner">
+            <marquee behavior="scroll" direction="left">
+                <h1>🤠 WELCOME PATRIOTS! 🤠 RANDOM HISTORICAL WILD WEST IMAGE GENERATOR! 🤠 GOD BLESS AMERICA! 🤠</h1>
+            </marquee>
+        </div>
+
+        <div id="content">
+            <p>Loading your freedom-loving image...</p>
+            <img src="https://i.imgur.com/UKDZ3AR.gif" alt="Dancing cowboy">
+        </div>
+
+        <div>
+            <img src="https://i.imgur.com/3QXG3YZ.gif" alt="Spinning star">
+            <img src="https://i.imgur.com/UKDZ3AR.gif" alt="Dancing cowboy">
+            <img src="https://i.imgur.com/3QXG3YZ.gif" alt="Spinning star">
+        </div>
+
+        <div class="counter">
+            <img src="https://www.cutercounter.com/hits.php?id=hmxndkf&nd=6&style=3" border="0" alt="visitor counter">
+            VISITORS SERVED SINCE 1776
+        </div>
+    </center>
+
+    <script>
+        async function fetchAmericanaImage() {
+            try {
+                // Step 1: Fetch random item from BLM collection
+                const searchUrl = new URL('https://archive.org/advancedsearch.php');
+                searchUrl.searchParams.set('q', 'collection:blm-historical-photograph-collection');
+                searchUrl.searchParams.set('rows', '1');
+                searchUrl.searchParams.set('sort[]', 'random');
+                searchUrl.searchParams.set('output', 'json');
+                searchUrl.searchParams.set('fl[]', 'identifier');
+
+                const searchResponse = await fetch(searchUrl);
+                const searchData = await searchResponse.json();
+                const identifier = searchData.response.docs[0].identifier;
+
+                // Step 2: Get item metadata
+                const metadataResponse = await fetch(`https://archive.org/metadata/${identifier}`);
+                const metadata = await metadataResponse.json();
+
+                // Find first suitable image file
+                const imageFile = metadata.files.find(file => 
+                    file.format === 'JPEG' || 
+                    file.name.toLowerCase().endsWith('.jpg') ||
+                    file.name.toLowerCase().endsWith('.jpeg')
+                );
+
+                if (!imageFile) throw new Error('No image found');
+
+                // Create image element
+                const img = document.createElement('img');
+                img.src = `https://archive.org/download/${identifier}/${imageFile.name}`;
+                img.alt = 'Historical Americana';
+                img.style.maxWidth = '100%';
+                img.style.border = '10px ridge #B22234';
+
+                // Update content area
+                const contentDiv = document.getElementById('content');
+                contentDiv.innerHTML = '';
+                contentDiv.appendChild(img);
+                contentDiv.insertAdjacentHTML('beforeend', '<h2>FRESH FROM THE AMERICAN FRONTIER!</h2>');
+
+            } catch (error) {
+                console.error('Yeehaw Error:', error);
+                document.getElementById('content').innerHTML = `
+                    <h2>⚠️ ALERT PATRIOT ⚠️</h2>
+                    <p>Couldn't wrangle that image!</p>
+                    <img src="https://i.imgur.com/4uJwQ6x.gif" alt="Sad cowboy">
+                    <p>Try again after raising the flag!</p>
+                `;
+            }
+        }
+
+        // Initial fetch
+        fetchAmericanaImage();
+
+        // Refresh button functionality
+        document.body.addEventListener('click', () => {
+            document.getElementById('content').innerHTML = `
+                <p>Fetching new image of freedom...</p>
+                <img src="https://i.imgur.com/UKDZ3AR.gif" alt="Loading cowboy">
+            `;
+            fetchAmericanaImage();
+        });
+    </script>
+</body>
+</html>
