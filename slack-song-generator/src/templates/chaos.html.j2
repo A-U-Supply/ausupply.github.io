@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONG TITLE LIBRARY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 2rem;
+            color: #ff00ff;
+            text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00;
+            position: relative;
+            z-index: 9999;
+        }
+
+        .title {
+            position: absolute;
+            white-space: nowrap;
+            cursor: default;
+            transition: transform 0.3s ease;
+        }
+
+        .title:hover {
+            transform: scale(1.2);
+            z-index: 10000 !important;
+        }
+
+        .media {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        ★ SONG TITLE LIBRARY ★
+    </div>
+
+    {% for style in title_styles %}
+    <div class="title{% if loop.index % 17 == 0 %} blink{% endif %}"
+         style="
+            left: {{ style.left }}%;
+            top: {{ style.top }}%;
+            transform: rotate({{ style.rotation }}deg);
+            font-size: {{ style.font_size }}px;
+            color: {{ style.color }};
+            font-family: '{{ style.font_family }}', sans-serif;
+            {% if style.text_shadow %}text-shadow: {{ style.text_shadow }};{% endif %}
+            {% if style.border %}border: {{ style.border }}; padding: 5px;{% endif %}
+            z-index: {{ style.z_index }};
+         ">
+        {{ style.text }}
+    </div>
+    {% endfor %}
+
+    {% for media in media_styles %}
+    <img class="media"
+         src="{{ media.src }}"
+         style="
+            left: {{ media.left }}%;
+            top: {{ media.top }}%;
+            transform: rotate({{ media.rotation }}deg);
+            width: {{ media.width }}px;
+            z-index: {{ media.z_index }};
+         "
+         alt="">
+    {% endfor %}
+</body>
+</html>
