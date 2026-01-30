@@ -1,0 +1,31 @@
+name: Daily Surreal Prompt
+
+on:
+  schedule:
+    # 7am PT = 3pm UTC (during PST)
+    # 7am PT = 2pm UTC (during PDT)
+    # Using 3pm UTC for consistency
+    - cron: '0 15 * * *'
+  workflow_dispatch:  # Manual trigger button
+
+jobs:
+  post-prompt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r surreal-prompt-bot/requirements.txt
+
+      - name: Run bot
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python surreal-prompt-bot/bot.py
