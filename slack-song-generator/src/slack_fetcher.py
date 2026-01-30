@@ -40,6 +40,8 @@ def fetch_messages(config: SlackConfig, limit: int = 500) -> list[str]:
         # Handle pagination
         if response.get("has_more"):
             cursor = response.get("response_metadata", {}).get("next_cursor")
+            if cursor is None:
+                break  # Safety: break if pagination token missing
         else:
             break
 
