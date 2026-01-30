@@ -11,7 +11,7 @@ DEFAULT_CONFIG = {
     },
     "prompt": {
         "temperature": 1.0,
-        "model": "HuggingFaceH4/zephyr-7b-beta",
+        "model": "HuggingFaceTB/SmolLM3-3B",
         "max_headlines": 10,
     },
     "inspirations": {
