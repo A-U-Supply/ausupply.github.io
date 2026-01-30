@@ -16,7 +16,8 @@
             background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff);
             overflow-x: hidden;
             position: relative;
-            padding-bottom: 60px;
+            padding-bottom: 70px;
+            transition: background 0.3s ease;
         }
 
         .header {
@@ -100,21 +101,27 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 50px;
             background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
             border-top: 3px solid #000;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 20px;
+            padding: 8px 20px;
             z-index: 99999;
             font-family: 'Comic Sans MS', cursive;
         }
 
+        .toolbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .toolbar button {
-            padding: 8px 16px;
-            font-size: 14px;
+            padding: 6px 12px;
+            font-size: 13px;
             font-family: 'Comic Sans MS', cursive;
             border: 2px solid #000;
             border-radius: 4px;
@@ -137,8 +144,8 @@
         }
 
         .toolbar select {
-            padding: 8px;
-            font-size: 14px;
+            padding: 6px;
+            font-size: 13px;
             font-family: 'Comic Sans MS', cursive;
             border: 2px solid #000;
             border-radius: 4px;
@@ -147,25 +154,39 @@
 
         .toolbar .divider {
             width: 2px;
-            height: 30px;
+            height: 24px;
             background: #000;
-            margin: 0 5px;
+            margin: 0 4px;
         }
 
-        .toolbar .hint {
-            font-size: 12px;
+        .toolbar .label {
+            font-size: 11px;
+            font-weight: bold;
             color: #000;
             background: rgba(255,255,255,0.7);
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 2px 6px;
+            border-radius: 3px;
         }
 
         .color-btn {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             border: 2px solid #000 !important;
             padding: 0 !important;
+        }
+
+        .bg-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid #000 !important;
+            padding: 0 !important;
+        }
+
+        .rotate-btn {
+            font-size: 16px !important;
+            padding: 4px 10px !important;
         }
     </style>
 </head>
@@ -207,40 +228,73 @@
     {% endfor %}
 
     <div class="toolbar">
-        <span class="hint">Click to select, drag to move, scroll to rotate</span>
-        <div class="divider"></div>
+        <div class="toolbar-row">
+            <span class="label">TEXT</span>
+            <button class="color-btn" style="background: #ff00ff" data-color="#ff00ff"></button>
+            <button class="color-btn" style="background: #00ff00" data-color="#00ff00"></button>
+            <button class="color-btn" style="background: #00ffff" data-color="#00ffff"></button>
+            <button class="color-btn" style="background: #ffff00" data-color="#ffff00"></button>
+            <button class="color-btn" style="background: #ff0000" data-color="#ff0000"></button>
+            <button class="color-btn" style="background: #ff8800" data-color="#ff8800"></button>
+            <button class="color-btn" style="background: #ffffff" data-color="#ffffff"></button>
+            <button class="color-btn" style="background: #000000" data-color="#000000"></button>
 
-        <button class="color-btn" style="background: #ff00ff" data-color="#ff00ff"></button>
-        <button class="color-btn" style="background: #00ff00" data-color="#00ff00"></button>
-        <button class="color-btn" style="background: #00ffff" data-color="#00ffff"></button>
-        <button class="color-btn" style="background: #ffff00" data-color="#ffff00"></button>
-        <button class="color-btn" style="background: #ff0000" data-color="#ff0000"></button>
-        <button class="color-btn" style="background: #ffffff" data-color="#ffffff"></button>
-        <button class="color-btn" style="background: #000000" data-color="#000000"></button>
+            <div class="divider"></div>
 
-        <div class="divider"></div>
+            <span class="label">ROTATE</span>
+            <button class="rotate-btn" id="rotateLeft">↺</button>
+            <button class="rotate-btn" id="rotateRight">↻</button>
 
-        <select id="animSelect">
-            <option value="">Animation...</option>
-            <option value="anim-none">None</option>
-            <option value="anim-blink">Blink</option>
-            <option value="anim-pulse">Pulse</option>
-            <option value="anim-rainbow">Rainbow</option>
-            <option value="anim-shake">Shake</option>
-            <option value="anim-float">Float</option>
-        </select>
+            <div class="divider"></div>
 
-        <div class="divider"></div>
+            <select id="animSelect">
+                <option value="">Animation...</option>
+                <option value="anim-none">None</option>
+                <option value="anim-blink">Blink</option>
+                <option value="anim-pulse">Pulse</option>
+                <option value="anim-rainbow">Rainbow</option>
+                <option value="anim-shake">Shake</option>
+                <option value="anim-float">Float</option>
+            </select>
 
-        <button id="resetBtn">Reset All</button>
-        <button id="saveBtn">💾 Save</button>
+            <div class="divider"></div>
+
+            <span class="label">BG</span>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff)" data-bg="linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff)"></button>
+            <button class="bg-btn" style="background: #000000" data-bg="#000000"></button>
+            <button class="bg-btn" style="background: #ffffff" data-bg="#ffffff"></button>
+            <button class="bg-btn" style="background: #1a1a2e" data-bg="#1a1a2e"></button>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #ff00ff, #00ffff)" data-bg="linear-gradient(45deg, #ff00ff, #00ffff)"></button>
+            <button class="bg-btn" style="background: linear-gradient(180deg, #000428, #004e92)" data-bg="linear-gradient(180deg, #000428, #004e92)"></button>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #232526, #414345)" data-bg="linear-gradient(45deg, #232526, #414345)"></button>
+            <button class="bg-btn" style="background: #ff6b6b" data-bg="repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 10px, #feca57 10px, #feca57 20px)"></button>
+
+            <div class="divider"></div>
+
+            <button id="resetBtn">Reset</button>
+            <button id="saveBtn">💾</button>
+        </div>
     </div>
 
     <script>
-        const STORAGE_KEY = 'songTitlePositions';
+        const STORAGE_KEY = 'songTitlePositions_v2';
+        const BG_STORAGE_KEY = 'songTitleBackground';
         let selectedTitle = null;
         let isDragging = false;
         let dragOffset = { x: 0, y: 0 };
+
+        // Load saved background
+        function loadBackground() {
+            const savedBg = localStorage.getItem(BG_STORAGE_KEY);
+            if (savedBg) {
+                document.body.style.background = savedBg;
+            }
+        }
+
+        // Save background
+        function saveBackground(bg) {
+            localStorage.setItem(BG_STORAGE_KEY, bg);
+        }
 
         // Load saved positions
         function loadPositions() {
@@ -286,6 +340,16 @@
                 };
             });
             localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+        }
+
+        // Rotate selected title
+        function rotateSelected(degrees) {
+            if (!selectedTitle) return;
+            let rotation = parseInt(selectedTitle.dataset.rotation) || 0;
+            rotation += degrees;
+            selectedTitle.dataset.rotation = rotation;
+            selectedTitle.style.transform = `rotate(${rotation}deg)`;
+            autoSave();
         }
 
         // Select title
@@ -355,9 +419,23 @@
             btn.addEventListener('click', () => {
                 if (selectedTitle) {
                     selectedTitle.style.color = btn.dataset.color;
+                    autoSave();
                 }
             });
         });
+
+        // Background buttons
+        document.querySelectorAll('.bg-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const bg = btn.dataset.bg;
+                document.body.style.background = bg;
+                saveBackground(bg);
+            });
+        });
+
+        // Rotate buttons
+        document.getElementById('rotateLeft').addEventListener('click', () => rotateSelected(-15));
+        document.getElementById('rotateRight').addEventListener('click', () => rotateSelected(15));
 
         // Animation select
         document.getElementById('animSelect').addEventListener('change', (e) => {
@@ -365,13 +443,15 @@
                 selectedTitle.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
                 selectedTitle.classList.add(e.target.value);
                 e.target.value = '';
+                autoSave();
             }
         });
 
         // Reset button
         document.getElementById('resetBtn').addEventListener('click', () => {
-            if (confirm('Reset all titles to original positions?')) {
+            if (confirm('Reset all titles and background to original?')) {
                 localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(BG_STORAGE_KEY);
                 location.reload();
             }
         });
@@ -379,7 +459,7 @@
         // Save button
         document.getElementById('saveBtn').addEventListener('click', () => {
             savePositions();
-            alert('Positions saved!');
+            alert('Saved!');
         });
 
         // Auto-save on changes
@@ -392,7 +472,20 @@
         document.addEventListener('mouseup', autoSave);
         document.querySelectorAll('.title').forEach(t => t.addEventListener('wheel', autoSave));
 
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (!selectedTitle) return;
+            if (e.key === 'ArrowLeft' || e.key === '[') {
+                e.preventDefault();
+                rotateSelected(-5);
+            } else if (e.key === 'ArrowRight' || e.key === ']') {
+                e.preventDefault();
+                rotateSelected(5);
+            }
+        });
+
         // Load on start
+        loadBackground();
         loadPositions();
     </script>
 </body>
