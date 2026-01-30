@@ -6,20 +6,20 @@ A daily Slack bot that generates surrealist drawing prompts inspired by news hea
 
 1. Scrapes headlines from diverse news sources (FT, Fox News, CNN, Reuters, BBC, etc.)
 2. Picks random artistic inspirations from `inspirations.txt`
-3. Feeds both to Groq's free Llama API
+3. Feeds both to Hugging Face's free Inference API
 4. Posts a surreal headline-style drawing prompt to Slack
 
 ## Setup
 
 ### 1. Get API Keys
 
-- **Groq**: Free at https://console.groq.com
+- **Hugging Face**: Free at https://huggingface.co/settings/tokens (create a read token)
 - **Slack**: Create app at https://api.slack.com/apps with `chat:write` scope
 
 ### 2. Configure GitHub Secrets
 
 In your repo settings, add:
-- `GROQ_API_KEY`
+- `HF_TOKEN`
 - `SLACK_BOT_TOKEN`
 
 ### 3. Invite Bot to Channel
@@ -33,7 +33,7 @@ Invite your Slack bot to `#drawma` (or your chosen channel).
 pip install -r requirements.txt
 
 # Set environment variables
-export GROQ_API_KEY="gsk_..."
+export HF_TOKEN="hf_..."
 export SLACK_BOT_TOKEN="xoxb-..."
 
 # Dry run (no Slack posting)
@@ -65,7 +65,7 @@ slack:
 
 prompt:
   temperature: 1.0
-  model: llama-3.1-8b-instant
+  model: mistralai/Mistral-7B-Instruct-v0.3
   max_headlines: 10
 
 inspirations:
