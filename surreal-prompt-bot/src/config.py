@@ -11,7 +11,7 @@ DEFAULT_CONFIG = {
     },
     "prompt": {
         "temperature": 1.0,
-        "model": "llama-3.1-8b-instant",
+        "model": "mistralai/Mistral-7B-Instruct-v0.3",
         "max_headlines": 10,
     },
     "inspirations": {

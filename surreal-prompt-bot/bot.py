@@ -30,9 +30,9 @@ def run_bot(args) -> int:
     config = merge_cli_args(config, args)
 
     # Get API keys from environment
-    groq_api_key = os.environ.get("GROQ_API_KEY")
-    if not groq_api_key:
-        logger.error("GROQ_API_KEY environment variable not set")
+    hf_token = os.environ.get("HF_TOKEN")
+    if not hf_token:
+        logger.error("HF_TOKEN environment variable not set")
         return 1
 
     slack_token = os.environ.get("SLACK_BOT_TOKEN")
@@ -73,7 +73,7 @@ def run_bot(args) -> int:
         inspirations=inspirations,
         model=config["prompt"]["model"],
         temperature=config["prompt"]["temperature"],
-        api_key=groq_api_key,
+        api_key=hf_token,
     )
 
     print(f"\n{'='*60}")

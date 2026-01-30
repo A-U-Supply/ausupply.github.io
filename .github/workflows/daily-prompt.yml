@@ -27,5 +27,5 @@ jobs:
       - name: Run bot
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: python surreal-prompt-bot/bot.py

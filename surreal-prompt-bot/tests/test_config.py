@@ -11,7 +11,7 @@ def test_load_config_defaults():
     """Config has sensible defaults when file missing."""
     config = load_config(Path("/nonexistent/config.yaml"))
     assert config["slack"]["channel"] == "#drawma"
-    assert config["prompt"]["model"] == "llama-3.1-8b-instant"
+    assert config["prompt"]["model"] == "mistralai/Mistral-7B-Instruct-v0.3"
 
 
 def test_load_config_from_file():

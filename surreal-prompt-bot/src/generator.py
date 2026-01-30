@@ -1,7 +1,7 @@
-"""Prompt generator using Groq API."""
+"""Prompt generator using Hugging Face Inference API."""
 import logging
 
-from groq import Groq
+from huggingface_hub import InferenceClient
 
 logger = logging.getLogger(__name__)
 
@@ -31,18 +31,20 @@ def generate_prompt(
     temperature: float,
     api_key: str,
 ) -> str:
-    """Generate a surreal prompt using Groq API."""
-    client = Groq(api_key=api_key)
+    """Generate a surreal prompt using Hugging Face Inference API."""
+    client = InferenceClient(token=api_key)
 
     user_prompt = build_llm_prompt(headlines, inspirations)
     logger.debug(f"LLM prompt:\n{user_prompt}")
 
-    response = client.chat.completions.create(
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": user_prompt},
+    ]
+
+    response = client.chat_completion(
         model=model,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_prompt},
-        ],
+        messages=messages,
         temperature=temperature,
         max_tokens=150,
     )

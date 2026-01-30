@@ -12,7 +12,7 @@ def test_bot_dry_run_does_not_post():
          patch("bot.sample_inspirations", return_value=["test style"]), \
          patch("bot.generate_prompt", return_value="Test prompt"), \
          patch("bot.post_to_slack") as mock_post, \
-         patch.dict(os.environ, {"GROQ_API_KEY": "test"}):
+         patch.dict(os.environ, {"HF_TOKEN": "test"}):
 
         from bot import run_bot
 
@@ -37,7 +37,7 @@ def test_bot_posts_on_success():
          patch("bot.sample_inspirations", return_value=["test style"]), \
          patch("bot.generate_prompt", return_value="Test prompt"), \
          patch("bot.post_to_slack", return_value=True) as mock_post, \
-         patch.dict(os.environ, {"GROQ_API_KEY": "test", "SLACK_BOT_TOKEN": "xoxb-test"}):
+         patch.dict(os.environ, {"HF_TOKEN": "test", "SLACK_BOT_TOKEN": "xoxb-test"}):
 
         from bot import run_bot
 
