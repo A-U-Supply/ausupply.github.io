@@ -1,0 +1,21 @@
+slack:
+  channel: "#drawma"
+
+prompt:
+  temperature: 1.0
+  model: llama-3.1-8b-instant
+  max_headlines: 10
+
+inspirations:
+  file: inspirations.txt
+  pick_count: 2
+
+sources:
+  - reuters
+  - foxnews
+  - cnn
+  - bbc
+  - ft
+  - bloomberg
+  - guardian
+  - breitbart
