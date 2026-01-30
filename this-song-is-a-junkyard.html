@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONG TITLE LIBRARY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff);
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 2rem;
+            color: #ff00ff;
+            text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00;
+            position: relative;
+            z-index: 9999;
+        }
+
+        .title {
+            position: absolute;
+            white-space: nowrap;
+            cursor: grab;
+            transition: transform 0.1s ease;
+            user-select: none;
+        }
+
+        .title:active {
+            cursor: grabbing;
+        }
+
+        .title.selected {
+            outline: 3px dashed #ff00ff;
+            outline-offset: 4px;
+        }
+
+        .title:hover {
+            z-index: 10000 !important;
+        }
+
+        .media {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            17% { color: #ff8800; }
+            33% { color: #ffff00; }
+            50% { color: #00ff00; }
+            67% { color: #0088ff; }
+            83% { color: #8800ff; }
+            100% { color: #ff0000; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px) rotate(-1deg); }
+            75% { transform: translateX(3px) rotate(1deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .anim-blink { animation: blink 1s infinite; }
+        .anim-pulse { animation: pulse 1s infinite; }
+        .anim-rainbow { animation: rainbow 3s linear infinite; }
+        .anim-shake { animation: shake 0.3s infinite; }
+        .anim-float { animation: float 2s ease-in-out infinite; }
+        .anim-none { animation: none; }
+
+        /* Toolbar */
+        .toolbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
+            border-top: 3px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 20px;
+            z-index: 99999;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .toolbar button {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.1s;
+        }
+
+        .toolbar button:hover {
+            transform: scale(1.05);
+            background: #ffff00;
+        }
+
+        .toolbar button:active {
+            transform: scale(0.95);
+        }
+
+        .toolbar button.active {
+            background: #00ff00;
+        }
+
+        .toolbar select {
+            padding: 8px;
+            font-size: 14px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .toolbar .divider {
+            width: 2px;
+            height: 30px;
+            background: #000;
+            margin: 0 5px;
+        }
+
+        .toolbar .hint {
+            font-size: 12px;
+            color: #000;
+            background: rgba(255,255,255,0.7);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #000 !important;
+            padding: 0 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        ★ SONG TITLE LIBRARY ★
+    </div>
+
+    
+    <div class="title"
+         data-id="1"
+         data-rotation="0"
+         style="
+            left: 60.3891663916987%;
+            top: 65.96166240501776%;
+            transform: rotate(0deg);
+            font-size: 41px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 0;
+         ">
+        sweat wheat meet and greet come an beat the heat
+    </div>
+    
+    <div class="title"
+         data-id="2"
+         data-rotation="-19"
+         style="
+            left: 18.44930489800582%;
+            top: 89.86049044249323%;
+            transform: rotate(-19deg);
+            font-size: 45px;
+            color: #666666;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 1;
+         ">
+        I wasn't ear starving
+    </div>
+    
+    <div class="title"
+         data-id="3"
+         data-rotation="-5"
+         style="
+            left: 71.19173303970102%;
+            top: 29.85609180249374%;
+            transform: rotate(-5deg);
+            font-size: 15px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 2;
+         ">
+        mustard so I can cream
+    </div>
+    
+    <div class="title"
+         data-id="4"
+         data-rotation="16"
+         style="
+            left: 33.14781918282873%;
+            top: 49.12999673479775%;
+            transform: rotate(16deg);
+            font-size: 17px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 3;
+         ">
+        between the extremes p...p
+    </div>
+    
+    <div class="title"
+         data-id="5"
+         data-rotation="-9"
+         style="
+            left: 21.839366190676728%;
+            top: 45.07636286223472%;
+            transform: rotate(-9deg);
+            font-size: 31px;
+            color: #000000;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 4;
+         ">
+        Tip of the Fatberg
+    </div>
+    
+    <div class="title"
+         data-id="6"
+         data-rotation="-17"
+         style="
+            left: 79.13533908107382%;
+            top: 54.461717444508174%;
+            transform: rotate(-17deg);
+            font-size: 34px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 5;
+         ">
+        Music to play over your conspiring
+    </div>
+    
+    <div class="title"
+         data-id="7"
+         data-rotation="7"
+         style="
+            left: 64.71465188359994%;
+            top: 36.64569580923971%;
+            transform: rotate(7deg);
+            font-size: 30px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 6;
+         ">
+        a certian kind of freedom
+    </div>
+    
+    <div class="title"
+         data-id="8"
+         data-rotation="2"
+         style="
+            left: 71.33209158256375%;
+            top: 36.58857096841841%;
+            transform: rotate(2deg);
+            font-size: 44px;
+            color: #000000;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            
+            z-index: 7;
+         ">
+        _l'argent des autres._ †
+    </div>
+    
+    <div class="title"
+         data-id="9"
+         data-rotation="7"
+         style="
+            left: 47.26921305976021%;
+            top: 40.52706829250741%;
+            transform: rotate(7deg);
+            font-size: 23px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 8;
+         ">
+        pair a dice prison
+    </div>
+    
+    <div class="title"
+         data-id="10"
+         data-rotation="3"
+         style="
+            left: 29.440561186212175%;
+            top: 51.21086534288968%;
+            transform: rotate(3deg);
+            font-size: 39px;
+            color: #666666;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 9;
+         ">
+        yeah not so bad
+    </div>
+    
+    <div class="title"
+         data-id="11"
+         data-rotation="6"
+         style="
+            left: 79.67533387949221%;
+            top: 49.400416161340424%;
+            transform: rotate(6deg);
+            font-size: 17px;
+            color: #666666;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 10;
+         ">
+        only 1%, pretty good
+    </div>
+    
+    <div class="title"
+         data-id="12"
+         data-rotation="-15"
+         style="
+            left: 25.390670407779172%;
+            top: 78.17752148637028%;
+            transform: rotate(-15deg);
+            font-size: 33px;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 11;
+         ">
+        my inventory is 99% accurate and im 1% more dead
+    </div>
+    
+    <div class="title"
+         data-id="13"
+         data-rotation="4"
+         style="
+            left: 23.924854799678492%;
+            top: 72.35238293034483%;
+            transform: rotate(4deg);
+            font-size: 47px;
+            color: #333333;
+            font-family: 'Times New Roman', sans-serif;
+            
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 12;
+         ">
+        glad ur still alive
+    </div>
+    
+    <div class="title"
+         data-id="14"
+         data-rotation="17"
+         style="
+            left: 28.708386884824293%;
+            top: 19.478836924475136%;
+            transform: rotate(17deg);
+            font-size: 20px;
+            color: #cccccc;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 13;
+         ">
+        the lyrics to this song is a series of yes and nose :nose:
+    </div>
+    
+    <div class="title"
+         data-id="15"
+         data-rotation="18"
+         style="
+            left: 46.7073264559204%;
+            top: 43.418344981797915%;
+            transform: rotate(18deg);
+            font-size: 38px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 14;
+         ">
+        Is 'is' an is as any 'is' is?
+    </div>
+    
+    <div class="title"
+         data-id="16"
+         data-rotation="-3"
+         style="
+            left: 16.34701952753091%;
+            top: 60.36110654027213%;
+            transform: rotate(-3deg);
+            font-size: 45px;
+            color: #000000;
+            font-family: 'Courier New', sans-serif;
+            
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 15;
+         ">
+        beard with bald guy
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="17"
+         data-rotation="-3"
+         style="
+            left: 58.996924408309006%;
+            top: 18.659425804781588%;
+            transform: rotate(-3deg);
+            font-size: 19px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            
+            z-index: 16;
+         ">
+        DO NOT REPEAT THIS INSIGHT
+    </div>
+    
+    <div class="title"
+         data-id="18"
+         data-rotation="11"
+         style="
+            left: 71.34286694094139%;
+            top: 66.54873663887761%;
+            transform: rotate(11deg);
+            font-size: 45px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 17;
+         ">
+        song title idea:
+each track is named a single word. the album forms a complete sentence
+    </div>
+    
+    <div class="title"
+         data-id="19"
+         data-rotation="5"
+         style="
+            left: 15.595067442918271%;
+            top: 18.66618551004747%;
+            transform: rotate(5deg);
+            font-size: 18px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 18;
+         ">
+        read war and peace or watch one piece
+    </div>
+    
+    <div class="title"
+         data-id="20"
+         data-rotation="-8"
+         style="
+            left: 78.74939057088514%;
+            top: 21.397344766216957%;
+            transform: rotate(-8deg);
+            font-size: 32px;
+            color: #000000;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 19;
+         ">
+        return to animism
+    </div>
+    
+    <div class="title"
+         data-id="21"
+         data-rotation="16"
+         style="
+            left: 68.36984888914665%;
+            top: 42.904607872706336%;
+            transform: rotate(16deg);
+            font-size: 13px;
+            color: #333333;
+            font-family: 'Times New Roman', sans-serif;
+            
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 20;
+         ">
+        ...To Exist Is To Be a Subject of Blind Compulsion.
+    </div>
+    
+    <div class="title"
+         data-id="22"
+         data-rotation="-13"
+         style="
+            left: 82.07191326603211%;
+            top: 20.45058094058399%;
+            transform: rotate(-13deg);
+            font-size: 36px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 21;
+         ">
+        Again There Comes an Experiment With the Human Work
+    </div>
+    
+    <div class="title"
+         data-id="23"
+         data-rotation="-12"
+         style="
+            left: 24.077032415159483%;
+            top: 34.018630546023616%;
+            transform: rotate(-12deg);
+            font-size: 38px;
+            color: #cccccc;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 22;
+         ">
+        director 69
+    </div>
+    
+    <div class="title"
+         data-id="24"
+         data-rotation="1"
+         style="
+            left: 73.60855141605457%;
+            top: 20.988540473287905%;
+            transform: rotate(1deg);
+            font-size: 36px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 23;
+         ">
+        sleep cartel
+    </div>
+    
+    <div class="title"
+         data-id="25"
+         data-rotation="1"
+         style="
+            left: 84.43499804801851%;
+            top: 40.4998865433412%;
+            transform: rotate(1deg);
+            font-size: 40px;
+            color: #999999;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 24;
+         ">
+        rewards viral engagement at all costs
+    </div>
+    
+    <div class="title"
+         data-id="26"
+         data-rotation="-2"
+         style="
+            left: 26.28450661537635%;
+            top: 71.03559468729449%;
+            transform: rotate(-2deg);
+            font-size: 47px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 25;
+         ">
+        What is to be done, fellas?
+    </div>
+    
+    <div class="title"
+         data-id="27"
+         data-rotation="19"
+         style="
+            left: 83.91608274968411%;
+            top: 45.85371922280914%;
+            transform: rotate(19deg);
+            font-size: 31px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            
+            z-index: 26;
+         ">
+        You Lamp! You Towel! You Plate!
+    </div>
+    
+    <div class="title"
+         data-id="28"
+         data-rotation="-17"
+         style="
+            left: 75.25338204415304%;
+            top: 46.81806614247829%;
+            transform: rotate(-17deg);
+            font-size: 38px;
+            color: #666666;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 27;
+         ">
+        The Wurly Durly World of the Visually Too Much
+    </div>
+    
+    <div class="title"
+         data-id="29"
+         data-rotation="-14"
+         style="
+            left: 47.55778935156069%;
+            top: 61.372774595040156%;
+            transform: rotate(-14deg);
+            font-size: 39px;
+            color: #333333;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 28;
+         ">
+        world capitalist intercourse
+    </div>
+    
+    <div class="title"
+         data-id="30"
+         data-rotation="19"
+         style="
+            left: 36.71240587725103%;
+            top: 71.01495362400071%;
+            transform: rotate(19deg);
+            font-size: 21px;
+            color: #000000;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 29;
+         ">
+        f.a.t.
+failed attitude test
+    </div>
+    
+    <div class="title"
+         data-id="31"
+         data-rotation="-1"
+         style="
+            left: 8.494901153654322%;
+            top: 20.790714963251663%;
+            transform: rotate(-1deg);
+            font-size: 46px;
+            color: #666666;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 30;
+         ">
+        normal university
+    </div>
+    
+    <div class="title"
+         data-id="32"
+         data-rotation="-17"
+         style="
+            left: 57.362488424616316%;
+            top: 27.954192530282793%;
+            transform: rotate(-17deg);
+            font-size: 40px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 31;
+         ">
+        this is real
+    </div>
+    
+    <div class="title"
+         data-id="33"
+         data-rotation="11"
+         style="
+            left: 32.53638416025894%;
+            top: 33.665685281359515%;
+            transform: rotate(11deg);
+            font-size: 38px;
+            color: #666666;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 32;
+         ">
+        Supersaturated Mother Liquor
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="34"
+         data-rotation="-1"
+         style="
+            left: 53.9678276447449%;
+            top: 36.218354838503174%;
+            transform: rotate(-1deg);
+            font-size: 44px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 33;
+         ">
+        ipad dads
+    </div>
+    
+    <div class="title"
+         data-id="35"
+         data-rotation="-4"
+         style="
+            left: 58.95608985590637%;
+            top: 11.744815455583256%;
+            transform: rotate(-4deg);
+            font-size: 19px;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 34;
+         ">
+        the flesh was sense. it made no soft
+    </div>
+    
+    <div class="title"
+         data-id="36"
+         data-rotation="-6"
+         style="
+            left: 26.47352326686579%;
+            top: 73.55053795335022%;
+            transform: rotate(-6deg);
+            font-size: 43px;
+            color: #333333;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 35;
+         ">
+        Despite All My Tabs I'm Still Just a Rat in a Cage
+    </div>
+    
+    <div class="title"
+         data-id="37"
+         data-rotation="-14"
+         style="
+            left: 56.835578627304734%;
+            top: 10.828205374490002%;
+            transform: rotate(-14deg);
+            font-size: 13px;
+            color: #000000;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 36;
+         ">
+        Spillikins!
+    </div>
+    
+    <div class="title"
+         data-id="38"
+         data-rotation="19"
+         style="
+            left: 63.4925079060326%;
+            top: 12.44396713487409%;
+            transform: rotate(19deg);
+            font-size: 21px;
+            color: #cccccc;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 37;
+         ">
+        The flesh was soft. It made no sense.
+    </div>
+    
+    <div class="title"
+         data-id="39"
+         data-rotation="-5"
+         style="
+            left: 6.864327836725952%;
+            top: 11.842356931514203%;
+            transform: rotate(-5deg);
+            font-size: 37px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 38;
+         ">
+        *people are always brendan
+    </div>
+    
+    <div class="title"
+         data-id="40"
+         data-rotation="5"
+         style="
+            left: 16.064440758615966%;
+            top: 64.491295803551%;
+            transform: rotate(5deg);
+            font-size: 32px;
+            color: #666666;
+            font-family: 'Times New Roman', sans-serif;
+            
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 39;
+         ">
+        people are always human
+    </div>
+    
+    <div class="title"
+         data-id="41"
+         data-rotation="9"
+         style="
+            left: 35.62155129164171%;
+            top: 63.69475745349826%;
+            transform: rotate(9deg);
+            font-size: 24px;
+            color: #cccccc;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 40;
+         ">
+        defund the chat
+    </div>
+    
+    <div class="title"
+         data-id="42"
+         data-rotation="-3"
+         style="
+            left: 25.732223046050258%;
+            top: 88.27975209542014%;
+            transform: rotate(-3deg);
+            font-size: 45px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 41;
+         ">
+        controlling interests
+trolling interests
+    </div>
+    
+    <div class="title"
+         data-id="43"
+         data-rotation="-10"
+         style="
+            left: 74.92328632310699%;
+            top: 56.79729195061271%;
+            transform: rotate(-10deg);
+            font-size: 48px;
+            color: #666666;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 42;
+         ">
+        Verdad y Certeza
+    </div>
+    
+    <div class="title"
+         data-id="44"
+         data-rotation="-3"
+         style="
+            left: 54.7539556974268%;
+            top: 73.46062576143844%;
+            transform: rotate(-3deg);
+            font-size: 38px;
+            color: #cccccc;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 43;
+         ">
+        npc:
+non playable citizen
+non patterning citizen 
+non paying citizen 
+nano paternal citizen 
+nonetised personal chastity
+nonentary payable cogent
+neurotic pizza chart
+novel personhood crash
+no problems canceling 
+narrative pattern corrosion 
+narrative postmodern condition 
+now personhood clickbait
+non pictured century
+negative profit culture 
+npc player connection 
+narrative personhood conditioning
+
+
+whiped these out while watching P.G. Talk 1.0. feel free to mix and match, add more
+    </div>
+    
+    <div class="title"
+         data-id="45"
+         data-rotation="17"
+         style="
+            left: 24.648441872867146%;
+            top: 26.43646713367219%;
+            transform: rotate(17deg);
+            font-size: 25px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 44;
+         ">
+        [recalling a sign i saw in the philippines on the back of a trike:]
+
+drugs are retarted [sic]
+don't get started
+    </div>
+    
+    <div class="title"
+         data-id="46"
+         data-rotation="-10"
+         style="
+            left: 21.789752136822802%;
+            top: 60.60328023172467%;
+            transform: rotate(-10deg);
+            font-size: 28px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 45;
+         ">
+        Josh and the fucks who don't matter
+    </div>
+    
+    <div class="title"
+         data-id="47"
+         data-rotation="9"
+         style="
+            left: 55.83738701759649%;
+            top: 40.75311761648653%;
+            transform: rotate(9deg);
+            font-size: 47px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 46;
+         ">
+        negazine
+    </div>
+    
+    <div class="title"
+         data-id="48"
+         data-rotation="-8"
+         style="
+            left: 57.66433991167594%;
+            top: 52.81626171394253%;
+            transform: rotate(-8deg);
+            font-size: 36px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 47;
+         ">
+        For Us By U
+    </div>
+    
+    <div class="title"
+         data-id="49"
+         data-rotation="-5"
+         style="
+            left: 27.764887287026276%;
+            top: 48.89435153532264%;
+            transform: rotate(-5deg);
+            font-size: 29px;
+            color: #666666;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 48;
+         ">
+        Capitalists, don’t invest your capital in the cement industry!
+    </div>
+    
+    <div class="title"
+         data-id="50"
+         data-rotation="9"
+         style="
+            left: 66.39740812951958%;
+            top: 45.192569208574696%;
+            transform: rotate(9deg);
+            font-size: 14px;
+            color: #000000;
+            font-family: 'Times New Roman', sans-serif;
+            
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 49;
+         ">
+        {{},{},{}}; III; Three; 3, 3, 3, ... :  Mimesis
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="51"
+         data-rotation="15"
+         style="
+            left: 37.131673438248086%;
+            top: 50.46824336196181%;
+            transform: rotate(15deg);
+            font-size: 32px;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 50;
+         ">
+        Always the Candle in the Bovine Eye
+    </div>
+    
+    <div class="title"
+         data-id="52"
+         data-rotation="-13"
+         style="
+            left: 51.518528870655025%;
+            top: 74.99555322851846%;
+            transform: rotate(-13deg);
+            font-size: 36px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 51;
+         ">
+        The craftsman dances upon a volcano
+    </div>
+    
+    <div class="title"
+         data-id="53"
+         data-rotation="-5"
+         style="
+            left: 54.240260830903864%;
+            top: 37.72142948695666%;
+            transform: rotate(-5deg);
+            font-size: 34px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 52;
+         ">
+        Metaphysically Attacking Others
+    </div>
+    
+    <div class="title"
+         data-id="54"
+         data-rotation="11"
+         style="
+            left: 50.72696328708712%;
+            top: 80.0067008846531%;
+            transform: rotate(11deg);
+            font-size: 47px;
+            color: #999999;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 53;
+         ">
+        are we the badies
+    </div>
+    
+    <div class="title"
+         data-id="55"
+         data-rotation="16"
+         style="
+            left: 23.781714596052417%;
+            top: 7.275197994099701%;
+            transform: rotate(16deg);
+            font-size: 45px;
+            color: #666666;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 54;
+         ">
+        Bic Mag
+Bag Mic
+Mig Bac
+Mc Bag
+MAGA Big
+    </div>
+    
+    <div class="title"
+         data-id="56"
+         data-rotation="-14"
+         style="
+            left: 38.247471707269476%;
+            top: 84.70800899830627%;
+            transform: rotate(-14deg);
+            font-size: 28px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 55;
+         ">
+        Every Big Mac Is Liquid In State With A Change In Scale
+    </div>
+    
+    <div class="title"
+         data-id="57"
+         data-rotation="15"
+         style="
+            left: 41.36028729047016%;
+            top: 66.71171900867517%;
+            transform: rotate(15deg);
+            font-size: 12px;
+            color: #cccccc;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 56;
+         ">
+        Big Mac Tax
+    </div>
+    
+    <div class="title"
+         data-id="58"
+         data-rotation="-10"
+         style="
+            left: 22.914544794329366%;
+            top: 53.928901231285586%;
+            transform: rotate(-10deg);
+            font-size: 25px;
+            color: #cccccc;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 57;
+         ">
+        Communal Pursuit of the Big Mac
+    </div>
+    
+    <div class="title"
+         data-id="59"
+         data-rotation="-15"
+         style="
+            left: 75.18065125340433%;
+            top: 26.491901783289737%;
+            transform: rotate(-15deg);
+            font-size: 14px;
+            color: #cccccc;
+            font-family: 'Times New Roman', sans-serif;
+            
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 58;
+         ">
+        Cute Cute, In a Stupid-Ass Way
+    </div>
+    
+    <div class="title"
+         data-id="60"
+         data-rotation="-1"
+         style="
+            left: 45.88950222004225%;
+            top: 73.74812084368095%;
+            transform: rotate(-1deg);
+            font-size: 27px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            
+            z-index: 59;
+         ">
+        bad job
+    </div>
+    
+    <div class="title"
+         data-id="61"
+         data-rotation="-5"
+         style="
+            left: 15.834992679992403%;
+            top: 33.089534826598076%;
+            transform: rotate(-5deg);
+            font-size: 16px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            
+            z-index: 60;
+         ">
+        Spicy Axiom
+    </div>
+    
+    <div class="title"
+         data-id="62"
+         data-rotation="-2"
+         style="
+            left: 10.163152797329111%;
+            top: 10.330576853834224%;
+            transform: rotate(-2deg);
+            font-size: 33px;
+            color: #000000;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 61;
+         ">
+        audio sensory memory reprogramming
+    </div>
+    
+    <div class="title"
+         data-id="63"
+         data-rotation="-19"
+         style="
+            left: 18.408630518628808%;
+            top: 56.6189448578708%;
+            transform: rotate(-19deg);
+            font-size: 31px;
+            color: #999999;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            
+            z-index: 62;
+         ">
+        sleep story
+I think thats the name. category of video on YouTube that people listen to to fall asleep
+    </div>
+    
+    <div class="title"
+         data-id="64"
+         data-rotation="16"
+         style="
+            left: 38.56325879194646%;
+            top: 26.01975255566857%;
+            transform: rotate(16deg);
+            font-size: 27px;
+            color: #cccccc;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 63;
+         ">
+        strategic schizophrenia
+    </div>
+    
+    <div class="title"
+         data-id="65"
+         data-rotation="13"
+         style="
+            left: 17.05914796119621%;
+            top: 45.4094024876689%;
+            transform: rotate(13deg);
+            font-size: 25px;
+            color: #000000;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 64;
+         ">
+        once is was
+    </div>
+    
+    <div class="title"
+         data-id="66"
+         data-rotation="-1"
+         style="
+            left: 36.41470317917666%;
+            top: 70.7256271462759%;
+            transform: rotate(-1deg);
+            font-size: 35px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 65;
+         ">
+        Green Ray Machine
+    </div>
+    
+    <div class="title"
+         data-id="67"
+         data-rotation="-13"
+         style="
+            left: 50.587092542067225%;
+            top: 55.30320378099705%;
+            transform: rotate(-13deg);
+            font-size: 41px;
+            color: #333333;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 66;
+         ">
+        be the do
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="68"
+         data-rotation="14"
+         style="
+            left: 82.65917800059955%;
+            top: 14.575396116996501%;
+            transform: rotate(14deg);
+            font-size: 22px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 67;
+         ">
+        fucked up feelings
+    </div>
+    
+    <div class="title"
+         data-id="69"
+         data-rotation="-4"
+         style="
+            left: 14.419641853539877%;
+            top: 54.3219627190745%;
+            transform: rotate(-4deg);
+            font-size: 20px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 68;
+         ">
+        we should have more
+    </div>
+    
+    <div class="title"
+         data-id="70"
+         data-rotation="10"
+         style="
+            left: 25.331771455664438%;
+            top: 56.63129407021181%;
+            transform: rotate(10deg);
+            font-size: 32px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 69;
+         ">
+        viewpoint abyss
+    </div>
+    
+    <div class="title"
+         data-id="71"
+         data-rotation="6"
+         style="
+            left: 35.6765089526403%;
+            top: 27.87475753627905%;
+            transform: rotate(6deg);
+            font-size: 16px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 70;
+         ">
+        system vacuum
+    </div>
+    
+    <div class="title"
+         data-id="72"
+         data-rotation="-14"
+         style="
+            left: 18.395258138591714%;
+            top: 13.961170517143795%;
+            transform: rotate(-14deg);
+            font-size: 19px;
+            color: #333333;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 71;
+         ">
+        hetero/homo coin :coin:
+    </div>
+    
+    <div class="title"
+         data-id="73"
+         data-rotation="-4"
+         style="
+            left: 17.50832006158867%;
+            top: 53.28593488708497%;
+            transform: rotate(-4deg);
+            font-size: 43px;
+            color: #666666;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 72;
+         ">
+        temporal index
+    </div>
+    
+    <div class="title"
+         data-id="74"
+         data-rotation="17"
+         style="
+            left: 27.12167979047024%;
+            top: 44.29467601473097%;
+            transform: rotate(17deg);
+            font-size: 39px;
+            color: #000000;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 73;
+         ">
+        architectural apparition
+    </div>
+    
+    <div class="title"
+         data-id="75"
+         data-rotation="17"
+         style="
+            left: 6.365246020567774%;
+            top: 89.27394060795736%;
+            transform: rotate(17deg);
+            font-size: 35px;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 74;
+         ">
+        playing with dead things
+    </div>
+    
+    <div class="title"
+         data-id="76"
+         data-rotation="-2"
+         style="
+            left: 33.95480721492109%;
+            top: 7.26291391151757%;
+            transform: rotate(-2deg);
+            font-size: 15px;
+            color: #cccccc;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 75;
+         ">
+        irreality
+    </div>
+    
+    <div class="title"
+         data-id="77"
+         data-rotation="8"
+         style="
+            left: 18.756308590565027%;
+            top: 79.35914846020245%;
+            transform: rotate(8deg);
+            font-size: 31px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 76;
+         ">
+        Two celebrities roll a hoop
+    </div>
+    
+    <div class="title"
+         data-id="78"
+         data-rotation="10"
+         style="
+            left: 58.91335360041563%;
+            top: 41.775530996293234%;
+            transform: rotate(10deg);
+            font-size: 12px;
+            color: #000000;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 77;
+         ">
+        <https://www.urbandictionary.com/define.php?term=fell+off|Mom Fell Off>
+    </div>
+    
+    <div class="title"
+         data-id="79"
+         data-rotation="18"
+         style="
+            left: 75.00734240583739%;
+            top: 87.79767741614825%;
+            transform: rotate(18deg);
+            font-size: 13px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 78;
+         ">
+        Watching the Cats Grow
+    </div>
+    
+    <div class="title"
+         data-id="80"
+         data-rotation="-4"
+         style="
+            left: 63.23851347062469%;
+            top: 78.432515734277%;
+            transform: rotate(-4deg);
+            font-size: 28px;
+            color: #000000;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 79;
+         ">
+        The Genesis of the Capitalist Farmer
+    </div>
+    
+    <div class="title"
+         data-id="81"
+         data-rotation="-1"
+         style="
+            left: 22.24719244308372%;
+            top: 56.87690729982975%;
+            transform: rotate(-1deg);
+            font-size: 36px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 80;
+         ">
+        Beggars Licence
+    </div>
+    
+    <div class="title"
+         data-id="82"
+         data-rotation="-8"
+         style="
+            left: 51.815471327460145%;
+            top: 50.713960891196194%;
+            transform: rotate(-8deg);
+            font-size: 46px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 81;
+         ">
+        _A Minnesota farmer’s suicide note:_
+&gt; _"Farming is just one long goodby."_
+    </div>
+    
+    <div class="title"
+         data-id="83"
+         data-rotation="5"
+         style="
+            left: 60.4788034453103%;
+            top: 57.92356877233669%;
+            transform: rotate(5deg);
+            font-size: 21px;
+            color: #666666;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 82;
+         ">
+        Orange Man Bad
+    </div>
+    
+    <div class="title"
+         data-id="84"
+         data-rotation="-2"
+         style="
+            left: 69.91564974622645%;
+            top: 31.87694994674492%;
+            transform: rotate(-2deg);
+            font-size: 31px;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 83;
+         ">
+        good news coal miners
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="85"
+         data-rotation="-15"
+         style="
+            left: 7.2981749559973075%;
+            top: 79.00383645722316%;
+            transform: rotate(-15deg);
+            font-size: 37px;
+            color: #999999;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 84;
+         ">
+        Nothing for Money, and the Tricks for Free
+    </div>
+    
+    <div class="title"
+         data-id="86"
+         data-rotation="12"
+         style="
+            left: 60.86824331756113%;
+            top: 44.0068786932815%;
+            transform: rotate(12deg);
+            font-size: 28px;
+            color: #666666;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 85;
+         ">
+        ear wyrm
+    </div>
+    
+    <div class="title"
+         data-id="87"
+         data-rotation="0"
+         style="
+            left: 37.470744181550415%;
+            top: 38.42039997372204%;
+            transform: rotate(0deg);
+            font-size: 48px;
+            color: #cccccc;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 86;
+         ">
+        Market Gardening
+    </div>
+    
+    <div class="title"
+         data-id="88"
+         data-rotation="1"
+         style="
+            left: 74.35780767690588%;
+            top: 15.822892343682167%;
+            transform: rotate(1deg);
+            font-size: 26px;
+            color: #999999;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 87;
+         ">
+        Alien Arrows
+    </div>
+    
+    <div class="title"
+         data-id="89"
+         data-rotation="-10"
+         style="
+            left: 51.081932062844835%;
+            top: 15.075817433891578%;
+            transform: rotate(-10deg);
+            font-size: 39px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 88;
+         ">
+        knowledge-labor  decoupling
+    </div>
+    
+    <div class="title"
+         data-id="90"
+         data-rotation="11"
+         style="
+            left: 28.04540423389315%;
+            top: 8.574667099555871%;
+            transform: rotate(11deg);
+            font-size: 12px;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 89;
+         ">
+        exploitation index
+    </div>
+    
+    <div class="title"
+         data-id="91"
+         data-rotation="-18"
+         style="
+            left: 34.77161697444238%;
+            top: 33.12031102118979%;
+            transform: rotate(-18deg);
+            font-size: 25px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            
+            z-index: 90;
+         ">
+        stonks
+    </div>
+    
+    <div class="title"
+         data-id="92"
+         data-rotation="13"
+         style="
+            left: 55.096576829015646%;
+            top: 16.04537677058567%;
+            transform: rotate(13deg);
+            font-size: 19px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 91;
+         ">
+        what we gotta do
+    </div>
+    
+    <div class="title"
+         data-id="93"
+         data-rotation="10"
+         style="
+            left: 41.29967279918928%;
+            top: 23.962701816131375%;
+            transform: rotate(10deg);
+            font-size: 26px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 92;
+         ">
+        I dont like using the word art
+    </div>
+    
+    <div class="title"
+         data-id="94"
+         data-rotation="-11"
+         style="
+            left: 70.4956147321485%;
+            top: 36.786430030794236%;
+            transform: rotate(-11deg);
+            font-size: 37px;
+            color: #666666;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 93;
+         ">
+        The Earth is a Cat
+    </div>
+    
+    <div class="title"
+         data-id="95"
+         data-rotation="19"
+         style="
+            left: 74.7566197128324%;
+            top: 80.0591841879761%;
+            transform: rotate(19deg);
+            font-size: 42px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            
+            
+            z-index: 94;
+         ">
+        The Timecutter
+    </div>
+    
+    <div class="title"
+         data-id="96"
+         data-rotation="-10"
+         style="
+            left: 34.07036336591815%;
+            top: 63.11266494063715%;
+            transform: rotate(-10deg);
+            font-size: 19px;
+            color: #000000;
+            font-family: 'Times New Roman', sans-serif;
+            
+            
+            z-index: 95;
+         ">
+        volatility smile
+    </div>
+    
+    <div class="title"
+         data-id="97"
+         data-rotation="12"
+         style="
+            left: 81.80164265459777%;
+            top: 74.94463540621129%;
+            transform: rotate(12deg);
+            font-size: 33px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 96;
+         ">
+        authority of the steam
+    </div>
+    
+    <div class="title"
+         data-id="98"
+         data-rotation="2"
+         style="
+            left: 29.865004105163322%;
+            top: 71.15484586173775%;
+            transform: rotate(2deg);
+            font-size: 13px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 97;
+         ">
+        art critism is "harmful" because it disturbs wealthy people in their enjoyment of eye way way
+    </div>
+    
+    <div class="title"
+         data-id="99"
+         data-rotation="-2"
+         style="
+            left: 33.69764271133605%;
+            top: 81.46970807822468%;
+            transform: rotate(-2deg);
+            font-size: 44px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 98;
+         ">
+        stab adam smith
+    </div>
+    
+    <div class="title"
+         data-id="100"
+         data-rotation="-17"
+         style="
+            left: 69.66218683502092%;
+            top: 35.05387066698995%;
+            transform: rotate(-17deg);
+            font-size: 24px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 99;
+         ">
+        consumption assumption
+    </div>
+    
+    <div class="title"
+         data-id="101"
+         data-rotation="3"
+         style="
+            left: 55.008641097309436%;
+            top: 62.960365904711395%;
+            transform: rotate(3deg);
+            font-size: 23px;
+            color: #999999;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 100;
+         ">
+        decelerationist
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="102"
+         data-rotation="12"
+         style="
+            left: 41.4055654846284%;
+            top: 18.07897292173186%;
+            transform: rotate(12deg);
+            font-size: 24px;
+            color: #000000;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 101;
+         ">
+        _ain't got no date_
+    </div>
+    
+    <div class="title"
+         data-id="103"
+         data-rotation="-10"
+         style="
+            left: 20.20888331825259%;
+            top: 10.359110568275613%;
+            transform: rotate(-10deg);
+            font-size: 20px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 102;
+         ">
+        Serf's Up!
+    </div>
+    
+    <div class="title"
+         data-id="104"
+         data-rotation="6"
+         style="
+            left: 40.958505785575724%;
+            top: 59.7055844279824%;
+            transform: rotate(6deg);
+            font-size: 19px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 103;
+         ">
+        Forgetting the Metric
+    </div>
+    
+    <div class="title"
+         data-id="105"
+         data-rotation="2"
+         style="
+            left: 38.936435663625716%;
+            top: 9.762553941933422%;
+            transform: rotate(2deg);
+            font-size: 28px;
+            color: #000000;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 104;
+         ">
+        co-boredism
+    </div>
+    
+    <div class="title"
+         data-id="106"
+         data-rotation="5"
+         style="
+            left: 64.30868504459228%;
+            top: 8.860467301787736%;
+            transform: rotate(5deg);
+            font-size: 13px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 105;
+         ">
+        newmark
+    </div>
+    
+    <div class="title"
+         data-id="107"
+         data-rotation="13"
+         style="
+            left: 6.822579480171562%;
+            top: 31.98995151440503%;
+            transform: rotate(13deg);
+            font-size: 47px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 106;
+         ">
+        news/life balance
+    </div>
+    
+    <div class="title"
+         data-id="108"
+         data-rotation="14"
+         style="
+            left: 45.12359284411964%;
+            top: 5.330018931084453%;
+            transform: rotate(14deg);
+            font-size: 19px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 107;
+         ">
+        they can't stop us
+    </div>
+    
+    <div class="title"
+         data-id="109"
+         data-rotation="-12"
+         style="
+            left: 14.150550447197059%;
+            top: 74.78534599966976%;
+            transform: rotate(-12deg);
+            font-size: 26px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 108;
+         ">
+        they can't even stop themselves
+    </div>
+    
+    <div class="title"
+         data-id="110"
+         data-rotation="-6"
+         style="
+            left: 59.327875303281566%;
+            top: 31.619838577521897%;
+            transform: rotate(-6deg);
+            font-size: 44px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 109;
+         ">
+        cathode cafe
+    </div>
+    
+    <div class="title"
+         data-id="111"
+         data-rotation="-7"
+         style="
+            left: 45.529933127211955%;
+            top: 23.295989336060032%;
+            transform: rotate(-7deg);
+            font-size: 28px;
+            color: #999999;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 110;
+         ">
+        Jeu d'esprit
+    </div>
+    
+    <div class="title"
+         data-id="112"
+         data-rotation="-13"
+         style="
+            left: 17.253214198297393%;
+            top: 11.837708627220323%;
+            transform: rotate(-13deg);
+            font-size: 44px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 111;
+         ">
+        The body of departure
+The body of arrival
+    </div>
+    
+    <div class="title"
+         data-id="113"
+         data-rotation="6"
+         style="
+            left: 29.600975790110358%;
+            top: 6.158767637261244%;
+            transform: rotate(6deg);
+            font-size: 33px;
+            color: #cccccc;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 112;
+         ">
+        *Synthetic Solidarity™*
+    </div>
+    
+    <div class="title"
+         data-id="114"
+         data-rotation="0"
+         style="
+            left: 8.339498436276518%;
+            top: 34.512233705424904%;
+            transform: rotate(0deg);
+            font-size: 47px;
+            color: #cccccc;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 113;
+         ">
+        the hole is where the magic is
+    </div>
+    
+    <div class="title"
+         data-id="115"
+         data-rotation="7"
+         style="
+            left: 54.04984594352158%;
+            top: 27.640848306350698%;
+            transform: rotate(7deg);
+            font-size: 43px;
+            color: #999999;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 114;
+         ">
+        The expenditures of a primitive being
+    </div>
+    
+    <div class="title"
+         data-id="116"
+         data-rotation="9"
+         style="
+            left: 33.51024749614616%;
+            top: 44.38327731751651%;
+            transform: rotate(9deg);
+            font-size: 15px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 115;
+         ">
+        BEDO “we’re all brendans after all.”
+    </div>
+    
+    <div class="title"
+         data-id="117"
+         data-rotation="-5"
+         style="
+            left: 8.381984568205567%;
+            top: 75.44495614262364%;
+            transform: rotate(-5deg);
+            font-size: 44px;
+            color: #666666;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 116;
+         ">
+        in reference to Juan Atkins quote
+    </div>
+    
+    <div class="title"
+         data-id="118"
+         data-rotation="-18"
+         style="
+            left: 63.28258146209967%;
+            top: 54.531636565745295%;
+            transform: rotate(-18deg);
+            font-size: 46px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 117;
+         ">
+        note for future self
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="119"
+         data-rotation="-15"
+         style="
+            left: 9.842454350488303%;
+            top: 58.78796863015312%;
+            transform: rotate(-15deg);
+            font-size: 46px;
+            color: #999999;
+            font-family: 'Courier New', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            
+            z-index: 118;
+         ">
+        There Are No UFOs
+
+(_note for future self:_ in reference to Juan Atkins quote: "There are no UFOs. Machine music is the only way forward")
+    </div>
+    
+    <div class="title"
+         data-id="120"
+         data-rotation="-7"
+         style="
+            left: 42.34076876988718%;
+            top: 68.27476303485199%;
+            transform: rotate(-7deg);
+            font-size: 40px;
+            color: #000000;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            border: 2px dotted #cccccc; padding: 5px;
+            z-index: 119;
+         ">
+        immoral tally
+    </div>
+    
+    <div class="title"
+         data-id="121"
+         data-rotation="19"
+         style="
+            left: 76.89263406020815%;
+            top: 76.65288641220968%;
+            transform: rotate(19deg);
+            font-size: 25px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 120;
+         ">
+        Immortality Sale
+    </div>
+    
+    <div class="title"
+         data-id="122"
+         data-rotation="16"
+         style="
+            left: 33.85799749132741%;
+            top: 11.190538274958605%;
+            transform: rotate(16deg);
+            font-size: 44px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 121;
+         ">
+        "Don't Die"
+    </div>
+    
+    <div class="title"
+         data-id="123"
+         data-rotation="17"
+         style="
+            left: 60.62119683081359%;
+            top: 83.88556785727953%;
+            transform: rotate(17deg);
+            font-size: 21px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 122;
+         ">
+        The Vortex of Central Suspicion
+    </div>
+    
+    <div class="title"
+         data-id="124"
+         data-rotation="-13"
+         style="
+            left: 81.38182417198527%;
+            top: 49.08595178970474%;
+            transform: rotate(-13deg);
+            font-size: 14px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            
+            z-index: 123;
+         ">
+        more womp-womps
+    </div>
+    
+    <div class="title"
+         data-id="125"
+         data-rotation="-18"
+         style="
+            left: 52.5610430047118%;
+            top: 13.199175751899697%;
+            transform: rotate(-18deg);
+            font-size: 32px;
+            color: #666666;
+            font-family: 'Arial', sans-serif;
+            
+            border: 2px dotted #999999; padding: 5px;
+            z-index: 124;
+         ">
+        Gesundheit
+    </div>
+    
+    <div class="title"
+         data-id="126"
+         data-rotation="-2"
+         style="
+            left: 17.957010437202456%;
+            top: 56.089024723289725%;
+            transform: rotate(-2deg);
+            font-size: 27px;
+            color: #999999;
+            font-family: 'Times New Roman', sans-serif;
+            
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 125;
+         ">
+        Murph from Earph Lights the Land on Fire
+    </div>
+    
+    <div class="title"
+         data-id="127"
+         data-rotation="17"
+         style="
+            left: 62.07840885570771%;
+            top: 60.95986688514744%;
+            transform: rotate(17deg);
+            font-size: 42px;
+            color: #cccccc;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 126;
+         ">
+        Doubt is a Paper Tiger
+    </div>
+    
+    <div class="title"
+         data-id="128"
+         data-rotation="-1"
+         style="
+            left: 55.3744062070712%;
+            top: 73.21501711746069%;
+            transform: rotate(-1deg);
+            font-size: 44px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #000000;
+            
+            z-index: 127;
+         ">
+        home is where the generationally amassed wealth is
+    </div>
+    
+    <div class="title"
+         data-id="129"
+         data-rotation="-4"
+         style="
+            left: 73.90613387594637%;
+            top: 55.00055390861523%;
+            transform: rotate(-4deg);
+            font-size: 35px;
+            color: #999999;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            border: 2px dotted #000000; padding: 5px;
+            z-index: 128;
+         ">
+        A serious tutorial for funny learning.
+A funny tutorial for serious learning.
+    </div>
+    
+    <div class="title"
+         data-id="130"
+         data-rotation="13"
+         style="
+            left: 10.790261923475004%;
+            top: 22.051064048243482%;
+            transform: rotate(13deg);
+            font-size: 38px;
+            color: #333333;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 129;
+         ">
+        shpilmgrim
+    </div>
+    
+    <div class="title"
+         data-id="131"
+         data-rotation="-7"
+         style="
+            left: 34.70476476017672%;
+            top: 21.35232171458805%;
+            transform: rotate(-7deg);
+            font-size: 47px;
+            color: #333333;
+            font-family: 'Arial', sans-serif;
+            text-shadow: 2px 2px 4px #cccccc;
+            
+            z-index: 130;
+         ">
+        floating in a mire of semantical puzzles
+    </div>
+    
+    <div class="title"
+         data-id="132"
+         data-rotation="7"
+         style="
+            left: 64.15879154422029%;
+            top: 7.80494307025037%;
+            transform: rotate(7deg);
+            font-size: 33px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            border: 2px dotted #666666; padding: 5px;
+            z-index: 131;
+         ">
+        shirts say it for me
+    </div>
+    
+    <div class="title"
+         data-id="133"
+         data-rotation="-3"
+         style="
+            left: 21.433594725501255%;
+            top: 79.30248274870854%;
+            transform: rotate(-3deg);
+            font-size: 38px;
+            color: #000000;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            
+            z-index: 132;
+         ">
+        trad bad
+    </div>
+    
+    <div class="title"
+         data-id="134"
+         data-rotation="19"
+         style="
+            left: 82.85763357714183%;
+            top: 19.897244818786366%;
+            transform: rotate(19deg);
+            font-size: 13px;
+            color: #999999;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #666666;
+            border: 2px dotted #333333; padding: 5px;
+            z-index: 133;
+         ">
+        Just so you know, I'm not a trad cath, byyyyeeee!!!
+    </div>
+    
+    <div class="title"
+         data-id="135"
+         data-rotation="13"
+         style="
+            left: 61.037688974701695%;
+            top: 67.2406497432767%;
+            transform: rotate(13deg);
+            font-size: 44px;
+            color: #000000;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 134;
+         ">
+        clacker wacker
+    </div>
+    
+    <div class="title anim-blink"
+         data-id="136"
+         data-rotation="10"
+         style="
+            left: 28.10876434954003%;
+            top: 55.53022645451141%;
+            transform: rotate(10deg);
+            font-size: 13px;
+            color: #333333;
+            font-family: 'Times New Roman', sans-serif;
+            text-shadow: 2px 2px 4px #999999;
+            
+            z-index: 135;
+         ">
+        poor person shoots the gun and poor art comes out
+    </div>
+    
+    <div class="title"
+         data-id="137"
+         data-rotation="-3"
+         style="
+            left: 29.240093284246036%;
+            top: 80.45763253552278%;
+            transform: rotate(-3deg);
+            font-size: 12px;
+            color: #000000;
+            font-family: 'Comic Sans MS', sans-serif;
+            
+            
+            z-index: 136;
+         ">
+        Trousers of Awakening
+    </div>
+    
+    <div class="title"
+         data-id="138"
+         data-rotation="-17"
+         style="
+            left: 77.19357517334596%;
+            top: 80.27478442059277%;
+            transform: rotate(-17deg);
+            font-size: 13px;
+            color: #999999;
+            font-family: 'Courier New', sans-serif;
+            
+            
+            z-index: 137;
+         ">
+        the beating of great hinds
+    </div>
+    
+    <div class="title"
+         data-id="139"
+         data-rotation="13"
+         style="
+            left: 51.06560304750985%;
+            top: 37.28088121547412%;
+            transform: rotate(13deg);
+            font-size: 29px;
+            color: #333333;
+            font-family: 'Comic Sans MS', sans-serif;
+            text-shadow: 2px 2px 4px #333333;
+            
+            z-index: 138;
+         ">
+        the price of a working hour is 3D
+    </div>
+    
+
+    
+
+    <div class="toolbar">
+        <span class="hint">Click to select, drag to move, scroll to rotate</span>
+        <div class="divider"></div>
+
+        <button class="color-btn" style="background: #ff00ff" data-color="#ff00ff"></button>
+        <button class="color-btn" style="background: #00ff00" data-color="#00ff00"></button>
+        <button class="color-btn" style="background: #00ffff" data-color="#00ffff"></button>
+        <button class="color-btn" style="background: #ffff00" data-color="#ffff00"></button>
+        <button class="color-btn" style="background: #ff0000" data-color="#ff0000"></button>
+        <button class="color-btn" style="background: #ffffff" data-color="#ffffff"></button>
+        <button class="color-btn" style="background: #000000" data-color="#000000"></button>
+
+        <div class="divider"></div>
+
+        <select id="animSelect">
+            <option value="">Animation...</option>
+            <option value="anim-none">None</option>
+            <option value="anim-blink">Blink</option>
+            <option value="anim-pulse">Pulse</option>
+            <option value="anim-rainbow">Rainbow</option>
+            <option value="anim-shake">Shake</option>
+            <option value="anim-float">Float</option>
+        </select>
+
+        <div class="divider"></div>
+
+        <button id="resetBtn">Reset All</button>
+        <button id="saveBtn">💾 Save</button>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'songTitlePositions';
+        let selectedTitle = null;
+        let isDragging = false;
+        let dragOffset = { x: 0, y: 0 };
+
+        // Load saved positions
+        function loadPositions() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            try {
+                const positions = JSON.parse(saved);
+                document.querySelectorAll('.title').forEach(title => {
+                    const id = title.dataset.id;
+                    if (positions[id]) {
+                        const p = positions[id];
+                        if (p.left !== undefined) title.style.left = p.left;
+                        if (p.top !== undefined) title.style.top = p.top;
+                        if (p.rotation !== undefined) {
+                            title.dataset.rotation = p.rotation;
+                            title.style.transform = `rotate(${p.rotation}deg)`;
+                        }
+                        if (p.color !== undefined) title.style.color = p.color;
+                        if (p.animation !== undefined) {
+                            title.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
+                            if (p.animation) title.classList.add(p.animation);
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error('Failed to load positions:', e);
+            }
+        }
+
+        // Save positions
+        function savePositions() {
+            const positions = {};
+            document.querySelectorAll('.title').forEach(title => {
+                const id = title.dataset.id;
+                const animClass = Array.from(title.classList).find(c => c.startsWith('anim-'));
+                positions[id] = {
+                    left: title.style.left,
+                    top: title.style.top,
+                    rotation: parseInt(title.dataset.rotation) || 0,
+                    color: title.style.color,
+                    animation: animClass || ''
+                };
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+        }
+
+        // Select title
+        function selectTitle(title) {
+            if (selectedTitle) {
+                selectedTitle.classList.remove('selected');
+            }
+            selectedTitle = title;
+            if (title) {
+                title.classList.add('selected');
+            }
+        }
+
+        // Title click/drag handlers
+        document.querySelectorAll('.title').forEach(title => {
+            title.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                isDragging = true;
+                const rect = title.getBoundingClientRect();
+                dragOffset.x = e.clientX - rect.left;
+                dragOffset.y = e.clientY - rect.top;
+                title.style.zIndex = 10001;
+            });
+
+            // Scroll to rotate
+            title.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                let rotation = parseInt(title.dataset.rotation) || 0;
+                rotation += e.deltaY > 0 ? 5 : -5;
+                title.dataset.rotation = rotation;
+                title.style.transform = `rotate(${rotation}deg)`;
+            });
+        });
+
+        // Mouse move for dragging
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || !selectedTitle) return;
+
+            const x = e.clientX - dragOffset.x;
+            const y = e.clientY - dragOffset.y;
+
+            // Convert to percentage
+            const leftPercent = (x / window.innerWidth) * 100;
+            const topPercent = (y / window.innerHeight) * 100;
+
+            selectedTitle.style.left = `${leftPercent}%`;
+            selectedTitle.style.top = `${topPercent}%`;
+        });
+
+        // Mouse up
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Click elsewhere to deselect
+        document.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('title') &&
+                !e.target.closest('.toolbar')) {
+                selectTitle(null);
+            }
+        });
+
+        // Color buttons
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (selectedTitle) {
+                    selectedTitle.style.color = btn.dataset.color;
+                }
+            });
+        });
+
+        // Animation select
+        document.getElementById('animSelect').addEventListener('change', (e) => {
+            if (selectedTitle && e.target.value) {
+                selectedTitle.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
+                selectedTitle.classList.add(e.target.value);
+                e.target.value = '';
+            }
+        });
+
+        // Reset button
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            if (confirm('Reset all titles to original positions?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        });
+
+        // Save button
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            savePositions();
+            alert('Positions saved!');
+        });
+
+        // Auto-save on changes
+        let saveTimeout;
+        function autoSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(savePositions, 1000);
+        }
+
+        document.addEventListener('mouseup', autoSave);
+        document.querySelectorAll('.title').forEach(t => t.addEventListener('wheel', autoSave));
+
+        // Load on start
+        loadPositions();
+    </script>
+</body>
+</html>

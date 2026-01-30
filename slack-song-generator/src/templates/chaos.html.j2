@@ -16,6 +16,7 @@
             background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff);
             overflow-x: hidden;
             position: relative;
+            padding-bottom: 60px;
         }
 
         .header {
@@ -32,12 +33,21 @@
         .title {
             position: absolute;
             white-space: nowrap;
-            cursor: default;
-            transition: transform 0.3s ease;
+            cursor: grab;
+            transition: transform 0.1s ease;
+            user-select: none;
+        }
+
+        .title:active {
+            cursor: grabbing;
+        }
+
+        .title.selected {
+            outline: 3px dashed #ff00ff;
+            outline-offset: 4px;
         }
 
         .title:hover {
-            transform: scale(1.2);
             z-index: 10000 !important;
         }
 
@@ -51,8 +61,111 @@
             50%, 100% { opacity: 0; }
         }
 
-        .blink {
-            animation: blink 1s infinite;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            17% { color: #ff8800; }
+            33% { color: #ffff00; }
+            50% { color: #00ff00; }
+            67% { color: #0088ff; }
+            83% { color: #8800ff; }
+            100% { color: #ff0000; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px) rotate(-1deg); }
+            75% { transform: translateX(3px) rotate(1deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .anim-blink { animation: blink 1s infinite; }
+        .anim-pulse { animation: pulse 1s infinite; }
+        .anim-rainbow { animation: rainbow 3s linear infinite; }
+        .anim-shake { animation: shake 0.3s infinite; }
+        .anim-float { animation: float 2s ease-in-out infinite; }
+        .anim-none { animation: none; }
+
+        /* Toolbar */
+        .toolbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
+            border-top: 3px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 20px;
+            z-index: 99999;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .toolbar button {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.1s;
+        }
+
+        .toolbar button:hover {
+            transform: scale(1.05);
+            background: #ffff00;
+        }
+
+        .toolbar button:active {
+            transform: scale(0.95);
+        }
+
+        .toolbar button.active {
+            background: #00ff00;
+        }
+
+        .toolbar select {
+            padding: 8px;
+            font-size: 14px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .toolbar .divider {
+            width: 2px;
+            height: 30px;
+            background: #000;
+            margin: 0 5px;
+        }
+
+        .toolbar .hint {
+            font-size: 12px;
+            color: #000;
+            background: rgba(255,255,255,0.7);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid #000 !important;
+            padding: 0 !important;
         }
     </style>
 </head>
@@ -62,7 +175,9 @@
     </div>
 
     {% for style in title_styles %}
-    <div class="title{% if loop.index % 17 == 0 %} blink{% endif %}"
+    <div class="title{% if loop.index % 17 == 0 %} anim-blink{% endif %}"
+         data-id="{{ loop.index }}"
+         data-rotation="{{ style.rotation }}"
          style="
             left: {{ style.left }}%;
             top: {{ style.top }}%;
@@ -90,5 +205,195 @@
          "
          alt="">
     {% endfor %}
+
+    <div class="toolbar">
+        <span class="hint">Click to select, drag to move, scroll to rotate</span>
+        <div class="divider"></div>
+
+        <button class="color-btn" style="background: #ff00ff" data-color="#ff00ff"></button>
+        <button class="color-btn" style="background: #00ff00" data-color="#00ff00"></button>
+        <button class="color-btn" style="background: #00ffff" data-color="#00ffff"></button>
+        <button class="color-btn" style="background: #ffff00" data-color="#ffff00"></button>
+        <button class="color-btn" style="background: #ff0000" data-color="#ff0000"></button>
+        <button class="color-btn" style="background: #ffffff" data-color="#ffffff"></button>
+        <button class="color-btn" style="background: #000000" data-color="#000000"></button>
+
+        <div class="divider"></div>
+
+        <select id="animSelect">
+            <option value="">Animation...</option>
+            <option value="anim-none">None</option>
+            <option value="anim-blink">Blink</option>
+            <option value="anim-pulse">Pulse</option>
+            <option value="anim-rainbow">Rainbow</option>
+            <option value="anim-shake">Shake</option>
+            <option value="anim-float">Float</option>
+        </select>
+
+        <div class="divider"></div>
+
+        <button id="resetBtn">Reset All</button>
+        <button id="saveBtn">💾 Save</button>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'songTitlePositions';
+        let selectedTitle = null;
+        let isDragging = false;
+        let dragOffset = { x: 0, y: 0 };
+
+        // Load saved positions
+        function loadPositions() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            try {
+                const positions = JSON.parse(saved);
+                document.querySelectorAll('.title').forEach(title => {
+                    const id = title.dataset.id;
+                    if (positions[id]) {
+                        const p = positions[id];
+                        if (p.left !== undefined) title.style.left = p.left;
+                        if (p.top !== undefined) title.style.top = p.top;
+                        if (p.rotation !== undefined) {
+                            title.dataset.rotation = p.rotation;
+                            title.style.transform = `rotate(${p.rotation}deg)`;
+                        }
+                        if (p.color !== undefined) title.style.color = p.color;
+                        if (p.animation !== undefined) {
+                            title.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
+                            if (p.animation) title.classList.add(p.animation);
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error('Failed to load positions:', e);
+            }
+        }
+
+        // Save positions
+        function savePositions() {
+            const positions = {};
+            document.querySelectorAll('.title').forEach(title => {
+                const id = title.dataset.id;
+                const animClass = Array.from(title.classList).find(c => c.startsWith('anim-'));
+                positions[id] = {
+                    left: title.style.left,
+                    top: title.style.top,
+                    rotation: parseInt(title.dataset.rotation) || 0,
+                    color: title.style.color,
+                    animation: animClass || ''
+                };
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+        }
+
+        // Select title
+        function selectTitle(title) {
+            if (selectedTitle) {
+                selectedTitle.classList.remove('selected');
+            }
+            selectedTitle = title;
+            if (title) {
+                title.classList.add('selected');
+            }
+        }
+
+        // Title click/drag handlers
+        document.querySelectorAll('.title').forEach(title => {
+            title.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                isDragging = true;
+                const rect = title.getBoundingClientRect();
+                dragOffset.x = e.clientX - rect.left;
+                dragOffset.y = e.clientY - rect.top;
+                title.style.zIndex = 10001;
+            });
+
+            // Scroll to rotate
+            title.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                let rotation = parseInt(title.dataset.rotation) || 0;
+                rotation += e.deltaY > 0 ? 5 : -5;
+                title.dataset.rotation = rotation;
+                title.style.transform = `rotate(${rotation}deg)`;
+            });
+        });
+
+        // Mouse move for dragging
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || !selectedTitle) return;
+
+            const x = e.clientX - dragOffset.x;
+            const y = e.clientY - dragOffset.y;
+
+            // Convert to percentage
+            const leftPercent = (x / window.innerWidth) * 100;
+            const topPercent = (y / window.innerHeight) * 100;
+
+            selectedTitle.style.left = `${leftPercent}%`;
+            selectedTitle.style.top = `${topPercent}%`;
+        });
+
+        // Mouse up
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Click elsewhere to deselect
+        document.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('title') &&
+                !e.target.closest('.toolbar')) {
+                selectTitle(null);
+            }
+        });
+
+        // Color buttons
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (selectedTitle) {
+                    selectedTitle.style.color = btn.dataset.color;
+                }
+            });
+        });
+
+        // Animation select
+        document.getElementById('animSelect').addEventListener('change', (e) => {
+            if (selectedTitle && e.target.value) {
+                selectedTitle.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
+                selectedTitle.classList.add(e.target.value);
+                e.target.value = '';
+            }
+        });
+
+        // Reset button
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            if (confirm('Reset all titles to original positions?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        });
+
+        // Save button
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            savePositions();
+            alert('Positions saved!');
+        });
+
+        // Auto-save on changes
+        let saveTimeout;
+        function autoSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(savePositions, 1000);
+        }
+
+        document.addEventListener('mouseup', autoSave);
+        document.querySelectorAll('.title').forEach(t => t.addEventListener('wheel', autoSave));
+
+        // Load on start
+        loadPositions();
+    </script>
 </body>
 </html>
