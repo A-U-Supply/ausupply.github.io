@@ -11,7 +11,7 @@ DEFAULT_CONFIG = {
     },
     "prompt": {
         "temperature": 1.0,
-        "model": "mistralai/Mistral-7B-Instruct-v0.3",
+        "model": "HuggingFaceH4/zephyr-7b-beta",
         "max_headlines": 10,
     },
     "inspirations": {
