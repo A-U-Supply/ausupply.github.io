@@ -58,5 +58,14 @@ def generate_prompt(
     # Also handle unclosed think tags
     result = re.sub(r'<think>.*', '', result, flags=re.DOTALL).strip()
 
+    # Convert standard markdown to Slack mrkdwn format
+    # **bold** -> *bold*
+    result = re.sub(r'\*\*(.+?)\*\*', r'*\1*', result)
+    # __bold__ -> *bold*
+    result = re.sub(r'__(.+?)__', r'*\1*', result)
+    # *italic* -> _italic_ (but not if already *bold*)
+    # Only convert single * that aren't part of **
+    result = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'_\1_', result)
+
     logger.info(f"Generated prompt: {result}")
     return result
