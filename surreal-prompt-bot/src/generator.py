@@ -1,29 +1,37 @@
 """Prompt generator using Hugging Face Inference API."""
 import logging
 import re
+from pathlib import Path
 
 from huggingface_hub import InferenceClient
 
 logger = logging.getLogger(__name__)
 
-SYSTEM_PROMPT = """You are a surrealist artist with severe internet brain rot.
-Generate a single drawing prompt in the style of a surreal, unhinged headline.
-Include 1-3 emojis. One sentence. Do not explain it. Do not think out loud. Just output the headline directly.
-Do NOT use all caps. Use normal sentence case. You may use Slack formatting like *bold* or _italics_ if it adds flair."""
+
+def load_template(template_path: Path) -> tuple[str, str]:
+    """Load prompt template from file. Returns (system_prompt, user_template)."""
+    if not template_path.exists():
+        raise FileNotFoundError(f"Template file not found: {template_path}")
+
+    content = template_path.read_text()
+    parts = content.split("---", 1)
+
+    if len(parts) == 2:
+        return parts[0].strip(), parts[1].strip()
+    else:
+        # No separator, treat whole thing as user template
+        return "", content.strip()
 
 
-def build_llm_prompt(headlines: list[str], inspirations: list[str]) -> str:
-    """Build the prompt to send to the LLM."""
-    parts = ["Today's news headlines:"]
-    for headline in headlines:
-        parts.append(f"- {headline}")
+def build_llm_prompt(template: str, headlines: list[str], inspirations: list[str]) -> str:
+    """Build the prompt using template with placeholders."""
+    headlines_text = "\n".join(f"- {h}" for h in headlines)
+    inspirations_text = "\n".join(f"- {i}" for i in inspirations) if inspirations else "(none)"
 
-    if inspirations:
-        parts.append("\nArtistic inspiration for today:")
-        for insp in inspirations:
-            parts.append(f"- {insp}")
-
-    return "\n".join(parts)
+    return template.format(
+        headlines=headlines_text,
+        inspirations=inspirations_text
+    )
 
 
 def generate_prompt(
@@ -32,17 +40,25 @@ def generate_prompt(
     model: str,
     temperature: float,
     api_key: str,
+    template_path: Path = None,
 ) -> str:
     """Generate a surreal prompt using Hugging Face Inference API."""
     client = InferenceClient(token=api_key)
 
-    user_prompt = build_llm_prompt(headlines, inspirations)
-    logger.debug(f"LLM prompt:\n{user_prompt}")
+    # Load template
+    if template_path is None:
+        template_path = Path(__file__).parent.parent / "prompt_template.txt"
 
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": user_prompt},
-    ]
+    system_prompt, user_template = load_template(template_path)
+    user_prompt = build_llm_prompt(user_template, headlines, inspirations)
+
+    logger.debug(f"System prompt:\n{system_prompt}")
+    logger.debug(f"User prompt:\n{user_prompt}")
+
+    messages = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": user_prompt})
 
     response = client.chat_completion(
         model=model,
@@ -64,7 +80,6 @@ def generate_prompt(
     # __bold__ -> *bold*
     result = re.sub(r'__(.+?)__', r'*\1*', result)
     # *italic* -> _italic_ (but not if already *bold*)
-    # Only convert single * that aren't part of **
     result = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'_\1_', result)
 
     logger.info(f"Generated prompt: {result}")
