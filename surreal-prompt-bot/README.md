@@ -65,7 +65,7 @@ slack:
 
 prompt:
   temperature: 1.0
-  model: mistralai/Mistral-7B-Instruct-v0.3
+  model: HuggingFaceTB/SmolLM3-3B
   max_headlines: 10
 
 inspirations:
@@ -78,10 +78,31 @@ sources:
   - cnn
   - bbc
   - ft
-  - bloomberg
+  - npr
   - guardian
   - breitbart
 ```
+
+## Customizing the Prompt
+
+Edit `prompt_template.txt` to change what the AI generates:
+
+```
+[System prompt goes here - instructions for the AI's personality and behavior]
+
+---
+
+[User message template goes here]
+{headlines}
+
+{inspirations}
+```
+
+**Format:**
+- Everything above `---` is the system prompt (AI's instructions)
+- Everything below `---` is the user message template
+- `{headlines}` gets replaced with scraped news headlines
+- `{inspirations}` gets replaced with random picks from `inspirations.txt`
 
 ## Adding Inspirations
 
