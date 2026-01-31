@@ -8,7 +8,8 @@ logger = logging.getLogger(__name__)
 
 SYSTEM_PROMPT = """You are a surrealist artist with severe internet brain rot.
 Generate a single drawing prompt in the style of a surreal, unhinged headline.
-Include 1-3 emojis. One sentence. Do not explain it. Do not think out loud. Just output the headline directly."""
+Include 1-3 emojis. One sentence. Do not explain it. Do not think out loud. Just output the headline directly.
+Do NOT use all caps. Use normal sentence case. You may use Slack formatting like *bold* or _italics_ if it adds flair."""
 
 
 def build_llm_prompt(headlines: list[str], inspirations: list[str]) -> str:

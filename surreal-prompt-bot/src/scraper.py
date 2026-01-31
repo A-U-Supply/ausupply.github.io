@@ -78,13 +78,13 @@ def _scrape_ft() -> list[str]:
     return headlines[:5]
 
 
-def _scrape_bloomberg() -> list[str]:
-    """Scrape Bloomberg homepage headlines."""
-    resp = requests.get("https://www.bloomberg.com/", headers=HEADERS, timeout=TIMEOUT)
+def _scrape_npr() -> list[str]:
+    """Scrape NPR homepage headlines."""
+    resp = requests.get("https://www.npr.org/", headers=HEADERS, timeout=TIMEOUT)
     resp.raise_for_status()
     soup = BeautifulSoup(resp.text, "html.parser")
     headlines = []
-    for el in soup.select("h3, [data-component='headline']")[:15]:
+    for el in soup.select("h2.title, h3.title, .title a, .story-text a")[:15]:
         text = el.get_text(strip=True)
         if text and len(text) > 10:
             headlines.append(text)
@@ -123,7 +123,7 @@ SCRAPERS: dict[str, Callable[[], list[str]]] = {
     "cnn": _scrape_cnn,
     "foxnews": _scrape_foxnews,
     "ft": _scrape_ft,
-    "bloomberg": _scrape_bloomberg,
+    "npr": _scrape_npr,
     "guardian": _scrape_guardian,
     "breitbart": _scrape_breitbart,
 }

@@ -44,6 +44,6 @@ def test_scrape_all_sources_aggregates():
 
 def test_all_sources_have_scrapers():
     """Every configured source has a scraper function."""
-    default_sources = ["reuters", "foxnews", "cnn", "bbc", "ft", "bloomberg", "guardian", "breitbart"]
+    default_sources = ["reuters", "foxnews", "cnn", "bbc", "ft", "npr", "guardian", "breitbart"]
     for source in default_sources:
         assert source in SCRAPERS, f"Missing scraper for {source}"
