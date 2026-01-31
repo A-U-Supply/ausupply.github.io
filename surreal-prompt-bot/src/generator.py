@@ -1,5 +1,6 @@
 """Prompt generator using Hugging Face Inference API."""
 import logging
+import re
 
 from huggingface_hub import InferenceClient
 
@@ -7,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 SYSTEM_PROMPT = """You are a surrealist artist with severe internet brain rot.
 Generate a single drawing prompt in the style of a surreal, unhinged headline.
-Include 1-3 emojis. One sentence. Do not explain it."""
+Include 1-3 emojis. One sentence. Do not explain it. Do not think out loud. Just output the headline directly."""
 
 
 def build_llm_prompt(headlines: list[str], inspirations: list[str]) -> str:
@@ -46,9 +47,15 @@ def generate_prompt(
         model=model,
         messages=messages,
         temperature=temperature,
-        max_tokens=150,
+        max_tokens=300,
     )
 
     result = response.choices[0].message.content.strip()
+
+    # Strip thinking tags if present (some models output <think>...</think>)
+    result = re.sub(r'<think>.*?</think>', '', result, flags=re.DOTALL).strip()
+    # Also handle unclosed think tags
+    result = re.sub(r'<think>.*', '', result, flags=re.DOTALL).strip()
+
     logger.info(f"Generated prompt: {result}")
     return result
