@@ -47,7 +47,7 @@ def generate_prompt(
         model=model,
         messages=messages,
         temperature=temperature,
-        max_tokens=300,
+        max_tokens=1000,
     )
 
     result = response.choices[0].message.content.strip()
