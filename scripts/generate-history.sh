@@ -20,7 +20,12 @@ fi
 
 mkdir -p "$HISTORY_DIR"
 
-# Directories/files to EXCLUDE from snapshots (not visual site content)
+# Directories/files to EXCLUDE from snapshots
+# Non-site content:
+#   docs/, node_modules/, .git/, .github/, scripts/, history/, .worktrees/,
+#   .claude/, slack-song-generator/, surreal-prompt-bot/, README.md, etc.
+# Asset directories (img/ is 120MB — we rewrite paths to point to site root instead):
+#   img/, CSimages/, fonts/, ounds/
 EXCLUDE_PATTERNS=(
     "docs/"
     "node_modules/"
@@ -36,6 +41,11 @@ EXCLUDE_PATTERNS=(
     "package.json"
     "CNAME"
     ".gitignore"
+    "img/"
+    "CSimages/"
+    "CS images/"
+    "fonts/"
+    "ounds/"
 )
 
 # Build rsync exclude args
@@ -77,40 +87,51 @@ while IFS=$'\t' read -r date short_hash full_hash message; do
     # Rewrite asset paths in HTML files so they point back to site root.
     # From history/<date>-<hash>/page.html, we need ../../ to reach site root.
     #
-    # Handles:
-    #   src="img/        -> src="../../img/
-    #   src="CSimages/   -> src="../../CSimages/
-    #   src="ounds/      -> src="../../ounds/
-    #   src='img/        -> src='../../img/        (single-quoted variants)
-    #   src='CSimages/   -> src='../../CSimages/
-    #   src='ounds/      -> src='../../ounds/
-    #   url("img/        -> url("../../img/
-    #   url("fonts/      -> url("../../fonts/
-    #   url("CSimages/   -> url("../../CSimages/
-    #   href="vcfmw.css" -> href="../../vcfmw.css"
-    #   href='vcfmw.css' -> href='../../vcfmw.css'
-    #
-    # Also handle root-level image references (e.g. src="noise.png")
-    # by rewriting known root-level image extensions.
+    # Handles both relative (img/) and absolute (/img/) path styles:
+    #   src="img/         -> src="../../img/
+    #   src="/img/        -> src="../../img/
+    #   src="CSimages/    -> src="../../CSimages/
+    #   src="/CSimages/   -> src="../../CSimages/
+    #   src="ounds/       -> src="../../ounds/
+    #   (same for single-quoted variants)
+    #   url("img/         -> url("../../img/
+    #   url("fonts/       -> url("../../fonts/
+    #   url("/img/        -> url("../../img/
+    #   href="vcfmw.css"  -> href="../../vcfmw.css"
+    #   href="/vcfmw.css" -> href="../../vcfmw.css"
     find "$snapshot_dir" -name '*.html' -exec sed -i '' \
         -e 's|src="img/|src="../../img/|g' \
+        -e 's|src="/img/|src="../../img/|g' \
         -e 's|src="CSimages/|src="../../CSimages/|g' \
+        -e 's|src="/CSimages/|src="../../CSimages/|g' \
         -e 's|src="ounds/|src="../../ounds/|g' \
+        -e 's|src="/ounds/|src="../../ounds/|g' \
         -e "s|src='img/|src='../../img/|g" \
+        -e "s|src='/img/|src='../../img/|g" \
         -e "s|src='CSimages/|src='../../CSimages/|g" \
+        -e "s|src='/CSimages/|src='../../CSimages/|g" \
         -e "s|src='ounds/|src='../../ounds/|g" \
+        -e "s|src='/ounds/|src='../../ounds/|g" \
         -e 's|url("img/|url("../../img/|g' \
+        -e 's|url("/img/|url("../../img/|g' \
         -e 's|url("fonts/|url("../../fonts/|g' \
+        -e 's|url("/fonts/|url("../../fonts/|g' \
         -e 's|url("CSimages/|url("../../CSimages/|g' \
+        -e 's|url("/CSimages/|url("../../CSimages/|g' \
         -e 's|url("ounds/|url("../../ounds/|g' \
+        -e 's|url("/ounds/|url("../../ounds/|g' \
         -e 's|href="vcfmw.css"|href="../../vcfmw.css"|g' \
+        -e 's|href="/vcfmw.css"|href="../../vcfmw.css"|g' \
         -e "s|href='vcfmw.css'|href='../../vcfmw.css'|g" \
+        -e "s|href='/vcfmw.css'|href='../../vcfmw.css'|g" \
         {} +
 
     # Rewrite CSS files too (e.g. vcfmw.css font paths)
     find "$snapshot_dir" -name '*.css' -exec sed -i '' \
         -e 's|url("fonts/|url("../../fonts/|g' \
+        -e 's|url("/fonts/|url("../../fonts/|g' \
         -e 's|url("img/|url("../../img/|g' \
+        -e 's|url("/img/|url("../../img/|g' \
         {} +
 
     # Strip <script> tags (and their contents) from snapshot HTML files
