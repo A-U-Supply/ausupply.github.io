@@ -15,84 +15,438 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa; /* Light cyan background */
-            color: #000000; /* Default text color */
+            background: linear-gradient(45deg, #ffcccc, #ccffcc);
+            color: #000000;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 70px;
+            transition: background 0.3s ease;
         }
 
-        .content {
-            text-align: center;
-            margin: 20px;
+        .draggable {
+            position: absolute;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            z-index: 1;
+        }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+        .draggable.selected,
+        .draggable:hover {
+            outline: 3px dashed #ff00ff;
+            outline-offset: 4px;
+        }
+
+        .draggable:hover {
+            z-index: 10000 !important;
+        }
+
+        .draggable iframe,
+        .draggable img {
+            display: block;
+            pointer-events: auto;
+        }
+
+        .draggable.dragging iframe {
+            pointer-events: none;
         }
 
         footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             text-align: center;
-            padding: 20px;
-            background-color: #ff6600; /* Orange background for footer */
+            padding: 10px 20px;
+            background-color: #ff6600;
             color: white;
             font-size: 1.2rem;
-            border-top: 3px solid #000000; /* Black border on top */
+            border-top: 3px solid #000000;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            z-index: 99998;
         }
 
         /* Geocities-like effects */
         a {
-            color: #ff00ff; /* Neon pink links */
-            text-decoration: blink; /* Blink effect (deprecated but gives that old school vibe) */
+            color: #ff00ff;
+            text-decoration: blink;
         }
 
         a:hover {
-            color: #00ff00; /* Neon green on hover */
+            color: #00ff00;
             text-decoration: underline;
         }
 
-        .border-box {
-            border: 3px dotted #ff00ff; /* Pink dotted border around content */
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
-            background-color: #ffffcc; /* Light yellow background for content box */
+        .drag-overlay {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            cursor: grab;
+            z-index: 1;
         }
 
-        /* Gradient background for extra retro effect */
-        body {
-            background: linear-gradient(45deg, #ffcccc, #ccffcc);
+        .drag-overlay:active {
+            cursor: grabbing;
         }
 
-        /* Bold and pixelated text effect for footer */
-        footer {
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
+        .subtitle-text {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .continue-link {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: 3px dotted #ff00ff;
+            background-color: rgba(255, 255, 204, 0.8);
         }
     </style>
 </head>    
 
-<body text="#ffbf00", bgcolor="444455">
+<body>
 <header>
     <a href="index.html"><img src="img/cheeze-bourger2.png" alt="Header Image"></a>
     <h1>AUDIO UNITS SUPPLY</h1>
 </header>
 
-<div class="content">
-    <p><a href="/mire.html">Floating in a mire of semantical truzzles, so you don't have to!</a></p>
+<div class="draggable" data-id="subtitle" data-rotation="0"
+     style="left: 20%; top: 15%; transform: rotate(0deg);">
+    <div class="subtitle-text">
+        <a href="mire.html">Floating in a mire of semantical truzzles, so you don't have to!</a>
+    </div>
 </div>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3J-Cc49mfmI?si=BHmwtpzjxX0ug1sx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
- <br>
-<br>
-<br>
-<img src="img/dust_bobbles2.gif" width="560" height="315" >
-<br>
 
-<br/ >
-<br />
-<a href="//www.youtube.com/watch?v=UoP_KBHSqTU"><img src="img/skibbidibepoop.png"></a>
-<br />
-<br />
-<a href="/audex23.html" title="we got reason to fear social order (do not forget yr transfer slip)!"><img src="img/transfer-slip.png"></a>
-<br>
-<br>
-<br>
-<a href="/index2.html">continue</a>
+<div class="draggable" data-id="youtube" data-rotation="-3"
+     style="left: 5%; top: 25%; transform: rotate(-3deg); position: absolute;">
+    <div class="drag-overlay"></div>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/3J-Cc49mfmI?si=BHmwtpzjxX0ug1sx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<div class="draggable" data-id="dustbobbles" data-rotation="5"
+     style="left: 50%; top: 30%; transform: rotate(5deg);">
+    <img src="img/dust_bobbles2.gif" width="560" height="315">
+</div>
+
+<div class="draggable" data-id="skibbidi" data-rotation="-7"
+     style="left: 10%; top: 60%; transform: rotate(-7deg);">
+    <a href="//www.youtube.com/watch?v=UoP_KBHSqTU"><img src="img/skibbidibepoop.png"></a>
+</div>
+
+<div class="draggable" data-id="transferslip" data-rotation="4"
+     style="left: 55%; top: 65%; transform: rotate(4deg);">
+    <a href="audex23.html" title="we got reason to fear social order (do not forget yr transfer slip)!"><img src="img/transfer-slip.png"></a>
+</div>
+
+<div class="draggable" data-id="continue" data-rotation="-2"
+     style="left: 40%; top: 85%; transform: rotate(-2deg);">
+    <div class="continue-link">
+        <a href="index2.html">continue</a>
+    </div>
+</div>
+
 <footer>
     <p><a href="this-song-is-a-junkyard.html">Your only choice will be between a goat's ass and the face of god! Visit again!</a></p>
-</footer>    
+</footer>
+
+<script>
+    const STORAGE_KEY = 'indexPositions_v1';
+    let selectedItem = null;
+    let isDragging = false;
+    let hasMoved = false;
+    let dragOffset = { x: 0, y: 0 };
+
+    // Touch gesture state
+    let initialPinchDist = null;
+    let initialPinchAngle = null;
+    let initialScale = null;
+    let initialRotation = null;
+    let touchGesture = null;
+
+    function getDistance(t1, t2) {
+        const dx = t1.clientX - t2.clientX;
+        const dy = t1.clientY - t2.clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function getAngle(t1, t2) {
+        return Math.atan2(t2.clientY - t1.clientY, t2.clientX - t1.clientX) * (180 / Math.PI);
+    }
+
+    function loadPositions() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+
+        try {
+            const positions = JSON.parse(saved);
+            document.querySelectorAll('.draggable').forEach(item => {
+                const id = item.dataset.id;
+                if (positions[id]) {
+                    const p = positions[id];
+                    if (p.left !== undefined) item.style.left = p.left;
+                    if (p.top !== undefined) item.style.top = p.top;
+                    if (p.scale !== undefined) item.dataset.scale = p.scale;
+                    if (p.rotation !== undefined) item.dataset.rotation = p.rotation;
+                    updateTransform(item);
+                }
+            });
+        } catch (e) {
+            console.error('Failed to load positions:', e);
+        }
+    }
+
+    function savePositions() {
+        const positions = {};
+        document.querySelectorAll('.draggable').forEach(item => {
+            const id = item.dataset.id;
+            positions[id] = {
+                left: item.style.left,
+                top: item.style.top,
+                rotation: parseFloat(item.dataset.rotation) || 0,
+                scale: parseFloat(item.dataset.scale) || 1
+            };
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+    }
+
+    function updateTransform(item) {
+        const rotation = parseFloat(item.dataset.rotation) || 0;
+        const scale = parseFloat(item.dataset.scale) || 1;
+        item.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+    }
+
+    function rotateSelected(degrees) {
+        if (!selectedItem) return;
+        let rotation = parseFloat(selectedItem.dataset.rotation) || 0;
+        rotation += degrees;
+        selectedItem.dataset.rotation = rotation;
+        updateTransform(selectedItem);
+        autoSave();
+    }
+
+    function resizeSelected(delta) {
+        if (!selectedItem) return;
+        let scale = parseFloat(selectedItem.dataset.scale) || 1;
+        scale = Math.max(0.2, Math.min(3, scale + delta));
+        selectedItem.dataset.scale = scale;
+        updateTransform(selectedItem);
+        autoSave();
+    }
+
+    function selectItem(item) {
+        if (selectedItem) {
+            selectedItem.classList.remove('selected');
+        }
+        selectedItem = item;
+        if (item) {
+            item.classList.add('selected');
+        }
+    }
+
+    // Initialize scale data
+    document.querySelectorAll('.draggable').forEach(item => {
+        if (!item.dataset.scale) item.dataset.scale = '1';
+    });
+
+    // Mouse + touch handlers
+    document.querySelectorAll('.draggable').forEach(item => {
+        // Mouse drag
+        item.addEventListener('mousedown', (e) => {
+            if (e.target.tagName === 'IFRAME') return;
+            e.preventDefault();
+            selectItem(item);
+            isDragging = true;
+            hasMoved = false;
+            item.classList.add('dragging');
+            const rect = item.getBoundingClientRect();
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+            item.style.zIndex = 10001;
+        });
+
+        // Scroll to rotate
+        item.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            selectItem(item);
+            let rotation = parseFloat(item.dataset.rotation) || 0;
+            rotation += e.deltaY > 0 ? 5 : -5;
+            item.dataset.rotation = rotation;
+            updateTransform(item);
+        });
+
+        // Touch start
+        item.addEventListener('touchstart', (e) => {
+            // Allow taps on links to work when not dragging
+            if (e.touches.length === 1 && (e.target.tagName === 'A' || e.target.closest('a'))) {
+                // Don't prevent default for single taps on links initially
+                // We'll handle this in touchmove if it turns into a drag
+            }
+            selectItem(item);
+            item.style.zIndex = 10001;
+
+            if (e.touches.length === 1) {
+                touchGesture = 'drag';
+                isDragging = true;
+                hasMoved = false;
+                item.classList.add('dragging');
+                const touch = e.touches[0];
+                const rect = item.getBoundingClientRect();
+                dragOffset.x = touch.clientX - rect.left;
+                dragOffset.y = touch.clientY - rect.top;
+            } else if (e.touches.length === 2) {
+                e.preventDefault();
+                touchGesture = 'pinch';
+                isDragging = false;
+                item.classList.remove('dragging');
+                initialPinchDist = getDistance(e.touches[0], e.touches[1]);
+                initialPinchAngle = getAngle(e.touches[0], e.touches[1]);
+                initialScale = parseFloat(item.dataset.scale) || 1;
+                initialRotation = parseFloat(item.dataset.rotation) || 0;
+            }
+        });
+
+        // Touch move
+        item.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (!selectedItem || selectedItem !== item) return;
+
+            if (touchGesture === 'drag' && e.touches.length === 1) {
+                hasMoved = true;
+                const touch = e.touches[0];
+                const x = touch.clientX - dragOffset.x;
+                const y = touch.clientY - dragOffset.y;
+                const leftPercent = (x / window.innerWidth) * 100;
+                const topPercent = (y / window.innerHeight) * 100;
+                selectedItem.style.left = `${leftPercent}%`;
+                selectedItem.style.top = `${topPercent}%`;
+            } else if (e.touches.length === 2) {
+                if (touchGesture === 'drag') {
+                    touchGesture = 'pinch';
+                    isDragging = false;
+                    item.classList.remove('dragging');
+                    initialPinchDist = getDistance(e.touches[0], e.touches[1]);
+                    initialPinchAngle = getAngle(e.touches[0], e.touches[1]);
+                    initialScale = parseFloat(item.dataset.scale) || 1;
+                    initialRotation = parseFloat(item.dataset.rotation) || 0;
+                }
+
+                // Pinch to resize
+                const currentDist = getDistance(e.touches[0], e.touches[1]);
+                const pinchScale = currentDist / initialPinchDist;
+                const newScale = Math.max(0.2, Math.min(3, initialScale * pinchScale));
+                selectedItem.dataset.scale = newScale;
+
+                // Two-finger rotate
+                const currentAngle = getAngle(e.touches[0], e.touches[1]);
+                const angleDelta = currentAngle - initialPinchAngle;
+                const newRotation = initialRotation + angleDelta;
+                selectedItem.dataset.rotation = newRotation;
+
+                updateTransform(selectedItem);
+            }
+        });
+
+        // Touch end
+        item.addEventListener('touchend', (e) => {
+            if (e.touches.length === 0) {
+                isDragging = false;
+                item.classList.remove('dragging');
+                touchGesture = null;
+                initialPinchDist = null;
+                initialPinchAngle = null;
+                autoSave();
+            } else if (e.touches.length === 1 && touchGesture === 'pinch') {
+                touchGesture = 'drag';
+                isDragging = true;
+                item.classList.add('dragging');
+                const touch = e.touches[0];
+                const rect = item.getBoundingClientRect();
+                dragOffset.x = touch.clientX - rect.left;
+                dragOffset.y = touch.clientY - rect.top;
+            }
+        });
+    });
+
+    // Mouse move for dragging
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging || !selectedItem) return;
+        hasMoved = true;
+        const x = e.clientX - dragOffset.x;
+        const y = e.clientY - dragOffset.y;
+        const leftPercent = (x / window.innerWidth) * 100;
+        const topPercent = (y / window.innerHeight) * 100;
+        selectedItem.style.left = `${leftPercent}%`;
+        selectedItem.style.top = `${topPercent}%`;
+    });
+
+    // Mouse up — follow link only if no movement
+    document.addEventListener('mouseup', () => {
+        if (isDragging && selectedItem) {
+            selectedItem.classList.remove('dragging');
+            if (!hasMoved) {
+                const link = selectedItem.querySelector('a');
+                if (link) link.click();
+            }
+        }
+        isDragging = false;
+    });
+
+    // Block link clicks after drag
+    document.querySelectorAll('.draggable a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (hasMoved) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    // Click elsewhere to deselect
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.draggable')) {
+            selectItem(null);
+        }
+    });
+
+    // Auto-save
+    let saveTimeout;
+    function autoSave() {
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(savePositions, 1000);
+    }
+
+    document.addEventListener('mouseup', autoSave);
+    document.querySelectorAll('.draggable').forEach(t => t.addEventListener('wheel', autoSave));
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (!selectedItem) return;
+        if (e.key === 'ArrowLeft' || e.key === '[') {
+            e.preventDefault();
+            rotateSelected(-5);
+        } else if (e.key === 'ArrowRight' || e.key === ']') {
+            e.preventDefault();
+            rotateSelected(5);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            resizeSelected(0.1);
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            resizeSelected(-0.1);
+        }
+    });
+
+    // Load on start
+    loadPositions();
+</script>
 </body>
 </html>
