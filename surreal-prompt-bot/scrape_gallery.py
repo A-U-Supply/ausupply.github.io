@@ -39,7 +39,7 @@ def find_channel_id(client: WebClient, channel_name: str) -> str | None:
     name = channel_name.lstrip("#")
     cursor = None
     while True:
-        kwargs = {"types": "public_channel,private_channel", "limit": 200}
+        kwargs = {"types": "public_channel", "limit": 200}
         if cursor:
             kwargs["cursor"] = cursor
         resp = client.conversations_list(**kwargs)
