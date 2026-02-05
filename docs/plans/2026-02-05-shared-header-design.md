@@ -29,8 +29,19 @@ Shared styles in `vcfmw.css`:
 
 ## Pages Updated
 
-1. **`index.html`** — Links `vcfmw.css`, moved h1 into header, wrapped image in homepage link, removed redundant inline header/h1 styles
+1. **`index.html`** — Links `vcfmw.css`, moved h1 into header, wrapped image in homepage link, removed redundant inline header/h1 styles. All content is now draggable with full touch support and localStorage persistence.
 2. **`this-song-is-a-junkyard.html`** — Links `vcfmw.css`, added shared header above existing page header
+
+## Draggable Content (index.html)
+
+All content between header and footer is absolutely positioned and draggable:
+
+- **Mouse**: click-drag to move, scroll wheel to rotate
+- **Touch**: single-finger drag, pinch-to-resize (CSS scale), two-finger rotate
+- **Keyboard**: arrow left/right rotate, arrow up/down resize
+- Positions/scale/rotation persist in localStorage
+- YouTube iframe uses a `.drag-overlay` div extending 15px beyond the player for a larger grab surface
+- Links only navigate on click-without-movement (tracked via `hasMoved` flag)
 
 ## Touch Support (this-song-is-a-junkyard.html)
 

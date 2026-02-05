@@ -2,6 +2,15 @@
 
 Audio Units Supply website. Deliberately chaotic, geocities-inspired.
 
+## Interactive Homepage
+
+All content on `index.html` (YouTube embed, images, links) is draggable with full mouse and touch support:
+
+- **Mouse**: click and drag to move, scroll wheel to rotate
+- **Touch**: single finger drag, pinch to resize, two-finger twist to rotate
+- **Keyboard**: arrow left/right to rotate, arrow up/down to resize (select an item first)
+- Positions persist in localStorage across visits
+
 ## Shared Header
 
 All pages use a shared header defined in `vcfmw.css` with the standard structure:
