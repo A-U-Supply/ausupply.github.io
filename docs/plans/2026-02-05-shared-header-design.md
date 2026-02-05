@@ -15,21 +15,32 @@ Every page uses:
 </header>
 ```
 
-- Image links to homepage
+- Image links to homepage via relative path (`index.html`, not `/`)
 - Same image across all pages unless otherwise noted
 - Pages can omit the image if needed
 
 ## CSS
 
-Shared styles added to `vcfmw.css`:
+Shared styles in `vcfmw.css`:
 
-- `header` — yellow `#ffcc00` background, centered text, red bottom border
+- `header` — transparent background (inherits page body), centered text, red bottom border
 - `header img` — full-width, black border, drop shadow
-- `header h1` — red Courier New, text-shadow, scoped to header so other h1s unaffected
+- `header h1` — red Courier New, text-shadow, scoped to `header h1` so other h1s unaffected
 
-Styles moved from index.html's inline `<style>` to avoid duplication.
+## Pages Updated
 
-## Changes
+1. **`index.html`** — Links `vcfmw.css`, moved h1 into header, wrapped image in homepage link, removed redundant inline header/h1 styles
+2. **`this-song-is-a-junkyard.html`** — Links `vcfmw.css`, added shared header above existing page header
 
-1. **`vcfmw.css`** — Added `header`, `header img`, `header h1` rules
-2. **`index.html`** — Links `vcfmw.css`, moved h1 into header, wrapped image in homepage link, removed redundant inline header/h1 styles
+## Touch Support (this-song-is-a-junkyard.html)
+
+Added full touch interaction for the draggable song title elements:
+
+- **Single finger** — drag titles
+- **Pinch** — resize titles (font-size, clamped 8px-120px)
+- **Two-finger twist** — rotate titles
+- Seamless transition between drag and pinch gestures
+- `touch-action: none` on `.title` prevents browser default gestures
+- SIZE +/- toolbar buttons for mouse and touch resize
+- Arrow up/down keyboard shortcuts for resize
+- Font-size saved/loaded in localStorage
