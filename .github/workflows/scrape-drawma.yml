@@ -6,7 +6,7 @@ on:
     paths:
       - '.github/workflows/scrape-drawma.yml'
   schedule:
-    # 11pm PT = 7am UTC (during PST)
+    # 11pm PT = 7am UTC during PST
     - cron: '0 7 * * *'
   workflow_dispatch:
 
