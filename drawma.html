@@ -118,25 +118,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* --- Navigation zones --- */
-        .nav-zone {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            width: 50%;
-            z-index: 8;
-        }
-
-        .nav-zone--prev {
-            left: 0;
-            cursor: w-resize;
-        }
-
-        .nav-zone--next {
-            right: 0;
-            cursor: e-resize;
-        }
-
         /* --- Image stage --- */
         .stage {
             position: relative;
@@ -145,26 +126,97 @@
             align-items: center;
             justify-content: center;
             z-index: 9;
-            max-width: 85vw;
-            max-height: 65vh;
+            max-width: 90vw;
             pointer-events: none;
         }
 
+        .stage__gallery-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* --- Navigation arrows --- */
+        .nav-arrow {
+            pointer-events: auto;
+            background: none;
+            border: none;
+            color: #8b0000;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px 14px;
+            opacity: 0.3;
+            transition: opacity 0.3s, text-shadow 0.3s;
+            line-height: 1;
+            text-shadow: 0 0 8px rgba(139, 0, 0, 0.3);
+        }
+
+        .nav-arrow:hover {
+            opacity: 0.9;
+            text-shadow: 0 0 20px rgba(139, 0, 0, 0.8);
+        }
+
+        /* --- Gothic frame --- */
         .stage__image-wrap {
             position: relative;
             pointer-events: auto;
             cursor: pointer;
             line-height: 0;
+            padding: 6px;
+            border: 1px solid #4a3728;
+            background: linear-gradient(135deg, #1a1008, #0d0804, #1a1008);
+            box-shadow:
+                inset 0 0 12px rgba(139, 0, 0, 0.3),
+                0 0 30px rgba(139, 0, 0, 0.3),
+                0 0 60px rgba(139, 0, 0, 0.1),
+                0 0 2px #4a3728;
         }
 
+        /* Corner accents */
+        .stage__image-wrap::before,
+        .stage__image-wrap::after {
+            position: absolute;
+            color: #4a3728;
+            font-size: 0.7rem;
+            pointer-events: none;
+            z-index: 2;
+            text-shadow: 0 0 6px rgba(139, 0, 0, 0.4);
+        }
+
+        .stage__image-wrap::before {
+            content: '✦';
+            top: -2px;
+            left: -2px;
+        }
+
+        .stage__image-wrap::after {
+            content: '✦';
+            top: -2px;
+            right: -2px;
+        }
+
+        .stage__corner-bl,
+        .stage__corner-br {
+            position: absolute;
+            color: #4a3728;
+            font-size: 0.7rem;
+            pointer-events: none;
+            z-index: 2;
+            text-shadow: 0 0 6px rgba(139, 0, 0, 0.4);
+            bottom: -2px;
+        }
+
+        .stage__corner-bl { left: -2px; }
+        .stage__corner-br { right: -2px; }
+
         .stage__image-wrap img {
-            max-width: 85vw;
-            max-height: 65vh;
+            max-width: 80vw;
+            max-height: 60vh;
             width: auto;
             height: auto;
             display: block;
             border: 1px solid #8b0000;
-            box-shadow: 0 0 30px rgba(139, 0, 0, 0.35), 0 0 60px rgba(139, 0, 0, 0.15);
             transition: opacity 0.8s ease;
         }
 
@@ -339,9 +391,6 @@
 
     <div class="counter" id="counter"></div>
 
-    <div class="nav-zone nav-zone--prev" id="navPrev"></div>
-    <div class="nav-zone nav-zone--next" id="navNext"></div>
-
     <div id="content">
         <div class="status-message loading-dots">
             <span>.</span> <span>.</span> <span>.</span>
@@ -372,9 +421,7 @@
         var els = {
             content: document.getElementById('content'),
             counter: document.getElementById('counter'),
-            artistName: document.getElementById('artistName'),
-            navPrev: document.getElementById('navPrev'),
-            navNext: document.getElementById('navNext')
+            artistName: document.getElementById('artistName')
         };
 
         // --- Fetch manifest ---
@@ -403,25 +450,24 @@
                 '<div class="status-message status-message--error">' +
                 'neither contemplative, neither reflexive, nor communicative' +
                 '</div>';
-            hideNav();
         }
 
         function showEmpty() {
             els.content.innerHTML =
                 '<div class="status-message">No drawings yet</div>';
-            hideNav();
-        }
-
-        function hideNav() {
-            els.navPrev.style.display = 'none';
-            els.navNext.style.display = 'none';
         }
 
         function buildStage() {
             els.content.innerHTML =
                 '<div class="stage">' +
-                    '<div class="stage__image-wrap" id="imageWrap">' +
-                        '<img id="mainImage" alt="" src="">' +
+                    '<div class="stage__gallery-row">' +
+                        '<button class="nav-arrow nav-arrow--prev" id="arrowPrev">\u2039</button>' +
+                        '<div class="stage__image-wrap" id="imageWrap">' +
+                            '<img id="mainImage" alt="" src="">' +
+                            '<span class="stage__corner-bl">\u2726</span>' +
+                            '<span class="stage__corner-br">\u2726</span>' +
+                        '</div>' +
+                        '<button class="nav-arrow nav-arrow--next" id="arrowNext">\u203a</button>' +
                     '</div>' +
                     '<div class="prompt-area" id="promptArea">' +
                         '<div class="prompt-text" id="promptText"></div>' +
@@ -434,6 +480,8 @@
             els.promptArea = document.getElementById('promptArea');
             els.promptText = document.getElementById('promptText');
             els.promptDate = document.getElementById('promptDate');
+            els.arrowPrev = document.getElementById('arrowPrev');
+            els.arrowNext = document.getElementById('arrowNext');
         }
 
         function showImage(index, skipTransition) {
@@ -532,14 +580,14 @@
 
         // --- Events ---
         function bindEvents() {
-            // Click nav zones
-            els.navPrev.addEventListener('click', function (e) {
-                e.preventDefault();
+            // Click arrow buttons
+            els.arrowPrev.addEventListener('click', function (e) {
+                e.stopPropagation();
                 goPrev();
             });
 
-            els.navNext.addEventListener('click', function (e) {
-                e.preventDefault();
+            els.arrowNext.addEventListener('click', function (e) {
+                e.stopPropagation();
                 goNext();
             });
 
