@@ -83,17 +83,13 @@
             text-decoration: underline;
         }
 
-        .drag-overlay {
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
+        .iframe-wrap {
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
             cursor: grab;
-            z-index: 1;
         }
 
-        .drag-overlay:active {
+        .iframe-wrap:active {
             cursor: grabbing;
         }
 
@@ -128,9 +124,10 @@
 </div>
 
 <div class="draggable" data-id="youtube" data-rotation="-3"
-     style="left: 5%; top: 25%; transform: rotate(-3deg); position: absolute;">
-    <div class="drag-overlay"></div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/3J-Cc49mfmI?si=BHmwtpzjxX0ug1sx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     style="left: 5%; top: 25%; transform: rotate(-3deg);">
+    <div class="iframe-wrap">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3J-Cc49mfmI?si=BHmwtpzjxX0ug1sx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
 </div>
 
 <div class="draggable" data-id="dustbobbles" data-rotation="5"
