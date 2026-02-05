@@ -1,10 +1,10 @@
-name: Convert PNGs to WebP
+name: Optimize mire images and update HTML
 
 on:
   push:
     branches: [master]
     paths:
-      - 'img/**.png'
+      - 'img/mire/**.png'
 
   workflow_dispatch:
 
@@ -20,28 +20,80 @@ jobs:
       - name: Install webp tools
         run: sudo apt-get update && sudo apt-get install -y webp
 
-      - name: Convert new PNGs to WebP
+      - name: Convert PNGs to WebP
         run: |
           converted=0
-          for png in img/*.png; do
+          for png in img/mire/*.png; do
             [ -f "$png" ] || continue
             webp="${png%.png}.webp"
-            if [ ! -f "$webp" ] || [ "$png" -nt "$webp" ]; then
-              echo "Converting: $png -> $webp"
-              cwebp -q 80 "$png" -o "$webp"
-              converted=$((converted + 1))
-            else
-              echo "Skipping (up to date): $png"
-            fi
+            echo "Converting: $png -> $webp"
+            cwebp -q 80 "$png" -o "$webp"
+            converted=$((converted + 1))
           done
           echo "Converted $converted file(s)"
-          echo "CONVERTED=$converted" >> "$GITHUB_ENV"
 
-      - name: Commit WebP files
-        if: env.CONVERTED != '0'
+      - name: Detect new images and update mire.html
+        run: |
+          python3 <<'PYEOF'
+          import glob
+          import os
+          from datetime import datetime, timezone
+
+          html_path = "mire.html"
+
+          with open(html_path, "r") as f:
+              html = f.read()
+
+          # Find all webp files in img/mire/
+          webp_files = sorted(glob.glob("img/mire/*.webp"))
+
+          # Detect which ones are not already referenced in mire.html
+          new_names = []
+          for webp in webp_files:
+              basename = os.path.basename(webp)
+              if basename not in html:
+                  name = basename.removesuffix(".webp")
+                  new_names.append(name)
+                  print(f"New image detected: {name}")
+
+          if not new_names:
+              print("No new images to add to HTML.")
+              raise SystemExit(0)
+
+          # Build the HTML block
+          now = datetime.now(timezone.utc)
+          # Format: "February 5, 2026" (no leading zero on day)
+          date_heading = now.strftime("%B ") + str(now.day) + now.strftime(", %Y")
+
+          lines = [f"<h1>{date_heading}</h1>"]
+          for name in new_names:
+              lines.append(f'<a href="/img/mire/{name}.png">')
+              lines.append(f'\t<img src="/img/mire/{name}.webp" alt="" width="75%" loading="lazy">')
+              lines.append("</a>")
+              lines.append("<br>")
+          # Final <br> after the last image
+          lines.append("<br>")
+
+          block = "\n".join(lines)
+
+          # Insert after <body> tag
+          new_html = html.replace("<body>", "<body>\n" + block, 1)
+
+          with open(html_path, "w") as f:
+              f.write(new_html)
+
+          print(f"Updated mire.html with {len(new_names)} new image(s)")
+          PYEOF
+
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add img/*.webp
-          git commit -m "chore: auto-convert PNGs to WebP [skip ci]"
-          git push
+          git add img/mire/*.webp mire.html
+          # Only commit if there are staged changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: optimize mire images and update HTML [skip ci]"
+            git push
+          fi
