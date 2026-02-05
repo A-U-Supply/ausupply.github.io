@@ -222,6 +222,11 @@
             display: block;
             border: 1px solid #8b0000;
             transition: opacity 0.8s ease;
+            animation: strobe 0.15s infinite;
+        }
+
+        body.strobe-paused .stage__image-wrap img {
+            animation-play-state: paused;
         }
 
         .stage__image-wrap img.fade-out {
@@ -328,16 +333,56 @@
             text-overflow: ellipsis;
         }
 
-        .backwards-whisper.flash {
-            animation: whisperFlash 1.8s ease-out forwards;
+        /* No strobe — just the fade envelope */
+        .backwards-whisper.fade-only {
+            animation: whisperFade var(--whisper-dur, 5s) ease-in-out forwards;
         }
 
-        @keyframes whisperFlash {
-            0% { opacity: 0; transform: scaleX(-1); }
-            15% { opacity: 0.55; transform: scaleX(-1); }
-            40% { opacity: 0.7; transform: scaleX(-1); }
-            70% { opacity: 0.35; transform: scaleX(-1); }
-            100% { opacity: 0; transform: scaleX(-1); }
+        /* Fade envelope + fast strobe (0.15s to match background) */
+        .backwards-whisper.strobe1 {
+            animation:
+                whisperFade var(--whisper-dur, 5s) ease-in-out forwards,
+                whisperInvert1 0.15s infinite;
+        }
+
+        .backwards-whisper.strobe2 {
+            animation:
+                whisperFade var(--whisper-dur, 5s) ease-in-out forwards,
+                whisperInvert2 0.15s infinite;
+        }
+
+        .backwards-whisper.strobe3 {
+            animation:
+                whisperFade var(--whisper-dur, 5s) ease-in-out forwards,
+                whisperInvert3 0.15s infinite;
+        }
+
+        /* Whisper fade envelope — slow fade in, long linger, slow fade out.
+           The strobe is layered on via a separate fast animation. */
+        @keyframes whisperFade {
+            0% { opacity: 0; }
+            8% { opacity: 0.6; }
+            70% { opacity: 0.55; }
+            100% { opacity: 0; }
+        }
+
+        /* Fast strobe matching the background speed (0.15s cycle),
+           but each variant is offset by shifting which half inverts */
+        @keyframes whisperInvert1 {
+            0%, 49% { filter: invert(1); }
+            50%, 100% { filter: none; }
+        }
+
+        @keyframes whisperInvert2 {
+            0%, 32% { filter: none; }
+            33%, 82% { filter: invert(1); }
+            83%, 100% { filter: none; }
+        }
+
+        @keyframes whisperInvert3 {
+            0%, 15% { filter: none; }
+            16%, 65% { filter: invert(1); }
+            66%, 100% { filter: none; }
         }
 
         /* --- Save me button (strobe toggle) --- */
@@ -369,7 +414,8 @@
         body.strobe-paused .floor,
         body.strobe-paused .title h1,
         body.strobe-paused .title .subtitle,
-        body.strobe-paused .status-message--error {
+        body.strobe-paused .status-message--error,
+        body.strobe-paused .backwards-whisper {
             animation-play-state: paused;
         }
 
@@ -443,7 +489,11 @@
                 buildStage();
                 showImage(0, true);
                 bindEvents();
-                startWhispers(data);
+                // Load full prompt history for whispers
+                fetch('img/drawma/prompts.json')
+                    .then(function (r) { return r.ok ? r.json() : []; })
+                    .then(function (p) { startWhispers(p); })
+                    .catch(function () { startWhispers(data); });
             })
             .catch(function () {
                 showError();
@@ -595,7 +645,16 @@
                 goNext();
             });
 
-            // Click image to toggle prompt
+            // Hover image to show prompt, hide on leave
+            els.imageWrap.addEventListener('mouseenter', function () {
+                if (!state.promptVisible) togglePrompt();
+            });
+
+            els.imageWrap.addEventListener('mouseleave', function () {
+                if (state.promptVisible) togglePrompt();
+            });
+
+            // Click still works (for mobile tap)
             els.imageWrap.addEventListener('click', function (e) {
                 e.stopPropagation();
                 togglePrompt();
@@ -649,54 +708,84 @@
         var whispersEl = document.getElementById('whispers');
         var prompts = [];
 
+        var animations = ['fade-only', 'strobe1', 'strobe2', 'strobe3'];
+
         function spawnWhisper() {
             if (prompts.length === 0) return;
             var text = prompts[Math.floor(Math.random() * prompts.length)];
             var el = document.createElement('div');
             el.className = 'backwards-whisper';
-            el.textContent = text;
-            el.style.top = (2 + Math.random() * 92) + '%';
-            el.style.left = (1 + Math.random() * 70) + '%';
-            // Wide size range: tiny whispers to huge screams
-            var size = 0.6 + Math.random() * 3.5;
-            el.style.fontSize = size + 'rem';
-            // Larger ones slightly more transparent
-            if (size > 2.5) {
-                el.style.opacity = '0';
+            // ~40% forwards
+            var scaleX = Math.random() < 0.4 ? 'scaleX(1)' : 'scaleX(-1)';
+            // Sometimes just a fragment
+            if (Math.random() < 0.35) {
+                var words = text.split(' ');
+                var start = Math.floor(Math.random() * words.length);
+                var len = 1 + Math.floor(Math.random() * 3);
+                text = words.slice(start, start + len).join(' ');
             }
+            el.textContent = text;
+            // Spread across full viewport using grid + jitter
+            var cols = 4;
+            var rows = 5;
+            var col = Math.floor(Math.random() * cols);
+            var row = Math.floor(Math.random() * rows);
+            var cellW = 96 / cols;
+            var cellH = 92 / rows;
+            el.style.left = (1 + col * cellW + Math.random() * cellW * 0.6) + '%';
+            el.style.top = (2 + row * cellH + Math.random() * cellH * 0.6) + '%';
+            // Wide size range with bias toward medium
+            var size = 0.4 + Math.pow(Math.random(), 0.5) * 5;
+            el.style.fontSize = size + 'rem';
+            // Random rotation
+            var rot = (Math.random() * 40 - 20);
+            el.style.transform = scaleX + ' rotate(' + rot + 'deg)';
+            // Long linger duration (3-8 seconds)
+            var dur = 3 + Math.random() * 5;
+            el.style.setProperty('--whisper-dur', dur + 's');
             whispersEl.appendChild(el);
 
-            // Trigger animation next frame
+            // Pick a random animation style
+            var anim = animations[Math.floor(Math.random() * animations.length)];
             requestAnimationFrame(function () {
-                el.classList.add('flash');
+                el.classList.add(anim);
             });
 
-            // Remove after animation
             el.addEventListener('animationend', function () {
                 el.remove();
             });
         }
 
-        function startWhispers(manifestData) {
-            prompts = manifestData
-                .map(function (item) { return item.prompt; })
+        function startWhispers(promptData) {
+            // Accept either array of strings (prompts.json) or manifest objects
+            prompts = promptData
+                .map(function (item) { return typeof item === 'string' ? item : item.prompt; })
                 .filter(function (p) { return p && p.length > 0; });
             if (prompts.length === 0) return;
 
-            // Spawn 6-12 at a time, every 1.2 seconds — relentless
-            setInterval(function () {
-                var count = 6 + Math.floor(Math.random() * 7);
-                for (var i = 0; i < count; i++) {
-                    setTimeout(spawnWhisper, Math.random() * 800);
-                }
-            }, 1200);
+            // Constant chaotic stream — multiple overlapping timers
+            function chaosLoop(minDelay, maxDelay, minCount, maxCount) {
+                (function tick() {
+                    var count = minCount + Math.floor(Math.random() * (maxCount - minCount));
+                    for (var i = 0; i < count; i++) {
+                        setTimeout(spawnWhisper, Math.random() * 500);
+                    }
+                    setTimeout(tick, minDelay + Math.random() * (maxDelay - minDelay));
+                })();
+            }
+            // Frequent small spawns — always something new appearing
+            chaosLoop(300, 600, 1, 3);
+            chaosLoop(400, 800, 2, 4);
+            chaosLoop(500, 1000, 1, 3);
+            // Medium waves
+            chaosLoop(1500, 3000, 3, 6);
+            // Occasional bigger burst
+            chaosLoop(4000, 8000, 6, 12);
 
-            // Big initial burst
-            setTimeout(function () {
-                for (var i = 0; i < 10; i++) {
-                    setTimeout(spawnWhisper, i * 150);
-                }
-            }, 500);
+            // Staggered initial burst
+            for (var i = 0; i < 20; i++) {
+                setTimeout(spawnWhisper, i * 150);
+            }
         }
 
         // --- Strobe toggle ---

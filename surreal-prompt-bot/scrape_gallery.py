@@ -21,6 +21,7 @@ CHANNEL_NAME = "#drawma"
 REPO_ROOT = Path(__file__).parent.parent
 OUTPUT_DIR = REPO_ROOT / "img" / "drawma"
 MANIFEST_PATH = OUTPUT_DIR / "manifest.json"
+PROMPTS_PATH = OUTPUT_DIR / "prompts.json"
 
 
 def _ts_to_date(ts: str) -> str:
@@ -215,6 +216,28 @@ def save_manifest(manifest: list[dict]) -> None:
     logger.info(f"Saved manifest with {len(manifest)} entries")
 
 
+def fetch_all_messages(client: WebClient, channel_id: str) -> list[dict]:
+    """Fetch ALL channel messages (no time limit)."""
+    messages = []
+    cursor = None
+    while True:
+        kwargs = {"channel": channel_id, "limit": 200}
+        if cursor:
+            kwargs["cursor"] = cursor
+        resp = client.conversations_history(**kwargs)
+        messages.extend(resp["messages"])
+        cursor = resp.get("response_metadata", {}).get("next_cursor")
+        if not cursor:
+            break
+    return messages
+
+
+def save_prompts(prompt_texts: list[str]) -> None:
+    """Save all bot prompt texts to prompts.json for the gallery whispers."""
+    PROMPTS_PATH.write_text(json.dumps(prompt_texts, indent=2) + "\n")
+    logger.info(f"Saved {len(prompt_texts)} prompts to prompts.json")
+
+
 def main() -> int:
     """Orchestrate the full scrape: fetch messages, find images, download new ones."""
     token = os.environ.get("SLACK_BOT_TOKEN")
@@ -235,17 +258,28 @@ def main() -> int:
         return 1
     logger.info(f"Found channel {CHANNEL_NAME}: {channel_id}")
 
-    # Fetch recent messages
-    messages = fetch_channel_messages(client, channel_id)
-    logger.info(f"Fetched {len(messages)} messages")
+    # Fetch ALL messages for prompts (full history)
+    all_messages = fetch_all_messages(client, channel_id)
+    logger.info(f"Fetched {len(all_messages)} total messages from channel history")
 
-    # Identify bot prompts (messages from the bot)
-    prompts = [
+    # Identify bot prompts (messages from the bot) — full history
+    all_prompts = [
         {"text": m["text"], "ts": m["ts"]}
-        for m in messages
+        for m in all_messages
         if m.get("user") == bot_user_id or m.get("bot_id")
     ]
-    logger.info(f"Found {len(prompts)} bot prompts")
+    logger.info(f"Found {len(all_prompts)} bot prompts (all time)")
+
+    # Save all prompt texts for gallery whispers
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    prompt_texts = [
+        p["text"] for p in all_prompts
+        if p["text"].strip() and "has joined the channel" not in p["text"]
+    ]
+    save_prompts(prompt_texts)
+
+    # Use recent messages for image discovery
+    messages = fetch_channel_messages(client, channel_id)
 
     # Collect images from top-level messages
     all_images = extract_images_from_messages(messages)
@@ -259,7 +293,7 @@ def main() -> int:
     logger.info(f"Found {len(all_images)} total images")
 
     # Associate images with prompts
-    all_images = associate_images_with_prompts(all_images, prompts)
+    all_images = associate_images_with_prompts(all_images, all_prompts)
 
     # Filter out already-downloaded images
     manifest = load_manifest()
