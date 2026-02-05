@@ -151,6 +151,7 @@ def download_image(image: dict, output_dir: Path, token: str) -> dict:
     resp = requests.get(
         image["url"],
         headers={"Authorization": f"Bearer {token}"},
+        timeout=30,
     )
     resp.raise_for_status()
     filepath.write_bytes(resp.content)

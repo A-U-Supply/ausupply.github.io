@@ -285,10 +285,11 @@ class TestDownloadImage:
         assert expected_path.exists()
         assert expected_path.read_bytes() == b"\x89PNG fake image data"
 
-        # Verify Bearer auth header
+        # Verify Bearer auth header and timeout
         mock_get.assert_called_once_with(
             "https://files.slack.com/files-pri/F07ABC123/cool_drawing.jpg",
             headers={"Authorization": "Bearer xoxb-test-token"},
+            timeout=30,
         )
 
     def test_returns_manifest_entry(self, tmp_path):
@@ -368,3 +369,139 @@ class TestDownloadImage:
             entry = download_image(image, tmp_path, "xoxb-token")
 
         assert entry["prompt"] is None
+
+
+# ---------------------------------------------------------------------------
+# get_slack_username
+# ---------------------------------------------------------------------------
+
+
+class TestGetSlackUsername:
+    """Tests for resolving Slack user display names."""
+
+    def test_returns_display_name(self):
+        from scrape_gallery import get_slack_username
+
+        mock_client = MagicMock()
+        mock_client.users_info.return_value = {
+            "user": {
+                "profile": {
+                    "display_name": "jake",
+                    "real_name": "Jake Smith",
+                }
+            }
+        }
+        result = get_slack_username(mock_client, "U123")
+
+        assert result == "jake"
+        mock_client.users_info.assert_called_once_with(user="U123")
+
+    def test_falls_back_to_real_name_when_display_name_empty(self):
+        from scrape_gallery import get_slack_username
+
+        mock_client = MagicMock()
+        mock_client.users_info.return_value = {
+            "user": {
+                "profile": {
+                    "display_name": "",
+                    "real_name": "Jake Smith",
+                }
+            }
+        }
+        result = get_slack_username(mock_client, "U456")
+
+        assert result == "Jake Smith"
+
+    def test_returns_user_id_on_exception(self):
+        from scrape_gallery import get_slack_username
+
+        mock_client = MagicMock()
+        mock_client.users_info.side_effect = Exception("user_not_found")
+
+        result = get_slack_username(mock_client, "U789")
+
+        assert result == "U789"
+
+
+# ---------------------------------------------------------------------------
+# main (integration)
+# ---------------------------------------------------------------------------
+
+
+class TestMain:
+    """Integration test for the main() orchestrator."""
+
+    def test_happy_path_downloads_new_images(self, tmp_path, monkeypatch):
+        from scrape_gallery import main
+        import scrape_gallery
+
+        # Set up environment
+        monkeypatch.setenv("SLACK_BOT_TOKEN", "xoxb-test-token")
+
+        # Point OUTPUT_DIR and MANIFEST_PATH to temp directory
+        output_dir = tmp_path / "img" / "drawma"
+        manifest_path = output_dir / "manifest.json"
+        monkeypatch.setattr(scrape_gallery, "OUTPUT_DIR", output_dir)
+        monkeypatch.setattr(scrape_gallery, "MANIFEST_PATH", manifest_path)
+
+        # Build mock Slack client
+        mock_client = MagicMock()
+
+        # auth_test -> bot user id
+        mock_client.auth_test.return_value = {"user_id": "UBOT"}
+
+        # conversations_list -> one channel matching #drawma
+        mock_client.conversations_list.return_value = {
+            "channels": [{"name": "drawma", "id": "C001"}],
+            "response_metadata": {"next_cursor": ""},
+        }
+
+        # conversations_history -> one bot prompt + one user image message
+        bot_msg = _make_message(
+            text="Draw a surreal fish",
+            ts="1706918400.000000",  # 2024-02-03 UTC
+            user="UBOT",
+        )
+        user_msg = _make_message(
+            ts="1706918500.000000",  # same day
+            user="U123",
+            files=[_make_file(file_id="F001", name="fish.png")],
+        )
+        mock_client.conversations_history.return_value = {
+            "messages": [bot_msg, user_msg],
+            "response_metadata": {"next_cursor": ""},
+        }
+
+        # users_info -> display name for the artist
+        mock_client.users_info.return_value = {
+            "user": {"profile": {"display_name": "jake", "real_name": "Jake"}}
+        }
+
+        # Patch WebClient constructor to return our mock
+        monkeypatch.setattr(scrape_gallery, "WebClient", lambda token: mock_client)
+
+        # Patch requests.get to return fake image bytes
+        fake_resp = MagicMock()
+        fake_resp.content = b"fake png data"
+        fake_resp.raise_for_status = MagicMock()
+
+        with patch("scrape_gallery.requests.get", return_value=fake_resp):
+            exit_code = main()
+
+        # Verify success
+        assert exit_code == 0
+
+        # Verify image was written
+        expected_file = output_dir / "2024-02-03-F001.png"
+        assert expected_file.exists()
+        assert expected_file.read_bytes() == b"fake png data"
+
+        # Verify manifest was created with correct entry
+        assert manifest_path.exists()
+        manifest = json.loads(manifest_path.read_text())
+        assert len(manifest) == 1
+        assert manifest[0]["id"] == "F001"
+        assert manifest[0]["filename"] == "2024-02-03-F001.png"
+        assert manifest[0]["date"] == "2024-02-03"
+        assert manifest[0]["prompt"] == "Draw a surreal fish"
+        assert manifest[0]["artist"] == "jake"
