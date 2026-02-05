@@ -41,6 +41,10 @@ If repo size becomes a concern, this can be swapped to a GitHub API + client-sid
 
 The script is idempotent — re-running skips existing snapshots and only adds new ones.
 
+### Wayback Machine Archiving
+
+After generating local snapshots, the same script archives the live site's pages to the Internet Archive via their "Save Page Now" API (`https://web.archive.org/save/<url>`). It loops through all `.html` files in the site root and submits each one (e.g., `https://web.archive.org/save/https://ausupply.github.io/index.html`). This provides an independent off-site backup of each version alongside the local snapshots.
+
 ## history.html Page
 
 ### Layout
