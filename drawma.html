@@ -61,7 +61,7 @@
             left: 0;
             right: 0;
             text-align: center;
-            padding: 18px 0 10px;
+            padding: 18px 0 14px;
             z-index: 10;
             pointer-events: none;
         }
@@ -72,6 +72,16 @@
             letter-spacing: 0.35em;
             color: #ffffff;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: strobe 0.15s infinite;
+        }
+
+        .title .subtitle {
+            font-size: 0.95rem;
+            font-style: italic;
+            font-weight: 400;
+            color: #8b0000;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
             animation: strobe 0.15s infinite;
         }
 
@@ -114,7 +124,7 @@
             top: 0;
             bottom: 0;
             width: 50%;
-            z-index: 5;
+            z-index: 8;
         }
 
         .nav-zone--prev {
@@ -134,9 +144,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 6;
+            z-index: 9;
             max-width: 85vw;
-            max-height: 75vh;
+            max-height: 65vh;
             pointer-events: none;
         }
 
@@ -149,7 +159,7 @@
 
         .stage__image-wrap img {
             max-width: 85vw;
-            max-height: 75vh;
+            max-height: 65vh;
             width: auto;
             height: auto;
             display: block;
@@ -274,6 +284,39 @@
             100% { opacity: 0; transform: scaleX(-1); }
         }
 
+        /* --- Save me button (strobe toggle) --- */
+        .save-me {
+            position: fixed;
+            bottom: 22px;
+            left: 22px;
+            z-index: 20;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border: none;
+            background: none;
+            padding: 0;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+        }
+
+        .save-me:hover {
+            opacity: 0.8;
+        }
+
+        .save-me img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        body.strobe-paused .floor,
+        body.strobe-paused .title h1,
+        body.strobe-paused .title .subtitle,
+        body.strobe-paused .status-message--error {
+            animation-play-state: paused;
+        }
+
         /* --- Decorative HR --- */
         .red-rule {
             width: 60%;
@@ -291,6 +334,7 @@
 
     <div class="title">
         <h1>DRAWMA</h1>
+        <div class="subtitle">neither contemplative, neither reflexive, nor communicative</div>
     </div>
 
     <div class="counter" id="counter"></div>
@@ -307,6 +351,10 @@
     <div class="artist-name" id="artistName"></div>
 
     <div id="whispers"></div>
+
+    <button class="save-me" id="saveMe" title="Toggle strobe">
+        <img src="img/saveme.png" alt="Save me">
+    </button>
 
     <div class="floor"></div>
 
@@ -593,8 +641,10 @@
             }, 1000);
         }
 
-        // First load — directly set image without fade for index 0
-        // (handled in showImage with the src check)
+        // --- Strobe toggle ---
+        document.getElementById('saveMe').addEventListener('click', function () {
+            document.body.classList.toggle('strobe-paused');
+        });
     })();
     </script>
 </body>
