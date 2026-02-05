@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SONG TITLE LIBRARY</title>
+    <link rel="stylesheet" href="vcfmw.css">
     <style>
         * {
             margin: 0;
@@ -37,6 +38,7 @@
             cursor: grab;
             transition: transform 0.1s ease;
             user-select: none;
+            touch-action: none;
         }
 
         .title:active {
@@ -191,6 +193,10 @@
     </style>
 </head>
 <body>
+    <header>
+        <a href="index.html"><img src="img/cheeze-bourger2.png" alt="Header Image"></a>
+        <h1>AUDIO UNITS SUPPLY</h1>
+    </header>
     <div class="header">
         ★ SONG TITLE LIBRARY ★
     </div>
@@ -2611,6 +2617,12 @@ A funny tutorial for serious learning.
 
             <div class="divider"></div>
 
+            <span class="label">SIZE</span>
+            <button class="rotate-btn" id="sizeDown">−</button>
+            <button class="rotate-btn" id="sizeUp">+</button>
+
+            <div class="divider"></div>
+
             <span class="label">ROTATE</span>
             <button class="rotate-btn" id="rotateLeft">↺</button>
             <button class="rotate-btn" id="rotateRight">↻</button>
@@ -2653,6 +2665,23 @@ A funny tutorial for serious learning.
         let isDragging = false;
         let dragOffset = { x: 0, y: 0 };
 
+        // Touch gesture state
+        let initialPinchDist = null;
+        let initialPinchAngle = null;
+        let initialFontSize = null;
+        let initialRotation = null;
+        let touchGesture = null; // 'drag' or 'pinch'
+
+        function getDistance(t1, t2) {
+            const dx = t1.clientX - t2.clientX;
+            const dy = t1.clientY - t2.clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function getAngle(t1, t2) {
+            return Math.atan2(t2.clientY - t1.clientY, t2.clientX - t1.clientX) * (180 / Math.PI);
+        }
+
         // Load saved background
         function loadBackground() {
             const savedBg = localStorage.getItem(BG_STORAGE_KEY);
@@ -2684,6 +2713,7 @@ A funny tutorial for serious learning.
                             title.style.transform = `rotate(${p.rotation}deg)`;
                         }
                         if (p.color !== undefined) title.style.color = p.color;
+                        if (p.fontSize !== undefined) title.style.fontSize = p.fontSize;
                         if (p.animation !== undefined) {
                             title.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
                             if (p.animation) title.classList.add(p.animation);
@@ -2706,6 +2736,7 @@ A funny tutorial for serious learning.
                     top: title.style.top,
                     rotation: parseInt(title.dataset.rotation) || 0,
                     color: title.style.color,
+                    fontSize: title.style.fontSize,
                     animation: animClass || ''
                 };
             });
@@ -2722,6 +2753,15 @@ A funny tutorial for serious learning.
             autoSave();
         }
 
+        // Resize selected title
+        function resizeSelected(delta) {
+            if (!selectedTitle) return;
+            let size = parseFloat(selectedTitle.style.fontSize) || 16;
+            size = Math.max(8, Math.min(120, size + delta));
+            selectedTitle.style.fontSize = size + 'px';
+            autoSave();
+        }
+
         // Select title
         function selectTitle(title) {
             if (selectedTitle) {
@@ -2733,8 +2773,9 @@ A funny tutorial for serious learning.
             }
         }
 
-        // Title click/drag handlers
+        // Title mouse + touch handlers
         document.querySelectorAll('.title').forEach(title => {
+            // Mouse drag
             title.addEventListener('mousedown', (e) => {
                 e.preventDefault();
                 selectTitle(title);
@@ -2753,6 +2794,89 @@ A funny tutorial for serious learning.
                 rotation += e.deltaY > 0 ? 5 : -5;
                 title.dataset.rotation = rotation;
                 title.style.transform = `rotate(${rotation}deg)`;
+            });
+
+            // Touch start
+            title.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                title.style.zIndex = 10001;
+
+                if (e.touches.length === 1) {
+                    // Single finger drag
+                    touchGesture = 'drag';
+                    isDragging = true;
+                    const touch = e.touches[0];
+                    const rect = title.getBoundingClientRect();
+                    dragOffset.x = touch.clientX - rect.left;
+                    dragOffset.y = touch.clientY - rect.top;
+                } else if (e.touches.length === 2) {
+                    // Two finger pinch/rotate
+                    touchGesture = 'pinch';
+                    isDragging = false;
+                    initialPinchDist = getDistance(e.touches[0], e.touches[1]);
+                    initialPinchAngle = getAngle(e.touches[0], e.touches[1]);
+                    initialFontSize = parseFloat(title.style.fontSize) || 16;
+                    initialRotation = parseInt(title.dataset.rotation) || 0;
+                }
+            });
+
+            // Touch move
+            title.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!selectedTitle || selectedTitle !== title) return;
+
+                if (touchGesture === 'drag' && e.touches.length === 1) {
+                    const touch = e.touches[0];
+                    const x = touch.clientX - dragOffset.x;
+                    const y = touch.clientY - dragOffset.y;
+                    const leftPercent = (x / window.innerWidth) * 100;
+                    const topPercent = (y / window.innerHeight) * 100;
+                    selectedTitle.style.left = `${leftPercent}%`;
+                    selectedTitle.style.top = `${topPercent}%`;
+                } else if (e.touches.length === 2) {
+                    // Switch to pinch if started as drag
+                    if (touchGesture === 'drag') {
+                        touchGesture = 'pinch';
+                        isDragging = false;
+                        initialPinchDist = getDistance(e.touches[0], e.touches[1]);
+                        initialPinchAngle = getAngle(e.touches[0], e.touches[1]);
+                        initialFontSize = parseFloat(title.style.fontSize) || 16;
+                        initialRotation = parseInt(title.dataset.rotation) || 0;
+                    }
+
+                    // Pinch to resize
+                    const currentDist = getDistance(e.touches[0], e.touches[1]);
+                    const scale = currentDist / initialPinchDist;
+                    const newSize = Math.max(8, Math.min(120, initialFontSize * scale));
+                    selectedTitle.style.fontSize = newSize + 'px';
+
+                    // Two-finger rotate
+                    const currentAngle = getAngle(e.touches[0], e.touches[1]);
+                    const angleDelta = currentAngle - initialPinchAngle;
+                    const newRotation = Math.round(initialRotation + angleDelta);
+                    selectedTitle.dataset.rotation = newRotation;
+                    selectedTitle.style.transform = `rotate(${newRotation}deg)`;
+                }
+            });
+
+            // Touch end
+            title.addEventListener('touchend', (e) => {
+                if (e.touches.length === 0) {
+                    isDragging = false;
+                    touchGesture = null;
+                    initialPinchDist = null;
+                    initialPinchAngle = null;
+                    autoSave();
+                } else if (e.touches.length === 1 && touchGesture === 'pinch') {
+                    // Went from 2 fingers to 1, switch back to drag
+                    touchGesture = 'drag';
+                    isDragging = true;
+                    const touch = e.touches[0];
+                    const rect = title.getBoundingClientRect();
+                    dragOffset.x = touch.clientX - rect.left;
+                    dragOffset.y = touch.clientY - rect.top;
+                }
             });
         });
 
@@ -2776,7 +2900,7 @@ A funny tutorial for serious learning.
             isDragging = false;
         });
 
-        // Click elsewhere to deselect
+        // Click/tap elsewhere to deselect
         document.addEventListener('click', (e) => {
             if (!e.target.classList.contains('title') &&
                 !e.target.closest('.toolbar')) {
@@ -2802,6 +2926,10 @@ A funny tutorial for serious learning.
                 saveBackground(bg);
             });
         });
+
+        // Size buttons
+        document.getElementById('sizeDown').addEventListener('click', () => resizeSelected(-4));
+        document.getElementById('sizeUp').addEventListener('click', () => resizeSelected(4));
 
         // Rotate buttons
         document.getElementById('rotateLeft').addEventListener('click', () => rotateSelected(-15));
@@ -2851,6 +2979,12 @@ A funny tutorial for serious learning.
             } else if (e.key === 'ArrowRight' || e.key === ']') {
                 e.preventDefault();
                 rotateSelected(5);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                resizeSelected(2);
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                resizeSelected(-2);
             }
         });
 

@@ -2,6 +2,19 @@
 
 Audio Units Supply website. Deliberately chaotic, geocities-inspired.
 
+## Shared Header
+
+All pages use a shared header defined in `vcfmw.css` with the standard structure:
+
+```html
+<header>
+    <a href="index.html"><img src="img/cheeze-bourger2.png" alt="Header Image"></a>
+    <h1>AUDIO UNITS SUPPLY</h1>
+</header>
+```
+
+The header image links to the homepage. Use the same image across pages unless a page needs something different.
+
 ## Image Optimization
 
 Large PNG images (especially on `mire.html`) are automatically converted to WebP for faster loading.
