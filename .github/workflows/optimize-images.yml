@@ -1,0 +1,47 @@
+name: Convert PNGs to WebP
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'img/**.png'
+
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install webp tools
+        run: sudo apt-get update && sudo apt-get install -y webp
+
+      - name: Convert new PNGs to WebP
+        run: |
+          converted=0
+          for png in img/*.png; do
+            [ -f "$png" ] || continue
+            webp="${png%.png}.webp"
+            if [ ! -f "$webp" ] || [ "$png" -nt "$webp" ]; then
+              echo "Converting: $png -> $webp"
+              cwebp -q 80 "$png" -o "$webp"
+              converted=$((converted + 1))
+            else
+              echo "Skipping (up to date): $png"
+            fi
+          done
+          echo "Converted $converted file(s)"
+          echo "CONVERTED=$converted" >> "$GITHUB_ENV"
+
+      - name: Commit WebP files
+        if: env.CONVERTED != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add img/*.webp
+          git commit -m "chore: auto-convert PNGs to WebP [skip ci]"
+          git push
