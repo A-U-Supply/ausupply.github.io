@@ -5,17 +5,17 @@ set -euo pipefail
 # Generates static copies of the site at meaningful historical commits
 # into history/<YYYY-MM-DD>-<short-hash>/ subdirectories.
 #
-# Usage: ./scripts/generate-history.sh [--archive]
-#   --archive: Also archive live site pages to the Wayback Machine
+# Usage: ./scripts/generate-history.sh [--no-archive]
+#   --no-archive: Skip Wayback Machine archiving
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 HISTORY_DIR="$REPO_ROOT/history"
 MANIFEST="$HISTORY_DIR/manifest.json"
 SITE_URL="https://ausupply.github.io"
-DO_ARCHIVE=false
+DO_ARCHIVE=true
 
-if [[ "${1:-}" == "--archive" ]]; then
-    DO_ARCHIVE=true
+if [[ "${1:-}" == "--no-archive" ]]; then
+    DO_ARCHIVE=false
 fi
 
 mkdir -p "$HISTORY_DIR"
@@ -181,17 +181,33 @@ echo "]" >> "$MANIFEST"
 
 echo "Generated manifest with ${#SNAPSHOTS[@]} snapshots."
 
-# Wayback Machine archiving (optional)
+# Wayback Machine archiving (on by default, skip with --no-archive)
 if [ "$DO_ARCHIVE" = true ]; then
     echo ""
     echo "Archiving live site pages to the Wayback Machine..."
+    MAX_RETRIES=3
     for html_file in "$REPO_ROOT"/*.html; do
         filename=$(basename "$html_file")
         url="${SITE_URL}/${filename}"
         echo "  Archiving: $url"
-        curl -s -o /dev/null -w "  -> HTTP %{http_code}\n" \
-            "https://web.archive.org/save/${url}" || echo "  -> FAILED (will retry next run)"
-        sleep 2
+        attempt=1
+        while [ $attempt -le $MAX_RETRIES ]; do
+            http_code=$(curl -s -o /dev/null -w "%{http_code}" \
+                "https://web.archive.org/save/${url}" 2>/dev/null || echo "000")
+            if [ "$http_code" = "200" ] || [ "$http_code" = "302" ]; then
+                echo "    -> OK (HTTP $http_code)"
+                break
+            else
+                echo "    -> HTTP $http_code (attempt $attempt/$MAX_RETRIES)"
+                if [ $attempt -lt $MAX_RETRIES ]; then
+                    backoff=$((attempt * 5))
+                    echo "    -> Retrying in ${backoff}s..."
+                    sleep $backoff
+                fi
+            fi
+            attempt=$((attempt + 1))
+        done
+        sleep 3
     done
     echo "Wayback Machine archiving complete."
 fi

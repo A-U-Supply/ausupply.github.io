@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUDIO UNITS SUPPLY</title>
+    <link rel="stylesheet" href="../../vcfmw.css">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #ffcccc, #ccffcc);
+            color: #000000;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 70px;
+            transition: background 0.3s ease;
+        }
+
+        .draggable {
+            position: absolute;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            z-index: 1;
+        }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+        .draggable.selected,
+        .draggable:hover {
+            outline: 3px dashed #ff00ff;
+            outline-offset: 4px;
+        }
+
+        .draggable:hover {
+            z-index: 10000 !important;
+        }
+
+        .draggable iframe,
+        .draggable img {
+            display: block;
+            pointer-events: auto;
+        }
+
+        .draggable.dragging iframe {
+            pointer-events: none;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            font-size: 1.2rem;
+            border-top: 3px solid #000000;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            z-index: 99998;
+        }
+
+        /* Geocities-like effects */
+        a {
+            color: #ff00ff;
+            text-decoration: blink;
+        }
+
+        a:hover {
+            color: #00ff00;
+            text-decoration: underline;
+        }
+
+        .iframe-wrap {
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            cursor: grab;
+        }
+
+        .iframe-wrap:active {
+            cursor: grabbing;
+        }
+
+        .subtitle-text {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .continue-link {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: 3px dotted #ff00ff;
+            background-color: rgba(255, 255, 204, 0.8);
+        }
+    </style>
+</head>    
+
+<body>
+<header>
+    <a href="index.html"><img src="../../img/cheeze-bourger2.png" alt="Header Image"></a>
+    <h1>AUDIO UNITS SUPPLY</h1>
+</header>
+
+<div class="draggable" data-id="subtitle" data-rotation="0"
+     style="left: 20%; top: 15%; transform: rotate(0deg);">
+    <div class="subtitle-text">
+        <a href="mire.html">Floating in a mire of semantical truzzles, so you don't have to!</a>
+    </div>
+</div>
+
+<div class="draggable" data-id="youtube" data-rotation="-3"
+     style="left: 5%; top: 25%; transform: rotate(-3deg);">
+    <div class="iframe-wrap">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3J-Cc49mfmI?si=BHmwtpzjxX0ug1sx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="draggable" data-id="dustbobbles" data-rotation="5"
+     style="left: 50%; top: 30%; transform: rotate(5deg);">
+    <img src="../../img/dust_bobbles2.gif" width="560" height="315">
+</div>
+
+<div class="draggable" data-id="skibbidi" data-rotation="-7"
+     style="left: 10%; top: 60%; transform: rotate(-7deg);">
+    <a href="//www.youtube.com/watch?v=UoP_KBHSqTU"><img src="../../img/skibbidibepoop.png"></a>
+</div>
+
+<div class="draggable" data-id="transferslip" data-rotation="4"
+     style="left: 55%; top: 65%; transform: rotate(4deg);">
+    <a href="audex23.html" title="we got reason to fear social order (do not forget yr transfer slip)!"><img src="../../img/transfer-slip.png"></a>
+</div>
+
+<div class="draggable" data-id="timemachine" data-rotation="3"
+     style="left: 70%; top: 10%; transform: rotate(3deg);">
+    <a href="history.html"><img src="../../img/herstory.png" width="48" height="48"></a>
+</div>
+
+<div class="draggable" data-id="continue" data-rotation="-2"
+     style="left: 40%; top: 85%; transform: rotate(-2deg);">
+    <div class="continue-link">
+        <a href="index2.html">continue</a>
+    </div>
+</div>
+
+<footer>
+    <p><a href="this-song-is-a-junkyard.html">Your only choice will be between a goat's ass and the face of god! Visit again!</a></p>
+</footer>
+
+</body>
+</html>
