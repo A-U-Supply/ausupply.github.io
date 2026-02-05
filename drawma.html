@@ -21,6 +21,7 @@
 
         body {
             background: #0a0a0a;
+            background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' fill='%23111'/%3E%3C/svg%3E");
             color: #d4c5a9;
             font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
             display: flex;
@@ -33,14 +34,12 @@
         }
 
         /* --- Chevron / zig-zag floor pattern --- */
-        body::after {
-            content: '';
+        .floor {
             position: fixed;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            height: 80px;
-            opacity: 0.12;
+            bottom: 0;
             background:
                 linear-gradient(135deg, #8b0000 25%, transparent 25%) -20px 0,
                 linear-gradient(225deg, #8b0000 25%, transparent 25%) -20px 0,
@@ -48,9 +47,12 @@
                 linear-gradient(45deg, #8b0000 25%, transparent 25%);
             background-size: 40px 40px;
             background-color: #1a0000;
+            opacity: 0.3;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
+            animation: strobe 0.15s infinite;
         }
+
 
         /* --- Title --- */
         .title {
@@ -68,22 +70,14 @@
             font-size: 2.4rem;
             font-weight: 700;
             letter-spacing: 0.35em;
-            color: #d4c5a9;
-            text-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
-            animation: flicker 4s infinite;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: strobe 0.15s infinite;
         }
 
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            47% { opacity: 1; }
-            48% { opacity: 0.7; }
-            49% { opacity: 1; }
-            72% { opacity: 1; }
-            73% { opacity: 0.75; }
-            73.5% { opacity: 1; }
-            90% { opacity: 1; }
-            91% { opacity: 0.65; }
-            91.5% { opacity: 1; }
+        @keyframes strobe {
+            0%, 49% { filter: invert(1); }
+            50%, 100% { filter: none; }
         }
 
         /* --- Back link --- */
@@ -190,6 +184,17 @@
             line-height: 1.5;
         }
 
+        .prompt-text.backwards-flash {
+            animation: backwardsFlash 0.6s ease-out;
+        }
+
+        @keyframes backwardsFlash {
+            0% { transform: scaleX(-1); opacity: 0.6; color: #cc0000; }
+            40% { transform: scaleX(-1); opacity: 0.8; color: #cc0000; }
+            50% { transform: scaleX(1); opacity: 0.3; }
+            100% { transform: scaleX(1); opacity: 1; }
+        }
+
         .prompt-date {
             font-size: 0.85rem;
             color: #666;
@@ -224,6 +229,7 @@
         .status-message--error {
             color: #8b0000;
             font-style: italic;
+            animation: strobe 0.15s infinite;
         }
 
         /* --- Loading dots --- */
@@ -236,6 +242,47 @@
         @keyframes loadPulse {
             0%, 80%, 100% { opacity: 0.2; }
             40% { opacity: 1; }
+        }
+
+
+        /* --- Backwards flashing text --- */
+        .backwards-whisper {
+            position: fixed;
+            z-index: 2;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #8b0000;
+            opacity: 0;
+            transform: scaleX(-1);
+            pointer-events: none;
+            text-shadow: 0 0 8px rgba(139, 0, 0, 0.5);
+            white-space: nowrap;
+            max-width: 40vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .backwards-whisper.flash {
+            animation: whisperFlash 1.8s ease-out forwards;
+        }
+
+        @keyframes whisperFlash {
+            0% { opacity: 0; transform: scaleX(-1); }
+            15% { opacity: 0.55; transform: scaleX(-1); }
+            40% { opacity: 0.7; transform: scaleX(-1); }
+            70% { opacity: 0.35; transform: scaleX(-1); }
+            100% { opacity: 0; transform: scaleX(-1); }
+        }
+
+        /* --- Decorative HR --- */
+        .red-rule {
+            width: 60%;
+            max-width: 400px;
+            height: 1px;
+            border: none;
+            background: linear-gradient(to right, transparent, #8b0000, transparent);
+            margin: 0 auto;
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -258,6 +305,10 @@
     </div>
 
     <div class="artist-name" id="artistName"></div>
+
+    <div id="whispers"></div>
+
+    <div class="floor"></div>
 
     <script>
     (function () {
@@ -293,6 +344,7 @@
                 buildStage();
                 showImage(0, true);
                 bindEvents();
+                startWhispers(data);
             })
             .catch(function () {
                 showError();
@@ -301,7 +353,7 @@
         function showError() {
             els.content.innerHTML =
                 '<div class="status-message status-message--error">' +
-                'The owls are not what they seem' +
+                'neither contemplative, neither reflexive, nor communicative' +
                 '</div>';
             hideNav();
         }
@@ -396,6 +448,12 @@
             if (state.promptVisible) {
                 els.promptArea.classList.add('visible');
                 els.artistName.classList.add('visible');
+                // Backwards text flash — like the Red Room
+                els.promptText.classList.add('backwards-flash');
+                els.promptText.addEventListener('animationend', function handler() {
+                    els.promptText.classList.remove('backwards-flash');
+                    els.promptText.removeEventListener('animationend', handler);
+                });
             } else {
                 els.promptArea.classList.remove('visible');
                 els.artistName.classList.remove('visible');
@@ -485,6 +543,54 @@
                     }
                 }
             }, { passive: true });
+        }
+
+        // --- Backwards flashing prompts ---
+        var whispersEl = document.getElementById('whispers');
+        var prompts = [];
+
+        function spawnWhisper() {
+            if (prompts.length === 0) return;
+            var text = prompts[Math.floor(Math.random() * prompts.length)];
+            var el = document.createElement('div');
+            el.className = 'backwards-whisper';
+            el.textContent = text;
+            el.style.top = (5 + Math.random() * 85) + '%';
+            el.style.left = (2 + Math.random() * 55) + '%';
+            el.style.fontSize = (0.75 + Math.random() * 0.5) + 'rem';
+            whispersEl.appendChild(el);
+
+            // Trigger animation next frame
+            requestAnimationFrame(function () {
+                el.classList.add('flash');
+            });
+
+            // Remove after animation
+            el.addEventListener('animationend', function () {
+                el.remove();
+            });
+        }
+
+        function startWhispers(manifestData) {
+            prompts = manifestData
+                .map(function (item) { return item.prompt; })
+                .filter(function (p) { return p && p.length > 0; });
+            if (prompts.length === 0) return;
+
+            // Spawn 2-4 at a time, every 2-3 seconds
+            setInterval(function () {
+                var count = 2 + Math.floor(Math.random() * 3);
+                for (var i = 0; i < count; i++) {
+                    setTimeout(spawnWhisper, Math.random() * 600);
+                }
+            }, 2500);
+
+            // Initial burst
+            setTimeout(function () {
+                for (var i = 0; i < 3; i++) {
+                    setTimeout(spawnWhisper, i * 300);
+                }
+            }, 1000);
         }
 
         // First load — directly set image without fade for index 0
