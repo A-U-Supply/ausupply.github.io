@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAWMA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #d4c5a9;
+            font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* --- Chevron / zig-zag floor pattern --- */
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            opacity: 0.12;
+            background:
+                linear-gradient(135deg, #8b0000 25%, transparent 25%) -20px 0,
+                linear-gradient(225deg, #8b0000 25%, transparent 25%) -20px 0,
+                linear-gradient(315deg, #8b0000 25%, transparent 25%),
+                linear-gradient(45deg, #8b0000 25%, transparent 25%);
+            background-size: 40px 40px;
+            background-color: #1a0000;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- Title --- */
+        .title {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 18px 0 10px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .title h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            color: #d4c5a9;
+            text-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            47% { opacity: 1; }
+            48% { opacity: 0.7; }
+            49% { opacity: 1; }
+            72% { opacity: 1; }
+            73% { opacity: 0.75; }
+            73.5% { opacity: 1; }
+            90% { opacity: 1; }
+            91% { opacity: 0.65; }
+            91.5% { opacity: 1; }
+        }
+
+        /* --- Back link --- */
+        .back-link {
+            position: fixed;
+            top: 22px;
+            left: 22px;
+            z-index: 20;
+            color: #555;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #8b0000;
+        }
+
+        /* --- Counter --- */
+        .counter {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            z-index: 20;
+            color: #555;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* --- Navigation zones --- */
+        .nav-zone {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            z-index: 5;
+        }
+
+        .nav-zone--prev {
+            left: 0;
+            cursor: w-resize;
+        }
+
+        .nav-zone--next {
+            right: 0;
+            cursor: e-resize;
+        }
+
+        /* --- Image stage --- */
+        .stage {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 6;
+            max-width: 85vw;
+            max-height: 75vh;
+            pointer-events: none;
+        }
+
+        .stage__image-wrap {
+            position: relative;
+            pointer-events: auto;
+            cursor: pointer;
+            line-height: 0;
+        }
+
+        .stage__image-wrap img {
+            max-width: 85vw;
+            max-height: 75vh;
+            width: auto;
+            height: auto;
+            display: block;
+            border: 1px solid #8b0000;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.35), 0 0 60px rgba(139, 0, 0, 0.15);
+            transition: opacity 0.8s ease;
+        }
+
+        .stage__image-wrap img.fade-out {
+            opacity: 0;
+        }
+
+        /* --- Prompt text --- */
+        .prompt-area {
+            text-align: center;
+            margin-top: 16px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            max-width: 85vw;
+        }
+
+        .prompt-area.visible {
+            opacity: 1;
+        }
+
+        .prompt-text {
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #d4c5a9;
+            text-shadow: 0 0 12px rgba(139, 0, 0, 0.6);
+            line-height: 1.5;
+        }
+
+        .prompt-date {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .artist-name {
+            position: fixed;
+            bottom: 28px;
+            right: 22px;
+            z-index: 20;
+            font-size: 0.85rem;
+            color: #d4c5a9;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
+        }
+
+        .artist-name.visible {
+            opacity: 0.8;
+        }
+
+        /* --- Status messages --- */
+        .status-message {
+            font-size: 1.3rem;
+            color: #555;
+            letter-spacing: 0.15em;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .status-message--error {
+            color: #8b0000;
+            font-style: italic;
+        }
+
+        /* --- Loading dots --- */
+        .loading-dots span {
+            animation: loadPulse 1.4s infinite;
+        }
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes loadPulse {
+            0%, 80%, 100% { opacity: 0.2; }
+            40% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; back</a>
+
+    <div class="title">
+        <h1>DRAWMA</h1>
+    </div>
+
+    <div class="counter" id="counter"></div>
+
+    <div class="nav-zone nav-zone--prev" id="navPrev"></div>
+    <div class="nav-zone nav-zone--next" id="navNext"></div>
+
+    <div id="content">
+        <div class="status-message loading-dots">
+            <span>.</span> <span>.</span> <span>.</span>
+        </div>
+    </div>
+
+    <div class="artist-name" id="artistName"></div>
+
+    <script>
+    (function () {
+        'use strict';
+
+        var state = {
+            images: [],
+            index: 0,
+            promptVisible: false,
+            transitioning: false
+        };
+
+        var els = {
+            content: document.getElementById('content'),
+            counter: document.getElementById('counter'),
+            artistName: document.getElementById('artistName'),
+            navPrev: document.getElementById('navPrev'),
+            navNext: document.getElementById('navNext')
+        };
+
+        // --- Fetch manifest ---
+        fetch('img/drawma/manifest.json')
+            .then(function (res) {
+                if (!res.ok) throw new Error('Failed to load');
+                return res.json();
+            })
+            .then(function (data) {
+                if (!Array.isArray(data) || data.length === 0) {
+                    showEmpty();
+                    return;
+                }
+                state.images = data;
+                buildStage();
+                showImage(0, true);
+                bindEvents();
+            })
+            .catch(function () {
+                showError();
+            });
+
+        function showError() {
+            els.content.innerHTML =
+                '<div class="status-message status-message--error">' +
+                'The owls are not what they seem' +
+                '</div>';
+            hideNav();
+        }
+
+        function showEmpty() {
+            els.content.innerHTML =
+                '<div class="status-message">No drawings yet</div>';
+            hideNav();
+        }
+
+        function hideNav() {
+            els.navPrev.style.display = 'none';
+            els.navNext.style.display = 'none';
+        }
+
+        function buildStage() {
+            els.content.innerHTML =
+                '<div class="stage">' +
+                    '<div class="stage__image-wrap" id="imageWrap">' +
+                        '<img id="mainImage" alt="" src="">' +
+                    '</div>' +
+                    '<div class="prompt-area" id="promptArea">' +
+                        '<div class="prompt-text" id="promptText"></div>' +
+                        '<div class="prompt-date" id="promptDate"></div>' +
+                    '</div>' +
+                '</div>';
+
+            els.imageWrap = document.getElementById('imageWrap');
+            els.mainImage = document.getElementById('mainImage');
+            els.promptArea = document.getElementById('promptArea');
+            els.promptText = document.getElementById('promptText');
+            els.promptDate = document.getElementById('promptDate');
+        }
+
+        function showImage(index, skipTransition) {
+            if (state.transitioning) return;
+            if (index < 0 || index >= state.images.length) return;
+
+            var item = state.images[index];
+            var imgPath = 'img/drawma/' + item.filename;
+
+            // Hide prompt when switching
+            state.promptVisible = false;
+            els.promptArea.classList.remove('visible');
+            els.artistName.classList.remove('visible');
+
+            if (skipTransition) {
+                // First load — no transition
+                state.index = index;
+                els.mainImage.src = imgPath;
+                els.mainImage.alt = item.prompt || 'Drawing';
+                updateMeta(index);
+                preloadAdjacent(index);
+                return;
+            }
+
+            // Fade transition
+            state.transitioning = true;
+            els.mainImage.classList.add('fade-out');
+
+            setTimeout(function () {
+                state.index = index;
+                els.mainImage.src = imgPath;
+                els.mainImage.alt = item.prompt || 'Drawing';
+                updateMeta(index);
+
+                els.mainImage.onload = function () {
+                    els.mainImage.classList.remove('fade-out');
+                    state.transitioning = false;
+                    preloadAdjacent(index);
+                };
+
+                // Fallback if onload doesn't fire (cached)
+                setTimeout(function () {
+                    els.mainImage.classList.remove('fade-out');
+                    state.transitioning = false;
+                }, 900);
+            }, 400);
+        }
+
+        function updateMeta(index) {
+            var item = state.images[index];
+            els.counter.textContent = (index + 1) + ' / ' + state.images.length;
+            els.promptText.textContent = item.prompt || '';
+            els.promptDate.textContent = item.date || '';
+            els.artistName.textContent = item.artist || '';
+        }
+
+        function togglePrompt() {
+            if (state.images.length === 0) return;
+            state.promptVisible = !state.promptVisible;
+            if (state.promptVisible) {
+                els.promptArea.classList.add('visible');
+                els.artistName.classList.add('visible');
+            } else {
+                els.promptArea.classList.remove('visible');
+                els.artistName.classList.remove('visible');
+            }
+        }
+
+        function preloadAdjacent(index) {
+            var preload = [index - 1, index + 1];
+            preload.forEach(function (i) {
+                if (i >= 0 && i < state.images.length) {
+                    var img = new Image();
+                    img.src = 'img/drawma/' + state.images[i].filename;
+                }
+            });
+        }
+
+        function goPrev() {
+            if (state.images.length === 0) return;
+            var next = (state.index - 1 + state.images.length) % state.images.length;
+            showImage(next);
+        }
+
+        function goNext() {
+            if (state.images.length === 0) return;
+            var next = (state.index + 1) % state.images.length;
+            showImage(next);
+        }
+
+        // --- Events ---
+        function bindEvents() {
+            // Click nav zones
+            els.navPrev.addEventListener('click', function (e) {
+                e.preventDefault();
+                goPrev();
+            });
+
+            els.navNext.addEventListener('click', function (e) {
+                e.preventDefault();
+                goNext();
+            });
+
+            // Click image to toggle prompt
+            els.imageWrap.addEventListener('click', function (e) {
+                e.stopPropagation();
+                togglePrompt();
+            });
+
+            // Keyboard
+            document.addEventListener('keydown', function (e) {
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        goPrev();
+                        break;
+                    case 'ArrowRight':
+                        goNext();
+                        break;
+                    case ' ':
+                    case 'Enter':
+                        e.preventDefault();
+                        togglePrompt();
+                        break;
+                }
+            });
+
+            // Touch swipe
+            var touchStartX = 0;
+            var touchStartY = 0;
+            var touchStartTime = 0;
+
+            document.addEventListener('touchstart', function (e) {
+                touchStartX = e.changedTouches[0].clientX;
+                touchStartY = e.changedTouches[0].clientY;
+                touchStartTime = Date.now();
+            }, { passive: true });
+
+            document.addEventListener('touchend', function (e) {
+                var dx = e.changedTouches[0].clientX - touchStartX;
+                var dy = e.changedTouches[0].clientY - touchStartY;
+                var dt = Date.now() - touchStartTime;
+
+                // Must be a fast-ish horizontal swipe
+                if (dt < 500 && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+                    if (dx < 0) {
+                        goNext();
+                    } else {
+                        goPrev();
+                    }
+                }
+            }, { passive: true });
+        }
+
+        // First load — directly set image without fade for index 0
+        // (handled in showImage with the src check)
+    })();
+    </script>
+</body>
+</html>
