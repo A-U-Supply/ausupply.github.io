@@ -84,7 +84,7 @@
         }
 
         .iframe-wrap {
-            padding: 15px;
+            padding: 25px;
             background: rgba(0,0,0,0.1);
             cursor: grab;
         }
@@ -288,6 +288,7 @@
 
         // Touch start
         item.addEventListener('touchstart', (e) => {
+            if (e.target.tagName === 'IFRAME') return;
             // Allow taps on links to work when not dragging
             if (e.touches.length === 1 && (e.target.tagName === 'A' || e.target.closest('a'))) {
                 // Don't prevent default for single taps on links initially
