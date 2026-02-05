@@ -141,12 +141,12 @@ class TestAssociateImagesWithPrompts:
     def test_matches_image_to_prompt_same_day(self):
         from scrape_gallery import associate_images_with_prompts
 
-        # Both at 2023-11-14 UTC
+        # Both at 2023-11-14 UTC (00:00 and 06:00)
         images = [
-            {"file_id": "F001", "message_ts": "1699920000.000000", "user": "U123"},
+            {"file_id": "F001", "message_ts": "1699941600.000000", "user": "U123"},
         ]
         prompts = [
-            {"text": "Draw a fish wearing a top hat", "ts": "1699900000.000000"},
+            {"text": "Draw a fish wearing a top hat", "ts": "1699920000.000000"},
         ]
         result = associate_images_with_prompts(images, prompts)
 
@@ -156,12 +156,12 @@ class TestAssociateImagesWithPrompts:
     def test_no_match_different_day(self):
         from scrape_gallery import associate_images_with_prompts
 
-        # Image on 2023-11-15, prompt on 2023-11-14
+        # Image on 2023-11-15 00:00 UTC, prompt on 2023-11-14 00:00 UTC
         images = [
             {"file_id": "F001", "message_ts": "1700006400.000000", "user": "U123"},
         ]
         prompts = [
-            {"text": "Draw a fish", "ts": "1699900000.000000"},
+            {"text": "Draw a fish", "ts": "1699920000.000000"},
         ]
         result = associate_images_with_prompts(images, prompts)
 
@@ -171,13 +171,13 @@ class TestAssociateImagesWithPrompts:
     def test_multiple_prompts_picks_same_day(self):
         from scrape_gallery import associate_images_with_prompts
 
-        # Image on 2023-11-14
+        # Image on 2023-11-14 06:00 UTC
         images = [
-            {"file_id": "F001", "message_ts": "1699920000.000000", "user": "U123"},
+            {"file_id": "F001", "message_ts": "1699941600.000000", "user": "U123"},
         ]
         prompts = [
             {"text": "Old prompt", "ts": "1699800000.000000"},  # 2023-11-12
-            {"text": "Today prompt", "ts": "1699900000.000000"},  # 2023-11-14
+            {"text": "Today prompt", "ts": "1699920000.000000"},  # 2023-11-14
         ]
         result = associate_images_with_prompts(images, prompts)
 
@@ -186,11 +186,12 @@ class TestAssociateImagesWithPrompts:
     def test_image_keeps_existing_fields(self):
         from scrape_gallery import associate_images_with_prompts
 
+        # Both on 2023-11-14 UTC
         images = [
-            {"file_id": "F001", "message_ts": "1699920000.000000", "user": "U123", "name": "art.png"},
+            {"file_id": "F001", "message_ts": "1699941600.000000", "user": "U123", "name": "art.png"},
         ]
         prompts = [
-            {"text": "Draw something", "ts": "1699900000.000000"},
+            {"text": "Draw something", "ts": "1699920000.000000"},
         ]
         result = associate_images_with_prompts(images, prompts)
 
