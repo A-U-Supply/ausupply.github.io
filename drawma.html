@@ -323,7 +323,7 @@
             pointer-events: none;
             text-shadow: 0 0 8px rgba(139, 0, 0, 0.5);
             white-space: nowrap;
-            max-width: 40vw;
+            max-width: 60vw;
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -655,9 +655,15 @@
             var el = document.createElement('div');
             el.className = 'backwards-whisper';
             el.textContent = text;
-            el.style.top = (5 + Math.random() * 85) + '%';
-            el.style.left = (2 + Math.random() * 55) + '%';
-            el.style.fontSize = (0.75 + Math.random() * 0.5) + 'rem';
+            el.style.top = (2 + Math.random() * 92) + '%';
+            el.style.left = (1 + Math.random() * 70) + '%';
+            // Wide size range: tiny whispers to huge screams
+            var size = 0.6 + Math.random() * 3.5;
+            el.style.fontSize = size + 'rem';
+            // Larger ones slightly more transparent
+            if (size > 2.5) {
+                el.style.opacity = '0';
+            }
             whispersEl.appendChild(el);
 
             // Trigger animation next frame
@@ -677,20 +683,20 @@
                 .filter(function (p) { return p && p.length > 0; });
             if (prompts.length === 0) return;
 
-            // Spawn 2-4 at a time, every 2-3 seconds
+            // Spawn 6-12 at a time, every 1.2 seconds — relentless
             setInterval(function () {
-                var count = 2 + Math.floor(Math.random() * 3);
+                var count = 6 + Math.floor(Math.random() * 7);
                 for (var i = 0; i < count; i++) {
-                    setTimeout(spawnWhisper, Math.random() * 600);
+                    setTimeout(spawnWhisper, Math.random() * 800);
                 }
-            }, 2500);
+            }, 1200);
 
-            // Initial burst
+            // Big initial burst
             setTimeout(function () {
-                for (var i = 0; i < 3; i++) {
-                    setTimeout(spawnWhisper, i * 300);
+                for (var i = 0; i < 10; i++) {
+                    setTimeout(spawnWhisper, i * 150);
                 }
-            }, 1000);
+            }, 500);
         }
 
         // --- Strobe toggle ---
