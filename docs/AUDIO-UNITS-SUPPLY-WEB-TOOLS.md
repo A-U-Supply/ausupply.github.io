@@ -162,6 +162,17 @@ ausupply.github.io/
     └── AUDIO-UNITS-SUPPLY-WEB-TOOLS.md  # This file
 ```
 
+## Image Optimization
+
+PNG images are automatically converted to WebP via GitHub Actions for faster page loads.
+
+- **Trigger:** Push a PNG to `img/` on master
+- **Action:** `.github/workflows/optimize-images.yml` converts to WebP (quality 80)
+- **HTML pattern:** `<a href="original.png"><img src="optimized.webp" loading="lazy"></a>`
+- **Manual trigger:** Actions > "Convert PNGs to WebP" > Run workflow
+
+See `README.md` for full details.
+
 ---
 
 ## Contributing Ideas
@@ -176,4 +187,4 @@ Don't use Claude Code? No problem:
 
 ---
 
-*Last updated: 2026-01-30*
+*Last updated: 2026-02-05*
