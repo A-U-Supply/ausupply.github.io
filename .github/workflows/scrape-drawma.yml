@@ -1,0 +1,42 @@
+name: Scrape Drawma Gallery Images
+
+on:
+  schedule:
+    # 11pm PT = 7am UTC (during PST)
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install slack-sdk requests
+
+      - name: Scrape images from Slack
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: python surreal-prompt-bot/scrape_gallery.py
+
+      - name: Commit new images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add img/drawma/
+          if git diff --cached --quiet; then
+            echo "No new images to commit."
+          else
+            git commit -m "chore: add drawma gallery images ($(date -u +%Y-%m-%d)) [skip ci]"
+            git push
+          fi
