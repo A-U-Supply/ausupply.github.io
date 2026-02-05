@@ -255,6 +255,63 @@ class TestFilterNewImages:
 # ---------------------------------------------------------------------------
 
 
+def _fake_image_response(content=b"\x89PNG fake image data", content_type="image/jpeg"):
+    """Create a mock response that looks like a successful image download."""
+    resp = MagicMock()
+    resp.status_code = 200
+    resp.content = content
+    resp.headers = {"Content-Type": content_type}
+    return resp
+
+
+def _fake_redirect_response(location):
+    """Create a mock 302 redirect response."""
+    resp = MagicMock()
+    resp.status_code = 302
+    resp.headers = {"Location": location}
+    return resp
+
+
+class TestDownloadWithAuth:
+    """Tests for the redirect-preserving download helper."""
+
+    def test_follows_redirect_with_auth(self):
+        from scrape_gallery import _download_with_auth
+
+        redirect = _fake_redirect_response("https://cdn.slack.com/actual-image.jpg")
+        image_resp = _fake_image_response()
+
+        with patch("scrape_gallery.requests.get", side_effect=[redirect, image_resp]) as mock_get:
+            resp = _download_with_auth("https://files.slack.com/original", "xoxb-token")
+
+        assert resp.content == b"\x89PNG fake image data"
+        # Both calls should have the auth header
+        assert mock_get.call_count == 2
+        for call in mock_get.call_args_list:
+            assert call[1]["headers"]["Authorization"] == "Bearer xoxb-token"
+            assert call[1]["allow_redirects"] is False
+
+    def test_direct_response_no_redirect(self):
+        from scrape_gallery import _download_with_auth
+
+        image_resp = _fake_image_response()
+
+        with patch("scrape_gallery.requests.get", return_value=image_resp) as mock_get:
+            resp = _download_with_auth("https://files.slack.com/image.jpg", "xoxb-token")
+
+        assert mock_get.call_count == 1
+        assert resp.content == b"\x89PNG fake image data"
+
+    def test_too_many_redirects_raises(self):
+        from scrape_gallery import _download_with_auth
+
+        redirect = _fake_redirect_response("https://cdn.slack.com/loop")
+
+        with patch("scrape_gallery.requests.get", return_value=redirect):
+            with pytest.raises(Exception, match="Too many redirects"):
+                _download_with_auth("https://files.slack.com/loop", "xoxb-token")
+
+
 class TestDownloadImage:
     """Tests for downloading an image and producing a manifest entry."""
 
@@ -272,11 +329,9 @@ class TestDownloadImage:
             "artist": "jake",
         }
 
-        fake_response = MagicMock()
-        fake_response.status_code = 200
-        fake_response.content = b"\x89PNG fake image data"
+        image_resp = _fake_image_response()
 
-        with patch("scrape_gallery.requests.get", return_value=fake_response) as mock_get:
+        with patch("scrape_gallery.requests.get", return_value=image_resp) as mock_get:
             entry = download_image(image, tmp_path, "xoxb-test-token")
 
         # Verify the file was written
@@ -285,11 +340,12 @@ class TestDownloadImage:
         assert expected_path.exists()
         assert expected_path.read_bytes() == b"\x89PNG fake image data"
 
-        # Verify Bearer auth header and timeout
+        # Verify Bearer auth header and no auto-redirect
         mock_get.assert_called_once_with(
             "https://files.slack.com/files-pri/F07ABC123/cool_drawing.jpg",
             headers={"Authorization": "Bearer xoxb-test-token"},
             timeout=30,
+            allow_redirects=False,
         )
 
     def test_returns_manifest_entry(self, tmp_path):
@@ -306,11 +362,9 @@ class TestDownloadImage:
             "artist": "jake",
         }
 
-        fake_response = MagicMock()
-        fake_response.status_code = 200
-        fake_response.content = b"image data"
+        image_resp = _fake_image_response()
 
-        with patch("scrape_gallery.requests.get", return_value=fake_response):
+        with patch("scrape_gallery.requests.get", return_value=image_resp):
             entry = download_image(image, tmp_path, "xoxb-test-token")
 
         assert entry == {
@@ -337,11 +391,9 @@ class TestDownloadImage:
             "artist": "someone",
         }
 
-        fake_response = MagicMock()
-        fake_response.status_code = 200
-        fake_response.content = b"png data"
+        image_resp = _fake_image_response(content=b"png data", content_type="image/png")
 
-        with patch("scrape_gallery.requests.get", return_value=fake_response):
+        with patch("scrape_gallery.requests.get", return_value=image_resp):
             entry = download_image(image, tmp_path, "xoxb-token")
 
         assert entry["filename"] == "2024-02-03-F999.png"
@@ -361,14 +413,38 @@ class TestDownloadImage:
             "artist": "anon",
         }
 
-        fake_response = MagicMock()
-        fake_response.status_code = 200
-        fake_response.content = b"jpeg data"
+        image_resp = _fake_image_response(content=b"jpeg data")
 
-        with patch("scrape_gallery.requests.get", return_value=fake_response):
+        with patch("scrape_gallery.requests.get", return_value=image_resp):
             entry = download_image(image, tmp_path, "xoxb-token")
 
         assert entry["prompt"] is None
+
+    def test_rejects_html_response(self, tmp_path):
+        from scrape_gallery import download_image
+
+        image = {
+            "file_id": "F666",
+            "name": "broken.jpg",
+            "url": "https://files.slack.com/files-pri/F666/broken.jpg",
+            "message_ts": "1706918400.000000",
+            "width": 800,
+            "height": 600,
+            "prompt": None,
+            "artist": "anon",
+        }
+
+        html_resp = MagicMock()
+        html_resp.status_code = 200
+        html_resp.content = b"<!DOCTYPE html><html>login page</html>"
+        html_resp.headers = {"Content-Type": "text/html; charset=utf-8"}
+
+        with patch("scrape_gallery.requests.get", return_value=html_resp):
+            with pytest.raises(ValueError, match="Expected image content"):
+                download_image(image, tmp_path, "xoxb-token")
+
+        # Verify no file was written
+        assert not (tmp_path / "2024-02-03-F666.jpg").exists()
 
 
 # ---------------------------------------------------------------------------
@@ -481,9 +557,7 @@ class TestMain:
         monkeypatch.setattr(scrape_gallery, "WebClient", lambda token: mock_client)
 
         # Patch requests.get to return fake image bytes
-        fake_resp = MagicMock()
-        fake_resp.content = b"fake png data"
-        fake_resp.raise_for_status = MagicMock()
+        fake_resp = _fake_image_response(content=b"fake png data", content_type="image/png")
 
         with patch("scrape_gallery.requests.get", return_value=fake_resp):
             exit_code = main()

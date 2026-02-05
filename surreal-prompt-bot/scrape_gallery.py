@@ -138,6 +138,25 @@ def filter_new_images(images: list[dict], manifest: list[dict]) -> list[dict]:
     return [img for img in images if img["file_id"] not in existing_ids]
 
 
+def _download_with_auth(url: str, token: str, timeout: int = 30) -> requests.Response:
+    """Download a URL, manually following redirects to preserve the auth header.
+
+    The requests library strips Authorization headers on cross-domain redirects
+    (a security feature). Slack's url_private_download redirects to a CDN on a
+    different host, so we must follow redirects ourselves.
+    """
+    headers = {"Authorization": f"Bearer {token}"}
+    max_redirects = 5
+    for _ in range(max_redirects):
+        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=False)
+        if resp.status_code in (301, 302, 303, 307, 308):
+            url = resp.headers["Location"]
+            continue
+        resp.raise_for_status()
+        return resp
+    raise requests.TooManyRedirects(f"Too many redirects for {url}")
+
+
 def download_image(image: dict, output_dir: Path, token: str) -> dict:
     """Download an image and return a manifest entry dict.
 
@@ -148,12 +167,14 @@ def download_image(image: dict, output_dir: Path, token: str) -> dict:
     filename = f"{date}-{image['file_id']}.{ext}"
     filepath = output_dir / filename
 
-    resp = requests.get(
-        image["url"],
-        headers={"Authorization": f"Bearer {token}"},
-        timeout=30,
-    )
-    resp.raise_for_status()
+    resp = _download_with_auth(image["url"], token)
+
+    content_type = resp.headers.get("Content-Type", "")
+    if "image" not in content_type:
+        raise ValueError(
+            f"Expected image content, got '{content_type}' for {image['file_id']}"
+        )
+
     filepath.write_bytes(resp.content)
 
     logger.info(f"Downloaded {filename} ({len(resp.content)} bytes)")
