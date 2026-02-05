@@ -1,7 +1,7 @@
 # History Time Machine — Design Doc
 
 **Date:** 2026-02-05
-**Status:** Approved
+**Status:** Implemented
 
 ## Overview
 
