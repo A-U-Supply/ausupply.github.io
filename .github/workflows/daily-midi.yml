@@ -1,0 +1,38 @@
+name: Daily MIDI Bot
+
+on:
+  schedule:
+    - cron: '0 16 * * *'  # 4pm UTC (8am PT)
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  generate-midi:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: midi-bot/package-lock.json
+
+      - name: Install Python dependencies
+        run: pip install -r midi-bot/requirements.txt
+
+      - name: Install Node.js dependencies
+        run: cd midi-bot && npm ci
+
+      - name: Generate and post MIDI
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: python midi-bot/bot.py
