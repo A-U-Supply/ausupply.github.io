@@ -290,7 +290,16 @@ def main() -> int:
             replies = fetch_thread_replies(client, channel_id, m["ts"])
             all_images.extend(extract_images_from_messages(replies))
 
-    logger.info(f"Found {len(all_images)} total images")
+    # Deduplicate by file_id (same image can appear in both channel and thread)
+    seen_ids: set[str] = set()
+    deduped: list[dict] = []
+    for img in all_images:
+        if img["file_id"] not in seen_ids:
+            seen_ids.add(img["file_id"])
+            deduped.append(img)
+    all_images = deduped
+
+    logger.info(f"Found {len(all_images)} unique images")
 
     # Associate images with prompts
     all_images = associate_images_with_prompts(all_images, all_prompts)
