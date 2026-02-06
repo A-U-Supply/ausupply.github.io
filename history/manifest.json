@@ -75,5 +75,5 @@
   {"hash":"8f9aee9","date":"2025-07-22","message":"Update mire.html","path":"history/2025-07-22-8f9aee9/"},
   {"hash":"56146e8","date":"2026-01-30","message":"Add rotate buttons and background color controls","path":"history/2026-01-30-56146e8/"},
   {"hash":"2cf66aa","date":"2026-02-05","message":"feat: responsive scaling for mobile screens","path":"history/2026-02-05-2cf66aa/"},
-  {"hash":"ef367dc","date":"2026-02-06","message":"chore: add drawma gallery images (2026-02-06) [skip ci]","path":"history/2026-02-06-ef367dc/"}
+  {"hash":"94d8bb0","date":"2026-02-06","message":"fix: drawma gallery double-click bug and enlarge nav arrows","path":"history/2026-02-06-94d8bb0/"}
 ]
