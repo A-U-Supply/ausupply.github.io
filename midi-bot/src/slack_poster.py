@@ -58,20 +58,29 @@ def post_midi_to_slack(
         logger.info(f"Posted main message to {channel}")
 
         # Upload each MIDI file as a threaded reply
+        upload_failures = 0
         for track in ["melody", "drums", "bass", "chords"]:
             filepath = midi_dir / f"{track}.mid"
             if not filepath.exists():
-                logger.error(f"Missing MIDI file: {filepath}")
-                return False
+                logger.warning(f"Missing MIDI file: {filepath}")
+                upload_failures += 1
+                continue
 
-            client.files_upload_v2(
-                channel=channel,
-                file=str(filepath),
-                filename=f"{track}.mid",
-                initial_comment=TRACK_LABELS[track],
-                thread_ts=thread_ts,
-            )
-            logger.info(f"Uploaded {track}.mid")
+            try:
+                client.files_upload_v2(
+                    channel=channel,
+                    file=str(filepath),
+                    filename=f"{track}.mid",
+                    initial_comment=TRACK_LABELS[track],
+                    thread_ts=thread_ts,
+                )
+                logger.info(f"Uploaded {track}.mid")
+            except Exception as upload_err:
+                logger.warning(f"Failed to upload {track}.mid: {upload_err}")
+                upload_failures += 1
+
+        if upload_failures > 0:
+            logger.warning(f"{upload_failures}/4 file uploads failed (missing files:write scope?)")
 
         return True
     except Exception as e:
