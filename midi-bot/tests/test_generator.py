@@ -85,25 +85,37 @@ def test_validate_params_valid():
     validate_params(params, SAMPLE_SCALES, SAMPLE_INSTRUMENTS)
 
 
-def test_validate_params_bad_scale():
-    """Unknown scale raises ValueError."""
+def test_validate_params_bad_scale_autocorrects():
+    """Unknown scale gets replaced with a valid one."""
     params = {
         "scale": "Nonexistent Scale", "root": "C",
-        "chords": ["Cm"], "tempo": 120, "temperature": 1.0,
+        "chords": ["Cm", "Dm", "Em", "Fm"], "tempo": 120, "temperature": 1.0,
         "melody_instrument": 73, "chord_instrument": 0,
         "description": "test"
     }
-    with pytest.raises(ValueError, match="scale"):
-        validate_params(params, SAMPLE_SCALES, SAMPLE_INSTRUMENTS)
+    validate_params(params, SAMPLE_SCALES, SAMPLE_INSTRUMENTS)
+    assert params["scale"] in {"Hirajoshi", "Blues Hexatonic"}
 
 
-def test_validate_params_bad_tempo():
-    """Tempo out of range raises ValueError."""
+def test_validate_params_bad_tempo_clamps():
+    """Tempo out of range gets clamped."""
     params = {
         "scale": "Hirajoshi", "root": "C",
-        "chords": ["Cm"], "tempo": 300, "temperature": 1.0,
+        "chords": ["Cm", "Dm", "Em", "Fm"], "tempo": 300, "temperature": 1.0,
         "melody_instrument": 73, "chord_instrument": 0,
         "description": "test"
     }
-    with pytest.raises(ValueError, match="tempo"):
-        validate_params(params, SAMPLE_SCALES, SAMPLE_INSTRUMENTS)
+    validate_params(params, SAMPLE_SCALES, SAMPLE_INSTRUMENTS)
+    assert params["tempo"] == 200
+
+
+def test_validate_params_bad_instrument_autocorrects():
+    """Invalid instrument gets snapped to nearest valid one."""
+    params = {
+        "scale": "Hirajoshi", "root": "C",
+        "chords": ["Cm", "Dm", "Em", "Fm"], "tempo": 120, "temperature": 1.0,
+        "melody_instrument": 106, "chord_instrument": 0,
+        "description": "test"
+    }
+    validate_params(params, SAMPLE_SCALES, SAMPLE_INSTRUMENTS)
+    assert params["melody_instrument"] == 73  # Flute is the only option in SAMPLE_INSTRUMENTS

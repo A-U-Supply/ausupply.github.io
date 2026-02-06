@@ -67,34 +67,55 @@ def parse_llm_response(response: str) -> dict[str, Any]:
         raise ValueError(f"Failed to parse LLM response as JSON: {e}\nResponse: {response[:200]}")
 
 
+def _closest_program(target: int, valid_programs: set[int]) -> int:
+    """Find the closest valid MIDI program number to the target."""
+    return min(valid_programs, key=lambda p: abs(p - target))
+
+
 def validate_params(
     params: dict[str, Any],
     scales: list[dict],
     instruments: dict[str, list[dict]],
 ) -> None:
-    """Validate LLM-generated params. Raises ValueError on invalid params."""
+    """Validate and auto-correct LLM-generated params.
+
+    Instead of crashing on invalid values, fix them and log warnings.
+    Only raises ValueError for completely unrecoverable issues (e.g. no JSON at all).
+    """
+    import random
+
     scale_names = {s["name"] for s in scales}
     if params.get("scale") not in scale_names:
-        raise ValueError(f"Unknown scale: {params.get('scale')}")
+        old = params.get("scale")
+        params["scale"] = random.choice(list(scale_names))
+        logger.warning(f"Unknown scale '{old}', using '{params['scale']}' instead")
 
-    tempo = params.get("tempo", 0)
+    tempo = params.get("tempo", 120)
     if not (40 <= tempo <= 200):
-        raise ValueError(f"Invalid tempo: {tempo} (must be 40-200)")
+        params["tempo"] = max(40, min(200, tempo))
+        logger.warning(f"Clamped tempo {tempo} to {params['tempo']}")
 
-    temp = params.get("temperature", 0)
+    temp = params.get("temperature", 1.0)
     if not (0.5 <= temp <= 1.5):
-        raise ValueError(f"Invalid temperature: {temp} (must be 0.5-1.5)")
+        params["temperature"] = max(0.5, min(1.5, temp))
+        logger.warning(f"Clamped temperature {temp} to {params['temperature']}")
 
     valid_melody = {i["program"] for i in instruments["melody"]}
     if params.get("melody_instrument") not in valid_melody:
-        raise ValueError(f"Invalid melody_instrument: {params.get('melody_instrument')}")
+        old = params.get("melody_instrument")
+        params["melody_instrument"] = _closest_program(old or 0, valid_melody)
+        logger.warning(f"Invalid melody_instrument {old}, using {params['melody_instrument']} instead")
 
     valid_chords = {i["program"] for i in instruments["chords"]}
     if params.get("chord_instrument") not in valid_chords:
-        raise ValueError(f"Invalid chord_instrument: {params.get('chord_instrument')}")
+        old = params.get("chord_instrument")
+        params["chord_instrument"] = _closest_program(old or 0, valid_chords)
+        logger.warning(f"Invalid chord_instrument {old}, using {params['chord_instrument']} instead")
 
     if not isinstance(params.get("chords"), list) or len(params["chords"]) != 4:
-        raise ValueError(f"chords must be an array of exactly 4 chord symbols")
+        logger.warning(f"Invalid chords: {params.get('chords')}, using default progression")
+        root = params.get("root", "C")
+        params["chords"] = [f"{root}m", f"{root}m7", f"{root}m", f"{root}m7"]
 
 
 def generate_music_params(
