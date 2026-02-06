@@ -1,0 +1,21 @@
+slack:
+  channel: "#midieval"
+
+prompt:
+  temperature: 1.0
+  model: meta-llama/Llama-3.3-70B-Instruct
+  max_headlines: 10
+
+inspirations:
+  file: inspirations.txt
+  pick_count: 2
+
+sources:
+  - reuters
+  - foxnews
+  - cnn
+  - bbc
+  - ft
+  - npr
+  - guardian
+  - breitbart

@@ -1,0 +1,215 @@
+/* Shared header styles */
+header {
+    text-align: center;
+    background-color: transparent;
+    border-bottom: 3px solid #ff0000;
+}
+
+header img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #000000;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 2.5rem;
+    color: #ff0000;
+    text-shadow: 2px 2px 5px #ff0000;
+    margin: 20px 0;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5rem;
+        margin: 12px 0;
+    }
+}
+
+@font-face {
+  font-family: "3270Medium";
+  src: url("../../fonts/3270Medium.woff") format("woff"), url("../../fonts/3270Medium.ttf") format("truetype");
+}
+
+a, body, td, th, pre, div, input {
+  font-size: 18px;
+  font-family: "3270Medium",monospace,Courier;
+}
+
+a {
+  text-decoration:underline;
+}
+
+a:visited {
+   color: #ffbf00;
+}
+
+html, input[type=submit] {
+  color: #ffbf00;
+}
+
+a {
+  color: #ffbf00;
+}
+
+a:hover {
+  color: #ffbf00;
+}
+
+a:active {
+  color: #ffbf00;
+}
+
+hr{ 
+  height: 1px;
+  color: #ffbf00;
+  background-color: #ffbf00;
+  border: none;
+}
+
+button {
+  background-color:444430;
+  border: none;
+  color: ffbf00;
+  padding: 0px;
+  text-decoration: underline;
+;  display: inline-block;
+  font-size: 18px;
+  font-family: "3270Medium",monospace,Courier;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333333; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ffbf00; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ffbf00; 
+}
+
+.inv {
+ background-color:#ffbf00;
+ color:222230;
+}
+
+[data-title]:hover::after {
+  content: attr(data-title);
+  position: fixed;
+  top:425px;
+  display: contents;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #444455;
+  color: #ffbf99;
+  font-size: 18px;
+  font-family: "3270Medium",monospace,Courier;
+}
+[data-title]:hover::before {
+  content: '';
+}
+
+
+
+.blink0 {
+	animation: blinkingText0 1s infinite;
+	-webkit-animation: blinkingText0 5s infinite; /* Safari 4+ */
+	-moz-animation: blinkingText0 1s infinite; /* Fx 5+ */
+	-o-animation: blinkingText0 1s infinite; /* Opera 12+ */
+	color: #ffbf00;
+}
+
+.blink1 {
+	animation: blinkingText1 17s infinite;
+	-webkit-animation: blinkingText1 17s infinite; /* Safari 4+ */
+	-moz-animation: blinkingText1 17s infinite; /* Fx 5+ */
+	-o-animation: blinkingText1 17s infinite; /* Opera 12+ */
+	color: #BB9C00;
+}
+
+table.master {
+	background: url("/images/crt.png");
+	background-size: 100% 100%;	
+}
+
+@keyframes blinkingText0{
+ 0%,80% { opacity: 1; }
+/* 21%,30% { opacity: .5; } */
+ 95%,100% { opacity: 0; }
+}
+
+@keyframes blinkingText1{
+ 0% { opacity: 0; }     /* start blank */
+ 0%,.99% { opacity: 1; }
+ 1%,1.99% { opacity: 0; }
+ 2%,2.99% { opacity: 1; }
+ 3%,3.99% { opacity: 0; }
+ 4%,4.99% { opacity: 1; }
+ 5%,5.99% { opacity: 0; }
+ 6%,8.99% { opacity: 1; }
+ 9%,11.99% { opacity: 0; }
+ 
+ 12%,14.99% { opacity: 1; }
+ 15%,15.99% { opacity: 0; }
+ 16%,16.99% { opacity: 1; }
+ 17%,17.99% { opacity: 0; }
+ 18%,20.99% { opacity: 1; }
+ 21%,21.99% { opacity: 0; }
+ 22%,22.99% { opacity: 1; }
+ 23%,25.99% { opacity: 0; }
+ 
+ 26%,26.99% { opacity: 1; }
+ 27%,27.99% { opacity: 0; }
+ 28%,28.99% { opacity: 1; }
+ 29%,29.99% { opacity: 0; }
+ 30%,32.99% { opacity: 1; }
+ 33%,33.99% { opacity: 0; }
+ 34%,34.99% { opacity: 1; }
+ 35%,37.99% { opacity: 0; }
+ 
+ 38%,40.99% { opacity: 1; }
+ 41%,41.99% { opacity: 0; }
+ 42%,44.99% { opacity: 1; }
+ 45%,47.99% { opacity: 0; }
+ 
+ 48%,48.99% { opacity: 1; }
+ 49%,49.99% { opacity: 0; }
+ 50%,52.99% { opacity: 1; }
+ 53%,53.99% { opacity: 0; }
+ 54%,56.99% { opacity: 1; }
+ 57%,59.99% { opacity: 0; }
+ 
+ 60%,60.99% { opacity: 1; }
+ 61%,61.99% { opacity: 0; }
+ 62%,64.99% { opacity: 1; }
+ 65%,65.99% { opacity: 0; }
+ 66%,68.99% { opacity: 1; }
+ 69%,69.99% { opacity: 0; }
+ 70%,72.99% { opacity: 1; }
+ 73%,73.99% { opacity: 0; }
+ 74%,76.99% { opacity: 1; }
+ 77%,79.99% { opacity: 0; }
+
+ 80%,80.99% { opacity: 1; }
+ 81%,81.99% { opacity: 0; }
+ 82%,82.99% { opacity: 1; }
+ 83%,83.99% { opacity: 0; }
+ 84%,84.99% { opacity: 1; }
+ 85%,85.99% { opacity: 0; }
+ 86%,86.99% { opacity: 1; }
+ 87%,87.99% { opacity: 0; }
+ 88%,90.99% { opacity: 1; }
+ 91% { opacity: 0; }
+ 100% { opacity: 0; }
