@@ -1,10 +1,6 @@
 name: Scrape Drawma Gallery Images
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - '.github/workflows/scrape-drawma.yml'
   schedule:
     # 11pm PT = 7am UTC during PST
     - cron: '0 7 * * *'
@@ -19,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
