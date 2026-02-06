@@ -77,6 +77,8 @@ def post_midi_to_slack(
                 logger.info(f"Uploaded {track}.mid")
             except Exception as upload_err:
                 logger.warning(f"Failed to upload {track}.mid: {upload_err}")
+                if hasattr(upload_err, 'response') and upload_err.response:
+                    logger.warning(f"Slack API response: {upload_err.response.data}")
                 upload_failures += 1
 
         if upload_failures > 0:
