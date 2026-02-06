@@ -11,6 +11,9 @@ const fs = require('fs');
 const path = require('path');
 const { Note, Chord } = require('tonal');
 
+// Load tfjs-node for faster inference (falls back to pure JS if unavailable)
+try { require('@tensorflow/tfjs-node'); } catch (e) { /* pure JS fallback */ }
+
 // Magenta.js imports (server-side Node.js paths)
 const mm = require('@magenta/music/node/music_rnn');
 const core = require('@magenta/music/node/core');
@@ -198,6 +201,7 @@ function generateBass(params, scalePitches) {
     timeSignatures: [{ time: 0, numerator: 4, denominator: 4 }],
     totalTime: totalBeats * secondsPerBeat,
     notes,
+    controlChanges: [],
   };
 }
 
@@ -267,6 +271,7 @@ function generateChords(params, scalePitches) {
     timeSignatures: [{ time: 0, numerator: 4, denominator: 4 }],
     totalTime: totalBeats * secondsPerBeat,
     notes,
+    controlChanges: [],
   };
 }
 
