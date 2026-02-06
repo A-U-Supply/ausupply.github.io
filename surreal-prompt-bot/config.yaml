@@ -3,7 +3,7 @@ slack:
 
 prompt:
   temperature: 1.0
-  model: HuggingFaceTB/SmolLM3-3B
+  model: meta-llama/Llama-3.3-70B-Instruct
   max_headlines: 10
 
 inspirations:
