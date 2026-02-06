@@ -1,0 +1,11 @@
+{
+  "name": "midi-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Daily MIDI generator using Magenta.js",
+  "dependencies": {
+    "@magenta/music": "^1.23.1",
+    "@tensorflow/tfjs-node": "^4.22.0",
+    "tonal": "^6.2.0"
+  }
+}
