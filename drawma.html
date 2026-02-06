@@ -139,26 +139,50 @@
         /* --- Navigation arrows --- */
         .nav-arrow {
             pointer-events: auto;
-            background: none;
-            border: 1px solid #4a3728;
+            background: rgba(10, 10, 10, 0.6);
+            border: 2px solid #4a3728;
             color: #d4c5a9;
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: 5rem;
+            font-size: 7rem;
             cursor: pointer;
-            padding: 30px 18px;
-            opacity: 0.7;
-            transition: opacity 0.3s, text-shadow 0.3s, border-color 0.3s, color 0.3s;
+            padding: 40px 24px;
+            min-width: 70px;
+            min-height: 120px;
+            opacity: 0.85;
+            transition: opacity 0.3s, text-shadow 0.3s, border-color 0.3s, color 0.3s, background 0.3s;
             line-height: 1;
             text-shadow: 0 0 12px rgba(139, 0, 0, 0.5);
             box-shadow: inset 0 0 12px rgba(139, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav-arrow:hover {
             opacity: 1;
             color: #fff;
             border-color: #8b0000;
+            background: rgba(139, 0, 0, 0.15);
             text-shadow: 0 0 30px rgba(139, 0, 0, 1);
             box-shadow: inset 0 0 20px rgba(139, 0, 0, 0.4), 0 0 15px rgba(139, 0, 0, 0.3);
+        }
+
+        .nav-arrow:active {
+            opacity: 1;
+            color: #fff;
+            background: rgba(139, 0, 0, 0.3);
+            border-color: #cc0000;
+            text-shadow: 0 0 40px rgba(139, 0, 0, 1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-arrow {
+                font-size: 5rem;
+                padding: 20px 16px;
+                min-width: 56px;
+                min-height: 80px;
+                border-width: 1px;
+            }
         }
 
         /* --- Gothic frame --- */
@@ -566,15 +590,18 @@
 
             setTimeout(function () {
                 state.index = index;
-                els.mainImage.src = imgPath;
                 els.mainImage.alt = item.prompt || 'Drawing';
                 updateMeta(index);
 
+                // Set onload BEFORE src to avoid race with cached images
                 els.mainImage.onload = function () {
+                    els.mainImage.onload = null;
                     els.mainImage.classList.remove('fade-out');
                     state.transitioning = false;
                     preloadAdjacent(index);
                 };
+
+                els.mainImage.src = imgPath;
 
                 // Fallback if onload doesn't fire (cached)
                 setTimeout(function () {
