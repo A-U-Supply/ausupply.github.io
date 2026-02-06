@@ -21,6 +21,13 @@ header h1 {
     margin: 20px 0;
 }
 
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5rem;
+        margin: 12px 0;
+    }
+}
+
 @font-face {
   font-family: "3270Medium";
   src: url("fonts/3270Medium.woff") format("woff"), url("fonts/3270Medium.ttf") format("truetype");

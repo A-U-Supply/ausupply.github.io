@@ -107,6 +107,48 @@
             border: 3px dotted #ff00ff;
             background-color: rgba(255, 255, 204, 0.8);
         }
+
+        /* --- Responsive --- */
+        .draggable img {
+            max-width: 90vw;
+            height: auto;
+        }
+
+        .draggable iframe {
+            max-width: 85vw;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            .draggable iframe {
+                width: 280px;
+                height: 158px;
+            }
+
+            .draggable img[width="560"] {
+                width: 280px;
+                height: 158px;
+            }
+
+            .iframe-wrap {
+                padding: 12px;
+            }
+
+            .subtitle-text {
+                font-size: 0.9rem;
+                max-width: 80vw;
+            }
+
+            .continue-link {
+                font-size: 1.1rem;
+                padding: 8px 14px;
+            }
+
+            footer {
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+        }
     </style>
 </head>    
 
