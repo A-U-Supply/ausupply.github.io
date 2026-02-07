@@ -55,7 +55,8 @@ def post_midi_to_slack(
         message = format_message(params, instruments)
         resp = client.chat_postMessage(channel=channel, text=message)
         thread_ts = resp["ts"]
-        logger.info(f"Posted main message to {channel}")
+        channel_id = resp["channel"]  # resolved ID (files_upload_v2 needs ID, not name)
+        logger.info(f"Posted main message to {channel} ({channel_id})")
 
         # Upload each MIDI file as a threaded reply
         upload_failures = 0
@@ -68,7 +69,7 @@ def post_midi_to_slack(
 
             try:
                 client.files_upload_v2(
-                    channel=channel,
+                    channel=channel_id,
                     file=str(filepath),
                     filename=f"{track}.mid",
                     initial_comment=TRACK_LABELS[track],
