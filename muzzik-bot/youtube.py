@@ -56,8 +56,10 @@ def add_video_to_playlist(youtube, playlist_id: str, video_id: str) -> bool:
         logger.info(f"Added {video_id} to playlist {playlist_id}")
         return True
     except HttpError as e:
-        if e.resp.status == 404:
-            logger.warning(f"Video {video_id} not found (deleted/private), skipping")
+        if e.resp.status == 403 and "quota" in str(e).lower():
+            raise  # Quota exceeded — stop the run
+        if e.resp.status in (400, 403, 404):
+            logger.warning(f"Video {video_id} skipped (HTTP {e.resp.status}: {e.reason})")
             return False
         raise
 
@@ -84,6 +86,20 @@ def get_or_create_playlist(youtube, state: dict) -> tuple[str, dict]:
     return playlist_id, entry
 
 
+def get_playlist_video_ids(youtube, playlist_id: str) -> set[str]:
+    """Fetch all video IDs currently in a playlist."""
+    video_ids = set()
+    request = youtube.playlistItems().list(
+        part="contentDetails", playlistId=playlist_id, maxResults=50
+    )
+    while request:
+        resp = request.execute()
+        for item in resp.get("items", []):
+            video_ids.add(item["contentDetails"]["videoId"])
+        request = youtube.playlistItems().list_next(request, resp)
+    return video_ids
+
+
 def process_backlog(youtube, state: dict, dry_run: bool = False) -> int:
     """Process the video backlog, adding up to DAILY_INSERT_CAP videos.
 
@@ -102,29 +118,44 @@ def process_backlog(youtube, state: dict, dry_run: bool = False) -> int:
     added = 0
     remaining = []
 
+    # Fetch existing playlist contents to avoid duplicates
+    existing_ids = get_playlist_video_ids(youtube, playlist_id)
+    if existing_ids:
+        logger.info(f"Playlist already has {len(existing_ids)} videos, will skip duplicates")
+
     # Build lookup for marking urls as added
     video_id_to_url = {}
     for u in state["urls"]:
         if u.get("video_id") and not u["added_to_playlist"]:
             video_id_to_url.setdefault(u["video_id"], u)
 
+    skipped_dupes = 0
     for video_id in state["backlog"]:
         if added >= DAILY_INSERT_CAP:
             remaining.append(video_id)
             continue
 
+        # Skip videos already in the playlist
+        if video_id in existing_ids:
+            skipped_dupes += 1
+            if video_id in video_id_to_url:
+                video_id_to_url[video_id]["added_to_playlist"] = True
+            continue
+
         # Check if we need a new playlist
         if playlist_entry["count"] >= MAX_PLAYLIST_SIZE:
             playlist_id, playlist_entry = get_or_create_playlist(youtube, state)
+            existing_ids = get_playlist_video_ids(youtube, playlist_id)
 
         success = add_video_to_playlist(youtube, playlist_id, video_id)
         if success:
             playlist_entry["count"] += 1
             added += 1
+            existing_ids.add(video_id)
         # Mark as added in urls list (even if video was unavailable — don't retry)
         if video_id in video_id_to_url:
             video_id_to_url[video_id]["added_to_playlist"] = True
 
     state["backlog"] = remaining
-    logger.info(f"Added {added} videos, {len(remaining)} remaining in backlog")
+    logger.info(f"Added {added} videos, skipped {skipped_dupes} duplicates, {len(remaining)} remaining in backlog")
     return added
