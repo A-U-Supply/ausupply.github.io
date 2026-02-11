@@ -1,13 +1,21 @@
 """Scrape #midieval Slack channel and archive MIDI bot output."""
 import json
 import logging
+import os
 import re
+from datetime import datetime, timezone
 from pathlib import Path
+
+import requests
+from slack_sdk import WebClient
 
 logger = logging.getLogger(__name__)
 
 PUKE_BOX_DIR = Path(__file__).parent
 MANIFEST_PATH = PUKE_BOX_DIR / "manifest.json"
+
+CHANNEL_NAME = "midieval"
+MIDI_FILENAMES = {"melody.mid", "drums.mid", "bass.mid", "chords.mid"}
 
 
 def parse_midi_message(text: str) -> dict | None:
@@ -44,3 +52,128 @@ def parse_midi_message(text: str) -> dict | None:
         "chord_instrument": chord_instrument,
         "temperature": temperature,
     }
+
+
+def _download_with_auth(url: str, token: str, timeout: int = 30) -> bytes:
+    """Download a URL, manually following redirects to preserve the auth header.
+
+    The requests library strips Authorization headers on cross-domain redirects
+    (a security feature). Slack's url_private_download redirects to a CDN on a
+    different host, so we must follow redirects ourselves.
+
+    Returns the response body as bytes.
+    """
+    headers = {"Authorization": f"Bearer {token}"}
+    max_redirects = 5
+    for _ in range(max_redirects):
+        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=False)
+        if resp.status_code in (301, 302, 303, 307, 308):
+            url = resp.headers["Location"]
+            continue
+        resp.raise_for_status()
+        return resp.content
+    raise requests.TooManyRedirects(f"Too many redirects for {url}")
+
+
+def find_channel_id(client: WebClient) -> str:
+    """Find the #midieval channel ID by paginating through conversations_list.
+
+    Raises ValueError if the channel is not found.
+    """
+    cursor = None
+    while True:
+        kwargs = {"types": "public_channel", "limit": 200}
+        if cursor:
+            kwargs["cursor"] = cursor
+        resp = client.conversations_list(**kwargs)
+        for ch in resp["channels"]:
+            if ch["name"] == CHANNEL_NAME:
+                return ch["id"]
+        cursor = resp.get("response_metadata", {}).get("next_cursor")
+        if not cursor:
+            break
+    raise ValueError(f"Channel #{CHANNEL_NAME} not found")
+
+
+def fetch_midi_messages(client: WebClient, channel_id: str) -> list[dict]:
+    """Fetch all Daily MIDI messages from channel history.
+
+    Uses cursor-based pagination to walk the full history. Each message is
+    parsed with parse_midi_message(); non-matching messages are skipped.
+    Adds "date" (UTC YYYY-MM-DD from timestamp) and "thread_ts" fields.
+
+    Returns a list of parsed metadata dicts.
+    """
+    results = []
+    cursor = None
+    while True:
+        kwargs = {"channel": channel_id, "limit": 200}
+        if cursor:
+            kwargs["cursor"] = cursor
+        resp = client.conversations_history(**kwargs)
+        for msg in resp["messages"]:
+            parsed = parse_midi_message(msg.get("text", ""))
+            if parsed is None:
+                continue
+            ts = msg["ts"]
+            parsed["date"] = datetime.fromtimestamp(
+                float(ts), tz=timezone.utc
+            ).strftime("%Y-%m-%d")
+            parsed["thread_ts"] = ts
+            results.append(parsed)
+        cursor = resp.get("response_metadata", {}).get("next_cursor")
+        if not cursor:
+            break
+    logger.info(f"Found {len(results)} Daily MIDI messages")
+    return results
+
+
+def download_thread_midi_files(
+    client: WebClient,
+    channel_id: str,
+    thread_ts: str,
+    output_dir: str | Path,
+    token: str,
+) -> list[str]:
+    """Download MIDI files from a thread's replies.
+
+    Looks for file attachments whose name is in MIDI_FILENAMES
+    (melody.mid, drums.mid, bass.mid, chords.mid). Uses
+    _download_with_auth to handle Slack's redirect-based downloads.
+
+    Returns a list of downloaded filenames.
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    downloaded = []
+    cursor = None
+    while True:
+        kwargs = {"channel": channel_id, "ts": thread_ts, "limit": 200}
+        if cursor:
+            kwargs["cursor"] = cursor
+        resp = client.conversations_replies(**kwargs)
+        for msg in resp["messages"]:
+            for f in msg.get("files", []):
+                name = f.get("name", "")
+                if name not in MIDI_FILENAMES:
+                    continue
+                url = f.get("url_private_download") or f.get("url_private")
+                if not url:
+                    logger.warning(f"No download URL for {name} in thread {thread_ts}")
+                    continue
+                try:
+                    data = _download_with_auth(url, token)
+                    if not data.startswith(b'MThd'):
+                        logger.warning(f"{name}: not a valid MIDI file, skipping")
+                        continue
+                    filepath = output_dir / name
+                    filepath.write_bytes(data)
+                    downloaded.append(name)
+                    logger.info(f"Downloaded {name} ({len(data)} bytes)")
+                except Exception as e:
+                    logger.error(f"Failed to download {name}: {e}")
+        cursor = resp.get("response_metadata", {}).get("next_cursor")
+        if not cursor:
+            break
+    return downloaded
