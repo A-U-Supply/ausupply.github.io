@@ -626,9 +626,19 @@ function seekAudio(e) {
     audio.currentTime = pct * audio.duration;
 }
 
+function playRandomTrack() {
+    if (manifest.length < 2) return;
+    let next;
+    do { next = Math.floor(Math.random() * manifest.length); } while (next === currentIndex);
+    currentIndex = next;
+    renderCard();
+    loadTrack(currentIndex);
+}
+
 function toggleShuffle() {
     shuffleOn = !shuffleOn;
     document.getElementById('shuffle-btn').classList.toggle('active', shuffleOn);
+    if (shuffleOn && manifest.length) playRandomTrack();
 }
 
 function toggleLoop() {
@@ -652,17 +662,13 @@ audio.addEventListener('timeupdate', () => {
 });
 
 audio.addEventListener('ended', () => {
+    if (shuffleOn && manifest.length > 1) {
+        playRandomTrack();
+        return;
+    }
     if (loopOn) {
         audio.currentTime = 0;
         audio.play().catch(() => {});
-        return;
-    }
-    if (shuffleOn && manifest.length > 1) {
-        let next;
-        do { next = Math.floor(Math.random() * manifest.length); } while (next === currentIndex);
-        currentIndex = next;
-        renderCard();
-        loadTrack(currentIndex);
         return;
     }
     isPlaying = false;
