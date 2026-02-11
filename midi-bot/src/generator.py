@@ -29,6 +29,47 @@ def load_template(template_path: Path) -> tuple[str, str]:
     return "", content.strip()
 
 
+def describe_scale(scale: dict) -> str:
+    """Generate a brief character description from a scale's intervals."""
+    intervals = scale["intervals"]
+    n = len(intervals)
+    steps = [intervals[i + 1] - intervals[i] for i in range(n - 1)]
+
+    traits = []
+
+    # Note density
+    if n <= 5:
+        traits.append("sparse")
+    elif n >= 9:
+        traits.append("chromatic")
+
+    # Major/minor quality
+    has_major_3rd = 4 in intervals
+    has_minor_3rd = 3 in intervals
+
+    if has_major_3rd and not has_minor_3rd:
+        traits.append("bright")
+    elif has_minor_3rd and not has_major_3rd:
+        traits.append("dark")
+
+    # Augmented seconds (step of 3) = exotic flavor
+    if 3 in steps:
+        traits.append("exotic")
+
+    # Tritone present = tension
+    if 6 in intervals:
+        traits.append("restless")
+
+    # Many semitones = tense/chromatic
+    if steps.count(1) >= 3:
+        traits.append("tense")
+
+    if not traits:
+        traits.append("balanced")
+
+    return f"{', '.join(traits)}, {n} notes"
+
+
 def build_llm_prompt(
     template: str,
     headlines: list[str],
@@ -39,7 +80,11 @@ def build_llm_prompt(
     """Build the prompt with all context injected."""
     headlines_text = "\n".join(f"- {h}" for h in headlines)
     inspirations_text = "\n".join(f"- {i}" for i in inspirations) if inspirations else "(none)"
-    scales_text = "\n".join(f"- {s['name']} ({s['origin']})" for s in scales)
+    scales_lines = []
+    for i, s in enumerate(scales, 1):
+        desc = describe_scale(s)
+        scales_lines.append(f"{i}. {s['name']} ({s['origin']}) — {desc}")
+    scales_text = "\n".join(scales_lines)
     melody_text = "\n".join(f"- {i['program']}: {i['name']}" for i in instruments["melody"])
     chords_text = "\n".join(f"- {i['program']}: {i['name']}" for i in instruments["chords"])
 
