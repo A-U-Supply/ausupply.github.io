@@ -35,7 +35,7 @@ Reuses the surreal prompt bot's scraper and sampler. Same headline sources (Reut
 Tells Llama 3.3 70B to:
 
 1. Read the scraped headlines + musical inspirations
-2. Pick a scale from a curated list of 60+ world scales (provided in the prompt)
+2. Pick a scale from 5 randomly sampled options (drawn from the full 161-scale database)
 3. Pick a root note
 4. Build a 4-chord progression from that scale
 5. Choose a tempo (40-200 BPM)
@@ -43,7 +43,7 @@ Tells Llama 3.3 70B to:
 7. Set a temperature (0.5-1.5) for the ML models
 8. Write a one-line surreal description inspired by the headlines
 
-The prompt explicitly encourages variety and weirdness in scale selection.
+Each run, 5 scales are randomly sampled from the database and presented to the LLM as numbered options with character descriptions auto-computed from intervals (e.g. `1. "Gnawa" — North African/Moroccan, dark, 7 notes`). This prevents the LLM from gravitating to memorized favorites while preserving its ability to choose the scale that best fits the day's headlines.
 
 ### LLM Output Format
 
@@ -60,7 +60,7 @@ The prompt explicitly encourages variety and weirdness in scale selection.
 }
 ```
 
-The scale list and General MIDI instrument list are included directly in the prompt so the LLM picks from valid options only.
+The scale options and General MIDI instrument list are included in the user message (not system prompt) so they're properly formatted. A `validate_params` step auto-corrects any hallucinations: unknown scales fall back to random choice from the 5 options, and unsupported chord extensions like `E7(b9)` are stripped to `E7`.
 
 ### Musical Inspirations
 
@@ -74,7 +74,7 @@ A new music-focused `inspirations.txt` with entries like:
 
 ## Scale Database (`scales.json`)
 
-A curated collection of 60+ scales from around the world and throughout history. Each entry includes the scale name, intervals (semitones from root), and region/origin. Categories include:
+A curated collection of 161 scales from around the world and throughout history. Each entry includes the scale name, intervals (semitones from root), and region/origin. Categories include:
 
 - **Middle Eastern/Arabic**: Maqam Hijaz, Maqam Bayati, Maqam Saba, Maqam Nahawand, Maqam Kurd, Maqam Sikah, Maqam Rast
 - **Turkish**: Hicaz, Ussak, Nihavend, Huseyni
@@ -82,12 +82,14 @@ A curated collection of 60+ scales from around the world and throughout history.
 - **Japanese**: Hirajoshi, Miyako-bushi, In, Yo, Iwato, Kumoi
 - **Indonesian**: Pelog, Slendro
 - **Chinese**: Gong, Shang, Jue, Zhi, Yu
-- **African**: Equidistant pentatonic, Ethiopic scales
-- **Eastern European**: Hungarian minor, Hungarian major, Romanian minor, Ukrainian Dorian, Byzantine
+- **African**: West African Griot, Mande, Kora, Highlife, Congolese Rumba, Mbira, Gnawa, Chaabi, Ethiopic scales (Tizita, Ambassel, Anchihoye, Bati)
+- **Eastern European**: Hungarian minor/major, Romanian minor, Ukrainian Dorian, Byzantine, Balkan
+- **Jewish/Klezmer**: Freygish, Misheberakh, Adonai Malakh, Ahava Rabbah, Mi Sheberakh
+- **Celtic**: Celtic Mixolydian, Celtic Dorian, Celtic Pentatonic
+- **Korean**: Pyongjo, Kyemyonjo, Ujo
 - **Western exotic**: Whole tone, Diminished, Augmented, Prometheus, Enigmatic, Neapolitan major/minor, Double harmonic, Tritone
-- **Ancient Greek**: Lydian, Phrygian, Dorian, Mixolydian (original Greek tunings)
-- **Blues/jazz**: Bebop dominant, Bebop Dorian, Blues hexatonic, Altered dominant
-- **Synthetic/modern**: Messiaen's modes of limited transposition, Scriabin's Mystic chord as scale
+- **Blues/jazz**: Bebop dominant/Dorian/Major, Blues hexatonic/Major/Nonatonic, Altered dominant, Lydian dominant/augmented
+- **Synthetic/modern**: Messiaen's modes 2-7, Scriabin's Mystic chord/Prometheus, Istrian, Tcherepnin Nonatonic
 
 ## MIDI Generation (Node.js)
 
@@ -122,13 +124,22 @@ A single Node.js script (`generate_midi.js`) receives the LLM's JSON params via 
 
 ### Output
 
-4 MIDI files, each 4 bars long at the LLM's specified tempo. Plain MIDI — no audio rendering.
+4 MIDI files, each 4 bars long at the LLM's specified tempo. Plus a mixed audio preview (see below).
 
 ### Node.js Dependencies
 
 - `@magenta/music` — ImprovRNN, DrumsRNN model loading + inference
 - `midi-writer-js` — programmatic MIDI file writing (bass, chords)
 - `@tonaljs/tonal` — chord/scale music theory helpers
+
+## Audio Preview
+
+After MIDI generation, all 4 tracks are synthesized and mixed into a single `preview.wav` file using `pretty_midi` and `scipy`. No soundfont or external binary required.
+
+- **Pitched instruments** (melody, chords, bass): synthesized as sine waves via `pretty_midi.synthesize()` — lo-fi chiptune aesthetic
+- **Drums**: custom noise burst synthesis — kick (low sine sweep + thump), snare (noise + tone burst), hihat (short filtered noise), other percussion (clicks)
+- **Mixing**: all 4 tracks summed, normalized to 0.9 peak, capped at 30 seconds
+- **Output**: 22050 Hz mono 16-bit WAV, uploaded to the Slack thread before the individual MIDI files
 
 ## Slack Posting
 
@@ -147,7 +158,7 @@ A restless Tuesday in a bureaucracy that runs on reverb
 :musical_score: Chords -- Dm  Ebmaj7  Gm  A7
 ```
 
-**Thread:** 4 replies, each with one `.mid` file attached and its track label.
+**Thread:** Audio preview first, then 4 replies each with one `.mid` file attached and its track label.
 
 ### Slack App
 
@@ -160,7 +171,7 @@ midi-bot/
 ├── bot.py                  # Main orchestrator
 ├── config.yaml             # Channel, model, temperature defaults
 ├── prompt_template.txt     # Music-focused LLM template
-├── scales.json             # 60+ world scales with intervals + origins
+├── scales.json             # 161 world scales with intervals + origins
 ├── instruments.json        # General MIDI instruments grouped by category
 ├── inspirations.txt        # Musical vibes for LLM inspiration
 ├── requirements.txt        # slack-sdk, huggingface_hub, pyyaml, etc.
@@ -170,6 +181,7 @@ midi-bot/
     ├── generator.py        # LLM call (adapted from surreal-prompt-bot)
     ├── scraper.py          # Headline scraping (reused from surreal-prompt-bot)
     ├── sampler.py          # Inspiration sampling (reused from surreal-prompt-bot)
+    ├── synthesizer.py      # Sine wave audio preview synthesis
     ├── slack_poster.py     # Slack file upload
     └── config.py           # Config loading
 ```
@@ -217,13 +229,13 @@ midi-bot/
 - **ImprovRNN was trained on Western pop/jazz** — exotic scales are enforced via post-processing quantization, so melodies will have the right notes but may not capture the authentic phrasing of a raga or maqam
 - **DrumsRNN generates general drum patterns** — it won't produce genre-specific rhythms (no tabla, no djembe patterns)
 - **4 bars is short** — enough for a loop/idea, not a full composition
-- **LLM may favor "safe" scales** — the prompt template explicitly encourages variety and weirdness to mitigate this
+- **LLM scale bias** — mitigated by presenting only 5 randomly sampled scales per run with character descriptions; the LLM chooses from these rather than defaulting to memorized favorites
 
 ## What's Deliberately NOT Included
 
 - No web page on the site — lives in Slack only
 - No archiving MIDI files in the repo — they're ephemeral
-- No audio rendering — just raw MIDI files, users load in their DAWs
+- No high-fidelity audio rendering — sine wave preview only, users load MIDIs in their DAWs for real instruments
 - No multi-bar generation beyond 4 bars
 - No user interaction / requests / voting
 - No history or back-catalog
