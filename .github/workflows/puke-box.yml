@@ -1,0 +1,41 @@
+name: Puke Box Archiver
+
+on:
+  schedule:
+    - cron: '0 22 * * *'  # 10pm UTC (2pm PT) — 6 hours after midi bot
+  workflow_dispatch:
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install slack-sdk requests pretty_midi scipy numpy
+
+      - name: Scrape and archive
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: python puke-box/scrape_midieval.py
+
+      - name: Commit new entries
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add puke-box/
+          if git diff --cached --quiet; then
+            echo "No new entries to commit."
+          else
+            git commit -m "chore: archive midieval entries ($(date -u +%Y-%m-%d)) [skip ci]"
+            git push
+          fi
