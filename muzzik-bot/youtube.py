@@ -89,14 +89,20 @@ def get_or_create_playlist(youtube, state: dict) -> tuple[str, dict]:
 def get_playlist_video_ids(youtube, playlist_id: str) -> set[str]:
     """Fetch all video IDs currently in a playlist."""
     video_ids = set()
-    request = youtube.playlistItems().list(
-        part="contentDetails", playlistId=playlist_id, maxResults=50
-    )
-    while request:
-        resp = request.execute()
-        for item in resp.get("items", []):
-            video_ids.add(item["contentDetails"]["videoId"])
-        request = youtube.playlistItems().list_next(request, resp)
+    try:
+        request = youtube.playlistItems().list(
+            part="contentDetails", playlistId=playlist_id, maxResults=50
+        )
+        while request:
+            resp = request.execute()
+            for item in resp.get("items", []):
+                video_ids.add(item["contentDetails"]["videoId"])
+            request = youtube.playlistItems().list_next(request, resp)
+    except HttpError as e:
+        if e.resp.status == 404:
+            logger.info(f"Playlist {playlist_id} not listable yet (newly created), assuming empty")
+            return set()
+        raise
     return video_ids
 
 
