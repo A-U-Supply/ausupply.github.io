@@ -18,6 +18,7 @@ from src.generator import (
     generate_music_params, load_scales, load_instruments
 )
 from src.slack_poster import post_midi_to_slack
+from src.synthesizer import synthesize_preview
 
 
 # Import scraper/sampler from surreal-prompt-bot using importlib.util
@@ -158,6 +159,13 @@ def run_bot(args) -> int:
 
         logger.info("All 4 MIDI files generated successfully")
 
+        # Synthesize audio preview (sine waves + noise burst drums)
+        preview_path = midi_path / "preview.wav"
+        if synthesize_preview(midi_path, preview_path):
+            logger.info("Audio preview generated")
+        else:
+            logger.warning("Audio preview generation failed, continuing without it")
+
         if args.dry_run:
             logger.info("Dry run - not posting to Slack")
             # Copy files to a visible location for inspection
@@ -166,6 +174,8 @@ def run_bot(args) -> int:
             dry_run_dir.mkdir(exist_ok=True)
             for f in midi_path.glob("*.mid"):
                 shutil.copy2(f, dry_run_dir / f.name)
+            if preview_path.exists():
+                shutil.copy2(preview_path, dry_run_dir / preview_path.name)
             logger.info(f"MIDI files saved to {dry_run_dir}")
             return 0
 
