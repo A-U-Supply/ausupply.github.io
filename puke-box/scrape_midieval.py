@@ -114,8 +114,11 @@ def fetch_midi_messages(client: WebClient, channel_id: str) -> list[dict]:
             kwargs["cursor"] = cursor
         resp = client.conversations_history(**kwargs)
         for msg in resp["messages"]:
-            parsed = parse_midi_message(msg.get("text", ""))
+            text = msg.get("text", "")
+            parsed = parse_midi_message(text)
             if parsed is None:
+                if text.strip():
+                    logger.debug(f"Skipped non-MIDI message: {text[:80]}")
                 continue
             ts = msg["ts"]
             parsed["date"] = datetime.fromtimestamp(
@@ -123,6 +126,7 @@ def fetch_midi_messages(client: WebClient, channel_id: str) -> list[dict]:
             ).strftime("%Y-%m-%d")
             parsed["thread_ts"] = ts
             results.append(parsed)
+            logger.info(f"Matched: {parsed['date']} — {parsed['scale']} in {parsed['root']}")
         cursor = resp.get("response_metadata", {}).get("next_cursor")
         if not cursor:
             break
@@ -327,7 +331,7 @@ def run_scraper() -> int:
 
 if __name__ == "__main__":
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.DEBUG,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     )
     exit(run_scraper())
