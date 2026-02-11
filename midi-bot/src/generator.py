@@ -83,7 +83,7 @@ def build_llm_prompt(
     scales_lines = []
     for i, s in enumerate(scales, 1):
         desc = describe_scale(s)
-        scales_lines.append(f"{i}. {s['name']} ({s['origin']}) — {desc}")
+        scales_lines.append(f'{i}. "{s["name"]}" — {s["origin"]}, {desc}')
     scales_text = "\n".join(scales_lines)
     melody_text = "\n".join(f"- {i['program']}: {i['name']}" for i in instruments["melody"])
     chords_text = "\n".join(f"- {i['program']}: {i['name']}" for i in instruments["chords"])
@@ -161,6 +161,12 @@ def validate_params(
         logger.warning(f"Invalid chords: {params.get('chords')}, using default progression")
         root = params.get("root", "C")
         params["chords"] = [f"{root}m", f"{root}m7", f"{root}m", f"{root}m7"]
+    else:
+        # Strip parenthetical extensions tonal.js can't parse, e.g. E7(b9) → E7
+        sanitized = [re.sub(r'\(.*?\)', '', c) for c in params["chords"]]
+        if sanitized != params["chords"]:
+            logger.warning(f"Simplified chords {params['chords']} → {sanitized}")
+            params["chords"] = sanitized
 
 
 def generate_music_params(
