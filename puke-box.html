@@ -226,7 +226,7 @@
             top: 64%;
             left: 38.25%;
             width: 40%;
-            height: 10%;
+            height: 13%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -287,6 +287,26 @@
             white-space: nowrap;
         }
         .dl-btn:hover { color: #fff; background: #444; }
+        .mode-row {
+            display: flex;
+            gap: 4px;
+        }
+        .mode-btn {
+            background: linear-gradient(180deg, #333 0%, #111 100%);
+            border: 1px outset #555;
+            color: #888;
+            font-family: 'Courier New', monospace;
+            font-size: clamp(0.4rem, 0.9vw, 0.55rem);
+            cursor: pointer;
+            padding: 1px 5px;
+            white-space: nowrap;
+        }
+        .mode-btn:hover { color: #fff; background: #444; }
+        .mode-btn.active {
+            color: #00ff00;
+            border-color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
 
         /* === SIDE MARQUEES === */
         .side-marquee {
@@ -441,6 +461,10 @@
                 <a class="dl-btn" id="dl-bass" href="#" download>BASS</a>
                 <a class="dl-btn" id="dl-chords" href="#" download>CHORDS</a>
             </div>
+            <div class="mode-row">
+                <button class="mode-btn" id="shuffle-btn" onclick="toggleShuffle()" title="Shuffle">&#x1F500; SHUFFLE</button>
+                <button class="mode-btn" id="loop-btn" onclick="toggleLoop()" title="Loop">&#x1F501; LOOP</button>
+            </div>
         </div>
     </div>
 </div>
@@ -474,6 +498,8 @@ let manifest = [];
 let currentIndex = 0;
 const audio = new Audio();
 let isPlaying = false;
+let shuffleOn = false;
+let loopOn = false;
 
 /* === MANIFEST === */
 async function loadManifest() {
@@ -600,6 +626,16 @@ function seekAudio(e) {
     audio.currentTime = pct * audio.duration;
 }
 
+function toggleShuffle() {
+    shuffleOn = !shuffleOn;
+    document.getElementById('shuffle-btn').classList.toggle('active', shuffleOn);
+}
+
+function toggleLoop() {
+    loopOn = !loopOn;
+    document.getElementById('loop-btn').classList.toggle('active', loopOn);
+}
+
 function formatTime(s) {
     if (isNaN(s)) return '0:00';
     const m = Math.floor(s / 60);
@@ -616,6 +652,19 @@ audio.addEventListener('timeupdate', () => {
 });
 
 audio.addEventListener('ended', () => {
+    if (loopOn) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+        return;
+    }
+    if (shuffleOn && manifest.length > 1) {
+        let next;
+        do { next = Math.floor(Math.random() * manifest.length); } while (next === currentIndex);
+        currentIndex = next;
+        renderCard();
+        loadTrack(currentIndex);
+        return;
+    }
     isPlaying = false;
     document.getElementById('play-btn').textContent = '\u25B6';
     document.getElementById('progress-fill').style.width = '0%';
