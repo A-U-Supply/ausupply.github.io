@@ -496,7 +496,7 @@ async function loadManifest() {
     // Check URL hash for deep link
     const hash = location.hash.slice(1);
     if (hash) {
-        const idx = manifest.findIndex(e => e.date === hash);
+        const idx = manifest.findIndex(e => (e.id || e.date) === hash);
         if (idx >= 0) currentIndex = idx;
     }
 
@@ -549,25 +549,26 @@ function selectCurrentTrack() {
 /* === AUDIO === */
 function loadTrack(index) {
     const entry = manifest[index];
-    audio.src = `puke-box/${entry.date}/preview.ogg`;
-    location.hash = entry.date;
+    const eid = entry.id || entry.date;
+    audio.src = `puke-box/${eid}/preview.ogg`;
+    location.hash = eid;
 
     // Update marquee
     document.getElementById('description-marquee').textContent =
         `\u266B ${entry.scale} in ${entry.root} (${entry.tempo} BPM) \u2014 ${entry.description} \u266B`;
 
     // Update downloads
-    const base = `puke-box/${entry.date}`;
+    const base = `puke-box/${eid}`;
     document.getElementById('dl-ogg').href = `${base}/preview.ogg`;
-    document.getElementById('dl-ogg').download = `${entry.date}-preview.ogg`;
+    document.getElementById('dl-ogg').download = `${eid}-preview.ogg`;
     document.getElementById('dl-melody').href = `${base}/melody.mid`;
-    document.getElementById('dl-melody').download = `${entry.date}-melody.mid`;
+    document.getElementById('dl-melody').download = `${eid}-melody.mid`;
     document.getElementById('dl-drums').href = `${base}/drums.mid`;
-    document.getElementById('dl-drums').download = `${entry.date}-drums.mid`;
+    document.getElementById('dl-drums').download = `${eid}-drums.mid`;
     document.getElementById('dl-bass').href = `${base}/bass.mid`;
-    document.getElementById('dl-bass').download = `${entry.date}-bass.mid`;
+    document.getElementById('dl-bass').download = `${eid}-bass.mid`;
     document.getElementById('dl-chords').href = `${base}/chords.mid`;
-    document.getElementById('dl-chords').download = `${entry.date}-chords.mid`;
+    document.getElementById('dl-chords').download = `${eid}-chords.mid`;
 
     // Auto-play
     audio.play().then(() => {

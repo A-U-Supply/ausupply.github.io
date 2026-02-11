@@ -121,12 +121,12 @@ def fetch_midi_messages(client: WebClient, channel_id: str) -> list[dict]:
                     logger.debug(f"Skipped non-MIDI message: {text[:80]}")
                 continue
             ts = msg["ts"]
-            parsed["date"] = datetime.fromtimestamp(
-                float(ts), tz=timezone.utc
-            ).strftime("%Y-%m-%d")
+            dt = datetime.fromtimestamp(float(ts), tz=timezone.utc)
+            parsed["date"] = dt.strftime("%Y-%m-%d")
+            parsed["entry_id"] = dt.strftime("%Y-%m-%d-%H%M%S")
             parsed["thread_ts"] = ts
             results.append(parsed)
-            logger.info(f"Matched: {parsed['date']} — {parsed['scale']} in {parsed['root']}")
+            logger.info(f"Matched: {parsed['entry_id']} — {parsed['scale']} in {parsed['root']}")
         cursor = resp.get("response_metadata", {}).get("next_cursor")
         if not cursor:
             break
@@ -245,8 +245,8 @@ def build_manifest(puke_box_dir: Path) -> list[dict]:
     for child in puke_box_dir.iterdir():
         if not child.is_dir():
             continue
-        # Only consider directories matching YYYY-MM-DD format
-        if not re.match(r"^\d{4}-\d{2}-\d{2}$", child.name):
+        # Match YYYY-MM-DD or YYYY-MM-DD-HHMMSS directories
+        if not re.match(r"^\d{4}-\d{2}-\d{2}(-\d{6})?$", child.name):
             continue
         meta_path = child / "meta.json"
         if not meta_path.exists():
@@ -254,7 +254,8 @@ def build_manifest(puke_box_dir: Path) -> list[dict]:
         try:
             meta = json.loads(meta_path.read_text())
             entries.append({
-                "date": child.name,
+                "id": child.name,
+                "date": meta.get("date", child.name[:10]),
                 "description": meta.get("description", ""),
                 "scale": meta.get("scale", ""),
                 "root": meta.get("root", ""),
@@ -264,25 +265,25 @@ def build_manifest(puke_box_dir: Path) -> list[dict]:
             logger.warning(f"Skipping {child.name}: {e}")
             continue
 
-    entries.sort(key=lambda e: e["date"], reverse=True)
+    entries.sort(key=lambda e: e["id"], reverse=True)
     return entries
 
 
-def get_existing_dates(puke_box_dir: Path) -> set[str]:
-    """Return set of date strings (YYYY-MM-DD) already archived.
+def get_existing_entries(puke_box_dir: Path) -> set[str]:
+    """Return set of entry IDs already archived.
 
-    A date is considered archived if its directory exists AND contains
-    a preview.ogg file.
+    An entry is considered archived if its directory exists AND contains
+    a preview.ogg file. Matches both YYYY-MM-DD and YYYY-MM-DD-HHMMSS.
     """
-    dates = set()
+    entries = set()
     for child in puke_box_dir.iterdir():
         if not child.is_dir():
             continue
-        if not re.match(r"^\d{4}-\d{2}-\d{2}$", child.name):
+        if not re.match(r"^\d{4}-\d{2}-\d{2}(-\d{6})?$", child.name):
             continue
         if (child / "preview.ogg").exists():
-            dates.add(child.name)
-    return dates
+            entries.add(child.name)
+    return entries
 
 
 def run_scraper() -> int:
@@ -296,31 +297,31 @@ def run_scraper() -> int:
     channel_id = find_channel_id(client)
     messages = fetch_midi_messages(client, channel_id)
 
-    existing = get_existing_dates(PUKE_BOX_DIR)
-    new_messages = [m for m in messages if m["date"] not in existing]
+    existing = get_existing_entries(PUKE_BOX_DIR)
+    new_messages = [m for m in messages if m["entry_id"] not in existing]
 
     logger.info(f"Found {len(new_messages)} new entries to process")
     if not new_messages:
         return 0
 
     for msg in new_messages:
-        date_dir = PUKE_BOX_DIR / msg["date"]
-        date_dir.mkdir(exist_ok=True)
+        entry_dir = PUKE_BOX_DIR / msg["entry_id"]
+        entry_dir.mkdir(exist_ok=True)
 
         downloaded = download_thread_midi_files(
-            client, channel_id, msg["thread_ts"], date_dir, token
+            client, channel_id, msg["thread_ts"], entry_dir, token
         )
         if len(downloaded) < 4:
             logger.warning(
-                f"{msg['date']}: only {len(downloaded)} MIDI files downloaded (expected 4)"
+                f"{msg['entry_id']}: only {len(downloaded)} MIDI files downloaded (expected 4)"
             )
 
-        if not synthesize_ogg(date_dir):
-            logger.warning(f"{msg['date']}: OGG synthesis failed, skipping")
+        if not synthesize_ogg(entry_dir):
+            logger.warning(f"{msg['entry_id']}: OGG synthesis failed, skipping")
             continue
 
-        meta = {k: v for k, v in msg.items() if k != "thread_ts"}
-        (date_dir / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
+        meta = {k: v for k, v in msg.items() if k not in ("thread_ts", "entry_id")}
+        (entry_dir / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
 
     manifest = build_manifest(PUKE_BOX_DIR)
     MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n")
