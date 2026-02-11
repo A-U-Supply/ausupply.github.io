@@ -58,6 +58,21 @@ def post_midi_to_slack(
         channel_id = resp["channel"]  # resolved ID (files_upload_v2 needs ID, not name)
         logger.info(f"Posted main message to {channel} ({channel_id})")
 
+        # Upload audio preview if available
+        preview_path = midi_dir / "preview.wav"
+        if preview_path.exists():
+            try:
+                client.files_upload_v2(
+                    channel=channel_id,
+                    file=str(preview_path),
+                    filename="preview.wav",
+                    initial_comment=":loud_sound: Preview (sine wave synthesis)",
+                    thread_ts=thread_ts,
+                )
+                logger.info("Uploaded preview.wav")
+            except Exception as e:
+                logger.warning(f"Failed to upload preview: {e}")
+
         # Upload each MIDI file as a threaded reply
         upload_failures = 0
         for track in ["melody", "drums", "bass", "chords"]:
