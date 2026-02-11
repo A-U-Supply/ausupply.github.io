@@ -1,8 +1,10 @@
 """Scrape #midieval Slack channel and archive MIDI bot output."""
+import importlib.util
 import json
 import logging
 import os
 import re
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -177,3 +179,86 @@ def download_thread_midi_files(
         if not cursor:
             break
     return downloaded
+
+
+def _import_synthesizer():
+    """Import synthesize_preview from midi-bot/src/synthesizer.py via importlib."""
+    synth_path = Path(__file__).parent.parent / "midi-bot" / "src" / "synthesizer.py"
+    spec = importlib.util.spec_from_file_location("midi_synthesizer", synth_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.synthesize_preview
+
+
+def synthesize_ogg(midi_dir: Path) -> bool:
+    """Synthesize MIDI files to OGG via WAV intermediate.
+
+    Uses the midi-bot synthesizer to generate a WAV preview, then
+    converts to OGG with ffmpeg for smaller file size.
+
+    Returns True on success, False on failure.
+    """
+    wav_path = midi_dir / "preview.wav"
+    ogg_path = midi_dir / "preview.ogg"
+
+    try:
+        synth_fn = _import_synthesizer()
+        if not synth_fn(midi_dir, wav_path):
+            logger.error("Synthesizer returned failure")
+            return False
+    except Exception as e:
+        logger.error(f"Synthesis failed: {e}")
+        return False
+
+    try:
+        result = subprocess.run(
+            ["ffmpeg", "-y", "-i", str(wav_path), "-b:a", "64k", str(ogg_path)],
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        if result.returncode != 0:
+            logger.error(f"ffmpeg failed: {result.stderr}")
+            return False
+    except Exception as e:
+        logger.error(f"ffmpeg conversion failed: {e}")
+        return False
+    finally:
+        if wav_path.exists():
+            wav_path.unlink()
+
+    logger.info(f"OGG preview written: {ogg_path}")
+    return True
+
+
+def build_manifest(puke_box_dir: Path) -> list[dict]:
+    """Build a manifest from date directories containing meta.json.
+
+    Scans for directories matching YYYY-MM-DD format that contain a
+    meta.json file. Returns a list of manifest entries sorted newest first.
+    """
+    entries = []
+    for child in puke_box_dir.iterdir():
+        if not child.is_dir():
+            continue
+        # Only consider directories matching YYYY-MM-DD format
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", child.name):
+            continue
+        meta_path = child / "meta.json"
+        if not meta_path.exists():
+            continue
+        try:
+            meta = json.loads(meta_path.read_text())
+            entries.append({
+                "date": child.name,
+                "description": meta.get("description", ""),
+                "scale": meta.get("scale", ""),
+                "root": meta.get("root", ""),
+                "tempo": meta.get("tempo", 0),
+            })
+        except (json.JSONDecodeError, OSError) as e:
+            logger.warning(f"Skipping {child.name}: {e}")
+            continue
+
+    entries.sort(key=lambda e: e["date"], reverse=True)
+    return entries
