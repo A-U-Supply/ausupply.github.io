@@ -1,5 +1,30 @@
 [
   {
+    "id": "2026-02-11-202459",
+    "date": "2026-02-11",
+    "description": "A *cartel drone* :helicopter: hums in the background as a *baroque harpsichord* plays a mournful melody *underwater* :ocean:, echoing the turmoil in Tehran",
+    "scale": "Maqam Nahawand",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-11-201229",
+    "date": "2026-02-11",
+    "description": "A requiem for *Dawson's Creek* echoes through a desolate parking garage :city",
+    "scale": "Hexatonic (Blues Minor)",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-11-200637",
+    "date": "2026-02-11",
+    "description": "As rallies for Iran's revolution clash with discontent, a lonely medieval lute weeps in the darkness of an abandoned factory :dove",
+    "scale": "Hungarian Minor",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-11-165311",
     "date": "2026-02-11",
     "description": "A frozen lake of steel drums echoes with the haunting melodies of a *gen Z accordion apocalypse* :ocean::skull:",
     "scale": "Hungarian Minor",
@@ -7,6 +32,15 @@
     "tempo": 120
   },
   {
+    "id": "2026-02-11",
+    "date": "2026-02-11",
+    "description": "A frozen lake of steel drums echoes with the haunting melodies of a *gen Z accordion apocalypse* :ocean::skull:",
+    "scale": "Hungarian Minor",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-10-165328",
     "date": "2026-02-10",
     "description": "A 250-foot arch made of *wet* harpsichords emerges from the estuary, playing a haunting melody :ocean::loud",
     "scale": "Hungarian Minor",
@@ -14,6 +48,15 @@
     "tempo": 120
   },
   {
+    "id": "2026-02-10",
+    "date": "2026-02-10",
+    "description": "A 250-foot arch made of *wet* harpsichords emerges from the estuary, playing a haunting melody :ocean::loud",
+    "scale": "Hungarian Minor",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-08-161749",
     "date": "2026-02-08",
     "description": "A mariachi band on the moon is singing a gospel choir's lament for a crashed Olympic dream :full",
     "scale": "Hungarian Minor",
@@ -21,6 +64,39 @@
     "tempo": 120
   },
   {
+    "id": "2026-02-08",
+    "date": "2026-02-08",
+    "description": "A mariachi band on the moon is singing a gospel choir's lament for a crashed Olympic dream :full",
+    "scale": "Hungarian Minor",
+    "root": "Eb",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-07-161657",
+    "date": "2026-02-07",
+    "description": "A demolition derby in a abandoned church where the *pipe organ is playing a haunting melody* :car::boom:, but the *drum machine is possessed by the spirit of chaos* :robot",
+    "scale": "Hungarian Minor",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-07-001120",
+    "date": "2026-02-07",
+    "description": "A *harp* with oven mitts weeps for K-pop dreams lost in a *freezing* home :house::broken",
+    "scale": "Hungarian Minor",
+    "root": "E",
+    "tempo": 90
+  },
+  {
+    "id": "2026-02-07-000232",
+    "date": "2026-02-07",
+    "description": "A haunted carousel spins endlessly in a deserted White House :carousel",
+    "scale": "Hungarian Minor",
+    "root": "Eb",
+    "tempo": 120
+  },
+  {
+    "id": "2026-02-07",
     "date": "2026-02-07",
     "description": "A haunted carousel spins endlessly in a deserted White House :carousel",
     "scale": "Hungarian Minor",

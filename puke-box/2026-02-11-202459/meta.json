@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Nahawand",
+  "root": "E",
+  "tempo": 120,
+  "description": "A *cartel drone* :helicopter: hums in the background as a *baroque harpsichord* plays a mournful melody *underwater* :ocean:, echoing the turmoil in Tehran",
+  "chords": [
+    "Em7",
+    "G7",
+    "Am7",
+    "D7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-11"
+}
