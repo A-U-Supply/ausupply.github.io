@@ -262,3 +262,72 @@ def build_manifest(puke_box_dir: Path) -> list[dict]:
 
     entries.sort(key=lambda e: e["date"], reverse=True)
     return entries
+
+
+def get_existing_dates(puke_box_dir: Path) -> set[str]:
+    """Return set of date strings (YYYY-MM-DD) already archived.
+
+    A date is considered archived if its directory exists AND contains
+    a preview.ogg file.
+    """
+    dates = set()
+    for child in puke_box_dir.iterdir():
+        if not child.is_dir():
+            continue
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", child.name):
+            continue
+        if (child / "preview.ogg").exists():
+            dates.add(child.name)
+    return dates
+
+
+def run_scraper() -> int:
+    """Main orchestration logic. Returns exit code (0 = success, 1 = error)."""
+    token = os.environ.get("SLACK_BOT_TOKEN")
+    if not token:
+        logger.error("SLACK_BOT_TOKEN environment variable is required")
+        return 1
+
+    client = WebClient(token=token)
+    channel_id = find_channel_id(client)
+    messages = fetch_midi_messages(client, channel_id)
+
+    existing = get_existing_dates(PUKE_BOX_DIR)
+    new_messages = [m for m in messages if m["date"] not in existing]
+
+    logger.info(f"Found {len(new_messages)} new entries to process")
+    if not new_messages:
+        return 0
+
+    for msg in new_messages:
+        date_dir = PUKE_BOX_DIR / msg["date"]
+        date_dir.mkdir(exist_ok=True)
+
+        downloaded = download_thread_midi_files(
+            client, channel_id, msg["thread_ts"], date_dir, token
+        )
+        if len(downloaded) < 4:
+            logger.warning(
+                f"{msg['date']}: only {len(downloaded)} MIDI files downloaded (expected 4)"
+            )
+
+        if not synthesize_ogg(date_dir):
+            logger.warning(f"{msg['date']}: OGG synthesis failed, skipping")
+            continue
+
+        meta = {k: v for k, v in msg.items() if k != "thread_ts"}
+        (date_dir / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
+
+    manifest = build_manifest(PUKE_BOX_DIR)
+    MANIFEST_PATH.write_text(json.dumps(manifest, indent=2) + "\n")
+    logger.info(f"Manifest written with {len(manifest)} entries")
+
+    return 0
+
+
+if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    )
+    exit(run_scraper())
