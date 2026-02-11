@@ -91,7 +91,7 @@
         .jukebox-wrapper {
             display: flex;
             justify-content: center;
-            padding: 10px 0 20px;
+            padding: 140px 0 20px;
             position: relative;
         }
         .jukebox-container {
@@ -100,10 +100,14 @@
             aspect-ratio: 1;
         }
         .jukebox-container img {
-            width: 100%;
-            height: 100%;
+            width: 170%;
+            height: 170%;
             object-fit: contain;
             display: block;
+            position: absolute;
+            top: -35%;
+            left: -35%;
+            pointer-events: none;
             filter: drop-shadow(0 0 30px rgba(0, 150, 255, 0.4))
                     drop-shadow(0 0 60px rgba(255, 0, 128, 0.2));
         }
@@ -121,7 +125,7 @@
         /* Marquee zone — the amber display at top of jukebox */
         #marquee-zone {
             top: 24%;
-            left: 42%;
+            left: 40.25%;
             width: 37%;
             height: 9%;
             /* amber glow */
@@ -141,7 +145,7 @@
         /* Flipper zone — the lattice/diamond grid area */
         #flipper-zone {
             top: 42%;
-            left: 38%;
+            left: 36.25%;
             width: 44%;
             height: 21%;
             background: rgba(10, 5, 20, 0.88);
@@ -220,7 +224,7 @@
         /* Controls zone — bottom display + buttons */
         #controls-zone {
             top: 64%;
-            left: 40%;
+            left: 38.25%;
             width: 40%;
             height: 10%;
             display: flex;
@@ -401,7 +405,7 @@
 <!-- Jukebox -->
 <div class="jukebox-wrapper">
     <div class="jukebox-container">
-        <img src="img/puke-box.jpg" alt="THE PUKE BOX">
+        <img src="img/puke-box.png" alt="THE PUKE BOX">
 
         <!-- Overlay: amber marquee display -->
         <div class="overlay-zone" id="marquee-zone">
