@@ -136,7 +136,9 @@ def process_backlog(youtube, state: dict, dry_run: bool = False) -> int:
             video_id_to_url.setdefault(u["video_id"], u)
 
     skipped_dupes = 0
-    for video_id in state["backlog"]:
+    quota_exceeded = False
+    backlog_iter = iter(state["backlog"])
+    for video_id in backlog_iter:
         if added >= DAILY_INSERT_CAP:
             remaining.append(video_id)
             continue
@@ -153,7 +155,15 @@ def process_backlog(youtube, state: dict, dry_run: bool = False) -> int:
             playlist_id, playlist_entry = get_or_create_playlist(youtube, state)
             existing_ids = get_playlist_video_ids(youtube, playlist_id)
 
-        success = add_video_to_playlist(youtube, playlist_id, video_id)
+        try:
+            success = add_video_to_playlist(youtube, playlist_id, video_id)
+        except HttpError:
+            # Quota exceeded — save progress for remaining videos
+            logger.warning("Quota exceeded, saving progress and stopping")
+            remaining.append(video_id)
+            quota_exceeded = True
+            break
+
         if success:
             playlist_entry["count"] += 1
             added += 1
@@ -162,6 +172,10 @@ def process_backlog(youtube, state: dict, dry_run: bool = False) -> int:
         if video_id in video_id_to_url:
             video_id_to_url[video_id]["added_to_playlist"] = True
 
+    # Collect any unprocessed videos from the iterator
+    remaining.extend(backlog_iter)
     state["backlog"] = remaining
     logger.info(f"Added {added} videos, skipped {skipped_dupes} duplicates, {len(remaining)} remaining in backlog")
+    if quota_exceeded:
+        logger.info("Run stopped early due to quota — will resume on next run")
     return added
