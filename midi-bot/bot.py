@@ -125,9 +125,9 @@ def run_bot(args) -> int:
     scales = load_scales(script_dir / "scales.json")
     instruments = load_instruments(script_dir / "instruments.json")
 
-    # Offer the LLM a random subset of scales each day to prevent
-    # it from gravitating to the same favorites (e.g. Hungarian Minor)
-    llm_scales = random.sample(scales, min(15, len(scales)))
+    # Offer the LLM a small curated subset so it actually reads and
+    # chooses intelligently instead of defaulting to its favorites
+    llm_scales = random.sample(scales, min(5, len(scales)))
 
     # Generate music parameters via LLM
     logger.info("Generating music parameters via LLM...")
