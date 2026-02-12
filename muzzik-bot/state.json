@@ -1,7 +1,6505 @@
 {
   "playlists": [
-    {"id": "PLAKdKOnF8LlPHA7-WbyMH2PX7Vu3zu26v", "title": "muzzik vol. 1", "count": 0}
+    {
+      "id": "PLAKdKOnF8LlPHA7-WbyMH2PX7Vu3zu26v",
+      "title": "muzzik vol. 1",
+      "count": 189
+    }
   ],
-  "urls": [],
-  "backlog": []
+  "urls": [
+    {
+      "url": "https://youtube.com/playlist?list=PLAKdKOnF8LlPHA7-WbyMH2PX7Vu3zu26v",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2026-02-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dTB_GDmFbGk",
+      "video_id": "dTB_GDmFbGk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-02-11",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/bXfU-4XTaG4?si=MW35Xt8TBatIssD-",
+      "video_id": "bXfU-4XTaG4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-02-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/tArP7BaGtN4?si=G8qfKT09k7k-8dW0",
+      "video_id": "tArP7BaGtN4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_lKG0a96K4iWP9chY4EBMClxGjIbfRePaQ&amp;si=SGoGsjm_QsqBKp0U",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2026-01-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/shorts/Ubwy_Kne57U?si=jOVD3wToiwpsFJGO",
+      "video_id": "Ubwy_Kne57U",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/cLVXgaR7LD8?si=yQuySXWceybDwUYm",
+      "video_id": "cLVXgaR7LD8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Xn5wfH_erZ0?si=_DyuDgjERM2WL6Ah",
+      "video_id": "Xn5wfH_erZ0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/4b2sdjbUvzo?si=MKYxjQPkGQlVoA7A",
+      "video_id": "4b2sdjbUvzo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/HmBUpxPvJfg?si=cXLUMuav_pv2SO8w",
+      "video_id": "HmBUpxPvJfg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/PmU23XK_cZ8?si=qS9b1mJZV_AP7GiD",
+      "video_id": "PmU23XK_cZ8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/G6d-vCtdmrQ?si=c8-cTObmv9ese0Vo",
+      "video_id": "G6d-vCtdmrQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/K0T6R_1K4RQ?si=Tzm8Vr970p1k29Z5",
+      "video_id": "K0T6R_1K4RQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/JAKnp1RwmFk?si=toUu_Je0EhFybtnq",
+      "video_id": "JAKnp1RwmFk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-09",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/7ohbKidZLiA?si=UsUPwARhe7eWObXW",
+      "video_id": "7ohbKidZLiA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/aIpvHOkZbwY?si=8AS6p6Uj932UZBz_",
+      "video_id": "aIpvHOkZbwY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=43nbOliFoE0&amp;list=RD43nbOliFoE0&amp;start_radio=1",
+      "video_id": "43nbOliFoE0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-05",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/kl8Q5QU23QE?si=egz2bP8zYZKqvOyc",
+      "video_id": "kl8Q5QU23QE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2026-01-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_lCW0HyMU9sPJG93PZFWfDzvL6iBH84gnM&amp;si=ipi0vVol21WYvado",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-12-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://annas-archive.li/blog/backing-up-spotify.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-12-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/U4UFAejSQFA?si=fyjKN7PpMkVyWUAx",
+      "video_id": "U4UFAejSQFA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_mCcsZmlKoSmd7Og2I2Bb7o2rgtfVhyNkw&amp;si=yl6SulbMqx18XhRF",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-12-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/wno4uK0LOik?si=4FOiFvAB8_LPO1qq",
+      "video_id": "wno4uK0LOik",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/SqwXA1ci1Rg?si=bG4LzrksK1xLllL5",
+      "video_id": "SqwXA1ci1Rg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-04",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=qQ57vsykf6s",
+      "video_id": "qQ57vsykf6s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=jhv4kX1-NoM",
+      "video_id": "jhv4kX1-NoM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/g4n7MvpKv2s?si=EHuScMaVDTutg5gd",
+      "video_id": "g4n7MvpKv2s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/hXB4kmwaCD0?si=sCsldz3bx3cM3vU7",
+      "video_id": "hXB4kmwaCD0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/yEuYc05b-TM?si=D2KS0FOldSUsEC62",
+      "video_id": "yEuYc05b-TM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ssbsAb5HrrA",
+      "video_id": "ssbsAb5HrrA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-12-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=mU2gnXBwcyU",
+      "video_id": "mU2gnXBwcyU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-11-21",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nBdJ-4DQpV0",
+      "video_id": "nBdJ-4DQpV0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-11-19",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=k9yMIboriEY",
+      "video_id": "k9yMIboriEY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-11-19",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/GFRd4mO06gI?si=_XPhUH_Nu26yqXuA",
+      "video_id": "GFRd4mO06gI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-11-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/QqzXvvdk3bQ?si=UlGCS7dngMeI7hiX",
+      "video_id": "QqzXvvdk3bQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-11-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=N2pwPxr74wo&amp;list=RDN2pwPxr74wo&amp;start_radio=1",
+      "video_id": "N2pwPxr74wo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-11-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/_0VQTcmb2A0?si=_YiX91cILAv8ssa_",
+      "video_id": "_0VQTcmb2A0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-11-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/OnGQeVTt4KI?si=zGxtddxiEe1O2nEH",
+      "video_id": "OnGQeVTt4KI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/jmBzOujPYno?si=8TVL8ZoICjAdFYSP",
+      "video_id": "jmBzOujPYno",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0XO1dz1uF00",
+      "video_id": "0XO1dz1uF00",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-23",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=xSDfCwDmJNo",
+      "video_id": "xSDfCwDmJNo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-17",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtube.com/shorts/hBEkKouWsbM?si=ALEPKonqhihBEa4s",
+      "video_id": "hBEkKouWsbM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-16",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/cd-yDwhgrzM?si=KItjPmVlunXjOcV0",
+      "video_id": "cd-yDwhgrzM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/pkSyBkk99VE?si=SAFWhC0_GnaJiOO5",
+      "video_id": "pkSyBkk99VE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/3vR_btAIrME?si=d9lOQ1qsgdo59IyH",
+      "video_id": "3vR_btAIrME",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/J0Yb7M8kaXo?si=9htakLyq6Kkc_lwv",
+      "video_id": "J0Yb7M8kaXo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=mpPuvhpcr-E",
+      "video_id": "mpPuvhpcr-E",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/CWH8FLTy4pw?si=jfnP-abLPZ_wIL0Q",
+      "video_id": "CWH8FLTy4pw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/NVXjHpZnj14?si=xqcCHohzUXgg83bY",
+      "video_id": "NVXjHpZnj14",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-07",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/q1SYwy5tc5E?si=ZKnoxTWzVT0eHgT4",
+      "video_id": "q1SYwy5tc5E",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-07",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/l470P-l5glA?si=mPRJcc7brKqm2asT",
+      "video_id": "l470P-l5glA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-04",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/YrUkbd5mzTI?si=BfPng2tWnMla2R5Q",
+      "video_id": "YrUkbd5mzTI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-03",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_n6WvS9QcHgdu02R0KRPKyUamMi5bSfY5I&amp;si=96wQcyeulS75Gmz4",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-10-03",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/1a8J-GV73c4?si=M6ka1sY8-JVwOU6l",
+      "video_id": "1a8J-GV73c4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-02",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/U9em24CR3JA?si=TsbSv5IDo5Yn-V1H",
+      "video_id": "U9em24CR3JA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-10-02",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/acWLD_SHtcQ?si=oa8oILXnDzqSwje0",
+      "video_id": "acWLD_SHtcQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/AaU0-6fHI0k?si=_WlGtMBNKUESzNfG",
+      "video_id": "AaU0-6fHI0k",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=lfMh0zfIO3A&amp;list=RDlfMh0zfIO3A&amp;start_radio=1",
+      "video_id": "lfMh0zfIO3A",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-22",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HBzzdlpISFg&amp;list=RDHBzzdlpISFg&amp;start_radio=1",
+      "video_id": "HBzzdlpISFg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-22",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=4JDm8KKbBdk&amp;list=RD4JDm8KKbBdk&amp;start_radio=1",
+      "video_id": "4JDm8KKbBdk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-22",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GZ1U8f9GJM8&amp;list=RDGZ1U8f9GJM8&amp;start_radio=1",
+      "video_id": "GZ1U8f9GJM8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-22",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/D706caxJ5wQ?si=qJFmwb8Ax4CPIiJF",
+      "video_id": "D706caxJ5wQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-20",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/gNdeYXMqpxs?si=OzZueKkAfqwfleKS",
+      "video_id": "gNdeYXMqpxs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/pTOS1zNfIS8?si=TG7NhKeibxiRib_n",
+      "video_id": "pTOS1zNfIS8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ylL-SSRDyJc",
+      "video_id": "ylL-SSRDyJc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-12",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ozv8ugNm0P0",
+      "video_id": "ozv8ugNm0P0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://tresorberlin.bandcamp.com/album/music-for-toilets?from=embed",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-09-09",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/Q_SHi3BPRuE?si=YzAm1gJCB_8RqRWp",
+      "video_id": "Q_SHi3BPRuE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-02",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/iIcIpgHdHko?si=ynGUtaA9VQULaOmA",
+      "video_id": "iIcIpgHdHko",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-09-01",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/SdkpoifTIeI?si=BAgVjBRysR91KBtc",
+      "video_id": "SdkpoifTIeI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-30",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/yjC4qXiBRu4?si=QbD22kDu5qWVhxgf",
+      "video_id": "yjC4qXiBRu4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://ra.co/podcast/1013",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-08-30",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/FfXwm3jwVbI?si=dNUUfNuiWQdqValU",
+      "video_id": "FfXwm3jwVbI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/pwpxAtJS-Sc",
+      "video_id": "pwpxAtJS-Sc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-24",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/61T4IgorY08?feature=shared",
+      "video_id": "61T4IgorY08",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-24",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/2YblqLkzlmk?si=HC8N8lD9yXDytGhF",
+      "video_id": "2YblqLkzlmk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-24",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=srtNgPRa6v0&amp;list=PLOh4zNdPb5tlhkOpwzzsyF2ZHMrU4Kijr&amp;index=1",
+      "video_id": "srtNgPRa6v0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-23",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/ykwwz20RULg?si=FAd9pH53Iz1pxpkC",
+      "video_id": "ykwwz20RULg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/K6QjQeKfmUs?si=y5OcE77FvM9QNpu7",
+      "video_id": "K6QjQeKfmUs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=PLS7hzozZUr2wTwE4ONfbJTjoZGPM66SR7&si=NDInqqaXMaAs7rLL",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-08-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_AGNRUR9xmg",
+      "video_id": "_AGNRUR9xmg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ADV94hSMKHw",
+      "video_id": "ADV94hSMKHw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/i_5MwmxB3zc?si=T4tfoa-FaYlkWH6A",
+      "video_id": "i_5MwmxB3zc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=B2KrYkha2iw",
+      "video_id": "B2KrYkha2iw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-15",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/NMFtf8YKwxA?si=XLIYsNoNQt27svXC",
+      "video_id": "NMFtf8YKwxA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=KGAAhzreGWw",
+      "video_id": "KGAAhzreGWw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dAECAnlnriU",
+      "video_id": "dAECAnlnriU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-10",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/xk3tvBZDWPQ?si=ZPThrkHObAkHMEnP",
+      "video_id": "xk3tvBZDWPQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-09",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/NL4lHwjX9pM?si=6CjRaEvIGWiBf3Lq",
+      "video_id": "NL4lHwjX9pM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-09",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=lJCoik8NsZ4",
+      "video_id": "lJCoik8NsZ4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-08-05",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/0ybNdtnMUAc?si=P0iX5Pd5vt5Ak8cQ",
+      "video_id": "0ybNdtnMUAc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-29",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/2-IHZrdMiTc?si=y_hrVGFDjU5MQHRg",
+      "video_id": "2-IHZrdMiTc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/YYOKMUTTDdA?si=0oFkLedXeTJfbSaC",
+      "video_id": "YYOKMUTTDdA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-27",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/U6sXqOvu7pc?si=v8yjbBGXqroqzB4H",
+      "video_id": "U6sXqOvu7pc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/lxfd9MF601Y?si=ZQ9dGLCaiGjxAxKq",
+      "video_id": "lxfd9MF601Y",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=eXvBjCO19QY&list=RDeXvBjCO19QY&start_radio=1&ab_channel=2PacVEVO",
+      "video_id": "eXvBjCO19QY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-23",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7dENI7urpQo",
+      "video_id": "7dENI7urpQo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://wapo.st/4kVew8G",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-07-22",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://adoptastation.org/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-07-22",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NFZmgWhofDI",
+      "video_id": "NFZmgWhofDI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-22",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/QfZfg_A1nR4?si=VZJ9EEaVdyh1ClZc",
+      "video_id": "QfZfg_A1nR4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-20",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/MuK8_zT7Xtg?si=n4fXWgt9zTrGMiZ3",
+      "video_id": "MuK8_zT7Xtg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-20",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rk6LdBQfP9M&amp;list=RDrk6LdBQfP9M&amp;start_radio=1",
+      "video_id": "rk6LdBQfP9M",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-18",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/kQo4KwtCBw8?si=Zswglh3ns4rqmifG",
+      "video_id": "kQo4KwtCBw8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-17",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/ClNTn1wtq7E?si=ssTyhNxKuy3zUkRD",
+      "video_id": "ClNTn1wtq7E",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/gYJZMDsdWVQ?si=Sv82SNpatcA52ZH6",
+      "video_id": "gYJZMDsdWVQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=tUhCPZgZAJ0",
+      "video_id": "tUhCPZgZAJ0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-15",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/pV6apN_5PqI?si=m3a2KC4ftGaeKIJ7",
+      "video_id": "pV6apN_5PqI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/1m9n5Uv0bp0?si=U-gtt4BEQrXmDv_L",
+      "video_id": "1m9n5Uv0bp0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/V0jE7PxiuCM?si=6sCjyoOMFzrTEPjx",
+      "video_id": "V0jE7PxiuCM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Phh3oVCtzBg?si=4r4TGrts0NuTHDNS",
+      "video_id": "Phh3oVCtzBg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=OBVx0Jmg88g",
+      "video_id": "OBVx0Jmg88g",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-10",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/s9E6iYcN8yI?si=c6Czhuio4_H-t4VE",
+      "video_id": "s9E6iYcN8yI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-08",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_kWzyOSfXn9_t176sPyACoHuzFPGceRL8k&amp;si=8GtoIZKAut2r-v_s",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-07-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/qL50bwiHvoY?si=wbKbFTJlqWcfdw43",
+      "video_id": "qL50bwiHvoY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-07",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/dGCIrnIA1bg?si=3Kn3my4SIsjNFiKa",
+      "video_id": "dGCIrnIA1bg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.tiktok.com/t/ZP8rE3CqN/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-07-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2D6J_Nnr-M8&amp;pp=ygUJI2ZseW9sYW5k",
+      "video_id": "2D6J_Nnr-M8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://au-supply.slack.com/archives/C03TFJUE36G/p1660265708675579",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-07-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/_gB2iWln0ls?si=bsU3W1DHMsVO_G8-",
+      "video_id": "_gB2iWln0ls",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-07-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ntPeHC8z1Og?si=0MD1geRHi4RD4JCV",
+      "video_id": "ntPeHC8z1Og",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-29",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/2Z8yUuAolVY?si=cIK00gSf7P3l3cmB",
+      "video_id": "2Z8yUuAolVY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/WKgauv6CH0s?si=7P_Xh6ds8x-UAPed",
+      "video_id": "WKgauv6CH0s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/IlxvmEVK8jk?si=cfLHDINPuhUAsoM3",
+      "video_id": "IlxvmEVK8jk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=RP3SjiMgYWg",
+      "video_id": "RP3SjiMgYWg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-23",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=JNMfncYn6sw",
+      "video_id": "JNMfncYn6sw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-21",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/WbFgXhQCagU?si=lG2vn4gNV0bDdmnz",
+      "video_id": "WbFgXhQCagU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-19",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NsIo1j6m9fw&amp;ab_channel=%E3%83%96%E3%83%AC%E3%83%BC%E3%83%B3%E3%83%BB%E3%82%A2%E3%83%B3%E3%82%B5%E3%83%B3%E3%83%96%E3%83%AB%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB",
+      "video_id": "NsIo1j6m9fw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-19",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/8al5cSQNmME?si=KZMep1-L2PsaJhrj",
+      "video_id": "8al5cSQNmME",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/t7OUYECIrig?si=Ggd0ocfsJoYTq9v0",
+      "video_id": "t7OUYECIrig",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/zglm9Y-dhbk?si=nYfzwATNndMU9yWl",
+      "video_id": "zglm9Y-dhbk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=WoemMPPJ78s&amp;ab_channel=Vulf",
+      "video_id": "WoemMPPJ78s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-11",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/9tMe_LpUHAQ?si=NShr-ELazsWQgRq1",
+      "video_id": "9tMe_LpUHAQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=gWnYusg6CTc&amp;ab_channel=MJLenderman",
+      "video_id": "gWnYusg6CTc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-08",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://thecia.bandcamp.com/album/s-t",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-06-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=oBxKAhrYwP0&amp;list=PL3KpZkn6MkFXgZhfbdLAV993L9z_yXOeE&amp;index=3",
+      "video_id": "oBxKAhrYwP0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-06-01",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=kt0Z9RZkg-4",
+      "video_id": "kt0Z9RZkg-4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/gnTjPlZA9c4?si=oxEPMRlu_e0vwMb1",
+      "video_id": "gnTjPlZA9c4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-28",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/Np50qKCvE_M?si=YU9ONlpkOLHXF4jI",
+      "video_id": "Np50qKCvE_M",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-28",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/g6EDlyy3QEU?si=JMkW_tykbm6gIJVz",
+      "video_id": "g6EDlyy3QEU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-28",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/d_GF1fa4wYM?si=TpM48OHK9ojliadx",
+      "video_id": "d_GF1fa4wYM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-28",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Nbdgl2TYKno&list=OLAK5uy_l0y4Y31S7w1UjWmdCaxxSqzEZtpsYcp8g&ab_channel=KaliMalone-Topic",
+      "video_id": "Nbdgl2TYKno",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-28",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/PwS6LA70NGM?si=fE__PWmY4k11--6U",
+      "video_id": "PwS6LA70NGM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-26",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hNDco3XaFY0",
+      "video_id": "hNDco3XaFY0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7REhdRvE6gc",
+      "video_id": "7REhdRvE6gc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-13",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=59Gy7TAkQW8",
+      "video_id": "59Gy7TAkQW8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-12",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/3oGSjmbuEG8?si=xEBlWNb7wpomoz50&amp;t=1075",
+      "video_id": "3oGSjmbuEG8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-12",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/yFHPoQuw1ZM?si=PMp3H2bxqy8PzsRs",
+      "video_id": "yFHPoQuw1ZM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/u7SPP4piyMo?si=p0EpxEjE7rtDZDTm",
+      "video_id": "u7SPP4piyMo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/6AhevUscppA?si=ZDgk_oXTkaq_3ZrX",
+      "video_id": "6AhevUscppA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/hSSCflexxno?si=0Xp8td0ot-KPbY_u",
+      "video_id": "hSSCflexxno",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/9j5J1-rbAfA?si=RGNUL_kweuZMey7h",
+      "video_id": "9j5J1-rbAfA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.tiktok.com/t/ZP86kvoCK/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-05-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/NgwImbbZU0s?si=7-uv6SUd9hLEEpA9",
+      "video_id": "NgwImbbZU0s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=iLT0gvJgLoU&amp;ab_channel=Geese",
+      "video_id": "iLT0gvJgLoU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-07",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/fIeb2sRbI8Y?si=YbimJzJS9_YPTG8v",
+      "video_id": "fIeb2sRbI8Y",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/I37l6C7UB5w?si=ciG-9MFm10PMaqQL",
+      "video_id": "I37l6C7UB5w",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/YroLdUjtg4U?si=Qfv_r3uUlAmg6wOG",
+      "video_id": "YroLdUjtg4U",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_UQsqFiyw9k",
+      "video_id": "_UQsqFiyw9k",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-07",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_m0ZiGo0nnxzSOv2iopjXM-esd28e35fF4&amp;si=28JyncvYBbzVfCE4",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-05-06",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/svPL1rXjD0w?si=eWjkhmmUnmYXBg6s",
+      "video_id": "svPL1rXjD0w",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-05-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Tgw9cFdCPxU",
+      "video_id": "Tgw9cFdCPxU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Cx1W-vJ30dc",
+      "video_id": "Cx1W-vJ30dc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6J6cfjpgwkk",
+      "video_id": "6J6cfjpgwkk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=vATLlSPnGxE",
+      "video_id": "vATLlSPnGxE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=jMhe5mzffCI",
+      "video_id": "jMhe5mzffCI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/U676v-WoOC4?si=RWtvgRhousImkFL1",
+      "video_id": "U676v-WoOC4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/a-v4MJ1RgDs?si=imXDcI8c3XbqVwHF",
+      "video_id": "a-v4MJ1RgDs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZGPeO9jZYvM",
+      "video_id": "ZGPeO9jZYvM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-29",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/DpAFZnMyC7o?si=Z2L7HUf_Vl2LLhqH",
+      "video_id": "DpAFZnMyC7o",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/CkGrNV5cYrM?si=i7l_6_VBuhEl36EU",
+      "video_id": "CkGrNV5cYrM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ZNI17eohWgA?si=oAPdw_2A5heaDJyD",
+      "video_id": "ZNI17eohWgA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/5_j40sRuTBQ?si=1zla4syINMVLhNyr",
+      "video_id": "5_j40sRuTBQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/KSnF7RaeoXE?si=PJDiBL9XYQilHPwD",
+      "video_id": "KSnF7RaeoXE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/gAY74NyLMGs?si=9UJbXNbiEbAXidKN",
+      "video_id": "gAY74NyLMGs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ZoIFbhaye8s?si=IhcZ98HfkDFjQ66H",
+      "video_id": "ZoIFbhaye8s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/OWHEXasEaFI?si=sKfv0NBawbjplyLn",
+      "video_id": "OWHEXasEaFI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Ikl-64rmOYs?si=2d7Ex0QOWiPQ4WIm",
+      "video_id": "Ikl-64rmOYs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Yt3PB2GiLeU?si=gIH_R-ijklfkBLej",
+      "video_id": "Yt3PB2GiLeU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Pw6H9doABWY?si=mRTdxYktyg2ivC6Y",
+      "video_id": "Pw6H9doABWY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/muKkVufgkAE?si=g4eOfW_nlDyxjdWT",
+      "video_id": "muKkVufgkAE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=pbktJytZvTY",
+      "video_id": "pbktJytZvTY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=g0uc3Ag2yXM",
+      "video_id": "g0uc3Ag2yXM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-18",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/pUwEG1SDvvA?si=welqb4ktA0dMig9M",
+      "video_id": "pUwEG1SDvvA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/aGoGyGSnVuA?si=KdD-PGSKm_-FaXWm",
+      "video_id": "aGoGyGSnVuA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-16",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/goh2x_G0ct4",
+      "video_id": "goh2x_G0ct4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=CdUdHMrtY88",
+      "video_id": "CdUdHMrtY88",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-13",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_n1V-wJZc0WKKeruQl5YAnTcT20d9IEiNU&amp;si=qdxacUvMyQPYuEys",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-04-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/b2_nSjH_k5M?si=HU-wk0geWiqPtiHs",
+      "video_id": "b2_nSjH_k5M",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/rILKm-DC06A",
+      "video_id": "rILKm-DC06A",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-09",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/38PylwA9rQY?si=TirILBJn88o5hMrZ",
+      "video_id": "38PylwA9rQY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/hIyt_E9Y7bQ?si=dXx-iDPpIg4hbrhj",
+      "video_id": "hIyt_E9Y7bQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-04",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/y_sue2MN6Ek?si=utzAxMGAPAA0d72L",
+      "video_id": "y_sue2MN6Ek",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-04",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/-AtU0Ov0LZo?si=ye4el8tvthuKWRLy",
+      "video_id": "-AtU0Ov0LZo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-04",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DCDmfhwk6qY",
+      "video_id": "DCDmfhwk6qY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-04-04",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/p335p60Lkxc?si=d0Y4FSuJQitWZpe7",
+      "video_id": "p335p60Lkxc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-28",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=9Gc4QTqslN4",
+      "video_id": "9Gc4QTqslN4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-24",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Rpwx6vVX-_E&amp;list=RDEMTGdESHRm2MNt02BJbAMgtQ&amp;index=2",
+      "video_id": "Rpwx6vVX-_E",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-22",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/TOjUd4Xes2M?si=POjvcolDghrdSPDk",
+      "video_id": "TOjUd4Xes2M",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/flQ0HoJuuhs?si=a4vA7miw4D2V5u7k",
+      "video_id": "flQ0HoJuuhs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/r4-uq8cTF7o?si=Cw34QptNL9gwVzCM",
+      "video_id": "r4-uq8cTF7o",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/JSHd5mm7qNI?si=Xp6XzlzRUYw3JKzA",
+      "video_id": "JSHd5mm7qNI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/TULETlL4beY?si=If6XMomQ_HR08JVP",
+      "video_id": "TULETlL4beY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/0Xk-wRMKMoc?si=06o-TRnECEi9FpE2",
+      "video_id": "0Xk-wRMKMoc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/Rcc8sUDmO_Y?si=HfREouRjDQv7gk31",
+      "video_id": "Rcc8sUDmO_Y",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/K3dzK6hKaX8?si=fK0YkA0sV6MLxWZP",
+      "video_id": "K3dzK6hKaX8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/h0YKkQPgEYM?si=ZBycvYDJ540US6z1",
+      "video_id": "h0YKkQPgEYM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=PLMmDDSnnlS6gbrTQCQlz039XxUvE5xN7P&amp;si=oCsPrjEAgkWk1T8M",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/qywS6LUfXb8?si=o4JMs2C4JjCvJ-DQ",
+      "video_id": "qywS6LUfXb8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/9vstjbrLqDI?si=TUOeY0LWGvpeQJuW",
+      "video_id": "9vstjbrLqDI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://analogafrica.bandcamp.com/album/roots-rocking-zimbabwe-the-modern-sound-of-harare-townships-1975-1980-analog-africa-no-41",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/BGpUyxSeeoc?si=VAtl9L4F98px9zZK",
+      "video_id": "BGpUyxSeeoc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=mh-skHl7drc",
+      "video_id": "mh-skHl7drc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-21",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=oNhJelyOOHM&amp;list=RDGMeWHqgZ8C0&amp;index=5",
+      "video_id": "oNhJelyOOHM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-19",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://analogafrica.bandcamp.com/album/per-selv-tico-sonic-expedition-into-the-peruvian-amazon-1972-1986-analog-africa-no-36",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-03-19",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/1bE8Q524CPc?si=ebtI1wk07URgWnwd",
+      "video_id": "1bE8Q524CPc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=uB1D9wWxd2w&amp;ab_channel=MarkMorrison",
+      "video_id": "uB1D9wWxd2w",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-17",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NI6aOFI7hms&amp;ab_channel=TheCardigansVEVO",
+      "video_id": "NI6aOFI7hms",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-17",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/vhrjTeugvMs?si=ZO6QSqDnL0s4SzeT",
+      "video_id": "vhrjTeugvMs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-15",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/kPU4W6R-3Ik?si=DpdyuhuDqlbuw7zA",
+      "video_id": "kPU4W6R-3Ik",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-15",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/816IuEYZF70?si=mOi26RxAuAJTsord",
+      "video_id": "816IuEYZF70",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-15",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/H5dNJqtN65Y?si=tUvCTJ-RSIN0sLND",
+      "video_id": "H5dNJqtN65Y",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-15",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/RnA5WIXm1_E?si=nIl5If3pJx2Nn3uA",
+      "video_id": "RnA5WIXm1_E",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-15",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/eChixk2FDc8?si=fyGRDYSCj0o87bJF",
+      "video_id": "eChixk2FDc8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-14",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=WL-saL1laIc&amp;t=484s",
+      "video_id": "WL-saL1laIc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-08",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=kPRA0W1kECg&amp;ab_channel=TimoBingmann",
+      "video_id": "kPRA0W1kECg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-02",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=C2cMG33mWVY",
+      "video_id": "C2cMG33mWVY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-03-02",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/I2HGFgM6P0Y",
+      "video_id": "I2HGFgM6P0Y",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=jdU16tnrt14",
+      "video_id": "jdU16tnrt14",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7I0QdAOBuww",
+      "video_id": "7I0QdAOBuww",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/U5gEY3_PXfE?si=G9u2slespeNRYI_-",
+      "video_id": "U5gEY3_PXfE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-23",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/I6vjaimSK4E?si=lHth_Ka2rglLtmog",
+      "video_id": "I6vjaimSK4E",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-23",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/TiGhRcruIJY",
+      "video_id": "TiGhRcruIJY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=STP4cCpyScE",
+      "video_id": "STP4cCpyScE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-21",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=yCxNUKNgqyQ",
+      "video_id": "yCxNUKNgqyQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-21",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.maxxtees.com/product/liberalism-is-ghetto-christian-walker-hoodie/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-02-20",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://knowyourmeme.com/memes/people/christian-walker",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-02-20",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/q-xiQI5uhBg?si=0RGwvtOHmqLQKyMs",
+      "video_id": "q-xiQI5uhBg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-20",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=C6zovYEZs5g",
+      "video_id": "C6zovYEZs5g",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=q8AMZmWqgRM&amp;ab_channel=AlGreen-Topic",
+      "video_id": "q8AMZmWqgRM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-16",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=qmOLtTGvsbM&amp;ab_channel=TotoVEVO",
+      "video_id": "qmOLtTGvsbM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-16",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cXAKq5QvX4k&amp;ab_channel=RobertAllen",
+      "video_id": "cXAKq5QvX4k",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-16",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/JSHd5mm7qNI?si=sTmHqxDNdgbggbhU",
+      "video_id": "JSHd5mm7qNI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2025-02-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Udgsk0Pzf7w?si=DCs02VxZCqjfi1Ya",
+      "video_id": "Udgsk0Pzf7w",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.cameroononline.org/how-francis-bebey-transformed-cameroonian-music/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-02-12",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=z-2CKsaq5r8&amp;ab_channel=VilletorteDavid%28Dj%27s-BROWN%29",
+      "video_id": "z-2CKsaq5r8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-12",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-zo-44fLy_4&amp;ab_channel=Ren%C3%A9Touzet-Topic",
+      "video_id": "-zo-44fLy_4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-12",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/25WNG0VAZJw",
+      "video_id": "25WNG0VAZJw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Xee_2r-5L2U",
+      "video_id": "Xee_2r-5L2U",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/msfC9ogSdhI",
+      "video_id": "msfC9ogSdhI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/tJ5AAWvARfw",
+      "video_id": "tJ5AAWvARfw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/3xfeztg1ZOg?si=QZRcEyXJrBYZvlFv",
+      "video_id": "3xfeztg1ZOg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-07",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/SwXayHbUQ2o?si=rzCuaKPwqNuFG4d-",
+      "video_id": "SwXayHbUQ2o",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-07",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=KvWF6XbHJJE",
+      "video_id": "KvWF6XbHJJE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-04",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_HtmXTNn2Rw",
+      "video_id": "_HtmXTNn2Rw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-03",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=xP_sYT3O-Og",
+      "video_id": "xP_sYT3O-Og",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-02-01",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=LFPIgU0slw8&amp;ab_channel=MichelCamilo",
+      "video_id": "LFPIgU0slw8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-30",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=PwMfZhiQR-8&amp;ab_channel=KEXP",
+      "video_id": "PwMfZhiQR-8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-30",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/5DyC02BM_P4?si=YmwxafIN-aYjLhXf",
+      "video_id": "5DyC02BM_P4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-29",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/0riT7Eo_Reo?si=ScIEkcmMhf7X-Wvd",
+      "video_id": "0riT7Eo_Reo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-29",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/udilkPa4qBM?si=pWr97_z8qlwHH7sJ",
+      "video_id": "udilkPa4qBM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-29",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/vDj3CRZy5p8?si=p6soQnHE-ehJDNB2",
+      "video_id": "vDj3CRZy5p8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.hollywoodreporter.com/news/general-news/hans-zimmer-saudi-arabia-national-anthem-1236116970/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-01-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Z0XLzIswI2s&amp;ab_channel=Oxygene80",
+      "video_id": "Z0XLzIswI2s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-25",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/zg1WaqaA1pE?si=q0AMmeDLhTl5A3_k",
+      "video_id": "zg1WaqaA1pE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/eHyqvxxBzLQ",
+      "video_id": "eHyqvxxBzLQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7htstbQR868",
+      "video_id": "7htstbQR868",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-24",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/JBHgNlbLF8I",
+      "video_id": "JBHgNlbLF8I",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/g7uOFwNJCzs?si=ss2z_8t0ZM2ZwvNV",
+      "video_id": "g7uOFwNJCzs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-22",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/BWcRs31k_m8?si=6p7gnmG6lrIYCOwu",
+      "video_id": "BWcRs31k_m8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=FqtYWbf3jPo&amp;list=PLZKLrlWNsJGuuOoDGwb5roEwlK2zmyANA&amp;index=2",
+      "video_id": "FqtYWbf3jPo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-20",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ANYPELSDG6o",
+      "video_id": "ANYPELSDG6o",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-20",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/kmlF2rw1weo?si=UdetZQx6XyAu8Rn8",
+      "video_id": "kmlF2rw1weo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://kfai.org/episode/01-17-2025-fubar-omniverse/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-01-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NQLvnin2bxs",
+      "video_id": "NQLvnin2bxs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://imprec.bandcamp.com/album/agartha-personal-meditation-music-1985-7-cd-box",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-01-15",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/0xjJuAzZj0s",
+      "video_id": "0xjJuAzZj0s",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/xrPPF6gzMJ0?si=74-qWzqnnHnr0gnu",
+      "video_id": "xrPPF6gzMJ0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/IuXuxpWtmgA?si=1d-gkOx_sGbJ_iIa",
+      "video_id": "IuXuxpWtmgA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/pRn4tTNkQQs?si=WyGlEUCAjhyNSLOp",
+      "video_id": "pRn4tTNkQQs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/o8IZ7lJsjg8?si=WB2mxPLItkOs8ZEg",
+      "video_id": "o8IZ7lJsjg8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://music.youtube.com/watch?v=5fRxlXC5K80",
+      "video_id": "5fRxlXC5K80",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/y1Ywpr5_6ho?si=h9DQlVkn2BoGFWSC",
+      "video_id": "y1Ywpr5_6ho",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/f5w1MxNvpes?si=MseNmxmFX8Q5xQrY",
+      "video_id": "f5w1MxNvpes",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/BDmHf721qXA?si=sI1om5d27SKe3Le5",
+      "video_id": "BDmHf721qXA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-10",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/ufnPNTalw5Q?si=a-mtTaku_nfJbWZY",
+      "video_id": "ufnPNTalw5Q",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-10",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=4xMrgsT0kU4",
+      "video_id": "4xMrgsT0kU4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-10",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://nyegenyegetapes.bandcamp.com/album/sounds-of-sisso",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2025-01-10",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=iiy5K81qvbg&amp;ab_channel=Streetworm14",
+      "video_id": "iiy5K81qvbg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2025-01-08",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.nts.live/projects/supporter-radio",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-12-31",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BVDZM96Xwpw",
+      "video_id": "BVDZM96Xwpw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-29",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Y4FrnrD7jCA&amp;ab_channel=randomVHStat",
+      "video_id": "Y4FrnrD7jCA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-29",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=S650YFB45Ho&amp;list=PLSa_MpJj5A2UhrOyh2rUT9i12nEu-6-Nc&amp;ab_channel=BeingDeadVEVO",
+      "video_id": "S650YFB45Ho",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-25",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nud2TQNahaU",
+      "video_id": "nud2TQNahaU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-24",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=CxjYrSoECeI",
+      "video_id": "CxjYrSoECeI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/U9TByT3QlWc?si=2kzpxle97nuInpWv",
+      "video_id": "U9TByT3QlWc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-24",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/ENd75_Hj8so",
+      "video_id": "ENd75_Hj8so",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=PLAKdKOnF8LlPAKw1z4DUcq9oVMTux61cf&amp;si=EbHKiDD3mOU_QAyO",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-12-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hvCnYcXGqYM&amp;t=217s",
+      "video_id": "hvCnYcXGqYM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-17",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=IuzNX4ZSbJc&amp;ab_channel=Cherbookie",
+      "video_id": "IuzNX4ZSbJc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-14",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=uMxkRT7bJ0w",
+      "video_id": "uMxkRT7bJ0w",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-11",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hz0_rWImSaM",
+      "video_id": "hz0_rWImSaM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-08",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=KB8HxP00kDY",
+      "video_id": "KB8HxP00kDY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-06",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/P4htqoi13TE",
+      "video_id": "P4htqoi13TE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-05",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/qeWutl38TQw",
+      "video_id": "qeWutl38TQw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-05",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/arQUVdjI2y0",
+      "video_id": "arQUVdjI2y0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-04",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/JTXMB7iVONM",
+      "video_id": "JTXMB7iVONM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-04",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/fgGlFmniFVY",
+      "video_id": "fgGlFmniFVY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/yHr3XlLBf7M",
+      "video_id": "yHr3XlLBf7M",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/qkuznjOQEus",
+      "video_id": "qkuznjOQEus",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://pitchfork.com/reviews/albums/jackzebra-king-of-kings/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-12-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/V5HW88srBGo",
+      "video_id": "V5HW88srBGo",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/DdRfr6fIcAc",
+      "video_id": "DdRfr6fIcAc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-12-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_kS3f5eDoTTEDtIgPduBAjGUubY5kjYNSs",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-11-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/fuV4yQWdn_4",
+      "video_id": "fuV4yQWdn_4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/g_erHkSrMJk",
+      "video_id": "g_erHkSrMJk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.fullbucket.de/music/ragnarok.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-11-21",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=pg7HvF3a_Iw&amp;list=PLS_ozHE5BMzTQ44fsNQbMydph6rvWWaU4",
+      "video_id": "pg7HvF3a_Iw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-20",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=kaFGVX3Nwo0",
+      "video_id": "kaFGVX3Nwo0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-20",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.nytimes.com/2024/11/19/arts/music/donkey-kong-country-soundtrack-david-wise.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-11-19",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/zPKxNTt-8A4?si=AiwKnrEv1JiQVgXa",
+      "video_id": "zPKxNTt-8A4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-18",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/QAoyes6VCrQ?si=vtqzMhpvPI9XwURe",
+      "video_id": "QAoyes6VCrQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-18",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/OcZjmW_Gt4w?si=nmbeAa-n4_vOoC45",
+      "video_id": "OcZjmW_Gt4w",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-18",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/QJavHc48iZU?si=zWGAJqzn_mH2cTQG",
+      "video_id": "QJavHc48iZU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-18",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/omgbhGirTtY?si=jcazFh3IjNqQkKUX",
+      "video_id": "omgbhGirTtY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-18",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/E7XvFClMXPI",
+      "video_id": "E7XvFClMXPI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://x.com/sunomusic/status/1854961069300613176",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-11-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/12cKPhKObzc",
+      "video_id": "12cKPhKObzc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://teenage.engineering/store/op-xy/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-11-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/XGHIcU3g8Ps?si=stUoHYLuT9zVPBkD",
+      "video_id": "XGHIcU3g8Ps",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ecrf9uoHSTc",
+      "video_id": "ecrf9uoHSTc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-11",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/lSyC6m1bYZs",
+      "video_id": "lSyC6m1bYZs",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/e3WqjTxtfVE",
+      "video_id": "e3WqjTxtfVE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.fullbucket.de/music/brokenmini.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-11-09",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/7WKm-p1j00c",
+      "video_id": "7WKm-p1j00c",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/tyPNZiFJyS0?si=REn7hvZvYsZeiOBT",
+      "video_id": "tyPNZiFJyS0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-08",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/mFfZkG2-pWk",
+      "video_id": "mFfZkG2-pWk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-05",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/IYRyA-Uthcw",
+      "video_id": "IYRyA-Uthcw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Qr9aWoTULnk",
+      "video_id": "Qr9aWoTULnk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-11-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://audiowatermarking.com/sonicdecloner",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-10-31",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.perfectcircuit.com/suzuki-omnichord-om-108.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-10-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/K-2pXMP3uu4",
+      "video_id": "K-2pXMP3uu4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/-J9-5fcNzaY",
+      "video_id": "-J9-5fcNzaY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/SzlOk1rqrkM",
+      "video_id": "SzlOk1rqrkM",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/wNGA3bPRjX8",
+      "video_id": "wNGA3bPRjX8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-20",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.makenoisemusic.com/synthesizers-and-controllers/tape-microsound-music-machine/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-10-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.musicthing.co.uk/workshopsystem/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-10-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://walzr.com/bop-spotter",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-10-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/7RW8PFJTJJY?si=nfKJcqPpUG4xBu4v",
+      "video_id": "7RW8PFJTJJY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-05",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/wtOu9QY9P64",
+      "video_id": "wtOu9QY9P64",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-04",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/z0pzzkp85-Q",
+      "video_id": "z0pzzkp85-Q",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-04",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ULtY8ovnh0U",
+      "video_id": "ULtY8ovnh0U",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-10-04",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://archive.org/details/dungeon_metadata",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-09-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/kaPJr92jAT4",
+      "video_id": "kaPJr92jAT4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-09-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Yqjl8_ey4Hk",
+      "video_id": "Yqjl8_ey4Hk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-09-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/uedeZ9eli0o?si=0yffVYjJasfoj03B",
+      "video_id": "uedeZ9eli0o",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-09-18",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/NI-7w7OjaaE",
+      "video_id": "NI-7w7OjaaE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-09-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://andre3000.com/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-09-13",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/lSgrwaqriuk",
+      "video_id": "lSgrwaqriuk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-09-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ynvUjVuxw7o",
+      "video_id": "ynvUjVuxw7o",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-09-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.tiktok.com/@contentcow0",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-09-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ueEPT8OTGUk",
+      "video_id": "ueEPT8OTGUk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-09-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.aljazeera.com/news/2024/7/8/gaza-toll-could-exceed-186000-lancet-study-says",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-08-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://godspeedyoublackemperor.bandcamp.com/album/no-title-as-of-13-february-2024-28340-dead",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-08-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/qaJNK3xOWBY?si=9lroovzsvQn9rRpz",
+      "video_id": "qaJNK3xOWBY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-24",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/GjIlvSVSQAE",
+      "video_id": "GjIlvSVSQAE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-21",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://teenage.engineering/products/po",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-08-21",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/T1841FR_eE8",
+      "video_id": "T1841FR_eE8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-21",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=aaZ2hs-45nI",
+      "video_id": "aaZ2hs-45nI",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-21",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.nasa.gov/science-research/heliophysics/space-weather/help-discover-the-sounds-of-space-played-by-nasas-harp/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-08-20",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/8rmsQErmHT8?start=166",
+      "video_id": "8rmsQErmHT8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/nMnsFtM8sv0",
+      "video_id": "nMnsFtM8sv0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/PLU3fYsAxA8",
+      "video_id": "PLU3fYsAxA8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Myv3Ql183gc",
+      "video_id": "Myv3Ql183gc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/n6QsusDS_8A?si=5NcT5SLa6O2-_oqx",
+      "video_id": "n6QsusDS_8A",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-08-03",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/i_3u3uJ4F9E?si=m0GgkcBQFuubTsV9",
+      "video_id": "i_3u3uJ4F9E",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-31",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/O_IZI7YQLsU?si=z3unBOF5p4la4peq",
+      "video_id": "O_IZI7YQLsU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-31",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/F2CcU-lTjsQ",
+      "video_id": "F2CcU-lTjsQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2QoBR-F3tp4",
+      "video_id": "2QoBR-F3tp4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/collection-of-vintage-radio-station-ids-from-the-1970s.t-22",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-07-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "http://archive.org",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/ninjam?tab=collection",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/FEb68L-3UWY?si=SfZueRxFs2bZhbDR",
+      "video_id": "FEb68L-3UWY",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/6-E1yYfyxFk?si=qrvGJ3diD6d55KaA",
+      "video_id": "6-E1yYfyxFk",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=c_qPiZVFs5c",
+      "video_id": "c_qPiZVFs5c",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ctLdakWSNjc",
+      "video_id": "ctLdakWSNjc",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/obHmjE7bdjQ",
+      "video_id": "obHmjE7bdjQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/l-7T2psTjpU?si=a-m73qKN0kmwgiZw",
+      "video_id": "l-7T2psTjpU",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-07",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=fowOHiOJC7g&amp;ab_channel=II-L",
+      "video_id": "fowOHiOJC7g",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-07",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Y9ADedGX-cE&amp;ab_channel=SOUNDROTATION",
+      "video_id": "Y9ADedGX-cE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-07",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BN8M2irJVJA&amp;list=PLSa_MpJj5A2XJ-Np_N1Xr1qfhsdiW2P2F&amp;index=3&amp;ab_channel=RonaldGrinder",
+      "video_id": "BN8M2irJVJA",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-04",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=psMLOlCxsFw&amp;list=PLqalLss_zIF7du6cQDq7AtCVIT6cZ_2IL&amp;index=3&amp;ab_channel=ThomasLigre",
+      "video_id": "psMLOlCxsFw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-04",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-iVYu5lyX5M&amp;ab_channel=DrFattyJr",
+      "video_id": "-iVYu5lyX5M",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-04",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UwNy9hOyQV4&amp;ab_channel=EnsembleOrganum-Topic",
+      "video_id": "UwNy9hOyQV4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-07-04",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/0ZEVuXsArfg?si=NRnpaSBqLhyDoWbK",
+      "video_id": "0ZEVuXsArfg",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://ubu.com/sound/wolf.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-06-21",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/HNeWjsUb0D0?si=XCKTl9XkFm0_20qB",
+      "video_id": "HNeWjsUb0D0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/iHzuygQd3do",
+      "video_id": "iHzuygQd3do",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-20",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dy77ioKI4lQ",
+      "video_id": "dy77ioKI4lQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-19",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=5_0lufFCs6M",
+      "video_id": "5_0lufFCs6M",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-19",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://ajjtheband.bandcamp.com/album/disposable-everything-else",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-06-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=4OSn_RJcwl0",
+      "video_id": "4OSn_RJcwl0",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-16",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/PshxeE7Ot7c?si=cXwjyfd2ikISq-LE",
+      "video_id": "PshxeE7Ot7c",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=t8tdmaEhMHE",
+      "video_id": "t8tdmaEhMHE",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-14",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DgD4x_SfyD8",
+      "video_id": "DgD4x_SfyD8",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-06-10",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.sirencon.com",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-06-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/bvy6aox2Sgw",
+      "video_id": "bvy6aox2Sgw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-05-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_mrc3Yv0X0TLCjVDj-8Fx8NYE9AG1bux2c",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.tiktok.com/t/ZTLWgaqjd/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-05-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/5wIOBBodoic?si=Em6c-inF-TA4elVx",
+      "video_id": "5wIOBBodoic",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-05-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=xTmeBx9SC58",
+      "video_id": "xTmeBx9SC58",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-05-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=JNjk8w8oRRQ",
+      "video_id": "JNjk8w8oRRQ",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-05-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=oNSqPmS6UME",
+      "video_id": "oNSqPmS6UME",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-05-27",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/NYjRzQc_ch4",
+      "video_id": "NYjRzQc_ch4",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-05-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.tiktok.com/t/ZTLGVp9CQ/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-05-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_lcpKQ5hGuCmk6cNWfJQFJuOqbu4014shQ",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/fXJc2NYwHjw",
+      "video_id": "fXJc2NYwHjw",
+      "type": "youtube",
+      "added_to_playlist": true,
+      "date": "2024-05-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dwsSbAKs3yo",
+      "video_id": "dwsSbAKs3yo",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=xm4Gm0-qVHw",
+      "video_id": "xm4Gm0-qVHw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GV94ibUocEk",
+      "video_id": "GV94ibUocEk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1QPlZo9OZj8",
+      "video_id": "1QPlZo9OZj8",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-17",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/playlist?list=PLPRWtKgY2MOsG9_xroWCAfd52ZwzVP1Pa",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/r4a-the-american-consulting-group-promo-soundtrack",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-05-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/jTJ4U7oorSc?si=3s7dmvP3x_Vq50ER",
+      "video_id": "jTJ4U7oorSc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-09",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/0gJ8xfg8FAU?si=_DtazOtLoNP5gfVt",
+      "video_id": "0gJ8xfg8FAU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-09",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Tm1nCe-2Cuo?si=rihrzVEeyzo2Zq0N",
+      "video_id": "Tm1nCe-2Cuo",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-08",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/HuO3wwLuF0w",
+      "video_id": "HuO3wwLuF0w",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/9JP-ZhwrxzI?feature=shared",
+      "video_id": "9JP-ZhwrxzI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-08",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://x.com/macklemore/status/1787616471738368099?s=46",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-05-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/lZbfNtDCHdM",
+      "video_id": "lZbfNtDCHdM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-05",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/BCJenvW7lcg",
+      "video_id": "BCJenvW7lcg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-04",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/RmuYa9n4s1s",
+      "video_id": "RmuYa9n4s1s",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-05-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/nFkP9Z2gWck?si=YS66tI7PLAWg-8wB",
+      "video_id": "nFkP9Z2gWck",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=S03nrwuKz1I",
+      "video_id": "S03nrwuKz1I",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-27",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GalJjZHrHfE",
+      "video_id": "GalJjZHrHfE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=U_Mj40cvIEg",
+      "video_id": "U_Mj40cvIEg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-25",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=kiUsJJboQNM",
+      "video_id": "kiUsJJboQNM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_QV12_KGpQ0",
+      "video_id": "_QV12_KGpQ0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=sQGx0pgoKcs",
+      "video_id": "sQGx0pgoKcs",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UBSlthqSPOA",
+      "video_id": "UBSlthqSPOA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=B7PUvFnMiAo",
+      "video_id": "B7PUvFnMiAo",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://soundcloud.com/jkjpn/drtysndclp",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-04-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hMRaLLTosp4",
+      "video_id": "hMRaLLTosp4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/W9n6yhmqyF0?si=PkguOYkcOVXp-6TS",
+      "video_id": "W9n6yhmqyF0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=C0jagztY9DY",
+      "video_id": "C0jagztY9DY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-13",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/-QuzcApPAPE",
+      "video_id": "-QuzcApPAPE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://sonauto.ai/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-04-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/4Dk21erUpvw?si=_RUN_E2Dh6yyJ2YY",
+      "video_id": "4Dk21erUpvw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-10",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=YTeacoeAm9o&amp;ab_channel=thepostarchive",
+      "video_id": "YTeacoeAm9o",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-10",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://larrywish.bandcamp.com/track/larry-wish-books",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-04-10",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/55xQu9eIPIA?si=QnsA5tmKms7tvHnp",
+      "video_id": "55xQu9eIPIA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-09",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "http://www.furious.com/perfect/zornzion.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-04-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/tJkPh2vluFQ?si=ZhKoPQzqnqsZ7SBr",
+      "video_id": "tJkPh2vluFQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-05",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-rDmcs1o658",
+      "video_id": "-rDmcs1o658",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-05",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=m9g5tIHQXEk&amp;ab_channel=Rufus-Topic",
+      "video_id": "m9g5tIHQXEk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-03",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6jNzQA5V5MI&amp;ab_channel=JerryLeeLewis-Topic",
+      "video_id": "6jNzQA5V5MI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-03",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=an_gnfu2Sfw",
+      "video_id": "an_gnfu2Sfw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-04-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/b790ccaa-402f-446b-8533-0d2c3fe5904b/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_KztNIg4cvE",
+      "video_id": "_KztNIg4cvE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-31",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/hsrTUDS6El4?si=kLKdmODE63O4qeul",
+      "video_id": "hsrTUDS6El4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://au-supply.slack.com/archives/C03TFJUE36G/p1711569356487949",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-29",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/D0oEtrCReh0?si=reyVvZlNgxoMexdC",
+      "video_id": "D0oEtrCReh0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://wavtool.com/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/77497353-c831-4ccf-8636-4ae297148846/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/9b91b71e-5bae-4b7c-acf7-5d5d9d8b745d/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://au-supply.slack.com/docs/T03SYH1KM7Z/F05K626CA1G",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/66434951-4038-4df8-aa7b-3f98481a7836/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/6a476013-4167-42b2-8e7a-cf6cb7e7fedf/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/975f14c1-c0dd-4bf4-b62b-809abee99980/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/dee5ddd8-433c-432a-968b-070bbceb06cc/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/b428d6c6-7f40-4af8-afaa-298c7266ab4b/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai/song/452239f7-5cc8-49b1-85e1-b6ff0a6747cf/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.suno.ai",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-03-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Zt1Ovb1g6Tg",
+      "video_id": "Zt1Ovb1g6Tg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-24",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=MJvnOz6GZ8g",
+      "video_id": "MJvnOz6GZ8g",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-19",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cwZ1L_0QLjw",
+      "video_id": "cwZ1L_0QLjw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-16",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/JuR5MUOJ8SI?si=0eGBwSslaVsUshIm",
+      "video_id": "JuR5MUOJ8SI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/mCf10TgpwgM",
+      "video_id": "mCf10TgpwgM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/_Vk_tFoi9PM?si=CMkf2_ElLqa7JR1H",
+      "video_id": "_Vk_tFoi9PM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=I1UoeanE6xE",
+      "video_id": "I1UoeanE6xE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=VjQvtE_el7w",
+      "video_id": "VjQvtE_el7w",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/MFCH3JwaIaU?si=qHlefHkIswR1CB8r",
+      "video_id": "MFCH3JwaIaU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/bpZyjbBNW0I?si=CvWeIgTqgIkF25Xy",
+      "video_id": "bpZyjbBNW0I",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/_R9an8AU3No?si=tdMpJePJDY2xjgYE",
+      "video_id": "_R9an8AU3No",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-03-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/4iZKceQn4ZM?si=dhODXmjOLSDbP_SE",
+      "video_id": "4iZKceQn4ZM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=g3DfekebzW8",
+      "video_id": "g3DfekebzW8",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-28",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/xJ2rSlwDg3I?si=jfqaHhQkCGpPdW-l",
+      "video_id": "xJ2rSlwDg3I",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.nts.live/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-02-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=mMed_6476t8&amp;list=PLlsZHYnNM0pYBgZJMH8cji9sQlN3BXNEu",
+      "video_id": "mMed_6476t8",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-19",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/SUFSB2plwzM?si=8JTEsiIs8gi_eWnZ",
+      "video_id": "SUFSB2plwzM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=XQmBCL53QZY",
+      "video_id": "XQmBCL53QZY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-15",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.theguardian.com/music/2024/feb/10/rock-singer-damo-suzuki-dies-aged-74",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-02-11",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/uk6NS5Y9TpY?si=bnzkQzF-1nDEmNgF",
+      "video_id": "uk6NS5Y9TpY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/IZ3i80B0qKg?si=Jsq4nlevzw8ZJ8nK",
+      "video_id": "IZ3i80B0qKg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-02-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.tiktok.com/t/ZPR3J3RPt/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-01-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.synthhistory.com/post/john-medeski-interview-on-the-curse-soundtrack",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-01-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=PwGgDmHuGpA",
+      "video_id": "PwGgDmHuGpA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-01-20",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_klmDdvu6fH5DI9dmhIb2obDpSwfLx6JX4&amp;si=hDwqbk0ZwwiO6yaq",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-01-20",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://github.com/neilbaldwin/KOII-tips-and-tricks/blob/master/readme.md",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-01-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/tzcTslewELI?si=HlDZjXqowqNX-3C3",
+      "video_id": "tzcTslewELI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2024-01-07",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.perfectcircuit.com/oxi-one.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2024-01-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://reverb.com/news/the-ems-vcs3-and-synthi-for-less-the-synth-markets-best-affordable-alternatives",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://synthanatomy.com/2023/10/behringer-shows-their-unfinished-ems-vcs-3-clone-for-the-first-time.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://optimisticunderground.com/2017/12/06/alessandro-cortini-avanti/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://cortini.bandcamp.com/album/avanti",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://reverb.com/item/6350452-synthi-aks-suitcase-synthesizer-owned-by-alessandro-cortini",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.moogmusic.com/news/introducing-mariana",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.soundonsound.com/reviews/apesoft-ivcs3",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://cherryaudio.com/instruments/surrealistic-mg-1-plus",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-31",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://bastl-instruments.com/instruments/bestie",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dcSbY8omlrs",
+      "video_id": "dcSbY8omlrs",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-23",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GOzi-gD7-ts",
+      "video_id": "GOzi-gD7-ts",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-23",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/o7ZkNDC0gBA?si=RRtvU7sBWjmwWQKh",
+      "video_id": "o7ZkNDC0gBA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=O-KqMHxpirI",
+      "video_id": "O-KqMHxpirI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-23",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/XoHWjG6LUsA?si=auXRW3WnfT5ss2_N",
+      "video_id": "XoHWjG6LUsA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=QsoOtmpIzVs",
+      "video_id": "QsoOtmpIzVs",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-17",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=OAIW5se_cxg",
+      "video_id": "OAIW5se_cxg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/j3iccw8dXIk",
+      "video_id": "j3iccw8dXIk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-09",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=iL-UFdNHtv0&amp;ab_channel=smartypants",
+      "video_id": "iL-UFdNHtv0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-06",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=G8sGmSEehi4&amp;ab_channel=ButtholeSurfers-Topic",
+      "video_id": "G8sGmSEehi4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-06",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=H6xLJtQEcN0",
+      "video_id": "H6xLJtQEcN0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-06",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=qtnjWETMt_o&amp;ab_channel=CandidDate",
+      "video_id": "qtnjWETMt_o",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-06",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Kw1dIT9SCNI&amp;ab_channel=AlanVega%2FSuicide-Topic",
+      "video_id": "Kw1dIT9SCNI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-06",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.koalasampler.com/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-03",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://photos.app.goo.gl/Dh9jypgxNgotNBz76",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-12-02",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/gIvgZ53GEOg?si=f0jQZg8xCx771AKY",
+      "video_id": "gIvgZ53GEOg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-12-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/1jYjCPe09co?si=WD8x7zSND2sqkz12",
+      "video_id": "1jYjCPe09co",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-30",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=on-y9Pv-CJA",
+      "video_id": "on-y9Pv-CJA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-28",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://x.com/annaindianaai/status/1728089499429642432",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-11-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/K3lgmnsTdcA?si=1937hxNmHOXkCc9t",
+      "video_id": "K3lgmnsTdcA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-25",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/jRNCO4cryCM?si=fuuEdfGh7hs8zcU1",
+      "video_id": "jRNCO4cryCM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-23",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=iFRpz4jYLVA&amp;list=OLAK5uy_nCA5QHMQWA24R8Z0Ek_ICjVbH5udK03ag&amp;index=8",
+      "video_id": "iFRpz4jYLVA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-23",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/7sofCz1OfGE?si=bwfGHTtp37DVKNf2",
+      "video_id": "7sofCz1OfGE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-23",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/bY-zmJ1VCQI?si=Bw7MpfP8DCOIfp6s",
+      "video_id": "bY-zmJ1VCQI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-23",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/sPdaashRNSI?si=mM2Igkafk_QULLQ6",
+      "video_id": "sPdaashRNSI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-23",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=V4jt2bY2HPs&amp;ab_channel=MusicSphere",
+      "video_id": "V4jt2bY2HPs",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-23",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://teenage.engineering/products/ep-133",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-11-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/lXeDP3xjjs4?si=itTMZhZfBrAcS2Ah",
+      "video_id": "lXeDP3xjjs4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/fVx9PpkW34g?si=a1r9YUmx5e0xcqHn",
+      "video_id": "fVx9PpkW34g",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-21",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Sxa9wNl2OjE&amp;ab_channel=TheImpressions-Topic",
+      "video_id": "Sxa9wNl2OjE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-19",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.apple.com/apple-music/apple-digital-masters/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-11-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.reddit.com/r/audiophile/comments/a58fzh/reminder_that_spotify_defaults_to_audio/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-11-17",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/nKAySS2whuA?si=HiocYciUGCjRCEmz",
+      "video_id": "nKAySS2whuA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=lepSvyL722A",
+      "video_id": "lepSvyL722A",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-16",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/zV75x00RiKI?si=wlFQ3dvDPFgbcAAQ",
+      "video_id": "zV75x00RiKI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/NajZa4NwR6k?si=rQRYUz1h9AGJb_Y7",
+      "video_id": "NajZa4NwR6k",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-11-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=w6qUDoqtoog",
+      "video_id": "w6qUDoqtoog",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-28",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NVjSycDJatc",
+      "video_id": "NVjSycDJatc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-28",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=17GCBtKYaOg&amp;ab_channel=10cc-Topic",
+      "video_id": "17GCBtKYaOg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-27",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://knowyourmeme.com/memes/ohio-vs-the-world",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-10-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/shorts/tzD9OxAHtzU?si=ADKplDD4D-4DuyGj",
+      "video_id": "tzD9OxAHtzU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/nlaoR5m4L80?si=12cs1Ne0xLgUh8tu",
+      "video_id": "nlaoR5m4L80",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.tiktok.com/t/ZT8kkjTSM/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-10-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Q_fvcvkTcjc?si=h75E6yBWrNI23AK-",
+      "video_id": "Q_fvcvkTcjc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-22",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=J17SdRpfxho&amp;ab_channel=GiorgioMoroder-Topic",
+      "video_id": "J17SdRpfxho",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-21",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DwPWGUhEtP0&amp;ab_channel=Yes-Topic",
+      "video_id": "DwPWGUhEtP0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-21",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=TLYsZH7cK7A",
+      "video_id": "TLYsZH7cK7A",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/_iALyau6LQk?si=_Fo7QQvUUCyIJwLT",
+      "video_id": "_iALyau6LQk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/S-1KDZTNty4?si=MMQtjqSC8vLIwc3Y",
+      "video_id": "S-1KDZTNty4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rcVKzroiilA",
+      "video_id": "rcVKzroiilA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-06",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Id2dCFfAqoE",
+      "video_id": "Id2dCFfAqoE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-06",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BXc2Seqw98c",
+      "video_id": "BXc2Seqw98c",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-06",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=yK2Sejb4hdg",
+      "video_id": "yK2Sejb4hdg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-10-02",
+      "user": "U0416JY70UC"
+    },
+    {
+      "url": "https://youtu.be/s0yTilal3_c?si=ItTS66DvzxSPD47B",
+      "video_id": "s0yTilal3_c",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-09-30",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=XiVtsWzNqiw",
+      "video_id": "XiVtsWzNqiw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-09-30",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://au-supply.slack.com/archives/C040C2RSEQ0/p1696009639964689",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-09-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=t8CkeCsJugE",
+      "video_id": "t8CkeCsJugE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-09-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ND2WwfANwPs&amp;ab_channel=TheFourFreshmen-Topic",
+      "video_id": "ND2WwfANwPs",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-09-29",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GMYzaqupprQ&amp;ab_channel=TheCars-Topic",
+      "video_id": "GMYzaqupprQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-09-25",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/tREowDWpXcA?si=YiPEZhHbS2NsyfR4",
+      "video_id": "tREowDWpXcA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-09-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/DPQI0H-CZDE?si=30HxEgaqx9Qizcsm",
+      "video_id": "DPQI0H-CZDE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-09-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/ThNdxgLojaM?si=gFkGM1VEr6tBnL3I",
+      "video_id": "ThNdxgLojaM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/l_1BSf77yCk?si=O5tFXBPmEZkCyuDU",
+      "video_id": "l_1BSf77yCk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-31",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=j4jtIDaeaWI&amp;ab_channel=SuzanneVegaVEVO",
+      "video_id": "j4jtIDaeaWI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-27",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1lOhA7xkQiw",
+      "video_id": "1lOhA7xkQiw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/shorts/wStIFMTn0QE?feature=share",
+      "video_id": "wStIFMTn0QE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-23",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://archive.org/details/808_variations/808variations/casioSK-1/casioSK-1_808_CP.wav",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-20",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/Bp00msID-BY",
+      "video_id": "Bp00msID-BY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-19",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.perfectcircuit.com/artiphon-orba-2.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-19",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://bondhotw.shop/products/magi?fbclid=PAAaZwVEJgBbRk5_Amg092YrfN7rtdwceKMUPlLYtHgeM7Hk6F75u0NgpYPV8_aem_AYo9PEl-YWYQXqUuaieLj4QlXSYfMXBCfPyC3BEBIdqiYO2hg2gxp6-Xu0ApYvxR96i5ALr2sbUYCDVwrnPTWV4f&amp;variant=8946435",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=xI_Yvkw1sdE",
+      "video_id": "xI_Yvkw1sdE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hw9bWnDei-k",
+      "video_id": "hw9bWnDei-k",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=U3pR0PXj0F0",
+      "video_id": "U3pR0PXj0F0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "http://blogfiles.wfmu.org/DP/2003/05/365-Days-Project-05-30-unknown-carry-on-my-wayward-son.mp3",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://wfmu.org/365/2003/150.shtml",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6SLo-_dDGls",
+      "video_id": "6SLo-_dDGls",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-17",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=LDYwIOWbeRU",
+      "video_id": "LDYwIOWbeRU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-17",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.twitch.tv/yungskrrt",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GHpfC6Kd7Ko&amp;ab_channel=PiperW.Preston",
+      "video_id": "GHpfC6Kd7Ko",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-10",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wPRSc6IBPtY&amp;list=PLX66jEixZe1yW2hs6UOAq4206YQCL0nNX&amp;index=8&amp;ab_channel=TomPetty-Topic",
+      "video_id": "wPRSc6IBPtY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-06",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://archive.org/download/kill-me-in-my-dreams-stems-aug-2-23/kill%20me%20in%20my%20dreams-stems-aug2-23.zip/kill%20me%20in%20my%20dreams-stems-aug2-23%20copy%2FDry%2FKMIM%20-%20Jangle%20Guit%20Strum_dry.wav",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://tulamics.com/products/the-tula-mic-cream",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-05",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://au-supply.slack.com/archives/C03TFJUE36G/p1690908406083309",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-05",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://colab.research.google.com/drive/1TMIKfDVXuxDVweBuULduxLSrqaKHXhFr?usp=sharing",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-04",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/9sAEcR5FgYo",
+      "video_id": "9sAEcR5FgYo",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://github.com/facebookresearch/audiocraft/blob/main/audiocraft/models/musicgen.py#L124",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://medium.com/mlearning-ai/softmax-temperature-5492e4007f71",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://ai.meta.com/blog/audiocraft-musicgen-audiogen-encodec-generative-ai-audio/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-08-02",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NgZAoJQSNW4",
+      "video_id": "NgZAoJQSNW4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=rl3FstCc_OY",
+      "video_id": "rl3FstCc_OY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=uKQ6rj25zDA",
+      "video_id": "uKQ6rj25zDA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=XDv-2YOoDnU",
+      "video_id": "XDv-2YOoDnU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-08-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/Ls9xG_SY4jk",
+      "video_id": "Ls9xG_SY4jk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-29",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/okLj1nfGG0s",
+      "video_id": "okLj1nfGG0s",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-29",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=L4LxavmC4_4",
+      "video_id": "L4LxavmC4_4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-28",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "http://youtube.com/watch?v=PnvcGv0TWek",
+      "video_id": "PnvcGv0TWek",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-28",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=JVX5TEWEuGQ",
+      "video_id": "JVX5TEWEuGQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-28",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/15gsVRYpJt4",
+      "video_id": "15gsVRYpJt4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/muck-is-a-bucket69/SHROOM/Orange-1/001-Sample01.wav",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://archive.org/details/AkeyBreakyJohnson",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/search?query=uploader%3A%28oyouareatubeo%40gmail.com%29",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/au_jkjpn-es-9-midi-test",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/au_thepope-smoke/005-Sample01.wav",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/muck-is-a-bucket69/SHROOM/White-1/001-Sample01.wav",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://archive.org/details/muck-is-a-bucket69/SHROOM/Magenta-3/001-Sample01.wav",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=WE0k5Pec4WU",
+      "video_id": "WE0k5Pec4WU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=9FqS7xsetcI",
+      "video_id": "9FqS7xsetcI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-25",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/EeLU9TZVZAk",
+      "video_id": "EeLU9TZVZAk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-23",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/c6T6suvnhco",
+      "video_id": "c6T6suvnhco",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-22",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://github.com/Shaunwei/RealChar",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/YQfwPziK-SA",
+      "video_id": "YQfwPziK-SA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Lrle0x_DHBM",
+      "video_id": "Lrle0x_DHBM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-16",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://bullypulpitgames.com/products/fiasco",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-14",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=zWm5WErkffQ",
+      "video_id": "zWm5WErkffQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-14",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=YLgqgh7qAbU",
+      "video_id": "YLgqgh7qAbU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-14",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://monome.org/docs/teletype/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://github.com/overtone/emacs-live",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://sonantlive.bitsnbites.eu/tool/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Music_tracker",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://codec.kiev.ua/Audi0.htm",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-07-13",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/rbTsG9jrJsU",
+      "video_id": "rbTsG9jrJsU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Pz_HJYDcnog",
+      "video_id": "Pz_HJYDcnog",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-08",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=f5mRjsuQp0s",
+      "video_id": "f5mRjsuQp0s",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-08",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=e8TdgBWEOP8",
+      "video_id": "e8TdgBWEOP8",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-08",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/SCBjMndcUd8",
+      "video_id": "SCBjMndcUd8",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-07",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=5rb5VyTnAyA",
+      "video_id": "5rb5VyTnAyA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "http://youtube.com/watch?v=U5maS-E34kA&amp;ab_channel=SanjayC",
+      "video_id": "U5maS-E34kA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-02",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Qksh3YOQhxc&amp;ab_channel=Get.Beautiful.Recordings",
+      "video_id": "Qksh3YOQhxc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-02",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=VmC3zri2ifQ",
+      "video_id": "VmC3zri2ifQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-07-01",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DTP9__vi3d4",
+      "video_id": "DTP9__vi3d4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-25",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/XlQRanTjPNc",
+      "video_id": "XlQRanTjPNc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/XSzWUaBEL5g",
+      "video_id": "XSzWUaBEL5g",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-19",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://huggingface.co/spaces/facebook/MusicGen",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-06-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=k4mrkP3xgdc",
+      "video_id": "k4mrkP3xgdc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-18",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/uaFwKLI_f1U",
+      "video_id": "uaFwKLI_f1U",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wL5T3tUOfpA",
+      "video_id": "wL5T3tUOfpA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-18",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cEqgeN27Hhk",
+      "video_id": "cEqgeN27Hhk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-16",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://archive.org/details/0-danceAMix",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-06-16",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.instagram.com/reel/CryaGwXAv1t/?igshid=YjgzMjc4YjcwZQ==",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-06-14",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/IFP3Jc5ztgg",
+      "video_id": "IFP3Jc5ztgg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/71440F93Etw",
+      "video_id": "71440F93Etw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=JFaMCIVHz2I",
+      "video_id": "JFaMCIVHz2I",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-06-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.keithmcmillen.com/products/k-mix/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-06-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://westernuniversity.zoom.us/j/96287264250",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-06-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://westernuniversity.zoom.us/u/aepoMK4Q51",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-06-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://soundation.com/projects/3596ecbd-25b9-48d7-b3a7-fdd6505180a6",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-06-01",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/CNDI4WlJ8eo",
+      "video_id": "CNDI4WlJ8eo",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-05-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_mtKqKLbCWRjd4WprcdCIu0uNNrz8owHIQ",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-05-23",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=SWTsLnYO68U",
+      "video_id": "SWTsLnYO68U",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-05-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://aitestkitchen.withgoogle.com/experiments/music-lm",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-05-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/l4e_Nba6Bpw",
+      "video_id": "l4e_Nba6Bpw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-05-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://musiclab.chromeexperiments.com/Shared-Piano/#3HK5IPHNA",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-05-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://teenage.engineering/products/tp-7",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-05-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/kye9hV2RlIA",
+      "video_id": "kye9hV2RlIA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-05-11",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://app.uberduck.ai/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-05-09",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://github.com/svc-develop-team/so-vits-svc",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-05-09",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=doSSutlNfXI&amp;ab_channel=SteinwaySociety-TheBayArea",
+      "video_id": "doSSutlNfXI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-05-08",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://vcvrack.com",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-05-03",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Mn_q_I7KOGA",
+      "video_id": "Mn_q_I7KOGA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-20",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/skpFXeacUnA",
+      "video_id": "skpFXeacUnA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/fR7C6nhoOjE",
+      "video_id": "fR7C6nhoOjE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/JhO0we1f0LY",
+      "video_id": "JhO0we1f0LY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-13",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Erey4UOLQ7E",
+      "video_id": "Erey4UOLQ7E",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-13",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/ToNfGuXbJoc",
+      "video_id": "ToNfGuXbJoc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-12",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HnJ12ygtDfY",
+      "video_id": "HnJ12ygtDfY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://learningsynths.ableton.com",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-04-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=xXPSe57pOss",
+      "video_id": "xXPSe57pOss",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-06",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Xm08nJ4opac",
+      "video_id": "Xm08nJ4opac",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-06",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=QjiyndquZ2I",
+      "video_id": "QjiyndquZ2I",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-06",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/OUzgNXsMj2g",
+      "video_id": "OUzgNXsMj2g",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-02",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=MB7ZOdp__gQ&amp;list=PLFjonLo8gYHIXC35K4Ujrbu6XHchNDCv9",
+      "video_id": "MB7ZOdp__gQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=f5iRPW5jFGs",
+      "video_id": "f5iRPW5jFGs",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=mhpX-CyTvfw",
+      "video_id": "mhpX-CyTvfw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-01",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=OuYY1gV8jhU",
+      "video_id": "OuYY1gV8jhU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-04-01",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=9tZT_FdAxpY&amp;list=OLAK5uy_kQzdBa8C8_tRYodHZLEh_1D73DveuEFgs&amp;index=4",
+      "video_id": "9tZT_FdAxpY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GG7fLOmlhYg",
+      "video_id": "GG7fLOmlhYg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=CEw-7cMnBDY",
+      "video_id": "CEw-7cMnBDY",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/hIHxDxTcuDk",
+      "video_id": "hIHxDxTcuDk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/ixTkLjTBQyk",
+      "video_id": "ixTkLjTBQyk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Eqa4BWilONg&amp;t=12s",
+      "video_id": "Eqa4BWilONg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=L_XJ_s5IsQc",
+      "video_id": "L_XJ_s5IsQc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dTnHAITmuYQ",
+      "video_id": "dTnHAITmuYQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=b2_CJ_nx-l4",
+      "video_id": "b2_CJ_nx-l4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=EwO0EagrgZU",
+      "video_id": "EwO0EagrgZU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/7Mkax5JhdbQ",
+      "video_id": "7Mkax5JhdbQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/jTO-zb6XTzg",
+      "video_id": "jTO-zb6XTzg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/MTrKkqE9p1o",
+      "video_id": "MTrKkqE9p1o",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Wurlitzer_electronic_piano",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/MrajbJVmrws",
+      "video_id": "MrajbJVmrws",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/auDZa5YAq-Y",
+      "video_id": "auDZa5YAq-Y",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/hT4UQLWSmL0",
+      "video_id": "hT4UQLWSmL0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://pitchfork.com/features/photo-gallery/a-deep-dive-into-blacklips-the-queer-performance-art-cult-cofounded-by-anohni-in-the-1990s/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-03-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=OLAK5uy_mZi9LY3n1P1p0AhiD3bmndSB3aTI61KMI",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-25",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.reddit.com/r/FL_Studio/comments/11xckm5/fl_studio_arcade_cab/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-03-21",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ZU4g5DRnKdI&amp;list=PLzu19_hLeADwTIMH1tbdSK6Y-C07AABQN",
+      "video_id": "ZU4g5DRnKdI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-21",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.treeofstems.com/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-03-19",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/Wjw7m-BKmQ8",
+      "video_id": "Wjw7m-BKmQ8",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/oXrbMDww9ss",
+      "video_id": "oXrbMDww9ss",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/9j_TuMSw7H4",
+      "video_id": "9j_TuMSw7H4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-17",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/WTAlt5ccvms",
+      "video_id": "WTAlt5ccvms",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-15",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Dz85ThYZJfw",
+      "video_id": "Dz85ThYZJfw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-15",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ruc99Z8Vy8I",
+      "video_id": "ruc99Z8Vy8I",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-09",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=X2uxhFGe69A",
+      "video_id": "X2uxhFGe69A",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-03-08",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "http://destroyfx.org/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-03-04",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "http://www.ondemagnetique.com/shop/om-1-cassette-synth-2023",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-03-01",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2JZY7aGi2oo&amp;list=PLrfCEV-W7z9C4wXY0QjZ-LmPF2ElQMAka",
+      "video_id": "2JZY7aGi2oo",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-02-25",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/UtfkrGRK8wA",
+      "video_id": "UtfkrGRK8wA",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-02-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/hT7x1NvGf5k",
+      "video_id": "hT7x1NvGf5k",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-02-11",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://youtu.be/3_aDQnA0qTw",
+      "video_id": "3_aDQnA0qTw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-02-09",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/oftolPu9qp4",
+      "video_id": "oftolPu9qp4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-02-09",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/playlist?list=OLAK5uy_nXuUCWaLuaXfrwL27OuDxcKFTZQPrv5K8",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-02-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=T3XY6FPrbuM&amp;ab_channel=Squid",
+      "video_id": "T3XY6FPrbuM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-29",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Gb0Q5r4ZCa0&amp;ab_channel=Squid",
+      "video_id": "Gb0Q5r4ZCa0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-28",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=1xD2ItImFEU&amp;ab_channel=systemofadownVEVO",
+      "video_id": "1xD2ItImFEU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-28",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=34541836",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://techcrunch.com/2023/01/27/google-created-an-ai-that-can-generate-music-from-text-descriptions-but-wont-release-it/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://google-research.github.io/seanet/musiclm/examples/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/0i4gZ9IE2CI",
+      "video_id": "0i4gZ9IE2CI",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/67bmf6PGCRo",
+      "video_id": "67bmf6PGCRo",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-27",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/3E0jZumGPIk",
+      "video_id": "3E0jZumGPIk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-26",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.tiktok.com/@gingeryoddha?_t=8ZJ8m4pTzQc&amp;_r=1",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-24",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7edvieBdICU&amp;list=PL_st0vhCJqycC5DKlIw9rJ7xoc5l26bAH&amp;index=6&amp;ab_channel=CaribouVideos",
+      "video_id": "7edvieBdICU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-19",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=k7j6DyVcHRM&amp;list=PL_st0vhCJqycC5DKlIw9rJ7xoc5l26bAH&amp;index=7&amp;ab_channel=CaribouVideos",
+      "video_id": "k7j6DyVcHRM",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-19",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=p8SyW8mGx-s&amp;list=PL_st0vhCJqycC5DKlIw9rJ7xoc5l26bAH&amp;index=8&amp;ab_channel=CaribouVideos",
+      "video_id": "p8SyW8mGx-s",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-19",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/vCLhbplKkNg",
+      "video_id": "vCLhbplKkNg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-18",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://vimeo.com/372853840",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BYSqr-Zkn6A",
+      "video_id": "BYSqr-Zkn6A",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-18",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://huggingface.co/spaces/fffiloni/spectrogram-to-music",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-08",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://github.com/riffusion/riffusion",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-08",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.riffusion.com/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-07",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DmcYTShN4Fk",
+      "video_id": "DmcYTShN4Fk",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2023-01-07",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.whosampled.com/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2023-01-07",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=kvSNCUxtNSQ",
+      "video_id": "kvSNCUxtNSQ",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-12-31",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=OJKe2j9Wjh4&amp;ab_channel=53jaybop",
+      "video_id": "OJKe2j9Wjh4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-12-30",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/rrvoqO5QGs8",
+      "video_id": "rrvoqO5QGs8",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-12-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/lcGL3CPrvzE",
+      "video_id": "lcGL3CPrvzE",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-12-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://maps.djtechtools.com/mappings/3839",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-12-22",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0kaVxgey9w4&amp;ab_channel=MrJonnyharry",
+      "video_id": "0kaVxgey9w4",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-12-21",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://ausupply.bandcamp.com/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-12-19",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://a-u.supply/audex22.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-12-19",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtu.be/IuY54A3bOmg",
+      "video_id": "IuY54A3bOmg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-12-16",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/8Lyvv_bhzD0",
+      "video_id": "8Lyvv_bhzD0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-12-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=tVTRY6851Ug",
+      "video_id": "tVTRY6851Ug",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-11-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HaFdzar209o&amp;ab_channel=ANDREWHUANG",
+      "video_id": "HaFdzar209o",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-11-19",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://minneapolis.craigslist.org/hnp/msg/d/minneapolis-orba-handheld-musical/7555318437.html",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-11-16",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.chessgames.com/perl/chesscollection?cid=1013663",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-11-12",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.chessgames.com/perl/chessgame?gid=1036342",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-11-12",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://www.chessgames.com/perl/chessgame?gid=1233404",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-11-12",
+      "user": "U03TD4SUDKL"
+    },
+    {
+      "url": "https://m.youtube.com/watch?v=-a9mfBGkVIY&amp;t=1166s&amp;pp=2AGOCZACAQ%3D%3D",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-31",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://soundcloud.com/ustom-ecordings/cf-102622-15?si=990d0015657f452590697b01f460963f&amp;utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-29",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://meet.google.com/pty-nqrd-bqf",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-26",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.amazon.com/Hosa-GPM-103-3-5-TRS-Adaptor/dp/B000068O3T/ref=mp_s_a_1_8?crid=L200WQQFZSAJ&amp;keywords=trs+headphone+adaptor+hosa&amp;qid=1666712684&amp;qu=eyJxc2MiOiIxLjU0IiwicXNhIjoiMC4wMCIsInFzcCI6IjAuMDAifQ%3D%3D&amp;sprefix=trs+headphone+adaptor+hosa%2Caps%2C226&amp;sr=8-8",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-25",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=EBCYvoC4muc&amp;ab_channel=lftkryo",
+      "video_id": "EBCYvoC4muc",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-10-24",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://burial.bandcamp.com/album/streetlands",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-22",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://youtube.com/playlist?list=PL_st0vhCJqycC5DKlIw9rJ7xoc5l26bAH",
+      "video_id": null,
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-10-14",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://youtu.be/_NfnXdXpjL0",
+      "video_id": "_NfnXdXpjL0",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-10-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/bWqLiy9TLdg",
+      "video_id": "bWqLiy9TLdg",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-10-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://youtu.be/bn2IjYXVmuw",
+      "video_id": "bn2IjYXVmuw",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-10-14",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://soundcloud.app.goo.gl/SoG5NfQ7Qbrea7oT8",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-06",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://soundcloud.com/ustom-ecordings/10522-cf-toubleshooting?si=01ece6d5a6244cad8c75b3689418c4e1&amp;utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-06",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://meet.google.com/vcx-oeoo-onu",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-10-05",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://teenage.engineering/store/po-80-record-factory/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-30",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.lalal.ai/",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-28",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://soundcloud.com/ustom-ecordings/cleanfeed-9-21-22-3?si=e73bd89bbfb2417fa26879201b627060&amp;utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-28",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://soundcloud.com/ustom-ecordings/92122-feedclean-test-2?si=ec88345cd6b242ef953df1689a5fe6e9&amp;utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-25",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://soundcloud.com/ustom-ecordings/feedclean-session-92122?si=c27420b0be6c49a28b2529f775ec2c52&amp;utm_source=clipboard&amp;utm_medium=text&amp;utm_campaign=social_sharing",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-25",
+      "user": "U03TFJBRK2Q"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=QN0DDD7B3oU&amp;ab_channel=DavidBruceComposer",
+      "video_id": "QN0DDD7B3oU",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-09-22",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://westernuniversity.zoom.us/j/98921975200",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-21",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://westernuniversity.zoom.us/u/aboXOcABuU",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-21",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://www.chinadaily.com.cn/cndy/2018-03/18/content_35870662.htm",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-09-10",
+      "user": "U03TD7FSUAE"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=q1ciINr7ePs&amp;ab_channel=DavidHilowitzMusic",
+      "video_id": "q1ciINr7ePs",
+      "type": "youtube",
+      "added_to_playlist": false,
+      "date": "2022-09-04",
+      "user": "U03TA650DEZ"
+    },
+    {
+      "url": "https://twitter.com/nasaexoplanets/status/1561442514078314496?s=21&amp;t=sXzzgmmGuwD9mU7IhXU-DA",
+      "video_id": null,
+      "type": "other",
+      "added_to_playlist": false,
+      "date": "2022-08-23",
+      "user": "U03TFJBRK2Q"
+    }
+  ],
+  "backlog": [
+    "dwsSbAKs3yo",
+    "xm4Gm0-qVHw",
+    "GV94ibUocEk",
+    "1QPlZo9OZj8",
+    "jTJ4U7oorSc",
+    "0gJ8xfg8FAU",
+    "Tm1nCe-2Cuo",
+    "HuO3wwLuF0w",
+    "9JP-ZhwrxzI",
+    "lZbfNtDCHdM",
+    "BCJenvW7lcg",
+    "RmuYa9n4s1s",
+    "nFkP9Z2gWck",
+    "S03nrwuKz1I",
+    "GalJjZHrHfE",
+    "U_Mj40cvIEg",
+    "kiUsJJboQNM",
+    "_QV12_KGpQ0",
+    "sQGx0pgoKcs",
+    "UBSlthqSPOA",
+    "B7PUvFnMiAo",
+    "hMRaLLTosp4",
+    "W9n6yhmqyF0",
+    "C0jagztY9DY",
+    "-QuzcApPAPE",
+    "4Dk21erUpvw",
+    "YTeacoeAm9o",
+    "55xQu9eIPIA",
+    "tJkPh2vluFQ",
+    "-rDmcs1o658",
+    "m9g5tIHQXEk",
+    "6jNzQA5V5MI",
+    "an_gnfu2Sfw",
+    "_KztNIg4cvE",
+    "hsrTUDS6El4",
+    "D0oEtrCReh0",
+    "Zt1Ovb1g6Tg",
+    "MJvnOz6GZ8g",
+    "cwZ1L_0QLjw",
+    "JuR5MUOJ8SI",
+    "mCf10TgpwgM",
+    "_Vk_tFoi9PM",
+    "I1UoeanE6xE",
+    "VjQvtE_el7w",
+    "MFCH3JwaIaU",
+    "bpZyjbBNW0I",
+    "_R9an8AU3No",
+    "4iZKceQn4ZM",
+    "g3DfekebzW8",
+    "xJ2rSlwDg3I",
+    "mMed_6476t8",
+    "SUFSB2plwzM",
+    "XQmBCL53QZY",
+    "uk6NS5Y9TpY",
+    "IZ3i80B0qKg",
+    "PwGgDmHuGpA",
+    "tzcTslewELI",
+    "dcSbY8omlrs",
+    "GOzi-gD7-ts",
+    "o7ZkNDC0gBA",
+    "O-KqMHxpirI",
+    "XoHWjG6LUsA",
+    "QsoOtmpIzVs",
+    "OAIW5se_cxg",
+    "j3iccw8dXIk",
+    "iL-UFdNHtv0",
+    "G8sGmSEehi4",
+    "H6xLJtQEcN0",
+    "qtnjWETMt_o",
+    "Kw1dIT9SCNI",
+    "gIvgZ53GEOg",
+    "1jYjCPe09co",
+    "on-y9Pv-CJA",
+    "K3lgmnsTdcA",
+    "jRNCO4cryCM",
+    "iFRpz4jYLVA",
+    "7sofCz1OfGE",
+    "bY-zmJ1VCQI",
+    "sPdaashRNSI",
+    "V4jt2bY2HPs",
+    "lXeDP3xjjs4",
+    "fVx9PpkW34g",
+    "Sxa9wNl2OjE",
+    "nKAySS2whuA",
+    "lepSvyL722A",
+    "zV75x00RiKI",
+    "NajZa4NwR6k",
+    "w6qUDoqtoog",
+    "NVjSycDJatc",
+    "17GCBtKYaOg",
+    "tzD9OxAHtzU",
+    "nlaoR5m4L80",
+    "Q_fvcvkTcjc",
+    "J17SdRpfxho",
+    "DwPWGUhEtP0",
+    "TLYsZH7cK7A",
+    "_iALyau6LQk",
+    "S-1KDZTNty4",
+    "rcVKzroiilA",
+    "Id2dCFfAqoE",
+    "BXc2Seqw98c",
+    "yK2Sejb4hdg",
+    "s0yTilal3_c",
+    "XiVtsWzNqiw",
+    "t8CkeCsJugE",
+    "ND2WwfANwPs",
+    "GMYzaqupprQ",
+    "tREowDWpXcA",
+    "DPQI0H-CZDE",
+    "ThNdxgLojaM",
+    "l_1BSf77yCk",
+    "j4jtIDaeaWI",
+    "1lOhA7xkQiw",
+    "wStIFMTn0QE",
+    "Bp00msID-BY",
+    "xI_Yvkw1sdE",
+    "hw9bWnDei-k",
+    "U3pR0PXj0F0",
+    "6SLo-_dDGls",
+    "LDYwIOWbeRU",
+    "GHpfC6Kd7Ko",
+    "wPRSc6IBPtY",
+    "9sAEcR5FgYo",
+    "NgZAoJQSNW4",
+    "rl3FstCc_OY",
+    "uKQ6rj25zDA",
+    "XDv-2YOoDnU",
+    "Ls9xG_SY4jk",
+    "okLj1nfGG0s",
+    "L4LxavmC4_4",
+    "PnvcGv0TWek",
+    "JVX5TEWEuGQ",
+    "15gsVRYpJt4",
+    "WE0k5Pec4WU",
+    "9FqS7xsetcI",
+    "EeLU9TZVZAk",
+    "c6T6suvnhco",
+    "YQfwPziK-SA",
+    "Lrle0x_DHBM",
+    "zWm5WErkffQ",
+    "YLgqgh7qAbU",
+    "rbTsG9jrJsU",
+    "Pz_HJYDcnog",
+    "f5mRjsuQp0s",
+    "e8TdgBWEOP8",
+    "SCBjMndcUd8",
+    "5rb5VyTnAyA",
+    "U5maS-E34kA",
+    "Qksh3YOQhxc",
+    "VmC3zri2ifQ",
+    "DTP9__vi3d4",
+    "XlQRanTjPNc",
+    "XSzWUaBEL5g",
+    "k4mrkP3xgdc",
+    "uaFwKLI_f1U",
+    "wL5T3tUOfpA",
+    "cEqgeN27Hhk",
+    "IFP3Jc5ztgg",
+    "71440F93Etw",
+    "JFaMCIVHz2I",
+    "CNDI4WlJ8eo",
+    "SWTsLnYO68U",
+    "l4e_Nba6Bpw",
+    "kye9hV2RlIA",
+    "doSSutlNfXI",
+    "Mn_q_I7KOGA",
+    "skpFXeacUnA",
+    "fR7C6nhoOjE",
+    "JhO0we1f0LY",
+    "Erey4UOLQ7E",
+    "ToNfGuXbJoc",
+    "HnJ12ygtDfY",
+    "xXPSe57pOss",
+    "Xm08nJ4opac",
+    "QjiyndquZ2I",
+    "OUzgNXsMj2g",
+    "MB7ZOdp__gQ",
+    "f5iRPW5jFGs",
+    "mhpX-CyTvfw",
+    "OuYY1gV8jhU",
+    "9tZT_FdAxpY",
+    "GG7fLOmlhYg",
+    "CEw-7cMnBDY",
+    "hIHxDxTcuDk",
+    "ixTkLjTBQyk",
+    "Eqa4BWilONg",
+    "L_XJ_s5IsQc",
+    "dTnHAITmuYQ",
+    "b2_CJ_nx-l4",
+    "EwO0EagrgZU",
+    "7Mkax5JhdbQ",
+    "jTO-zb6XTzg",
+    "MTrKkqE9p1o",
+    "MrajbJVmrws",
+    "auDZa5YAq-Y",
+    "hT4UQLWSmL0",
+    "ZU4g5DRnKdI",
+    "Wjw7m-BKmQ8",
+    "oXrbMDww9ss",
+    "9j_TuMSw7H4",
+    "WTAlt5ccvms",
+    "Dz85ThYZJfw",
+    "ruc99Z8Vy8I",
+    "X2uxhFGe69A",
+    "2JZY7aGi2oo",
+    "UtfkrGRK8wA",
+    "hT7x1NvGf5k",
+    "3_aDQnA0qTw",
+    "oftolPu9qp4",
+    "T3XY6FPrbuM",
+    "Gb0Q5r4ZCa0",
+    "1xD2ItImFEU",
+    "0i4gZ9IE2CI",
+    "67bmf6PGCRo",
+    "3E0jZumGPIk",
+    "7edvieBdICU",
+    "k7j6DyVcHRM",
+    "p8SyW8mGx-s",
+    "vCLhbplKkNg",
+    "BYSqr-Zkn6A",
+    "DmcYTShN4Fk",
+    "kvSNCUxtNSQ",
+    "OJKe2j9Wjh4",
+    "rrvoqO5QGs8",
+    "lcGL3CPrvzE",
+    "0kaVxgey9w4",
+    "IuY54A3bOmg",
+    "8Lyvv_bhzD0",
+    "tVTRY6851Ug",
+    "HaFdzar209o",
+    "EBCYvoC4muc",
+    "_NfnXdXpjL0",
+    "bWqLiy9TLdg",
+    "bn2IjYXVmuw",
+    "QN0DDD7B3oU",
+    "q1ciINr7ePs"
+  ]
 }
