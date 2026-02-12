@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Nairuz",
+  "root": "Eb",
+  "tempo": 120,
+  "description": "As *Trump* tries to stop the *zither* solo at rush hour, a mesmerizing orchestral swell emerges from the *bathroom* :toilet::droplet:",
+  "chords": [
+    "Dmaj7",
+    "E7",
+    "Gbmaj7",
+    "Abmaj7"
+  ],
+  "melody_instrument": 75,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-12"
+}
