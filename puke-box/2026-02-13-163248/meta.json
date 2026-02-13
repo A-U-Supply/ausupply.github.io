@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Freygish",
+  "root": "E",
+  "tempo": 120,
+  "description": "A gospel choir echoes through a submerged submarine, surrounded by calliope music piped in from a distant, mournful carnival :carousel",
+  "chords": [
+    "Em7",
+    "B7",
+    "G#m",
+    "C#m7"
+  ],
+  "melody_instrument": 64,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-13"
+}
