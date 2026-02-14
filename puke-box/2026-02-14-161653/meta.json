@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Charukesi",
+  "root": "E",
+  "tempo": 120,
+  "description": "As the *quad god* of the ice rink fell, a lone flute whispered secrets to the anxious adults in the elevator :speaking",
+  "chords": [
+    "Em7",
+    "G7",
+    "Am7",
+    "Dmaj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-14"
+}
