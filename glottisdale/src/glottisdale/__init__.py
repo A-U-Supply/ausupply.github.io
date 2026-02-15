@@ -15,6 +15,7 @@ from glottisdale.audio import (
     extract_audio,
     get_duration,
 )
+from glottisdale.phonotactics import order_syllables
 from glottisdale.types import Clip, Result, Syllable
 
 
@@ -34,6 +35,82 @@ def _parse_gap(gap: str) -> tuple[float, float]:
         return float(parts[0]), float(parts[1])
     val = float(gap)
     return val, val
+
+
+# Default weights for syllables-per-word: favors 2-syllable words
+_WORD_LENGTH_WEIGHTS = [0.30, 0.35, 0.25, 0.10]
+
+
+def _weighted_word_length(min_syl: int, max_syl: int, rng: random.Random) -> int:
+    """Pick a word length using weighted distribution.
+
+    Weights skew toward 2-syllable words for natural-sounding output.
+    Falls back to uniform if range doesn't match weight table.
+    """
+    choices = list(range(min_syl, max_syl + 1))
+    if len(choices) == len(_WORD_LENGTH_WEIGHTS):
+        return rng.choices(choices, weights=_WORD_LENGTH_WEIGHTS, k=1)[0]
+    # Fallback: use truncated/padded weights or uniform
+    if len(choices) <= len(_WORD_LENGTH_WEIGHTS):
+        weights = _WORD_LENGTH_WEIGHTS[:len(choices)]
+        return rng.choices(choices, weights=weights, k=1)[0]
+    return rng.randint(min_syl, max_syl)
+
+
+def _group_into_words(
+    syllables: list[Syllable],
+    spc_min: int,
+    spc_max: int,
+    rng: random.Random,
+) -> list[list[Syllable]]:
+    """Group syllables into variable-length words with phonotactic ordering."""
+    words: list[list[Syllable]] = []
+    i = 0
+    while i < len(syllables):
+        word_len = _weighted_word_length(spc_min, spc_max, rng)
+        word = syllables[i:i + word_len]
+        if word:
+            if len(word) > 1:
+                word = order_syllables(word, seed=rng.randint(0, 2**31))
+            words.append(word)
+        i += word_len
+    return words
+
+
+def _group_into_phrases(
+    words: list[list[Syllable]],
+    wpp_min: int,
+    wpp_max: int,
+    rng: random.Random,
+) -> list[list[list[Syllable]]]:
+    """Group words into phrases of variable length."""
+    phrases: list[list[list[Syllable]]] = []
+    i = 0
+    while i < len(words):
+        phrase_len = rng.randint(wpp_min, wpp_max)
+        phrase = words[i:i + phrase_len]
+        if phrase:
+            phrases.append(phrase)
+        i += phrase_len
+    return phrases
+
+
+def _group_into_sentences(
+    phrases: list,
+    pps_min: int,
+    pps_max: int,
+    rng: random.Random,
+) -> list[list]:
+    """Group phrases into sentence-level groups."""
+    sentences: list[list] = []
+    i = 0
+    while i < len(phrases):
+        sent_len = rng.randint(pps_min, pps_max)
+        sentence = phrases[i:i + sent_len]
+        if sentence:
+            sentences.append(sentence)
+        i += sent_len
+    return sentences
 
 
 def _sample_syllables(
@@ -105,7 +182,12 @@ def process(
     target_duration: float = 10.0,
     crossfade_ms: float = 10,
     padding_ms: float = 25,
-    gap: str = "200-500",
+    gap: str | None = None,
+    words_per_phrase: str = "3-5",
+    phrases_per_sentence: str = "2-3",
+    phrase_pause: str = "400-700",
+    sentence_pause: str = "800-1200",
+    word_crossfade_ms: float = 25,
     aligner: str = "default",
     whisper_model: str = "base",
     seed: int | None = None,
@@ -116,8 +198,17 @@ def process(
     clips_dir = output_dir / "clips"
     clips_dir.mkdir(parents=True, exist_ok=True)
 
-    gap_min, gap_max = _parse_gap(gap)
+    # Backward compat: if gap is provided, use it as phrase_pause
+    if gap is not None:
+        phrase_pause = gap
+        gap_min, gap_max = _parse_gap(gap)
+        sentence_pause = f"{gap_min * 2}-{gap_max * 2}"
+
     spc_min, spc_max = _parse_range(syllables_per_clip)
+    wpp_min, wpp_max = _parse_range(words_per_phrase)
+    pps_min, pps_max = _parse_range(phrases_per_sentence)
+    pp_min, pp_max = _parse_gap(phrase_pause)
+    sp_min, sp_max = _parse_gap(sentence_pause)
     alignment_engine = get_aligner(aligner, whisper_model=whisper_model)
 
     # Process each input file
@@ -158,18 +249,12 @@ def process(
                     return src_name
             return "unknown"
 
-        # Group syllables into variable-length nonsense "words"
-        words: list[list[Syllable]] = []
-        i = 0
-        while i < len(selected):
-            word_len = rng.randint(spc_min, spc_max)
-            word = selected[i:i + word_len]
-            if word:
-                words.append(word)
-            i += word_len
+        # Group syllables into phonotactically-ordered nonsense "words"
+        words = _group_into_words(selected, spc_min, spc_max, rng)
 
         # Build each word: cut individual syllables, fuse them tightly
         clips = []
+        word_clip_paths = []
         for word_idx, word_syls in enumerate(words):
             # Cut each syllable from its source audio
             syl_clip_paths = []
@@ -189,6 +274,7 @@ def process(
                     syl_clip_paths.append(syl_clip_path)
 
             if not syl_clip_paths:
+                word_clip_paths.append(None)
                 continue
 
             # Fuse syllables tightly into one "word" clip
@@ -213,18 +299,63 @@ def process(
                 source=dominant,
                 output_path=word_output,
             ))
+            word_clip_paths.append(word_output)
 
-        # Concatenate words with silence gaps between them
+        # Filter to valid word clip paths
+        valid_word_paths = [p for p in word_clip_paths if p is not None]
+
+        # Group words into phrases, phrases into sentences
+        phrases = _group_into_phrases(
+            [[p] for p in valid_word_paths], wpp_min, wpp_max, rng
+        )
+
+        # Build phrase WAVs (words concatenated with crossfade, no gaps)
+        phrase_paths = []
+        for phrase_idx, phrase_word_groups in enumerate(phrases):
+            phrase_clip_paths = [
+                p for group in phrase_word_groups for p in group
+                if p.exists()
+            ]
+            if not phrase_clip_paths:
+                continue
+            phrase_path = tmpdir / f"phrase_{phrase_idx:03d}.wav"
+            if len(phrase_clip_paths) == 1:
+                shutil.copy2(phrase_clip_paths[0], phrase_path)
+            else:
+                concatenate_clips(
+                    phrase_clip_paths, phrase_path,
+                    crossfade_ms=word_crossfade_ms,
+                )
+            phrase_paths.append(phrase_path)
+
+        # Group phrases into sentences, compute gap durations
+        sentence_groups = _group_into_sentences(
+            list(range(len(phrase_paths))), pps_min, pps_max, rng
+        )
+
+        # Build final concatenation with phrase/sentence pauses
         gap_durations = []
-        if len(clips) > 1:
-            for _ in range(len(clips) - 1):
-                gap_durations.append(rng.uniform(gap_min, gap_max))
+        ordered_phrase_paths = []
+        for sent_idx, sent_phrase_indices in enumerate(sentence_groups):
+            for i, phrase_idx in enumerate(sent_phrase_indices):
+                if phrase_idx < len(phrase_paths):
+                    ordered_phrase_paths.append(phrase_paths[phrase_idx])
+                    # Add gap after this phrase (unless it's the very last)
+                    is_last_in_sentence = (i == len(sent_phrase_indices) - 1)
+                    is_last_sentence = (sent_idx == len(sentence_groups) - 1)
+                    if not (is_last_in_sentence and is_last_sentence):
+                        if is_last_in_sentence:
+                            # Sentence boundary pause
+                            gap_durations.append(rng.uniform(sp_min, sp_max))
+                        else:
+                            # Phrase boundary pause
+                            gap_durations.append(rng.uniform(pp_min, pp_max))
 
+        # Final concatenation
         concatenated_path = output_dir / "concatenated.wav"
-        clip_paths = [c.output_path for c in clips if c.output_path.exists()]
-        if clip_paths:
+        if ordered_phrase_paths:
             concatenate_clips(
-                clip_paths,
+                ordered_phrase_paths,
                 concatenated_path,
                 crossfade_ms=0,
                 gap_durations_ms=gap_durations if gap_durations else None,
