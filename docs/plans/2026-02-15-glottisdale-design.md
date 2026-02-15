@@ -113,24 +113,33 @@ class Result:
 
 ## Aligner Interface
 
+> **Architecture change (during implementation planning):** ForceAlign was dropped after discovering its phoneme timestamps are evenly divided across the word duration (not truly force-aligned). The default backend uses Whisper word timestamps + g2p_en + vendored syllabify instead, which produces identical phoneme timing with fewer dependencies. The aligner interface is retained for future BFA integration.
+
 ```python
 class Aligner(ABC):
     @abstractmethod
-    def align(self, audio_path: Path, transcript: str) -> list[Phoneme]:
-        """Return phoneme-level timestamps for the given audio + transcript."""
+    def process(self, audio_path: Path) -> dict:
+        """Transcribe and align audio, returning syllable-level timestamps."""
 
-class ForceAlignBackend(Aligner):
-    """ARPABET phonemes via Wav2Vec2 CTC forced alignment."""
+class DefaultAligner(Aligner):
+    """Whisper ASR + g2p_en + ARPABET syllabifier."""
 
 class BFABackend(Aligner):
     """IPA phonemes via Bournemouth Forced Aligner. Future."""
 ```
 
-**ForceAlign** (v1 backend):
-- pip installable: `pip install forcealign`
-- ARPABET output works directly with vendored syllabifier
-- Wav2Vec2 model (~360MB), cached in `~/.cache/torch/`
-- CPU-only, no special config
+**DefaultAligner** (implemented backend):
+- Whisper word-level timestamps + g2p_en for ARPABET phoneme conversion
+- Vendored syllabifier splits phonemes into syllables
+- Proportional timing distributes word duration across syllables by phoneme count
+- No additional model downloads beyond Whisper
+
+~~**ForceAlign** (dropped):~~
+- ~~pip installable: `pip install forcealign`~~
+- ~~ARPABET output works directly with vendored syllabifier~~
+- ~~Wav2Vec2 model (~360MB), cached in `~/.cache/torch/`~~
+- ~~CPU-only, no special config~~
+- **Dropped:** phoneme timestamps are fake (word duration / phoneme count), identical to what g2p_en + proportional timing produces without the extra dependency
 
 **BFA** (future backend):
 - Bournemouth Forced Aligner, v1.1.0 (Feb 2026) — very new
