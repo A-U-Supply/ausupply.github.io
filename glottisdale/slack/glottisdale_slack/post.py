@@ -8,6 +8,7 @@ from pathlib import Path
 from slack_sdk import WebClient
 
 from glottisdale.types import Result
+from glottisdale_slack.fetch import find_channel_id
 
 logger = logging.getLogger(__name__)
 
@@ -56,8 +57,10 @@ def post_results(
     today = date.today().isoformat()
     summary = f":scissors: *Glottisdale* — {len(result.clips)} words from {len(sources)} source(s)"
 
+    # Resolve channel name to ID (files_upload_v2 requires channel ID)
+    channel_id = find_channel_id(client, channel) if channel.startswith("#") else channel
+
     thread_ts = None
-    channel_id = None
 
     # Upload concatenated audio as the TOP-LEVEL message (not in a thread)
     concat_path = result.concatenated
@@ -65,7 +68,7 @@ def post_results(
         try:
             resp = _upload_with_retry(
                 client,
-                channel=channel,
+                channel=channel_id,
                 file=str(concat_path),
                 filename=f"glottisdale-{today}.wav",
                 initial_comment=summary,
@@ -78,15 +81,14 @@ def post_results(
             if files:
                 file_id = files[0].get("id")
             if file_id:
-                thread_ts, channel_id = _get_thread_ts(client, file_id)
+                thread_ts, _ = _get_thread_ts(client, file_id)
         except Exception:
             logger.exception("Failed to upload concatenated audio")
 
     # Fall back to text message if upload failed
     if not thread_ts:
-        resp = client.chat_postMessage(channel=channel, text=summary)
+        resp = client.chat_postMessage(channel=channel_id, text=summary)
         thread_ts = resp["ts"]
-        channel_id = resp["channel"]
 
     # Upload clips zip in thread
     zip_path = output_dir / "clips.zip"

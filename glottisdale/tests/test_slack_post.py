@@ -1,13 +1,14 @@
 """Tests for Slack posting."""
 
 from pathlib import Path
-from unittest.mock import MagicMock, call
+from unittest.mock import MagicMock, call, patch
 
 from glottisdale_slack.post import post_results
 from glottisdale.types import Result, Clip, Syllable, Phoneme
 
 
-def test_post_results(tmp_path):
+@patch("glottisdale_slack.post.find_channel_id", return_value="C999")
+def test_post_results(mock_find_ch, tmp_path):
     client = MagicMock()
     # files_upload_v2 returns file list with ID
     client.files_upload_v2.return_value = {
