@@ -102,26 +102,7 @@ def post_results(
         thread_ts, _ = _get_thread_ts(client, file_id)
     _log(f"Thread ts: {thread_ts}")
 
-    # Upload clips zip as TOP-LEVEL message (not in thread)
-    zip_path = output_dir / "clips.zip"
-    if zip_path.exists():
-        _log(f"Uploading zip: {zip_path}")
-        try:
-            _upload_with_retry(
-                client,
-                channel=channel_id,
-                file=str(zip_path),
-                filename=f"glottisdale-{today}-clips.zip",
-                initial_comment="Individual word clips",
-            )
-            _log("Zip uploaded successfully")
-        except Exception:
-            logger.exception("Failed to upload clips zip")
-            _log("Zip upload failed (non-fatal)")
-    else:
-        _log(f"No zip found at {zip_path}")
-
-    # Post source links in thread (if we got a thread_ts)
+    # Post source links in thread
     if sources and thread_ts:
         source_lines = ["*Sources:*"]
         for src in sources:
@@ -142,5 +123,27 @@ def post_results(
         except Exception:
             logger.exception("Failed to post source links")
             _log("Source links failed (non-fatal)")
+
+    # Upload clips zip in thread (after source links)
+    zip_path = output_dir / "clips.zip"
+    if zip_path.exists() and thread_ts:
+        _log(f"Uploading zip in thread: {zip_path}")
+        try:
+            _upload_with_retry(
+                client,
+                channel=channel_id,
+                file=str(zip_path),
+                filename=f"glottisdale-{today}-clips.zip",
+                initial_comment="Individual word clips",
+                thread_ts=thread_ts,
+            )
+            _log("Zip uploaded successfully")
+        except Exception:
+            logger.exception("Failed to upload clips zip")
+            _log("Zip upload failed (non-fatal)")
+    elif zip_path.exists():
+        _log("No thread_ts, skipping zip upload")
+    else:
+        _log(f"No zip found at {zip_path}")
 
     _log("post_results complete")
