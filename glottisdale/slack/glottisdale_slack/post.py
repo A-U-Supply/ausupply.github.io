@@ -49,8 +49,8 @@ def post_results(
 ) -> None:
     """Post glottisdale results to a Slack channel.
 
-    Uploads concatenated audio as the top-level message,
-    then posts clips zip and source links in the thread.
+    Uploads concatenated audio as the top-level message (MUST succeed),
+    then posts clips zip as top-level and source links in thread.
     """
     client = _client or WebClient(token=token, timeout=120)
 
@@ -60,35 +60,31 @@ def post_results(
     # Resolve channel name to ID (files_upload_v2 requires channel ID)
     channel_id = find_channel_id(client, channel) if channel.startswith("#") else channel
 
-    thread_ts = None
-
-    # Upload concatenated audio as the TOP-LEVEL message (not in a thread)
+    # === WAV UPLOAD — MANDATORY, MUST SUCCEED ===
     concat_path = result.concatenated
-    if concat_path.exists():
-        try:
-            resp = _upload_with_retry(
-                client,
-                channel=channel_id,
-                file=str(concat_path),
-                filename=f"glottisdale-{today}.wav",
-                initial_comment=summary,
-            )
-            # Get thread_ts from the uploaded file's shares
-            file_id = None
-            files = resp.get("files") or []
-            if not files and resp.get("file"):
-                files = [resp["file"]]
-            if files:
-                file_id = files[0].get("id")
-            if file_id:
-                thread_ts, _ = _get_thread_ts(client, file_id)
-        except Exception:
-            logger.exception("Failed to upload concatenated audio")
+    if not concat_path.exists():
+        raise FileNotFoundError(f"Concatenated audio not found: {concat_path}")
 
-    # Fall back to text message if upload failed
-    if not thread_ts:
-        resp = client.chat_postMessage(channel=channel_id, text=summary)
-        thread_ts = resp["ts"]
+    resp = _upload_with_retry(
+        client,
+        channel=channel_id,
+        file=str(concat_path),
+        filename=f"glottisdale-{today}.wav",
+        initial_comment=summary,
+    )
+    # No try/except — if this fails, the whole run fails.
+
+    # Get thread_ts from the uploaded file's shares
+    file_id = None
+    files = resp.get("files") or []
+    if not files and resp.get("file"):
+        files = [resp["file"]]
+    if files:
+        file_id = files[0].get("id")
+
+    thread_ts = None
+    if file_id:
+        thread_ts, _ = _get_thread_ts(client, file_id)
 
     # Upload clips zip as TOP-LEVEL message (not in thread)
     zip_path = output_dir / "clips.zip"
@@ -104,8 +100,8 @@ def post_results(
         except Exception:
             logger.exception("Failed to upload clips zip")
 
-    # Post source links in thread
-    if sources:
+    # Post source links in thread (if we got a thread_ts)
+    if sources and thread_ts:
         source_lines = ["*Sources:*"]
         for src in sources:
             name = src.get("name", "unknown")

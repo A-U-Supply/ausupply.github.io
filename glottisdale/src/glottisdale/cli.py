@@ -1,6 +1,7 @@
 """CLI entrypoint for glottisdale."""
 
 import argparse
+import logging
 import sys
 from pathlib import Path
 
@@ -56,6 +57,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> None:
     """CLI entrypoint."""
+    logging.basicConfig(level=logging.INFO, format="%(name)s %(levelname)s: %(message)s")
     args = parse_args(argv)
 
     if args.input_files:

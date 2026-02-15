@@ -3,6 +3,8 @@
 from pathlib import Path
 from unittest.mock import MagicMock, call, patch
 
+import pytest
+
 from glottisdale_slack.post import post_results
 from glottisdale.types import Result, Clip, Syllable, Phoneme
 
@@ -69,3 +71,53 @@ def test_post_results(mock_find_ch, tmp_path):
     source_call = client.chat_postMessage.call_args_list[0]
     assert source_call[1]["thread_ts"] == "111.222"
     assert "video1.mp4" in source_call[1]["text"]
+
+
+@patch("glottisdale_slack.post.find_channel_id", return_value="C999")
+def test_wav_upload_failure_crashes(mock_find_ch, tmp_path):
+    """WAV upload failure must raise — never silently proceed."""
+    client = MagicMock()
+    client.files_upload_v2.side_effect = Exception("504 Gateway Timeout")
+
+    concat_path = tmp_path / "concatenated.wav"
+    concat_path.touch()
+
+    result = Result(
+        clips=[],
+        concatenated=concat_path,
+        transcript="test",
+        manifest={},
+    )
+
+    with pytest.raises(Exception, match="504 Gateway Timeout"):
+        post_results(
+            token="xoxb-test",
+            channel="#glottisdale",
+            result=result,
+            sources=[],
+            output_dir=tmp_path,
+            _client=client,
+        )
+
+
+@patch("glottisdale_slack.post.find_channel_id", return_value="C999")
+def test_missing_wav_raises(mock_find_ch, tmp_path):
+    """Missing WAV file must raise FileNotFoundError."""
+    client = MagicMock()
+
+    result = Result(
+        clips=[],
+        concatenated=tmp_path / "nonexistent.wav",
+        transcript="test",
+        manifest={},
+    )
+
+    with pytest.raises(FileNotFoundError):
+        post_results(
+            token="xoxb-test",
+            channel="#glottisdale",
+            result=result,
+            sources=[],
+            output_dir=tmp_path,
+            _client=client,
+        )
