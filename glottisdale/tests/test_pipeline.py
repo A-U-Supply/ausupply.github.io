@@ -179,3 +179,36 @@ def test_word_grouping_uses_phonotactic_ordering():
     # All 3 syllables should be in one word
     assert len(words) == 1
     assert len(words[0]) == 3
+
+
+def test_group_into_phrases():
+    from glottisdale import _group_into_phrases
+    import random
+
+    # 12 words should produce 2-4 phrases with default 3-5 words per phrase
+    fake_words = [["w"] for _ in range(12)]  # placeholder word lists
+    rng = random.Random(42)
+    phrases = _group_into_phrases(fake_words, wpp_min=3, wpp_max=5, rng=rng)
+
+    assert len(phrases) >= 2
+    assert len(phrases) <= 6
+    # All words accounted for
+    total_words = sum(len(p) for p in phrases)
+    assert total_words == 12
+    # Each phrase has 1-5 words (last phrase may be shorter)
+    for phrase in phrases[:-1]:
+        assert 3 <= len(phrase) <= 5
+
+
+def test_group_into_sentences():
+    from glottisdale import _group_into_sentences
+    import random
+
+    # 6 phrases -> 2-3 sentence groups
+    fake_phrases = [["p"] for _ in range(6)]
+    rng = random.Random(42)
+    sentences = _group_into_sentences(fake_phrases, pps_min=2, pps_max=3, rng=rng)
+
+    assert len(sentences) >= 2
+    total_phrases = sum(len(s) for s in sentences)
+    assert total_phrases == 6

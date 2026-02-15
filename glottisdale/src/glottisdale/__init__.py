@@ -77,6 +77,42 @@ def _group_into_words(
     return words
 
 
+def _group_into_phrases(
+    words: list[list[Syllable]],
+    wpp_min: int,
+    wpp_max: int,
+    rng: random.Random,
+) -> list[list[list[Syllable]]]:
+    """Group words into phrases of variable length."""
+    phrases: list[list[list[Syllable]]] = []
+    i = 0
+    while i < len(words):
+        phrase_len = rng.randint(wpp_min, wpp_max)
+        phrase = words[i:i + phrase_len]
+        if phrase:
+            phrases.append(phrase)
+        i += phrase_len
+    return phrases
+
+
+def _group_into_sentences(
+    phrases: list,
+    pps_min: int,
+    pps_max: int,
+    rng: random.Random,
+) -> list[list]:
+    """Group phrases into sentence-level groups."""
+    sentences: list[list] = []
+    i = 0
+    while i < len(phrases):
+        sent_len = rng.randint(pps_min, pps_max)
+        sentence = phrases[i:i + sent_len]
+        if sentence:
+            sentences.append(sentence)
+        i += sent_len
+    return sentences
+
+
 def _sample_syllables(
     syllables: list[Syllable],
     target_duration: float,
