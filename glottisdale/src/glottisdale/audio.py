@@ -155,7 +155,7 @@ def _concatenate_simple(clip_paths: list[Path], output_path: Path) -> None:
     try:
         cmd = [
             "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-            "-i", list_path, "-c", "copy", str(output_path),
+            "-i", list_path, "-c:a", "pcm_s16le", str(output_path),
         ]
         subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
     finally:
