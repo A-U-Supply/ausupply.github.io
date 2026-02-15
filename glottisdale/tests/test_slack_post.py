@@ -9,9 +9,19 @@ from glottisdale.types import Result, Clip, Syllable, Phoneme
 
 def test_post_results(tmp_path):
     client = MagicMock()
-    client.chat_postMessage.return_value = {
-        "ts": "111.222",
-        "channel": "C999",
+    # files_upload_v2 returns file list with ID
+    client.files_upload_v2.return_value = {
+        "files": [{"id": "F123"}],
+    }
+    # files_info returns shares so we can get thread_ts
+    client.files_info.return_value = {
+        "file": {
+            "shares": {
+                "public": {
+                    "C999": [{"ts": "111.222"}]
+                }
+            }
+        }
     }
 
     # Create real files so the upload paths exist
@@ -44,21 +54,17 @@ def test_post_results(tmp_path):
         _client=client,
     )
 
-    # Summary posted as main message first
-    summary_call = client.chat_postMessage.call_args_list[0]
-    assert "1 words" in summary_call[1]["text"]
-
-    # Audio + zip uploaded in thread
-    assert client.files_upload_v2.call_count == 2
+    # WAV uploaded as TOP-LEVEL message (no thread_ts)
     audio_upload = client.files_upload_v2.call_args_list[0]
-    assert audio_upload[1]["filename"] == "glottisdale.wav"
-    assert audio_upload[1]["thread_ts"] == "111.222"
+    assert "glottisdale-" in audio_upload[1]["filename"]
+    assert audio_upload[1]["filename"].endswith(".wav")
+    assert "thread_ts" not in audio_upload[1]
 
+    # Zip uploaded in thread
     zip_upload = client.files_upload_v2.call_args_list[1]
-    assert zip_upload[1]["filename"] == "clips.zip"
     assert zip_upload[1]["thread_ts"] == "111.222"
 
     # Source links in thread
-    source_call = client.chat_postMessage.call_args_list[1]
+    source_call = client.chat_postMessage.call_args_list[0]
     assert source_call[1]["thread_ts"] == "111.222"
     assert "video1.mp4" in source_call[1]["text"]

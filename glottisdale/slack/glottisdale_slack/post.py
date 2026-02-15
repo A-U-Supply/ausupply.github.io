@@ -2,6 +2,7 @@
 
 import logging
 import time
+from datetime import date
 from pathlib import Path
 
 from slack_sdk import WebClient
@@ -25,6 +26,18 @@ def _upload_with_retry(client: WebClient, max_retries: int = 3, **kwargs) -> dic
                 raise
 
 
+def _get_thread_ts(client: WebClient, file_id: str) -> tuple[str | None, str | None]:
+    """Get thread_ts and channel_id from a file upload via files.info."""
+    time.sleep(1)
+    info = client.files_info(file=file_id)
+    shares = info.get("file", {}).get("shares", {})
+    for share_type in ("public", "private"):
+        for ch_id, msgs in shares.get(share_type, {}).items():
+            if msgs:
+                return msgs[0].get("ts"), ch_id
+    return None, None
+
+
 def post_results(
     token: str,
     channel: str,
@@ -35,32 +48,45 @@ def post_results(
 ) -> None:
     """Post glottisdale results to a Slack channel.
 
-    Uploads concatenated audio + clips zip as the main message,
-    then posts source links in a thread to keep the main post clean.
+    Uploads concatenated audio as the top-level message,
+    then posts clips zip and source links in the thread.
     """
     client = _client or WebClient(token=token, timeout=120)
 
+    today = date.today().isoformat()
     summary = f":scissors: *Glottisdale* — {len(result.clips)} words from {len(sources)} source(s)"
 
-    # Post summary text first to guarantee we have a thread anchor
-    resp = client.chat_postMessage(channel=channel, text=summary)
-    thread_ts = resp["ts"]
-    channel_id = resp["channel"]
+    thread_ts = None
+    channel_id = None
 
-    # Upload concatenated audio in thread
+    # Upload concatenated audio as the TOP-LEVEL message (not in a thread)
     concat_path = result.concatenated
     if concat_path.exists():
         try:
-            _upload_with_retry(
+            resp = _upload_with_retry(
                 client,
-                channel=channel_id,
+                channel=channel,
                 file=str(concat_path),
-                filename="glottisdale.wav",
-                initial_comment="Concatenated syllable collage",
-                thread_ts=thread_ts,
+                filename=f"glottisdale-{today}.wav",
+                initial_comment=summary,
             )
+            # Get thread_ts from the uploaded file's shares
+            file_id = None
+            files = resp.get("files") or []
+            if not files and resp.get("file"):
+                files = [resp["file"]]
+            if files:
+                file_id = files[0].get("id")
+            if file_id:
+                thread_ts, channel_id = _get_thread_ts(client, file_id)
         except Exception:
             logger.exception("Failed to upload concatenated audio")
+
+    # Fall back to text message if upload failed
+    if not thread_ts:
+        resp = client.chat_postMessage(channel=channel, text=summary)
+        thread_ts = resp["ts"]
+        channel_id = resp["channel"]
 
     # Upload clips zip in thread
     zip_path = output_dir / "clips.zip"
@@ -70,7 +96,7 @@ def post_results(
                 client,
                 channel=channel_id,
                 file=str(zip_path),
-                filename="clips.zip",
+                filename=f"glottisdale-{today}-clips.zip",
                 initial_comment="Individual word clips",
                 thread_ts=thread_ts,
             )
