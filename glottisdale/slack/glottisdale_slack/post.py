@@ -90,7 +90,7 @@ def post_results(
         resp = client.chat_postMessage(channel=channel_id, text=summary)
         thread_ts = resp["ts"]
 
-    # Upload clips zip in thread
+    # Upload clips zip as TOP-LEVEL message (not in thread)
     zip_path = output_dir / "clips.zip"
     if zip_path.exists():
         try:
@@ -100,7 +100,6 @@ def post_results(
                 file=str(zip_path),
                 filename=f"glottisdale-{today}-clips.zip",
                 initial_comment="Individual word clips",
-                thread_ts=thread_ts,
             )
         except Exception:
             logger.exception("Failed to upload clips zip")

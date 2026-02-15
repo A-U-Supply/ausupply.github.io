@@ -61,9 +61,9 @@ def test_post_results(mock_find_ch, tmp_path):
     assert audio_upload[1]["filename"].endswith(".wav")
     assert "thread_ts" not in audio_upload[1]
 
-    # Zip uploaded in thread
+    # Zip uploaded as TOP-LEVEL (no thread_ts)
     zip_upload = client.files_upload_v2.call_args_list[1]
-    assert zip_upload[1]["thread_ts"] == "111.222"
+    assert "thread_ts" not in zip_upload[1]
 
     # Source links in thread
     source_call = client.chat_postMessage.call_args_list[0]
