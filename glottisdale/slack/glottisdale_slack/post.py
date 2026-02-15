@@ -1,6 +1,7 @@
 """Post glottisdale results to a Slack channel."""
 
 import logging
+import sys
 import time
 from datetime import date
 from pathlib import Path
@@ -13,6 +14,11 @@ from glottisdale_slack.fetch import find_channel_id
 logger = logging.getLogger(__name__)
 
 
+def _log(msg: str) -> None:
+    """Print to stderr so it always shows in CI logs."""
+    print(f"[glottisdale-post] {msg}", file=sys.stderr, flush=True)
+
+
 def _upload_with_retry(client: WebClient, max_retries: int = 3, **kwargs) -> dict:
     """Upload a file to Slack with retry on transient errors."""
     for attempt in range(max_retries):
@@ -21,7 +27,7 @@ def _upload_with_retry(client: WebClient, max_retries: int = 3, **kwargs) -> dic
         except Exception as e:
             if attempt < max_retries - 1:
                 wait = 5 * (attempt + 1)
-                logger.warning(f"Upload attempt {attempt + 1} failed: {e}, retrying in {wait}s...")
+                _log(f"Upload attempt {attempt + 1} failed: {e}, retrying in {wait}s...")
                 time.sleep(wait)
             else:
                 raise
@@ -52,6 +58,7 @@ def post_results(
     Uploads concatenated audio as the top-level message (MUST succeed),
     then posts clips zip as top-level and source links in thread.
     """
+    _log(f"Starting post_results for channel={channel}")
     client = _client or WebClient(token=token, timeout=120)
 
     today = date.today().isoformat()
@@ -59,11 +66,17 @@ def post_results(
 
     # Resolve channel name to ID (files_upload_v2 requires channel ID)
     channel_id = find_channel_id(client, channel) if channel.startswith("#") else channel
+    if not channel_id:
+        raise ValueError(f"Could not find channel: {channel}")
+    _log(f"Resolved channel {channel} -> {channel_id}")
 
     # === WAV UPLOAD — MANDATORY, MUST SUCCEED ===
     concat_path = result.concatenated
     if not concat_path.exists():
         raise FileNotFoundError(f"Concatenated audio not found: {concat_path}")
+
+    file_size = concat_path.stat().st_size
+    _log(f"Uploading WAV: {concat_path} ({file_size} bytes)")
 
     resp = _upload_with_retry(
         client,
@@ -73,6 +86,7 @@ def post_results(
         initial_comment=summary,
     )
     # No try/except — if this fails, the whole run fails.
+    _log(f"WAV upload response keys: {list(resp.keys()) if isinstance(resp, dict) else type(resp)}")
 
     # Get thread_ts from the uploaded file's shares
     file_id = None
@@ -81,14 +95,17 @@ def post_results(
         files = [resp["file"]]
     if files:
         file_id = files[0].get("id")
+    _log(f"WAV file_id: {file_id}")
 
     thread_ts = None
     if file_id:
         thread_ts, _ = _get_thread_ts(client, file_id)
+    _log(f"Thread ts: {thread_ts}")
 
     # Upload clips zip as TOP-LEVEL message (not in thread)
     zip_path = output_dir / "clips.zip"
     if zip_path.exists():
+        _log(f"Uploading zip: {zip_path}")
         try:
             _upload_with_retry(
                 client,
@@ -97,8 +114,12 @@ def post_results(
                 filename=f"glottisdale-{today}-clips.zip",
                 initial_comment="Individual word clips",
             )
+            _log("Zip uploaded successfully")
         except Exception:
             logger.exception("Failed to upload clips zip")
+            _log("Zip upload failed (non-fatal)")
+    else:
+        _log(f"No zip found at {zip_path}")
 
     # Post source links in thread (if we got a thread_ts)
     if sources and thread_ts:
@@ -117,5 +138,9 @@ def post_results(
                 text="\n".join(source_lines),
                 thread_ts=thread_ts,
             )
+            _log("Source links posted in thread")
         except Exception:
             logger.exception("Failed to post source links")
+            _log("Source links failed (non-fatal)")
+
+    _log("post_results complete")
