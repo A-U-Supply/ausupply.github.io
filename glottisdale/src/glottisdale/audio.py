@@ -1,0 +1,199 @@
+"""Audio processing via ffmpeg/ffprobe."""
+
+import json
+import subprocess
+from pathlib import Path
+
+
+def _run_ffprobe(path: Path, *args: str) -> str:
+    """Run ffprobe and return stdout."""
+    if not path.exists():
+        raise FileNotFoundError(f"File not found: {path}")
+    cmd = [
+        "ffprobe", "-v", "quiet", "-print_format", "json",
+        *args, str(path),
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    result.check_returncode()
+    return result.stdout
+
+
+def detect_input_type(path: Path) -> str:
+    """Return 'video' or 'audio' based on stream types."""
+    output = _run_ffprobe(path, "-show_streams")
+    data = json.loads(output)
+    for stream in data.get("streams", []):
+        if stream.get("codec_type") == "video":
+            return "video"
+    return "audio"
+
+
+def get_duration(path: Path) -> float:
+    """Get file duration in seconds."""
+    output = _run_ffprobe(path, "-show_format")
+    data = json.loads(output)
+    return float(data["format"]["duration"])
+
+
+def extract_audio(input_path: Path, output_path: Path) -> Path:
+    """Extract/resample audio to 16kHz mono WAV for Whisper."""
+    cmd = [
+        "ffmpeg", "-y", "-i", str(input_path),
+        "-vn", "-ar", "16000", "-ac", "1", "-f", "wav",
+        str(output_path),
+    ]
+    subprocess.run(
+        cmd, capture_output=True, text=True, timeout=120,
+    ).check_returncode()
+    return output_path
+
+
+def cut_clip(
+    input_path: Path,
+    output_path: Path,
+    start: float,
+    end: float,
+    padding_ms: float = 25,
+    fade_ms: float = 10,
+) -> Path:
+    """Cut an audio clip with padding and fade."""
+    file_duration = get_duration(input_path)
+    padding_s = padding_ms / 1000.0
+    fade_s = fade_ms / 1000.0
+
+    # Apply padding, clamp to file bounds
+    actual_start = max(0.0, start - padding_s)
+    actual_end = min(file_duration, end + padding_s)
+    duration = actual_end - actual_start
+
+    if duration <= 0:
+        raise ValueError(f"Invalid clip duration: {duration}s")
+
+    # Build audio filter for fades
+    filters = []
+    if fade_s > 0 and duration > fade_s * 2:
+        fade_out_start = duration - fade_s
+        filters.append(f"afade=t=in:d={fade_s}:curve=hsin")
+        filters.append(f"afade=t=out:st={fade_out_start}:d={fade_s}:curve=hsin")
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-ss", f"{actual_start:.4f}",
+        "-i", str(input_path),
+        "-t", f"{duration:.4f}",
+    ]
+    if filters:
+        cmd.extend(["-af", ",".join(filters)])
+    cmd.extend(["-c:a", "libvorbis", "-q:a", "4", str(output_path)])
+
+    subprocess.run(cmd, capture_output=True, text=True, timeout=30).check_returncode()
+    return output_path
+
+
+def generate_silence(output_path: Path, duration_ms: float, sample_rate: int = 16000) -> Path:
+    """Generate a silent OGG file."""
+    duration_s = duration_ms / 1000.0
+    cmd = [
+        "ffmpeg", "-y",
+        "-f", "lavfi", "-i", f"anullsrc=r={sample_rate}:cl=mono",
+        "-t", f"{duration_s:.4f}",
+        "-c:a", "libvorbis", "-q:a", "4",
+        str(output_path),
+    ]
+    subprocess.run(cmd, capture_output=True, text=True, timeout=30).check_returncode()
+    return output_path
+
+
+def concatenate_clips(
+    clip_paths: list[Path],
+    output_path: Path,
+    crossfade_ms: float = 0,
+    gap_durations_ms: list[float] | None = None,
+) -> Path:
+    """Concatenate audio clips with optional gaps and crossfade."""
+    import tempfile
+
+    if not clip_paths:
+        raise ValueError("No clips to concatenate")
+
+    if len(clip_paths) == 1:
+        import shutil
+        shutil.copy2(clip_paths[0], output_path)
+        return output_path
+
+    # Build list of files to concat (interleaved with silence if gaps)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir = Path(tmpdir)
+        concat_list = []
+
+        for i, clip in enumerate(clip_paths):
+            concat_list.append(clip)
+            if gap_durations_ms and i < len(clip_paths) - 1:
+                gap_ms = gap_durations_ms[i] if i < len(gap_durations_ms) else 0
+                if gap_ms > 0:
+                    silence_path = tmpdir / f"silence_{i:04d}.ogg"
+                    generate_silence(silence_path, gap_ms)
+                    concat_list.append(silence_path)
+
+        if crossfade_ms > 0:
+            _concatenate_with_crossfade(concat_list, output_path, crossfade_ms)
+        else:
+            _concatenate_simple(concat_list, output_path)
+
+    return output_path
+
+
+def _concatenate_simple(clip_paths: list[Path], output_path: Path) -> None:
+    """Concatenate via ffmpeg concat demuxer (no crossfade)."""
+    import tempfile
+
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+        for clip in clip_paths:
+            f.write(f"file '{clip}'\n")
+        list_path = f.name
+
+    try:
+        cmd = [
+            "ffmpeg", "-y", "-f", "concat", "-safe", "0",
+            "-i", list_path, "-c", "copy", str(output_path),
+        ]
+        subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
+    finally:
+        Path(list_path).unlink(missing_ok=True)
+
+
+def _concatenate_with_crossfade(
+    clip_paths: list[Path], output_path: Path, crossfade_ms: float
+) -> None:
+    """Concatenate with acrossfade filters between clips."""
+    crossfade_s = crossfade_ms / 1000.0
+    n = len(clip_paths)
+
+    if n <= 1:
+        import shutil
+        shutil.copy2(clip_paths[0], output_path)
+        return
+
+    # Build filter_complex chain
+    inputs = []
+    for i, clip in enumerate(clip_paths):
+        inputs.extend(["-i", str(clip)])
+
+    filter_parts = []
+    current_label = "[0]"
+
+    for i in range(1, n):
+        next_label = f"[{i}]"
+        out_label = f"[a{i}]" if i < n - 1 else "[out]"
+        filter_parts.append(
+            f"{current_label}{next_label}acrossfade=d={crossfade_s}:c1=tri:c2=tri{out_label}"
+        )
+        current_label = out_label
+
+    cmd = ["ffmpeg", "-y"] + inputs + [
+        "-filter_complex", ";".join(filter_parts),
+        "-map", "[out]",
+        "-c:a", "libvorbis", "-q:a", "4",
+        str(output_path),
+    ]
+    subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()

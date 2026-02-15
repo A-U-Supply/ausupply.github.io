@@ -1,0 +1,60 @@
+name: Glottisdale
+
+on:
+  schedule:
+    - cron: '0 18 * * *'  # 10am PT daily
+  workflow_dispatch:
+    inputs:
+      target_duration:
+        description: 'Target duration in seconds'
+        default: '10'
+      max_videos:
+        description: 'Max source videos'
+        default: '5'
+      whisper_model:
+        description: 'Whisper model (tiny/base/small)'
+        default: 'base'
+      seed:
+        description: 'RNG seed (empty for random)'
+        default: ''
+
+jobs:
+  glottisdale:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache Whisper + alignment models
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/whisper
+            ~/.cache/torch
+          key: glottisdale-models-${{ inputs.whisper_model || 'base' }}
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: |
+          pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+          pip install -r glottisdale/requirements.txt
+          pip install -e glottisdale/
+
+      - name: Run glottisdale
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          ARGS="--target-duration ${{ inputs.target_duration || '10' }}"
+          ARGS="$ARGS --max-videos ${{ inputs.max_videos || '5' }}"
+          ARGS="$ARGS --whisper-model ${{ inputs.whisper_model || 'base' }}"
+          if [ -n "${{ inputs.seed }}" ]; then
+            ARGS="$ARGS --seed ${{ inputs.seed }}"
+          fi
+          python glottisdale/bot.py $ARGS
