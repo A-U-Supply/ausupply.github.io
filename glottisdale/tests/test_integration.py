@@ -58,10 +58,10 @@ def test_full_pipeline_local_mode(mock_transcribe, tmp_path):
     assert manifest["sources"] == ["input"]
     assert len(manifest["clips"]) > 0
 
-    # Verify clips are real OGG files
+    # Verify clips are real WAV files
     for clip in result.clips:
         assert clip.output_path.exists()
         assert clip.output_path.stat().st_size > 0
 
-    # "hello" = 2 syllables, "beautiful" = 3 syllables, "world" = 1 syllable = 6 total
-    assert len(result.clips) >= 3  # at least some syllables selected
+    # 6 syllables grouped into variable-length words — at least 2 words
+    assert len(result.clips) >= 2

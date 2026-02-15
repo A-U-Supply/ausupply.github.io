@@ -21,16 +21,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     # Core options
     parser.add_argument("--output-dir", default="./glottisdale-output",
                         help="Output directory (default: ./glottisdale-output)")
-    parser.add_argument("--syllables-per-clip", type=int, default=1,
-                        help="Syllables per clip (default: 1)")
+    parser.add_argument("--syllables-per-clip", default="1-5",
+                        help="Syllables per word: '3', or '1-5' for variable (default: 1-5)")
     parser.add_argument("--target-duration", type=float, default=10.0,
                         help="Target total duration in seconds (default: 10)")
     parser.add_argument("--crossfade", type=float, default=10,
                         help="Crossfade between clips in ms (default: 10, 0=hard cut)")
     parser.add_argument("--padding", type=float, default=25,
                         help="Padding around syllable cuts in ms (default: 25)")
-    parser.add_argument("--gap", default="50-200",
-                        help="Silence between clips in ms: '0', '100', or '50-200' (default: 50-200)")
+    parser.add_argument("--gap", default="200-500",
+                        help="Silence between words in ms: '0', '300', or '200-500' (default: 200-500)")
     parser.add_argument("--whisper-model", default="base",
                         choices=["tiny", "base", "small", "medium"],
                         help="Whisper model size (default: base)")

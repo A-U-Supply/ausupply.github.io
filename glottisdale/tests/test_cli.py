@@ -15,11 +15,11 @@ def test_parse_local_files():
 def test_parse_defaults():
     args = parse_args([])
     assert args.output_dir == "./glottisdale-output"
-    assert args.syllables_per_clip == 1
+    assert args.syllables_per_clip == "1-5"
     assert args.target_duration == 10.0
     assert args.crossfade == 10
     assert args.padding == 25
-    assert args.gap == "50-200"
+    assert args.gap == "200-500"
     assert args.whisper_model == "base"
     assert args.aligner == "default"
     assert args.seed is None
@@ -39,7 +39,7 @@ def test_parse_all_options():
         "input.mp4",
     ])
     assert args.output_dir == "/tmp/out"
-    assert args.syllables_per_clip == 3
+    assert args.syllables_per_clip == "3"
     assert args.target_duration == 30.0
     assert args.crossfade == 0
     assert args.padding == 50

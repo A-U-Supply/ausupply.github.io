@@ -18,6 +18,15 @@ from glottisdale.audio import (
 from glottisdale.types import Clip, Result, Syllable
 
 
+def _parse_range(s: str) -> tuple[int, int]:
+    """Parse range string like '1-5' or '3' into (min, max)."""
+    if "-" in s:
+        parts = s.split("-", 1)
+        return int(parts[0]), int(parts[1])
+    val = int(s)
+    return val, val
+
+
 def _parse_gap(gap: str) -> tuple[float, float]:
     """Parse gap string like '50-200' or '100' into (min_ms, max_ms)."""
     if "-" in gap:
@@ -92,11 +101,11 @@ def _sample_syllables_multi_source(
 def process(
     input_paths: list[Path],
     output_dir: str | Path = "./glottisdale-output",
-    syllables_per_clip: int = 1,
+    syllables_per_clip: str = "1-5",
     target_duration: float = 10.0,
     crossfade_ms: float = 10,
     padding_ms: float = 25,
-    gap: str = "50-200",
+    gap: str = "200-500",
     aligner: str = "default",
     whisper_model: str = "base",
     seed: int | None = None,
@@ -108,6 +117,7 @@ def process(
     clips_dir.mkdir(parents=True, exist_ok=True)
 
     gap_min, gap_max = _parse_gap(gap)
+    spc_min, spc_max = _parse_range(syllables_per_clip)
     alignment_engine = get_aligner(aligner, whisper_model=whisper_model)
 
     # Process each input file
@@ -141,63 +151,82 @@ def process(
                 all_syllables, target_duration, rng
             )
 
-        # Group syllables into clips
+        # Helper to find which source a syllable came from
+        def _find_source(syl: Syllable) -> str:
+            for src_name, src_syls in all_syllables.items():
+                if syl in src_syls:
+                    return src_name
+            return "unknown"
+
+        # Group syllables into variable-length nonsense "words"
+        words: list[list[Syllable]] = []
+        i = 0
+        while i < len(selected):
+            word_len = rng.randint(spc_min, spc_max)
+            word = selected[i:i + word_len]
+            if word:
+                words.append(word)
+            i += word_len
+
+        # Build each word: cut individual syllables, fuse them tightly
         clips = []
-        for i in range(0, len(selected), syllables_per_clip):
-            group = selected[i:i + syllables_per_clip]
-            if not group:
+        for word_idx, word_syls in enumerate(words):
+            # Cut each syllable from its source audio
+            syl_clip_paths = []
+            for syl_idx, syl in enumerate(word_syls):
+                syl_source = _find_source(syl)
+                source_audio = tmpdir / f"{syl_source}.wav"
+                syl_clip_path = tmpdir / f"word{word_idx:03d}_syl{syl_idx:02d}.wav"
+                if source_audio.exists():
+                    cut_clip(
+                        input_path=source_audio,
+                        output_path=syl_clip_path,
+                        start=syl.start,
+                        end=syl.end,
+                        padding_ms=padding_ms,
+                        fade_ms=0,
+                    )
+                    syl_clip_paths.append(syl_clip_path)
+
+            if not syl_clip_paths:
                 continue
 
-            clip_start = min(s.start for s in group)
-            clip_end = max(s.end for s in group)
-            # Find which source file this syllable came from
-            clip_source = "unknown"
-            for src_name, src_syls in all_syllables.items():
-                if group[0] in src_syls:
-                    clip_source = src_name
-                    break
-
-            clip_idx = len(clips) + 1
-            w_idx = group[0].word_index
-            s_idx = 0
-            filename = f"{clip_idx:03d}_{clip_source}_w{w_idx:02d}_s{s_idx:02d}.ogg"
-            output_path = clips_dir / filename
-
-            clips.append(Clip(
-                syllables=group,
-                start=clip_start,
-                end=clip_end,
-                source=clip_source,
-                output_path=output_path,
-            ))
-
-        # Cut each clip from its source audio
-        for clip in clips:
-            source_audio = tmpdir / f"{clip.source}.wav"
-            if source_audio.exists():
-                cut_clip(
-                    input_path=source_audio,
-                    output_path=clip.output_path,
-                    start=clip.syllables[0].start,
-                    end=clip.syllables[-1].end,
-                    padding_ms=padding_ms,
-                    fade_ms=10,
+            # Fuse syllables tightly into one "word" clip
+            word_filename = f"{word_idx + 1:03d}_word.wav"
+            word_output = clips_dir / word_filename
+            if len(syl_clip_paths) == 1:
+                shutil.copy2(syl_clip_paths[0], word_output)
+            else:
+                concatenate_clips(
+                    syl_clip_paths, word_output,
+                    crossfade_ms=crossfade_ms,
                 )
 
-        # Generate gap durations
+            # Track dominant source for metadata
+            word_sources = [_find_source(s) for s in word_syls]
+            dominant = max(set(word_sources), key=word_sources.count)
+
+            clips.append(Clip(
+                syllables=word_syls,
+                start=min(s.start for s in word_syls),
+                end=max(s.end for s in word_syls),
+                source=dominant,
+                output_path=word_output,
+            ))
+
+        # Concatenate words with silence gaps between them
         gap_durations = []
         if len(clips) > 1:
             for _ in range(len(clips) - 1):
                 gap_durations.append(rng.uniform(gap_min, gap_max))
 
-        # Concatenate
-        concatenated_path = output_dir / "concatenated.ogg"
+        concatenated_path = output_dir / "concatenated.wav"
         clip_paths = [c.output_path for c in clips if c.output_path.exists()]
         if clip_paths:
             concatenate_clips(
                 clip_paths,
                 concatenated_path,
-                crossfade_ms=crossfade_ms,
+                crossfade_ms=0,
                 gap_durations_ms=gap_durations if gap_durations else None,
             )
 
