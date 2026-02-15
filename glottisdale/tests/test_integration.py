@@ -42,7 +42,9 @@ def test_full_pipeline_local_mode(mock_transcribe, tmp_path):
         target_duration=5.0,
         crossfade_ms=0,
         padding_ms=10,
-        gap="0",
+        phrase_pause="0",
+        sentence_pause="0",
+        word_crossfade_ms=0,
         seed=42,
     )
 
