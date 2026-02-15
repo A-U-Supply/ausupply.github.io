@@ -1,0 +1,9 @@
+openai-whisper
+g2p_en
+
+[dev]
+pytest>=8.0.0
+
+[slack]
+slack-sdk>=3.27.0
+requests>=2.31.0

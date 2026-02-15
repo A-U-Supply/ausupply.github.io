@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: glottisdale
+Version: 0.1.0
+Requires-Python: >=3.10
+Requires-Dist: openai-whisper
+Requires-Dist: g2p_en
+Provides-Extra: slack
+Requires-Dist: slack-sdk>=3.27.0; extra == "slack"
+Requires-Dist: requests>=2.31.0; extra == "slack"
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
