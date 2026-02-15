@@ -9,15 +9,9 @@ from glottisdale.types import Result, Clip, Syllable, Phoneme
 
 def test_post_results(tmp_path):
     client = MagicMock()
-    # files_upload_v2 returns file share info so we can get thread_ts
-    client.files_upload_v2.return_value = {
-        "file": {
-            "shares": {
-                "public": {
-                    "C999": [{"ts": "111.222"}]
-                }
-            }
-        }
+    client.chat_postMessage.return_value = {
+        "ts": "111.222",
+        "channel": "C999",
     }
 
     # Create real files so the upload paths exist
@@ -50,12 +44,21 @@ def test_post_results(tmp_path):
         _client=client,
     )
 
-    # Main upload should be the concatenated audio (no thread_ts)
-    first_upload = client.files_upload_v2.call_args_list[0]
-    assert "glottisdale.wav" in str(first_upload)
-    assert "thread_ts" not in first_upload[1]
+    # Summary posted as main message first
+    summary_call = client.chat_postMessage.call_args_list[0]
+    assert "1 words" in summary_call[1]["text"]
 
-    # Source links should be in thread
-    thread_msg = client.chat_postMessage.call_args_list[0]
-    assert thread_msg[1]["thread_ts"] == "111.222"
-    assert "video1.mp4" in thread_msg[1]["text"]
+    # Audio + zip uploaded in thread
+    assert client.files_upload_v2.call_count == 2
+    audio_upload = client.files_upload_v2.call_args_list[0]
+    assert audio_upload[1]["filename"] == "glottisdale.wav"
+    assert audio_upload[1]["thread_ts"] == "111.222"
+
+    zip_upload = client.files_upload_v2.call_args_list[1]
+    assert zip_upload[1]["filename"] == "clips.zip"
+    assert zip_upload[1]["thread_ts"] == "111.222"
+
+    # Source links in thread
+    source_call = client.chat_postMessage.call_args_list[1]
+    assert source_call[1]["thread_ts"] == "111.222"
+    assert "video1.mp4" in source_call[1]["text"]
