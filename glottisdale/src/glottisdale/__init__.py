@@ -36,6 +36,26 @@ def _parse_gap(gap: str) -> tuple[float, float]:
     return val, val
 
 
+# Default weights for syllables-per-word: favors 2-syllable words
+_WORD_LENGTH_WEIGHTS = [0.30, 0.35, 0.25, 0.10]
+
+
+def _weighted_word_length(min_syl: int, max_syl: int, rng: random.Random) -> int:
+    """Pick a word length using weighted distribution.
+
+    Weights skew toward 2-syllable words for natural-sounding output.
+    Falls back to uniform if range doesn't match weight table.
+    """
+    choices = list(range(min_syl, max_syl + 1))
+    if len(choices) == len(_WORD_LENGTH_WEIGHTS):
+        return rng.choices(choices, weights=_WORD_LENGTH_WEIGHTS, k=1)[0]
+    # Fallback: use truncated/padded weights or uniform
+    if len(choices) <= len(_WORD_LENGTH_WEIGHTS):
+        weights = _WORD_LENGTH_WEIGHTS[:len(choices)]
+        return rng.choices(choices, weights=weights, k=1)[0]
+    return rng.randint(min_syl, max_syl)
+
+
 def _sample_syllables(
     syllables: list[Syllable],
     target_duration: float,
@@ -162,7 +182,7 @@ def process(
         words: list[list[Syllable]] = []
         i = 0
         while i < len(selected):
-            word_len = rng.randint(spc_min, spc_max)
+            word_len = _weighted_word_length(spc_min, spc_max, rng)
             word = selected[i:i + word_len]
             if word:
                 words.append(word)

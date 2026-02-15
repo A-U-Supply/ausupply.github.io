@@ -123,3 +123,36 @@ def test_process_respects_target_duration(
     # Should select fewer syllables to stay near target
     total_duration = sum(c.end - c.start for c in result.clips)
     assert total_duration <= 1.0  # Some slack, but well under 2.0
+
+
+from glottisdale import _weighted_word_length
+
+
+class TestWeightedWordLength:
+    def test_returns_int_in_range(self):
+        rng = __import__("random").Random(42)
+        for _ in range(100):
+            length = _weighted_word_length(1, 4, rng)
+            assert 1 <= length <= 4
+
+    def test_distribution_skews_toward_two(self):
+        """With default weights, 2-syllable words should be most common."""
+        rng = __import__("random").Random(42)
+        counts = {1: 0, 2: 0, 3: 0, 4: 0}
+        for _ in range(1000):
+            length = _weighted_word_length(1, 4, rng)
+            counts[length] += 1
+        # 2-syllable should be the most common
+        assert counts[2] > counts[1]
+        assert counts[2] > counts[3]
+        assert counts[2] > counts[4]
+
+    def test_single_value_range(self):
+        rng = __import__("random").Random(42)
+        for _ in range(10):
+            assert _weighted_word_length(3, 3, rng) == 3
+
+    def test_range_of_two(self):
+        rng = __import__("random").Random(42)
+        results = {_weighted_word_length(2, 3, rng) for _ in range(50)}
+        assert results == {2, 3}
