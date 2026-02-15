@@ -19,19 +19,31 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Local video/audio files. If omitted, fetches from Slack.",
     )
 
-    # Core options
+    # Core options — prosodic grouping
     parser.add_argument("--output-dir", default="./glottisdale-output",
                         help="Output directory (default: ./glottisdale-output)")
-    parser.add_argument("--syllables-per-clip", default="1-5",
-                        help="Syllables per word: '3', or '1-5' for variable (default: 1-5)")
+    parser.add_argument("--syllables-per-word", default="1-4",
+                        help="Syllables per word: '3', or '1-4' for variable (default: 1-4)")
+    parser.add_argument("--syllables-per-clip", default=None,
+                        help=argparse.SUPPRESS)  # deprecated alias
     parser.add_argument("--target-duration", type=float, default=10.0,
                         help="Target total duration in seconds (default: 10)")
     parser.add_argument("--crossfade", type=float, default=10,
-                        help="Crossfade between clips in ms (default: 10, 0=hard cut)")
+                        help="Crossfade between syllables in a word, ms (default: 10, 0=hard cut)")
     parser.add_argument("--padding", type=float, default=25,
                         help="Padding around syllable cuts in ms (default: 25)")
-    parser.add_argument("--gap", default="200-500",
-                        help="Silence between words in ms: '0', '300', or '200-500' (default: 200-500)")
+    parser.add_argument("--words-per-phrase", default="3-5",
+                        help="Words per phrase: '4', or '3-5' (default: 3-5)")
+    parser.add_argument("--phrases-per-sentence", default="2-3",
+                        help="Phrases per sentence group: '2', or '2-3' (default: 2-3)")
+    parser.add_argument("--phrase-pause", default="400-700",
+                        help="Silence between phrases in ms: '500' or '400-700' (default: 400-700)")
+    parser.add_argument("--sentence-pause", default="800-1200",
+                        help="Silence between sentences in ms: '1000' or '800-1200' (default: 800-1200)")
+    parser.add_argument("--word-crossfade", type=float, default=25,
+                        help="Crossfade between words in a phrase, ms (default: 25)")
+    parser.add_argument("--gap", default=None,
+                        help=argparse.SUPPRESS)  # deprecated alias for --phrase-pause
     parser.add_argument("--whisper-model", default="base",
                         choices=["tiny", "base", "small", "medium"],
                         help="Whisper model size (default: base)")
@@ -52,7 +64,19 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--no-post", action="store_true",
                         help="Skip Slack posting, just write to output-dir")
 
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+
+    # Backward compat: --syllables-per-clip -> --syllables-per-word
+    if args.syllables_per_clip is not None:
+        print("Warning: --syllables-per-clip is deprecated, use --syllables-per-word",
+              file=sys.stderr)
+        args.syllables_per_word = args.syllables_per_clip
+    # Backward compat: --gap -> --phrase-pause
+    if args.gap is not None:
+        print("Warning: --gap is deprecated, use --phrase-pause", file=sys.stderr)
+        args.phrase_pause = args.gap
+
+    return args
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -73,11 +97,15 @@ def main(argv: list[str] | None = None) -> None:
         result = process(
             input_paths=input_paths,
             output_dir=args.output_dir,
-            syllables_per_clip=args.syllables_per_clip,
+            syllables_per_clip=args.syllables_per_word,
             target_duration=args.target_duration,
             crossfade_ms=args.crossfade,
             padding_ms=args.padding,
-            gap=args.gap,
+            words_per_phrase=args.words_per_phrase,
+            phrases_per_sentence=args.phrases_per_sentence,
+            phrase_pause=args.phrase_pause,
+            sentence_pause=args.sentence_pause,
+            word_crossfade_ms=args.word_crossfade,
             aligner=args.aligner,
             whisper_model=args.whisper_model,
             seed=args.seed,
@@ -127,11 +155,15 @@ def main(argv: list[str] | None = None) -> None:
             result = process(
                 input_paths=[v["path"] for v in videos],
                 output_dir=args.output_dir,
-                syllables_per_clip=args.syllables_per_clip,
+                syllables_per_clip=args.syllables_per_word,
                 target_duration=args.target_duration,
                 crossfade_ms=args.crossfade,
                 padding_ms=args.padding,
-                gap=args.gap,
+                words_per_phrase=args.words_per_phrase,
+                phrases_per_sentence=args.phrases_per_sentence,
+                phrase_pause=args.phrase_pause,
+                sentence_pause=args.sentence_pause,
+                word_crossfade_ms=args.word_crossfade,
                 aligner=args.aligner,
                 whisper_model=args.whisper_model,
                 seed=args.seed,
