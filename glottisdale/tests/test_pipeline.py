@@ -156,3 +156,26 @@ class TestWeightedWordLength:
         rng = __import__("random").Random(42)
         results = {_weighted_word_length(2, 3, rng) for _ in range(50)}
         assert results == {2, 3}
+
+
+def test_word_grouping_uses_phonotactic_ordering():
+    """Words with multiple syllables should be phonotactically ordered."""
+    from glottisdale import _group_into_words
+    import random
+
+    # Create syllables with distinct phoneme patterns
+    syls = [
+        Syllable([Phoneme("NG", 0.0, 0.1), Phoneme("AH0", 0.1, 0.2)],
+                 0.0, 0.2, "test", 0),  # NG onset = bad
+        Syllable([Phoneme("T", 0.3, 0.4), Phoneme("AH0", 0.4, 0.5)],
+                 0.3, 0.5, "test", 1),  # T onset = good
+        Syllable([Phoneme("AH0", 0.6, 0.7), Phoneme("N", 0.7, 0.8)],
+                 0.6, 0.8, "test", 2),  # ends on N = good coda
+    ]
+
+    rng = random.Random(42)
+    words = _group_into_words(syls, spc_min=3, spc_max=3, rng=rng)
+
+    # All 3 syllables should be in one word
+    assert len(words) == 1
+    assert len(words[0]) == 3

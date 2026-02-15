@@ -15,6 +15,7 @@ from glottisdale.audio import (
     extract_audio,
     get_duration,
 )
+from glottisdale.phonotactics import order_syllables
 from glottisdale.types import Clip, Result, Syllable
 
 
@@ -54,6 +55,26 @@ def _weighted_word_length(min_syl: int, max_syl: int, rng: random.Random) -> int
         weights = _WORD_LENGTH_WEIGHTS[:len(choices)]
         return rng.choices(choices, weights=weights, k=1)[0]
     return rng.randint(min_syl, max_syl)
+
+
+def _group_into_words(
+    syllables: list[Syllable],
+    spc_min: int,
+    spc_max: int,
+    rng: random.Random,
+) -> list[list[Syllable]]:
+    """Group syllables into variable-length words with phonotactic ordering."""
+    words: list[list[Syllable]] = []
+    i = 0
+    while i < len(syllables):
+        word_len = _weighted_word_length(spc_min, spc_max, rng)
+        word = syllables[i:i + word_len]
+        if word:
+            if len(word) > 1:
+                word = order_syllables(word, seed=rng.randint(0, 2**31))
+            words.append(word)
+        i += word_len
+    return words
 
 
 def _sample_syllables(
@@ -178,15 +199,8 @@ def process(
                     return src_name
             return "unknown"
 
-        # Group syllables into variable-length nonsense "words"
-        words: list[list[Syllable]] = []
-        i = 0
-        while i < len(selected):
-            word_len = _weighted_word_length(spc_min, spc_max, rng)
-            word = selected[i:i + word_len]
-            if word:
-                words.append(word)
-            i += word_len
+        # Group syllables into phonotactically-ordered nonsense "words"
+        words = _group_into_words(selected, spc_min, spc_max, rng)
 
         # Build each word: cut individual syllables, fuse them tightly
         clips = []
