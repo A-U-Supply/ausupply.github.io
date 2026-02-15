@@ -182,7 +182,12 @@ def process(
     target_duration: float = 10.0,
     crossfade_ms: float = 10,
     padding_ms: float = 25,
-    gap: str = "200-500",
+    gap: str | None = None,
+    words_per_phrase: str = "3-5",
+    phrases_per_sentence: str = "2-3",
+    phrase_pause: str = "400-700",
+    sentence_pause: str = "800-1200",
+    word_crossfade_ms: float = 25,
     aligner: str = "default",
     whisper_model: str = "base",
     seed: int | None = None,
@@ -193,8 +198,17 @@ def process(
     clips_dir = output_dir / "clips"
     clips_dir.mkdir(parents=True, exist_ok=True)
 
-    gap_min, gap_max = _parse_gap(gap)
+    # Backward compat: if gap is provided, use it as phrase_pause
+    if gap is not None:
+        phrase_pause = gap
+        gap_min, gap_max = _parse_gap(gap)
+        sentence_pause = f"{gap_min * 2}-{gap_max * 2}"
+
     spc_min, spc_max = _parse_range(syllables_per_clip)
+    wpp_min, wpp_max = _parse_range(words_per_phrase)
+    pps_min, pps_max = _parse_range(phrases_per_sentence)
+    pp_min, pp_max = _parse_gap(phrase_pause)
+    sp_min, sp_max = _parse_gap(sentence_pause)
     alignment_engine = get_aligner(aligner, whisper_model=whisper_model)
 
     # Process each input file
@@ -240,6 +254,7 @@ def process(
 
         # Build each word: cut individual syllables, fuse them tightly
         clips = []
+        word_clip_paths = []
         for word_idx, word_syls in enumerate(words):
             # Cut each syllable from its source audio
             syl_clip_paths = []
@@ -259,6 +274,7 @@ def process(
                     syl_clip_paths.append(syl_clip_path)
 
             if not syl_clip_paths:
+                word_clip_paths.append(None)
                 continue
 
             # Fuse syllables tightly into one "word" clip
@@ -283,18 +299,63 @@ def process(
                 source=dominant,
                 output_path=word_output,
             ))
+            word_clip_paths.append(word_output)
 
-        # Concatenate words with silence gaps between them
+        # Filter to valid word clip paths
+        valid_word_paths = [p for p in word_clip_paths if p is not None]
+
+        # Group words into phrases, phrases into sentences
+        phrases = _group_into_phrases(
+            [[p] for p in valid_word_paths], wpp_min, wpp_max, rng
+        )
+
+        # Build phrase WAVs (words concatenated with crossfade, no gaps)
+        phrase_paths = []
+        for phrase_idx, phrase_word_groups in enumerate(phrases):
+            phrase_clip_paths = [
+                p for group in phrase_word_groups for p in group
+                if p.exists()
+            ]
+            if not phrase_clip_paths:
+                continue
+            phrase_path = tmpdir / f"phrase_{phrase_idx:03d}.wav"
+            if len(phrase_clip_paths) == 1:
+                shutil.copy2(phrase_clip_paths[0], phrase_path)
+            else:
+                concatenate_clips(
+                    phrase_clip_paths, phrase_path,
+                    crossfade_ms=word_crossfade_ms,
+                )
+            phrase_paths.append(phrase_path)
+
+        # Group phrases into sentences, compute gap durations
+        sentence_groups = _group_into_sentences(
+            list(range(len(phrase_paths))), pps_min, pps_max, rng
+        )
+
+        # Build final concatenation with phrase/sentence pauses
         gap_durations = []
-        if len(clips) > 1:
-            for _ in range(len(clips) - 1):
-                gap_durations.append(rng.uniform(gap_min, gap_max))
+        ordered_phrase_paths = []
+        for sent_idx, sent_phrase_indices in enumerate(sentence_groups):
+            for i, phrase_idx in enumerate(sent_phrase_indices):
+                if phrase_idx < len(phrase_paths):
+                    ordered_phrase_paths.append(phrase_paths[phrase_idx])
+                    # Add gap after this phrase (unless it's the very last)
+                    is_last_in_sentence = (i == len(sent_phrase_indices) - 1)
+                    is_last_sentence = (sent_idx == len(sentence_groups) - 1)
+                    if not (is_last_in_sentence and is_last_sentence):
+                        if is_last_in_sentence:
+                            # Sentence boundary pause
+                            gap_durations.append(rng.uniform(sp_min, sp_max))
+                        else:
+                            # Phrase boundary pause
+                            gap_durations.append(rng.uniform(pp_min, pp_max))
 
+        # Final concatenation
         concatenated_path = output_dir / "concatenated.wav"
-        clip_paths = [c.output_path for c in clips if c.output_path.exists()]
-        if clip_paths:
+        if ordered_phrase_paths:
             concatenate_clips(
-                clip_paths,
+                ordered_phrase_paths,
                 concatenated_path,
                 crossfade_ms=0,
                 gap_durations_ms=gap_durations if gap_durations else None,

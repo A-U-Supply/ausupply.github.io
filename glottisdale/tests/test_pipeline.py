@@ -181,6 +181,65 @@ def test_word_grouping_uses_phonotactic_ordering():
     assert len(words[0]) == 3
 
 
+@patch("glottisdale.get_aligner")
+@patch("glottisdale.extract_audio")
+@patch("glottisdale.detect_input_type")
+@patch("glottisdale.cut_clip")
+@patch("glottisdale.concatenate_clips")
+@patch("glottisdale.get_duration", return_value=2.0)
+def test_process_uses_phrase_grouping(
+    mock_duration, mock_concat, mock_cut, mock_detect, mock_extract, mock_aligner, tmp_path
+):
+    """Process should use phrase-level grouping with appropriate gaps."""
+    mock_detect.return_value = "audio"
+    def fake_extract(input_path, output_path):
+        output_path.touch()
+        return output_path
+    mock_extract.side_effect = fake_extract
+
+    # 20 syllables = enough for multiple words and phrases
+    syllables = [
+        Syllable([Phoneme("AH0", i * 0.1, (i + 1) * 0.1)],
+                 i * 0.1, (i + 1) * 0.1, f"word{i}", i)
+        for i in range(20)
+    ]
+
+    aligner_instance = MagicMock()
+    aligner_instance.process.return_value = {
+        "text": "test",
+        "words": [],
+        "syllables": syllables,
+    }
+    mock_aligner.return_value = aligner_instance
+
+    def fake_cut(input_path, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_cut.side_effect = fake_cut
+
+    def fake_concat(clips, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_concat.side_effect = fake_concat
+
+    result = process(
+        input_paths=[tmp_path / "audio.wav"],
+        output_dir=tmp_path / "out",
+        target_duration=10.0,
+        syllables_per_clip="2-3",
+        words_per_phrase="3-4",
+        phrases_per_sentence="2-3",
+        phrase_pause="400-600",
+        sentence_pause="800-1000",
+        word_crossfade_ms=25,
+        seed=42,
+    )
+
+    assert len(result.clips) >= 1
+    # concatenate_clips should be called multiple times (once per word, per phrase, final)
+    assert mock_concat.call_count >= 2
+
+
 def test_group_into_phrases():
     from glottisdale import _group_into_phrases
     import random
