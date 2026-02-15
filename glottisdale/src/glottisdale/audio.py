@@ -84,20 +84,20 @@ def cut_clip(
     ]
     if filters:
         cmd.extend(["-af", ",".join(filters)])
-    cmd.extend(["-c:a", "libvorbis", "-q:a", "4", str(output_path)])
+    cmd.extend(["-c:a", "pcm_s16le", str(output_path)])
 
     subprocess.run(cmd, capture_output=True, text=True, timeout=30).check_returncode()
     return output_path
 
 
 def generate_silence(output_path: Path, duration_ms: float, sample_rate: int = 16000) -> Path:
-    """Generate a silent OGG file."""
+    """Generate a silent WAV file."""
     duration_s = duration_ms / 1000.0
     cmd = [
         "ffmpeg", "-y",
         "-f", "lavfi", "-i", f"anullsrc=r={sample_rate}:cl=mono",
         "-t", f"{duration_s:.4f}",
-        "-c:a", "libvorbis", "-q:a", "4",
+        "-c:a", "pcm_s16le",
         str(output_path),
     ]
     subprocess.run(cmd, capture_output=True, text=True, timeout=30).check_returncode()
@@ -131,7 +131,7 @@ def concatenate_clips(
             if gap_durations_ms and i < len(clip_paths) - 1:
                 gap_ms = gap_durations_ms[i] if i < len(gap_durations_ms) else 0
                 if gap_ms > 0:
-                    silence_path = tmpdir / f"silence_{i:04d}.ogg"
+                    silence_path = tmpdir / f"silence_{i:04d}.wav"
                     generate_silence(silence_path, gap_ms)
                     concat_list.append(silence_path)
 
@@ -193,7 +193,7 @@ def _concatenate_with_crossfade(
     cmd = ["ffmpeg", "-y"] + inputs + [
         "-filter_complex", ";".join(filter_parts),
         "-map", "[out]",
-        "-c:a", "libvorbis", "-q:a", "4",
+        "-c:a", "pcm_s16le",
         str(output_path),
     ]
     subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
