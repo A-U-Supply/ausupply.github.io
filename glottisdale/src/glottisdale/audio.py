@@ -144,22 +144,23 @@ def concatenate_clips(
 
 
 def _concatenate_simple(clip_paths: list[Path], output_path: Path) -> None:
-    """Concatenate via ffmpeg concat demuxer (no crossfade)."""
-    import tempfile
+    """Concatenate via ffmpeg concat filter (robust for WAV files)."""
+    n = len(clip_paths)
+    inputs = []
+    for clip in clip_paths:
+        inputs.extend(["-i", str(clip)])
 
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
-        for clip in clip_paths:
-            f.write(f"file '{clip}'\n")
-        list_path = f.name
+    # Use the concat filter instead of concat demuxer for WAV compatibility
+    filter_str = "".join(f"[{i}:a]" for i in range(n))
+    filter_str += f"concat=n={n}:v=0:a=1[out]"
 
-    try:
-        cmd = [
-            "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-            "-i", list_path, "-c:a", "pcm_s16le", str(output_path),
-        ]
-        subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
-    finally:
-        Path(list_path).unlink(missing_ok=True)
+    cmd = ["ffmpeg", "-y"] + inputs + [
+        "-filter_complex", filter_str,
+        "-map", "[out]",
+        "-c:a", "pcm_s16le",
+        str(output_path),
+    ]
+    subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
 
 
 def _concatenate_with_crossfade(
