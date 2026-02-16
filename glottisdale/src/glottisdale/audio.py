@@ -1,6 +1,7 @@
 """Audio processing via ffmpeg/ffprobe."""
 
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -117,7 +118,6 @@ def concatenate_clips(
         raise ValueError("No clips to concatenate")
 
     if len(clip_paths) == 1:
-        import shutil
         shutil.copy2(clip_paths[0], output_path)
         return output_path
 
@@ -171,7 +171,6 @@ def _concatenate_with_crossfade(
     n = len(clip_paths)
 
     if n <= 1:
-        import shutil
         shutil.copy2(clip_paths[0], output_path)
         return
 
@@ -198,3 +197,79 @@ def _concatenate_with_crossfade(
         str(output_path),
     ]
     subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
+
+
+def pitch_shift_clip(input_path: Path, output_path: Path, semitones: float) -> Path:
+    """Pitch-shift a WAV clip by the given number of semitones.
+
+    Uses ffmpeg asetrate + aresample to change pitch without changing duration.
+    If semitones is ~0, just copies the file.
+    """
+    if abs(semitones) < 0.01:
+        shutil.copy2(input_path, output_path)
+        return output_path
+
+    # Get original sample rate via ffprobe
+    output = _run_ffprobe(input_path, "-show_streams")
+    data = json.loads(output)
+    original_sr = None
+    for stream in data.get("streams", []):
+        if stream.get("codec_type") == "audio":
+            original_sr = int(stream["sample_rate"])
+            break
+    if original_sr is None:
+        raise ValueError(f"No audio stream found in {input_path}")
+
+    # Compute new rate: original_sr * 2^(semitones/12)
+    new_rate = original_sr * (2 ** (semitones / 12))
+
+    cmd = [
+        "ffmpeg", "-y", "-i", str(input_path),
+        "-af", f"asetrate={new_rate:.2f},aresample={original_sr}",
+        "-c:a", "pcm_s16le",
+        str(output_path),
+    ]
+    subprocess.run(cmd, capture_output=True, text=True, timeout=30).check_returncode()
+    return output_path
+
+
+def adjust_volume(input_path: Path, output_path: Path, db: float) -> Path:
+    """Adjust volume by dB amount using ffmpeg volume filter."""
+    cmd = [
+        "ffmpeg", "-y", "-i", str(input_path),
+        "-af", f"volume={db:.2f}dB",
+        "-c:a", "pcm_s16le",
+        str(output_path),
+    ]
+    subprocess.run(cmd, capture_output=True, text=True, timeout=30).check_returncode()
+    return output_path
+
+
+def mix_audio(
+    primary_path: Path,
+    secondary_path: Path,
+    output_path: Path,
+    secondary_volume_db: float = -40,
+) -> Path:
+    """Mix secondary audio under primary at the given volume level.
+
+    Output duration matches the primary. Secondary is looped if shorter.
+    """
+    primary_dur = get_duration(primary_path)
+
+    # Input 0: primary (as-is)
+    # Input 1: secondary, volume-adjusted, looped via stream_loop
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(primary_path),
+        "-stream_loop", "-1", "-i", str(secondary_path),
+        "-filter_complex",
+        f"[1:a]volume={secondary_volume_db:.2f}dB[bg];"
+        f"[0:a][bg]amix=inputs=2:duration=first:dropout_transition=0[out]",
+        "-map", "[out]",
+        "-t", f"{primary_dur:.4f}",
+        "-c:a", "pcm_s16le",
+        str(output_path),
+    ]
+    subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
+    return output_path

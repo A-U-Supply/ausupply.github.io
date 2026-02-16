@@ -271,3 +271,114 @@ def test_group_into_sentences():
     assert len(sentences) >= 2
     total_phrases = sum(len(s) for s in sentences)
     assert total_phrases == 6
+
+
+@patch("glottisdale.get_aligner")
+@patch("glottisdale.extract_audio")
+@patch("glottisdale.detect_input_type")
+@patch("glottisdale.cut_clip")
+@patch("glottisdale.concatenate_clips")
+@patch("glottisdale.get_duration", return_value=2.0)
+def test_process_accepts_audio_polish_params(
+    mock_duration, mock_concat, mock_cut, mock_detect, mock_extract, mock_aligner, tmp_path
+):
+    """process() should accept all audio polish parameters without TypeError."""
+    mock_detect.return_value = "audio"
+
+    def fake_extract(input_path, output_path):
+        output_path.touch()
+        return output_path
+    mock_extract.side_effect = fake_extract
+
+    aligner_instance = MagicMock()
+    aligner_instance.process.return_value = {
+        "text": "hello world",
+        "words": [
+            {"word": "hello", "start": 0.0, "end": 0.5},
+            {"word": "world", "start": 0.6, "end": 1.0},
+        ],
+        "syllables": _make_syllables(),
+    }
+    mock_aligner.return_value = aligner_instance
+
+    def fake_cut(input_path, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_cut.side_effect = fake_cut
+
+    def fake_concat(clips, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_concat.side_effect = fake_concat
+
+    result = process(
+        input_paths=[tmp_path / "audio.wav"],
+        output_dir=tmp_path / "out",
+        target_duration=10.0,
+        seed=42,
+        noise_level_db=-30,
+        room_tone=True,
+        pitch_normalize=True,
+        pitch_range=3,
+        breaths=True,
+        breath_probability=0.8,
+        volume_normalize=True,
+        prosodic_dynamics=True,
+    )
+
+    assert result.transcript == "[audio] hello world"
+    assert result.concatenated.exists()
+    assert (tmp_path / "out" / "manifest.json").exists()
+
+
+@patch("glottisdale.get_aligner")
+@patch("glottisdale.extract_audio")
+@patch("glottisdale.detect_input_type")
+@patch("glottisdale.cut_clip")
+@patch("glottisdale.concatenate_clips")
+@patch("glottisdale.get_duration", return_value=2.0)
+def test_process_audio_polish_all_disabled(
+    mock_duration, mock_concat, mock_cut, mock_detect, mock_extract, mock_aligner, tmp_path
+):
+    """process() should work with all audio polish features disabled."""
+    mock_detect.return_value = "audio"
+
+    def fake_extract(input_path, output_path):
+        output_path.touch()
+        return output_path
+    mock_extract.side_effect = fake_extract
+
+    aligner_instance = MagicMock()
+    aligner_instance.process.return_value = {
+        "text": "hello world",
+        "words": [],
+        "syllables": _make_syllables(),
+    }
+    mock_aligner.return_value = aligner_instance
+
+    def fake_cut(input_path, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_cut.side_effect = fake_cut
+
+    def fake_concat(clips, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_concat.side_effect = fake_concat
+
+    result = process(
+        input_paths=[tmp_path / "audio.wav"],
+        output_dir=tmp_path / "out",
+        target_duration=10.0,
+        seed=42,
+        noise_level_db=0,
+        room_tone=False,
+        pitch_normalize=False,
+        pitch_range=5,
+        breaths=False,
+        breath_probability=0.0,
+        volume_normalize=False,
+        prosodic_dynamics=False,
+    )
+
+    assert result.concatenated.exists()

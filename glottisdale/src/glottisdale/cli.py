@@ -28,8 +28,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help=argparse.SUPPRESS)  # deprecated alias
     parser.add_argument("--target-duration", type=float, default=30.0,
                         help="Target total duration in seconds (default: 30)")
-    parser.add_argument("--crossfade", type=float, default=10,
-                        help="Crossfade between syllables in a word, ms (default: 10, 0=hard cut)")
+    parser.add_argument("--crossfade", type=float, default=30,
+                        help="Crossfade between syllables in a word, ms (default: 30, 0=hard cut)")
     parser.add_argument("--padding", type=float, default=25,
                         help="Padding around syllable cuts in ms (default: 25)")
     parser.add_argument("--words-per-phrase", default="3-5",
@@ -40,8 +40,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help="Silence between phrases in ms: '500' or '400-700' (default: 400-700)")
     parser.add_argument("--sentence-pause", default="800-1200",
                         help="Silence between sentences in ms: '1000' or '800-1200' (default: 800-1200)")
-    parser.add_argument("--word-crossfade", type=float, default=25,
-                        help="Crossfade between words in a phrase, ms (default: 25)")
+    parser.add_argument("--word-crossfade", type=float, default=50,
+                        help="Crossfade between words in a phrase, ms (default: 50)")
     parser.add_argument("--gap", default=None,
                         help=argparse.SUPPRESS)  # deprecated alias for --phrase-pause
     parser.add_argument("--whisper-model", default="base",
@@ -63,6 +63,24 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help="Process but don't post to Slack")
     parser.add_argument("--no-post", action="store_true",
                         help="Skip Slack posting, just write to output-dir")
+
+    # Audio polish options
+    parser.add_argument("--noise-level", type=float, default=-40,
+                        help="Pink noise bed level in dB, 0 to disable (default: -40)")
+    parser.add_argument("--room-tone", action=argparse.BooleanOptionalAction, default=True,
+                        help="Extract room tone for gaps (default: enabled)")
+    parser.add_argument("--pitch-normalize", action=argparse.BooleanOptionalAction, default=True,
+                        help="Normalize pitch across syllables (default: enabled)")
+    parser.add_argument("--pitch-range", type=float, default=5,
+                        help="Max pitch shift in semitones (default: 5)")
+    parser.add_argument("--breaths", action=argparse.BooleanOptionalAction, default=True,
+                        help="Insert breath sounds at phrase boundaries (default: enabled)")
+    parser.add_argument("--breath-probability", type=float, default=0.6,
+                        help="Probability of breath at each phrase boundary (default: 0.6)")
+    parser.add_argument("--volume-normalize", action=argparse.BooleanOptionalAction, default=True,
+                        help="RMS-normalize syllable clips (default: enabled)")
+    parser.add_argument("--prosodic-dynamics", action=argparse.BooleanOptionalAction, default=True,
+                        help="Apply phrase-level volume envelope (default: enabled)")
 
     args = parser.parse_args(argv)
 
@@ -109,6 +127,14 @@ def main(argv: list[str] | None = None) -> None:
             aligner=args.aligner,
             whisper_model=args.whisper_model,
             seed=args.seed,
+            noise_level_db=args.noise_level,
+            room_tone=args.room_tone,
+            pitch_normalize=args.pitch_normalize,
+            pitch_range=args.pitch_range,
+            breaths=args.breaths,
+            breath_probability=args.breath_probability,
+            volume_normalize=args.volume_normalize,
+            prosodic_dynamics=args.prosodic_dynamics,
         )
 
         # Print summary to stdout
@@ -167,6 +193,14 @@ def main(argv: list[str] | None = None) -> None:
                 aligner=args.aligner,
                 whisper_model=args.whisper_model,
                 seed=args.seed,
+                noise_level_db=args.noise_level,
+                room_tone=args.room_tone,
+                pitch_normalize=args.pitch_normalize,
+                pitch_range=args.pitch_range,
+                breaths=args.breaths,
+                breath_probability=args.breath_probability,
+                volume_normalize=args.volume_normalize,
+                prosodic_dynamics=args.prosodic_dynamics,
             )
 
             # Print summary
