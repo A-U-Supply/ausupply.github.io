@@ -26,8 +26,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                         help="Syllables per word: '3', or '1-4' for variable (default: 1-4)")
     parser.add_argument("--syllables-per-clip", default=None,
                         help=argparse.SUPPRESS)  # deprecated alias
-    parser.add_argument("--target-duration", type=float, default=10.0,
-                        help="Target total duration in seconds (default: 10)")
+    parser.add_argument("--target-duration", type=float, default=30.0,
+                        help="Target total duration in seconds (default: 30)")
     parser.add_argument("--crossfade", type=float, default=10,
                         help="Crossfade between syllables in a word, ms (default: 10, 0=hard cut)")
     parser.add_argument("--padding", type=float, default=25,
