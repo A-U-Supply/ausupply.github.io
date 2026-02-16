@@ -21,7 +21,7 @@ def _import_synthesizer():
 def synthesize_midi_backing(midi_dir: Path, output_path: Path) -> bool:
     """Synthesize all 4 MIDI tracks into a single WAV."""
     synthesize = _import_synthesizer()
-    return synthesize(str(midi_dir), str(output_path))
+    return synthesize(midi_dir, output_path)
 
 
 def build_mix_command(
