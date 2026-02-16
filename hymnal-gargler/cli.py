@@ -207,6 +207,7 @@ def _run_slack(args: argparse.Namespace) -> None:
 
     # Fetch videos from #sample-sale
     video_dir = work_dir / "videos"
+    video_dir.mkdir(parents=True, exist_ok=True)
     logger.info(f"Fetching up to {args.max_videos} videos from #{args.video_channel}")
     fetch_videos(token, video_dir, args.max_videos, args.video_channel)
 

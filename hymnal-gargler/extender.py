@@ -65,13 +65,22 @@ def extend_midi(
             melody_path, drums_path, bass_path, chords_path, output_dir
         )
 
-    try:
-        summary = json.loads(result.stdout)
-        logger.info(f"Extended: {summary}")
-        return summary
-    except json.JSONDecodeError:
-        logger.warning(f"Could not parse Magenta output: {result.stdout}")
-        return {}
+    # Magenta prints initialization logs to stdout before the JSON summary.
+    # Extract the last line that looks like JSON.
+    json_lines = [
+        line for line in result.stdout.strip().split("\n")
+        if line.strip().startswith("{")
+    ]
+    if json_lines:
+        try:
+            summary = json.loads(json_lines[-1])
+            logger.info(f"Extended: {summary}")
+            return summary
+        except json.JSONDecodeError:
+            pass
+
+    logger.warning(f"Could not parse Magenta output: {result.stdout}")
+    return {}
 
 
 def _fallback_loop(melody_path, drums_path, bass_path, chords_path, output_dir):
