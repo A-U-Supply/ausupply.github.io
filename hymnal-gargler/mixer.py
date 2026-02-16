@@ -60,7 +60,11 @@ def mix_tracks(
 
     # Synthesize MIDI backing
     midi_wav = output_dir / "midi_backing.wav"
-    success = synthesize_midi_backing(midi_dir, midi_wav)
+    try:
+        success = synthesize_midi_backing(midi_dir, midi_wav)
+    except Exception as e:
+        logger.warning(f"MIDI synthesis failed: {e}")
+        success = False
 
     if success and midi_wav.exists():
         cmd = build_mix_command(acappella_path, midi_wav, full_mix_path)

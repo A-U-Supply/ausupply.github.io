@@ -15,7 +15,8 @@ def test_build_mix_command():
         vocal_weight=0.8,
         midi_weight=0.5,
     )
+    cmd_str = " ".join(str(c) for c in cmd)
     assert "ffmpeg" in cmd[0]
-    assert "/tmp/vocal.wav" in " ".join(str(c) for c in cmd)
-    assert "/tmp/midi.wav" in " ".join(str(c) for c in cmd)
-    assert "amix" in " ".join(str(c) for c in cmd)
+    assert "/tmp/vocal.wav" in cmd_str
+    assert "/tmp/midi.wav" in cmd_str
+    assert "amix" in cmd_str
