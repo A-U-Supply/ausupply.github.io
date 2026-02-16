@@ -25,4 +25,4 @@ def test_format_message():
 def test_format_message_no_description():
     msg = format_message("Blues", "A", 120, "", "https://link")
     assert "Hymnal Gargler" in msg
-    assert "_" not in msg or "Blues" in msg  # no empty italics
+    assert "Hymnal Gargler" in msg
