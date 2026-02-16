@@ -16,14 +16,14 @@ def test_parse_defaults():
     args = parse_args([])
     assert args.output_dir == "./glottisdale-output"
     assert args.syllables_per_word == "1-4"
-    assert args.target_duration == 10.0
-    assert args.crossfade == 10
+    assert args.target_duration == 30.0
+    assert args.crossfade == 30
     assert args.padding == 25
     assert args.phrase_pause == "400-700"
     assert args.sentence_pause == "800-1200"
     assert args.words_per_phrase == "3-5"
     assert args.phrases_per_sentence == "2-3"
-    assert args.word_crossfade == 25
+    assert args.word_crossfade == 50
     assert args.whisper_model == "base"
     assert args.aligner == "default"
     assert args.seed is None
@@ -86,3 +86,97 @@ def test_parse_slack_options():
     assert args.max_videos == 3
     assert args.dry_run is True
     assert args.no_post is True
+
+
+def test_audio_polish_flags_defaults():
+    args = parse_args([])
+    assert args.noise_level == -40
+    assert args.room_tone is True
+    assert args.pitch_normalize is True
+    assert args.pitch_range == 5
+    assert args.breaths is True
+    assert args.breath_probability == 0.6
+    assert args.volume_normalize is True
+    assert args.prosodic_dynamics is True
+
+
+def test_audio_polish_flags_disabled():
+    args = parse_args([
+        "--no-room-tone", "--no-pitch-normalize", "--no-breaths",
+        "--no-volume-normalize", "--no-prosodic-dynamics",
+        "--noise-level", "0",
+    ])
+    assert args.noise_level == 0
+    assert args.room_tone is False
+    assert args.pitch_normalize is False
+    assert args.breaths is False
+    assert args.volume_normalize is False
+    assert args.prosodic_dynamics is False
+
+
+def test_cli_passes_audio_polish_to_process(tmp_path):
+    """CLI local mode should pass all audio polish flags to process()."""
+    from glottisdale.cli import main
+
+    input_file = tmp_path / "test.wav"
+    input_file.touch()
+
+    mock_result = MagicMock()
+    mock_result.transcript = "test"
+    mock_result.clips = []
+    mock_result.concatenated = MagicMock()
+    mock_result.concatenated.name = "concatenated.wav"
+
+    with patch("glottisdale.process") as mock_process:
+        mock_process.return_value = mock_result
+        main([
+            str(input_file),
+            "--output-dir", str(tmp_path / "out"),
+            "--noise-level", "-30",
+            "--no-pitch-normalize",
+            "--pitch-range", "3",
+            "--no-breaths",
+            "--breath-probability", "0.4",
+            "--no-room-tone",
+            "--no-volume-normalize",
+            "--no-prosodic-dynamics",
+        ])
+
+        mock_process.assert_called_once()
+        call_kwargs = mock_process.call_args[1]
+        assert call_kwargs["noise_level_db"] == -30
+        assert call_kwargs["pitch_normalize"] is False
+        assert call_kwargs["pitch_range"] == 3
+        assert call_kwargs["breaths"] is False
+        assert call_kwargs["breath_probability"] == 0.4
+        assert call_kwargs["room_tone"] is False
+        assert call_kwargs["volume_normalize"] is False
+        assert call_kwargs["prosodic_dynamics"] is False
+
+
+def test_cli_passes_audio_polish_defaults_to_process(tmp_path):
+    """CLI should pass default audio polish values when no flags are given."""
+    from glottisdale.cli import main
+
+    input_file = tmp_path / "test.wav"
+    input_file.touch()
+
+    mock_result = MagicMock()
+    mock_result.transcript = "test"
+    mock_result.clips = []
+    mock_result.concatenated = MagicMock()
+    mock_result.concatenated.name = "concatenated.wav"
+
+    with patch("glottisdale.process") as mock_process:
+        mock_process.return_value = mock_result
+        main([str(input_file), "--output-dir", str(tmp_path / "out")])
+
+        call_kwargs = mock_process.call_args[1]
+        assert call_kwargs["noise_level_db"] == -40
+        assert call_kwargs["pitch_normalize"] is True
+        assert call_kwargs["pitch_range"] == 5
+        assert call_kwargs["breaths"] is True
+        assert call_kwargs["breath_probability"] == 0.6
+        assert call_kwargs["room_tone"] is True
+        assert call_kwargs["volume_normalize"] is True
+        assert call_kwargs["prosodic_dynamics"] is True

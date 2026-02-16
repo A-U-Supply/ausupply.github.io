@@ -1,19 +1,34 @@
 """Glottisdale — syllable-level audio collage tool."""
 
 import json
+import logging
 import random
 import shutil
+import subprocess
 import tempfile
 import zipfile
 from pathlib import Path
 
 from glottisdale.align import get_aligner
+from glottisdale.analysis import (
+    read_wav,
+    write_wav,
+    compute_rms,
+    estimate_f0,
+    find_room_tone,
+    find_breaths,
+    generate_pink_noise,
+)
 from glottisdale.audio import (
     cut_clip,
     concatenate_clips,
     detect_input_type,
     extract_audio,
     get_duration,
+    generate_silence,
+    pitch_shift_clip,
+    adjust_volume,
+    mix_audio,
 )
 from glottisdale.phonotactics import order_syllables
 from glottisdale.types import Clip, Result, Syllable
@@ -180,17 +195,26 @@ def process(
     output_dir: str | Path = "./glottisdale-output",
     syllables_per_clip: str = "1-5",
     target_duration: float = 10.0,
-    crossfade_ms: float = 10,
+    crossfade_ms: float = 30,
     padding_ms: float = 25,
     gap: str | None = None,
     words_per_phrase: str = "3-5",
     phrases_per_sentence: str = "2-3",
     phrase_pause: str = "400-700",
     sentence_pause: str = "800-1200",
-    word_crossfade_ms: float = 25,
+    word_crossfade_ms: float = 50,
     aligner: str = "default",
     whisper_model: str = "base",
     seed: int | None = None,
+    # Audio polish params
+    noise_level_db: float = -40,
+    room_tone: bool = True,
+    pitch_normalize: bool = True,
+    pitch_range: float = 5,
+    breaths: bool = True,
+    breath_probability: float = 0.6,
+    volume_normalize: bool = True,
+    prosodic_dynamics: bool = True,
 ) -> Result:
     """Run the full glottisdale pipeline."""
     rng = random.Random(seed)
@@ -231,6 +255,72 @@ def process(
             all_transcripts.append(f"[{source_name}] {result['text']}")
             all_syllables[source_name] = result["syllables"]
 
+        # === Audio polish: analyze sources ===
+        logger = logging.getLogger("glottisdale")
+        source_room_tones: dict[str, Path] = {}  # source_name -> room tone WAV path
+        source_breaths: dict[str, list[Path]] = {}  # source_name -> list of breath WAV paths
+
+        for source_name in all_syllables:
+            audio_path = tmpdir / f"{source_name}.wav"
+            if not audio_path.exists():
+                continue
+            try:
+                samples, sr = read_wav(audio_path)
+            except Exception:
+                continue
+
+            # Extract room tone
+            if room_tone:
+                try:
+                    rt = find_room_tone(samples, sr)
+                    if rt is not None:
+                        rt_start, rt_end = rt
+                        rt_path = tmpdir / f"{source_name}_roomtone.wav"
+                        rt_samples = samples[int(rt_start * sr):int(rt_end * sr)]
+                        write_wav(rt_path, rt_samples, sr)
+                        source_room_tones[source_name] = rt_path
+                        logger.info(
+                            f"Room tone found in {source_name}: "
+                            f"{rt_start:.1f}-{rt_end:.1f}s"
+                        )
+                except Exception:
+                    pass
+
+            # Detect breaths
+            if breaths:
+                try:
+                    # Build word-level boundaries from syllables
+                    word_bounds: list[tuple[float, float]] = []
+                    seen_words: set[tuple[str, int]] = set()
+                    for syl in all_syllables[source_name]:
+                        key = (syl.word, syl.word_index)
+                        if key not in seen_words:
+                            word_syls = [
+                                s for s in all_syllables[source_name]
+                                if s.word == syl.word
+                                and s.word_index == syl.word_index
+                            ]
+                            word_bounds.append((
+                                min(s.start for s in word_syls),
+                                max(s.end for s in word_syls),
+                            ))
+                            seen_words.add(key)
+                    word_bounds.sort()
+                    detected = find_breaths(samples, sr, word_bounds)
+                    if detected:
+                        breath_paths = []
+                        for bi, (bs, be) in enumerate(detected):
+                            bp = tmpdir / f"{source_name}_breath_{bi:03d}.wav"
+                            b_samples = samples[int(bs * sr):int(be * sr)]
+                            write_wav(bp, b_samples, sr)
+                            breath_paths.append(bp)
+                        source_breaths[source_name] = breath_paths
+                        logger.info(
+                            f"Found {len(detected)} breaths in {source_name}"
+                        )
+                except Exception:
+                    pass
+
         # Sample syllables across sources
         if len(all_syllables) == 1:
             source_name = list(all_syllables.keys())[0]
@@ -252,12 +342,13 @@ def process(
         # Group syllables into phonotactically-ordered nonsense "words"
         words = _group_into_words(selected, spc_min, spc_max, rng)
 
-        # Build each word: cut individual syllables, fuse them tightly
+        # Build each word: cut individual syllables, optionally normalize, fuse
         clips = []
         word_clip_paths = []
+
+        # First pass: cut all syllable clips
+        all_syl_clip_info = []  # (word_idx, syl_idx, syl_clip_path, syl)
         for word_idx, word_syls in enumerate(words):
-            # Cut each syllable from its source audio
-            syl_clip_paths = []
             for syl_idx, syl in enumerate(word_syls):
                 syl_source = _find_source(syl)
                 source_audio = tmpdir / f"{syl_source}.wav"
@@ -271,7 +362,92 @@ def process(
                         padding_ms=padding_ms,
                         fade_ms=0,
                     )
-                    syl_clip_paths.append(syl_clip_path)
+                    all_syl_clip_info.append(
+                        (word_idx, syl_idx, syl_clip_path, syl)
+                    )
+
+        # Pitch normalization: measure all F0s, shift to median
+        if pitch_normalize and all_syl_clip_info:
+            try:
+                import numpy as np
+                import math
+
+                f0_values = []
+                clip_f0s = {}
+                for word_idx, syl_idx, clip_path, syl in all_syl_clip_info:
+                    if clip_path.exists():
+                        samples, sr = read_wav(clip_path)
+                        f0 = estimate_f0(samples, sr)
+                        if f0 is not None:
+                            f0_values.append(f0)
+                            clip_f0s[(word_idx, syl_idx)] = f0
+
+                if f0_values:
+                    target_f0 = float(np.median(f0_values))
+                    logger.info(
+                        f"Pitch normalization: target F0 = {target_f0:.1f}Hz "
+                        f"(from {len(f0_values)} voiced clips)"
+                    )
+                    for word_idx, syl_idx, clip_path, syl in all_syl_clip_info:
+                        f0 = clip_f0s.get((word_idx, syl_idx))
+                        if f0 is not None and clip_path.exists():
+                            semitones_shift = 12 * math.log2(target_f0 / f0)
+                            # Clamp to pitch_range
+                            semitones_shift = max(
+                                -pitch_range,
+                                min(pitch_range, semitones_shift),
+                            )
+                            if abs(semitones_shift) >= 0.1:
+                                shifted = tmpdir / f"pitched_{clip_path.name}"
+                                pitch_shift_clip(
+                                    clip_path, shifted, semitones_shift
+                                )
+                                shutil.move(shifted, clip_path)
+            except Exception:
+                logger.debug("Pitch normalization failed, skipping")
+
+        # Volume normalization: normalize RMS across all syllable clips
+        if volume_normalize and all_syl_clip_info:
+            try:
+                import numpy as np
+                import math
+
+                rms_values = []
+                for word_idx, syl_idx, clip_path, syl in all_syl_clip_info:
+                    if clip_path.exists():
+                        samples, sr = read_wav(clip_path)
+                        rms_values.append(compute_rms(samples))
+
+                if rms_values:
+                    target_rms = float(np.median(rms_values))
+                    if target_rms > 1e-6:
+                        for (word_idx, syl_idx, clip_path,
+                             syl) in all_syl_clip_info:
+                            if clip_path.exists():
+                                samples, sr = read_wav(clip_path)
+                                clip_rms = compute_rms(samples)
+                                if clip_rms > 1e-6:
+                                    db_adjust = 20 * math.log10(
+                                        target_rms / clip_rms
+                                    )
+                                    db_adjust = max(-20, min(20, db_adjust))
+                                    if abs(db_adjust) >= 0.5:
+                                        adjusted = (
+                                            tmpdir / f"vol_{clip_path.name}"
+                                        )
+                                        adjust_volume(
+                                            clip_path, adjusted, db_adjust
+                                        )
+                                        shutil.move(adjusted, clip_path)
+            except Exception:
+                logger.debug("Volume normalization failed, skipping")
+
+        # Second pass: fuse syllables into words
+        for word_idx, word_syls in enumerate(words):
+            syl_clip_paths = [
+                info[2] for info in all_syl_clip_info
+                if info[0] == word_idx and info[2].exists()
+            ]
 
             if not syl_clip_paths:
                 word_clip_paths.append(None)
@@ -328,38 +504,132 @@ def process(
                 )
             phrase_paths.append(phrase_path)
 
+        # === Phase C: Prosodic dynamics on phrase WAVs ===
+        if prosodic_dynamics and phrase_paths:
+            for phrase_path in phrase_paths:
+                if not phrase_path.exists():
+                    continue
+                try:
+                    dur = get_duration(phrase_path)
+                    if dur > 0.3:
+                        fade_start = dur * 0.7
+                        softened = phrase_path.parent / f"dyn_{phrase_path.name}"
+                        cmd = [
+                            "ffmpeg", "-y", "-i", str(phrase_path),
+                            "-af",
+                            (
+                                f"volume=enable='between(t,0,{dur*0.2:.4f})':"
+                                f"volume=1.12dB,"
+                                f"volume=enable='gte(t,{fade_start:.4f})':"
+                                f"volume=-3dB"
+                            ),
+                            "-c:a", "pcm_s16le",
+                            str(softened),
+                        ]
+                        result_proc = subprocess.run(
+                            cmd, capture_output=True, text=True, timeout=30
+                        )
+                        if result_proc.returncode == 0:
+                            shutil.move(softened, phrase_path)
+                except Exception:
+                    pass
+
         # Group phrases into sentences, compute gap durations
         sentence_groups = _group_into_sentences(
             list(range(len(phrase_paths))), pps_min, pps_max, rng
         )
 
-        # Build final concatenation with phrase/sentence pauses
+        # === Phase D: Build gaps with room tone + breaths ===
         gap_durations = []
+        gap_types = []  # 'phrase' or 'sentence'
         ordered_phrase_paths = []
         for sent_idx, sent_phrase_indices in enumerate(sentence_groups):
             for i, phrase_idx in enumerate(sent_phrase_indices):
                 if phrase_idx < len(phrase_paths):
                     ordered_phrase_paths.append(phrase_paths[phrase_idx])
-                    # Add gap after this phrase (unless it's the very last)
                     is_last_in_sentence = (i == len(sent_phrase_indices) - 1)
                     is_last_sentence = (sent_idx == len(sentence_groups) - 1)
                     if not (is_last_in_sentence and is_last_sentence):
                         if is_last_in_sentence:
-                            # Sentence boundary pause
                             gap_durations.append(rng.uniform(sp_min, sp_max))
+                            gap_types.append("sentence")
                         else:
-                            # Phrase boundary pause
                             gap_durations.append(rng.uniform(pp_min, pp_max))
+                            gap_types.append("phrase")
+
+        # Build gap clips (room tone or silence, optionally with breaths)
+        all_breath_clips = [
+            bp for bps in source_breaths.values() for bp in bps
+        ]
+        final_clips_with_gaps = []
+        for i, phrase_path in enumerate(ordered_phrase_paths):
+            final_clips_with_gaps.append(phrase_path)
+            if i < len(gap_durations):
+                gap_ms = gap_durations[i]
+                gap_path = tmpdir / f"gap_{i:04d}.wav"
+
+                try:
+                    # Try room tone, fall back to silence
+                    if source_room_tones:
+                        rt_source = list(source_room_tones.values())[
+                            i % len(source_room_tones)
+                        ]
+                        generate_silence(gap_path, gap_ms)
+                        mixed_gap = tmpdir / f"gap_mixed_{i:04d}.wav"
+                        mix_audio(gap_path, rt_source, mixed_gap,
+                                  secondary_volume_db=0)
+                        shutil.move(mixed_gap, gap_path)
+                    else:
+                        generate_silence(gap_path, gap_ms)
+                except Exception:
+                    # Last resort: plain silence
+                    try:
+                        generate_silence(gap_path, gap_ms)
+                    except Exception:
+                        continue
+
+                # Optionally prepend a breath at phrase boundaries
+                if (all_breath_clips
+                        and i < len(gap_types)
+                        and gap_types[i] == "phrase"
+                        and rng.random() < breath_probability):
+                    try:
+                        breath_clip = rng.choice(all_breath_clips)
+                        breath_gap = tmpdir / f"breath_gap_{i:04d}.wav"
+                        concatenate_clips(
+                            [breath_clip, gap_path], breath_gap,
+                            crossfade_ms=10,
+                        )
+                        gap_path = breath_gap
+                    except Exception:
+                        pass
+
+                final_clips_with_gaps.append(gap_path)
 
         # Final concatenation
         concatenated_path = output_dir / "concatenated.wav"
-        if ordered_phrase_paths:
+        if final_clips_with_gaps:
             concatenate_clips(
-                ordered_phrase_paths,
+                final_clips_with_gaps,
                 concatenated_path,
                 crossfade_ms=0,
-                gap_durations_ms=gap_durations if gap_durations else None,
             )
+
+        # === Phase E: Mix pink noise bed under entire output ===
+        if noise_level_db != 0 and concatenated_path.exists():
+            try:
+                dur = get_duration(concatenated_path)
+                noise = generate_pink_noise(dur, 16000, seed=seed)
+                noise_path = tmpdir / "noise_bed.wav"
+                write_wav(noise_path, noise, 16000)
+                mixed_path = tmpdir / "concatenated_mixed.wav"
+                mix_audio(
+                    concatenated_path, noise_path, mixed_path,
+                    secondary_volume_db=noise_level_db,
+                )
+                shutil.move(mixed_path, concatenated_path)
+            except Exception:
+                logger.debug("Noise bed mixing failed, skipping")
 
         # Create zip of individual clips
         zip_path = output_dir / "clips.zip"
