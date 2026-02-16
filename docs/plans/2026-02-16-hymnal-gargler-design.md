@@ -51,7 +51,7 @@ The aesthetic goal is **"drunk choir learns a melody"** — not precise MIDI kar
 - Volume-normalize to median RMS
 - Result: a pool of clean, pitch-normalized syllable clips ready for mapping
 
-## Melody Extension (LLM Riffing)
+## Melody Extension (Magenta.js Riffing)
 
 The MIDI melody is 4 bars (~5-15 seconds). Target output is ~40 seconds. Extension uses the same music AI libraries as the MIDI bot — Magenta.js models for melody and drums, programmatic generation for bass and chords.
 
