@@ -1,0 +1,78 @@
+name: Hymnal Gargler
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 3pm PT daily
+  workflow_dispatch:
+    inputs:
+      target_duration:
+        description: 'Target duration in seconds'
+        default: '40'
+      max_videos:
+        description: 'Max source videos'
+        default: '5'
+      whisper_model:
+        description: 'Whisper model (tiny/base/small)'
+        default: 'base'
+      seed:
+        description: 'RNG seed (empty for random)'
+        default: ''
+      dry_run:
+        description: 'Dry run (skip Slack post)'
+        type: boolean
+        default: false
+
+jobs:
+  hymnal-gargler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: hymnal-gargler/package-lock.json
+
+      - name: Cache Whisper + torch models
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/whisper
+            ~/.cache/torch
+          key: hymnal-gargler-models-${{ inputs.whisper_model || 'base' }}
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg librubberband-dev
+
+      - name: Install Python dependencies
+        run: |
+          pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+          pip install -r hymnal-gargler/requirements.txt
+          pip install -e glottisdale/
+          python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
+
+      - name: Install Node.js dependencies
+        run: cd hymnal-gargler && npm ci
+
+      - name: Run Hymnal Gargler
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          ARGS="--target-duration ${{ inputs.target_duration || '40' }}"
+          ARGS="$ARGS --max-videos ${{ inputs.max_videos || '5' }}"
+          ARGS="$ARGS --whisper-model ${{ inputs.whisper_model || 'base' }}"
+          if [ -n "${{ inputs.seed }}" ]; then
+            ARGS="$ARGS --seed ${{ inputs.seed }}"
+          fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          python hymnal-gargler/bot.py $ARGS
