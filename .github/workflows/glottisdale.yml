@@ -52,7 +52,7 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         run: |
-          ARGS="--target-duration ${{ inputs.target_duration || '10' }}"
+          ARGS="--target-duration ${{ inputs.target_duration || '30' }}"
           ARGS="$ARGS --max-videos ${{ inputs.max_videos || '5' }}"
           ARGS="$ARGS --whisper-model ${{ inputs.whisper_model || 'base' }}"
           if [ -n "${{ inputs.seed }}" ]; then

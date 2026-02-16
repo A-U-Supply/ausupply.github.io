@@ -9,6 +9,7 @@ requires-python = ">=3.10"
 dependencies = [
     "openai-whisper",
     "g2p_en",
+    "scipy",
 ]
 
 [project.optional-dependencies]
