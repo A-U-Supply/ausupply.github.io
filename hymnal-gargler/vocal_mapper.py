@@ -32,7 +32,16 @@ def compute_target_pitch(
     source_f0: float,
     drift_semitones: float = 0,
 ) -> float:
-    """Compute semitone shift from source F0 to target MIDI note (with optional drift)."""
+    """Compute semitone shift from source F0 to target MIDI note (with optional drift).
+
+    Args:
+        note_midi: Target MIDI note number.
+        source_f0: Source syllable's F0 in Hz (after normalization).
+        drift_semitones: Signed drift to add (for loose pitch following).
+
+    Returns:
+        Shift in semitones.
+    """
     target_hz = pretty_midi.note_number_to_hz(note_midi)
     base_shift = 12 * math.log2(target_hz / source_f0)
     return base_shift + drift_semitones
@@ -55,7 +64,18 @@ def plan_note_mapping(
     drift_range: float = 2.0,
     chorus_probability: float = 0.3,
 ) -> list[NoteMapping]:
-    """Plan how each melody note maps to syllable(s)."""
+    """Plan how each melody note maps to syllable(s).
+
+    Args:
+        notes: List of Note objects from midi_parser.
+        pool_size: Number of available syllables.
+        seed: Random seed for reproducibility.
+        drift_range: Max semitones of pitch drift from melody.
+        chorus_probability: Probability of chorus on non-sustained notes.
+
+    Returns:
+        List of NoteMapping, one per note.
+    """
     rng = random.Random(seed)
     mappings = []
     syl_cursor = 0
@@ -91,7 +111,8 @@ def plan_note_mapping(
             or rng.random() < chorus_probability
         )
 
-        time_ratio = 1.0  # placeholder, computed at render time
+        # Time stretch ratio: placeholder, computed at render time
+        time_ratio = 1.0
 
         mappings.append(NoteMapping(
             note_pitch=note.pitch,
@@ -126,7 +147,7 @@ def render_mapping(
     per_syl_duration = target_duration / n_syls
 
     # Add rhythmic variation: +/-20% of exact duration
-    rng = random.Random()
+    rng = random.Random(note_index)
     syl_durations = []
     remaining = target_duration
     for i in range(n_syls):
@@ -228,7 +249,7 @@ def render_vocal_track(
 
         parts_with_gaps.append(wav_path)
 
-    # Concatenate everything with crossfade for smoothness
+    # Concatenate everything with crossfade
     output_path = work_dir / "acappella.wav"
     if len(parts_with_gaps) == 1:
         subprocess.run(["cp", str(parts_with_gaps[0]), str(output_path)], capture_output=True)
@@ -262,7 +283,7 @@ def _apply_vibrato(input_path: Path, output_path: Path, depth_cents: float = 50,
 def _apply_chorus(input_path: Path, output_path: Path, n_voices: int = 2):
     """Layer detuned copies for chorus effect."""
     rng = random.Random()
-    voices = [input_path]
+    voices = [input_path]  # original
     work_dir = output_path.parent
 
     for v in range(n_voices):
@@ -283,6 +304,7 @@ def _apply_chorus(input_path: Path, output_path: Path, n_voices: int = 2):
         subprocess.run(["cp", str(input_path), str(output_path)], capture_output=True)
         return
 
+    # Mix all voices
     inputs = []
     for v in voices:
         inputs.extend(["-i", str(v)])
