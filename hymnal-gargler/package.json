@@ -1,0 +1,12 @@
+{
+  "name": "hymnal-gargler",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "@magenta/music": "^1.23.1",
+    "@tonejs/midi": "^2.0.28"
+  },
+  "overrides": {
+    "tone": "14.8.26"
+  }
+}
