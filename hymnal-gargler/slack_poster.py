@@ -51,15 +51,11 @@ def post_results(
         source_link=source_link,
     )
 
-    full_mix_ogg = full_mix_path.with_suffix(".ogg")
-    if not full_mix_ogg.exists():
-        full_mix_ogg = full_mix_path
-
     resp = _upload_with_retry(
         client,
         channel=channel_id,
-        file=str(full_mix_ogg),
-        filename="hymnal_gargler_mix.ogg",
+        file=str(full_mix_path),
+        filename="hymnal_gargler_mix.wav",
         initial_comment=message,
         title="Hymnal Gargler — Full Mix",
     )
@@ -67,16 +63,12 @@ def post_results(
     thread_ts = _get_thread_ts(client, resp)
 
     if thread_ts:
-        acappella_ogg = acappella_path.with_suffix(".ogg")
-        if not acappella_ogg.exists():
-            acappella_ogg = acappella_path
-
         try:
             _upload_with_retry(
                 client,
                 channel=channel_id,
-                file=str(acappella_ogg),
-                filename="hymnal_gargler_acappella.ogg",
+                file=str(acappella_path),
+                filename="hymnal_gargler_acappella.wav",
                 initial_comment=":speaking_head_in_silhouette: A cappella (vocal only)",
                 title="Hymnal Gargler — A Cappella",
                 thread_ts=thread_ts,

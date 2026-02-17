@@ -73,11 +73,4 @@ def mix_tracks(
         logger.warning("MIDI synthesis failed, using a cappella as full mix")
         subprocess.run(["cp", str(acappella_path), str(full_mix_path)], capture_output=True)
 
-    # Convert both to OGG
-    for wav in [acappella_path, full_mix_path]:
-        ogg = wav.with_suffix(".ogg")
-        subprocess.run([
-            "ffmpeg", "-y", "-i", str(wav), "-b:a", "64k", str(ogg),
-        ], capture_output=True)
-
     return full_mix_path, acappella_path
