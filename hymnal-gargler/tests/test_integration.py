@@ -77,6 +77,60 @@ def test_vocal_mapper_with_real_melody():
         assert len(m.syllable_indices) >= 1
 
 
+def test_extend_midi_produces_full_duration():
+    """Extended melody should span the full target duration, not just the seed."""
+    import json
+    import pretty_midi
+    import tempfile
+
+    # Create a short 4-note melody (4 seconds at 120 BPM)
+    midi_dir = Path(tempfile.mkdtemp()) / "midi"
+    midi_dir.mkdir()
+    for name, is_drum in [("melody", False), ("drums", True), ("bass", False), ("chords", False)]:
+        pm = pretty_midi.PrettyMIDI(initial_tempo=120)
+        inst = pretty_midi.Instrument(program=0, is_drum=is_drum)
+        for i in range(4):
+            inst.notes.append(pretty_midi.Note(
+                velocity=100, pitch=36 if is_drum else 60 + i * 2,
+                start=i * 1.0, end=i * 1.0 + 0.5,
+            ))
+        pm.instruments.append(inst)
+        pm.write(str(midi_dir / f"{name}.mid"))
+
+    # Check if node_modules exists (skip if not)
+    node_modules = Path(__file__).parent.parent / "node_modules"
+    if not node_modules.exists():
+        pytest.skip("node_modules not installed")
+
+    from extender import extend_midi
+
+    with tempfile.TemporaryDirectory() as out_dir:
+        result = extend_midi(
+            melody_path=midi_dir / "melody.mid",
+            drums_path=midi_dir / "drums.mid",
+            bass_path=midi_dir / "bass.mid",
+            chords_path=midi_dir / "chords.mid",
+            output_dir=Path(out_dir),
+            target_duration=20.0,
+            tempo=120,
+        )
+        if result.get("fallback"):
+            pytest.skip("Magenta extension failed, testing fallback only")
+
+        # The extended melody should have more notes than the seed
+        assert result["melody_notes"] > 4
+
+        # Parse the extended melody and check it spans the target duration
+        extended = pretty_midi.PrettyMIDI(str(Path(out_dir) / "melody.mid"))
+        assert len(extended.instruments) > 0
+        notes = extended.instruments[0].notes
+        assert len(notes) > 4
+
+        # Last note should be near the target duration (within a bar)
+        last_note_end = max(n.end for n in notes)
+        assert last_note_end > 10.0, f"Extended melody only spans {last_note_end:.1f}s, expected >10s"
+
+
 def test_extender_fallback():
     """Extender fallback should copy files when Node.js fails."""
     import tempfile

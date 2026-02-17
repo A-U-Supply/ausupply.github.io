@@ -51,30 +51,28 @@ def post_results(
         source_link=source_link,
     )
 
-    resp = _upload_with_retry(
+    # Post intro message first, then upload files as thread replies
+    msg_resp = client.chat_postMessage(channel=channel_id, text=message)
+    thread_ts = msg_resp["ts"]
+
+    _upload_with_retry(
         client,
         channel=channel_id,
         file=str(full_mix_path),
         filename="hymnal_gargler_mix.wav",
-        initial_comment=message,
         title="Hymnal Gargler — Full Mix",
+        thread_ts=thread_ts,
     )
 
-    thread_ts = _get_thread_ts(client, resp)
-
-    if thread_ts:
-        try:
-            _upload_with_retry(
-                client,
-                channel=channel_id,
-                file=str(acappella_path),
-                filename="hymnal_gargler_acappella.wav",
-                initial_comment=":speaking_head_in_silhouette: A cappella (vocal only)",
-                title="Hymnal Gargler — A Cappella",
-                thread_ts=thread_ts,
-            )
-        except Exception as e:
-            logger.warning(f"Failed to upload a cappella: {e}")
+    _upload_with_retry(
+        client,
+        channel=channel_id,
+        file=str(acappella_path),
+        filename="hymnal_gargler_acappella.wav",
+        initial_comment=":speaking_head_in_silhouette: A cappella (vocal only)",
+        title="Hymnal Gargler — A Cappella",
+        thread_ts=thread_ts,
+    )
 
     logger.info(f"Posted to #{channel_name}")
 
@@ -91,23 +89,3 @@ def _upload_with_retry(client: WebClient, max_retries: int = 3, **kwargs) -> dic
                 time.sleep(wait)
             else:
                 raise
-
-
-def _get_thread_ts(client: WebClient, upload_resp: dict) -> str | None:
-    """Extract thread_ts from upload response."""
-    try:
-        file_obj = upload_resp.get("file", {})
-        file_id = file_obj.get("id")
-        if not file_id:
-            return None
-        info = client.files_info(file=file_id)
-        shares = info.get("file", {}).get("shares", {})
-        for channel_shares in shares.get("public", {}).values():
-            if channel_shares:
-                return channel_shares[0].get("ts")
-        for channel_shares in shares.get("private", {}).values():
-            if channel_shares:
-                return channel_shares[0].get("ts")
-    except Exception as e:
-        logger.warning(f"Could not get thread_ts: {e}")
-    return None

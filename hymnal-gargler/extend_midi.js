@@ -119,11 +119,15 @@ async function extendMelody(seedSeq, params, scalePitches, targetBars) {
                 quantizedSeed, totalSteps, temp, params.chords
             );
 
+            // Magenta returns quantized sequences — timing is in steps, not seconds
+            const stepDuration = secondsPerBar / stepsPerBar;
             for (const note of continuation.notes) {
+                const startStep = note.quantizedStartStep || 0;
+                const endStep = note.quantizedEndStep || (startStep + 1);
                 allNotes.push({
                     pitch: quantizeToScale(note.pitch, scalePitches),
-                    startTime: note.startTime + currentTime,
-                    endTime: note.endTime + currentTime,
+                    startTime: (startStep * stepDuration) + currentTime,
+                    endTime: (endStep * stepDuration) + currentTime,
                     velocity: note.velocity || 100,
                     program: params.melodyInstrument || 0,
                     instrument: 0,
@@ -192,11 +196,15 @@ async function extendDrums(seedSeq, params, targetBars) {
             const continuation = await drumsRnn.continueSequence(
                 quantizedSeed, barsToGen * stepsPerBar, params.temperature
             );
+            // Magenta returns quantized sequences — timing is in steps, not seconds
+            const stepDuration = secondsPerBar / stepsPerBar;
             for (const note of continuation.notes) {
+                const startStep = note.quantizedStartStep || 0;
+                const endStep = note.quantizedEndStep || (startStep + 1);
                 allNotes.push({
                     pitch: note.pitch,
-                    startTime: note.startTime + currentTime,
-                    endTime: note.endTime + currentTime,
+                    startTime: (startStep * stepDuration) + currentTime,
+                    endTime: (endStep * stepDuration) + currentTime,
                     velocity: note.velocity || 100,
                     program: 0, instrument: 0, isDrum: true,
                 });
