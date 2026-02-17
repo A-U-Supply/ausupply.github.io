@@ -28,17 +28,22 @@ def build_mix_command(
     vocal_path: Path,
     midi_wav_path: Path,
     output_path: Path,
-    vocal_weight: float = 0.8,
-    midi_weight: float = 0.5,
+    vocal_db: float = 0,
+    midi_db: float = -12,
 ) -> list[str]:
-    """Build ffmpeg command to mix vocal over MIDI backing."""
+    """Build ffmpeg command to mix vocal over MIDI backing.
+
+    Uses volume filters in dB for predictable levels. Default puts MIDI
+    12 dB below the vocals so the singing is clearly audible.
+    """
     return [
         "ffmpeg", "-y",
-        "-i", str(midi_wav_path),
         "-i", str(vocal_path),
+        "-i", str(midi_wav_path),
         "-filter_complex",
-        f"[0]aresample=16000[m];[1]aresample=16000[v];"
-        f"[m][v]amix=inputs=2:duration=longest:weights={midi_weight} {vocal_weight}[out]",
+        f"[0]aresample=16000,volume={vocal_db}dB[v];"
+        f"[1]aresample=16000,volume={midi_db}dB[m];"
+        f"[v][m]amix=inputs=2:duration=longest:normalize=0[out]",
         "-map", "[out]",
         "-ar", "16000",
         str(output_path),

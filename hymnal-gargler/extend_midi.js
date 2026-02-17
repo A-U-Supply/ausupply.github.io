@@ -27,7 +27,8 @@ function midiToNoteSequence(midi, isDrum = false) {
                 startTime: note.time,
                 endTime: note.time + note.duration,
                 velocity: Math.round(note.velocity * 127),
-                program: isDrum ? 0 : (track.instrument ? track.instrument.number : 0),
+                // Always use program 0 so seed + continuation land on same MIDI track
+                program: 0,
                 instrument: 0,
                 isDrum: isDrum,
             });

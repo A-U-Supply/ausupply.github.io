@@ -44,16 +44,22 @@ def parse_midi(path: Path) -> MidiTrack:
     is_drum = False
 
     if mid.instruments:
-        inst = mid.instruments[0]
-        program = inst.program
-        is_drum = inst.is_drum
-        for n in sorted(inst.notes, key=lambda n: n.start):
-            notes.append(Note(
-                pitch=n.pitch,
-                start=round(n.start, 4),
-                end=round(n.end, 4),
-                velocity=n.velocity,
-            ))
+        # Merge all non-drum instruments (Magenta may split seed + continuation
+        # across tracks if program numbers differ)
+        for inst in mid.instruments:
+            if inst.is_drum:
+                continue
+            if not is_drum and not notes:
+                program = inst.program
+                is_drum = inst.is_drum
+            for n in inst.notes:
+                notes.append(Note(
+                    pitch=n.pitch,
+                    start=round(n.start, 4),
+                    end=round(n.end, 4),
+                    velocity=n.velocity,
+                ))
+        notes.sort(key=lambda n: n.start)
 
     total_duration = mid.get_end_time()
     return MidiTrack(
