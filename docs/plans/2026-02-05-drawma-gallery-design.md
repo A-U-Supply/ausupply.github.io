@@ -1,6 +1,6 @@
 # Drawma Gallery - Design Doc
 
-**Status:** Implemented
+**Status:** Implemented (evolved significantly beyond original design — see notes below)
 
 ## Overview
 
@@ -131,3 +131,18 @@ surreal-prompt-bot/scrape_gallery.py
 1. Add `channels:history` and `files:read` scopes to the Slack app
 2. Reinstall app to workspace (Slack requires this after scope changes)
 3. Create `img/drawma/` directory
+
+## Implementation Notes (Post-Design)
+
+The actual implementation evolved well beyond the original design above:
+
+- **Strobing chevron background** — full-page animated zig-zag, not just a subtle bottom edge
+- **Inverted-flash title + subtitle** ("neither contemplative...") with strobe animation
+- **Gothic ornate frame** — double border (inner dark red, outer dark gold #4a3728), `✦` corner accents, layered glow
+- **Visible `‹`/`›` arrow buttons** with gothic border styling (not click-left/right-halves)
+- **Whispers system** — pulls from `img/drawma/prompts.json` (full channel history), 4 animation variants (fade-only + 3 fast strobe), scattered via 4x5 grid with jitter, random rotation, fragments
+- **Strobe toggle** — `img/saveme.png` button (bottom-left) pauses all strobe animations
+- **Hover-to-reveal prompt** with backwards text flash animation (click toggle for mobile)
+- **Scraper enhancements** — `_download_with_auth()` manually follows redirects preserving Authorization header; Content-Type validation rejects non-image responses
+- **`channels:read` scope** also needed (in addition to `channels:history` + `files:read`)
+- **`users:read` scope** still missing — artist field shows user ID instead of display name

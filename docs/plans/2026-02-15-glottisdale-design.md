@@ -4,6 +4,8 @@
 
 > **Note:** This design was extended by the [Natural Speech Design](2026-02-15-glottisdale-natural-speech-design.md), which adds hierarchical prosodic phrasing and phonotactic syllable ordering to make output sound like natural flowing speech.
 
+> **Note:** ForceAlign was dropped after implementation — its phoneme timestamps are fake (word duration / phoneme count), identical to g2p_en proportional timing. The pipeline uses Whisper word timestamps + g2p_en + syllabify instead. The abstract aligner interface (`align.py`) is retained for future BFA integration.
+
 ## Overview
 
 A Python tool that pulls video/audio from a Slack channel (or local files), segments speech into syllables using ASR + forced alignment, cuts individual audio clips at syllable boundaries, randomly shuffles them, and concatenates the result into an audio collage. Posts the output to a different Slack channel or writes to disk.
