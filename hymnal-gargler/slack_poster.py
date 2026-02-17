@@ -57,7 +57,7 @@ def post_results(
 
     resp = _upload_with_retry(
         client,
-        channels=channel_id,
+        channel=channel_id,
         file=str(full_mix_ogg),
         filename="hymnal_gargler_mix.ogg",
         initial_comment=message,
@@ -74,7 +74,7 @@ def post_results(
         try:
             _upload_with_retry(
                 client,
-                channels=channel_id,
+                channel=channel_id,
                 file=str(acappella_ogg),
                 filename="hymnal_gargler_acappella.ogg",
                 initial_comment=":speaking_head_in_silhouette: A cappella (vocal only)",
