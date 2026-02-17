@@ -33,15 +33,22 @@ def _upload_with_retry(client: WebClient, max_retries: int = 3, **kwargs) -> dic
                 raise
 
 
-def _get_thread_ts(client: WebClient, file_id: str) -> tuple[str | None, str | None]:
-    """Get thread_ts and channel_id from a file upload via files.info."""
-    time.sleep(1)
-    info = client.files_info(file=file_id)
-    shares = info.get("file", {}).get("shares", {})
-    for share_type in ("public", "private"):
-        for ch_id, msgs in shares.get(share_type, {}).items():
-            if msgs:
-                return msgs[0].get("ts"), ch_id
+def _get_thread_ts(client: WebClient, file_id: str, max_attempts: int = 5) -> tuple[str | None, str | None]:
+    """Get thread_ts and channel_id from a file upload via files.info.
+
+    Retries with increasing backoff because files_upload_v2 share info
+    can take several seconds to propagate to files.info.
+    """
+    for attempt in range(max_attempts):
+        wait = 2 * (attempt + 1)  # 2s, 4s, 6s, 8s, 10s
+        time.sleep(wait)
+        info = client.files_info(file=file_id)
+        shares = info.get("file", {}).get("shares", {})
+        for share_type in ("public", "private"):
+            for ch_id, msgs in shares.get(share_type, {}).items():
+                if msgs:
+                    return msgs[0].get("ts"), ch_id
+        _log(f"files.info attempt {attempt + 1}/{max_attempts}: no shares yet")
     return None, None
 
 
