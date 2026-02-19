@@ -220,6 +220,8 @@ def process(
     rng = random.Random(seed)
     output_dir = Path(output_dir)
     clips_dir = output_dir / "clips"
+    if clips_dir.exists():
+        shutil.rmtree(clips_dir)
     clips_dir.mkdir(parents=True, exist_ok=True)
 
     # Backward compat: if gap is provided, use it as phrase_pause

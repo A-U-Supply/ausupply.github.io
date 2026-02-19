@@ -31,9 +31,18 @@ def detect_input_type(path: Path) -> str:
 
 def get_duration(path: Path) -> float:
     """Get file duration in seconds."""
-    output = _run_ffprobe(path, "-show_format")
+    output = _run_ffprobe(path, "-show_format", "-show_streams")
     data = json.loads(output)
-    return float(data["format"]["duration"])
+    # Try format duration first, fall back to first audio stream
+    dur = data.get("format", {}).get("duration")
+    if dur is None:
+        for stream in data.get("streams", []):
+            if stream.get("codec_type") == "audio" and "duration" in stream:
+                dur = stream["duration"]
+                break
+    if dur is None:
+        return 0.0
+    return float(dur)
 
 
 def extract_audio(input_path: Path, output_path: Path) -> Path:
@@ -167,12 +176,38 @@ def _concatenate_with_crossfade(
     clip_paths: list[Path], output_path: Path, crossfade_ms: float
 ) -> None:
     """Concatenate with acrossfade filters between clips."""
-    crossfade_s = crossfade_ms / 1000.0
     n = len(clip_paths)
 
     if n <= 1:
         shutil.copy2(clip_paths[0], output_path)
         return
+
+    # Get durations, drop clips with no measurable audio
+    durations = []
+    valid_paths = []
+    for p in clip_paths:
+        dur = get_duration(p)
+        if dur > 0.001:
+            durations.append(dur)
+            valid_paths.append(p)
+    clip_paths = valid_paths
+    n = len(clip_paths)
+
+    if n == 0:
+        raise ValueError("No clips with non-zero duration to concatenate")
+    if n == 1:
+        shutil.copy2(clip_paths[0], output_path)
+        return
+
+    # acrossfade needs each clip > crossfade duration, and the chained
+    # intermediate results can still produce zero frames for short clips.
+    # Require each clip to be at least 3x the crossfade to be safe.
+    min_dur = min(durations)
+    safe_crossfade_ms = min(crossfade_ms, min_dur * 1000 / 3.0)
+    if safe_crossfade_ms < 1:
+        _concatenate_simple(clip_paths, output_path)
+        return
+    crossfade_s = safe_crossfade_ms / 1000.0
 
     # Build filter_complex chain
     inputs = []
@@ -196,7 +231,13 @@ def _concatenate_with_crossfade(
         "-c:a", "pcm_s16le",
         str(output_path),
     ]
-    subprocess.run(cmd, capture_output=True, text=True, timeout=120).check_returncode()
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    result.check_returncode()
+
+    # ffmpeg can exit 0 but produce empty output when acrossfade filter
+    # drops all frames (short clips in a chain). Fall back to simple concat.
+    if output_path.stat().st_size <= 78:
+        _concatenate_simple(clip_paths, output_path)
 
 
 def pitch_shift_clip(input_path: Path, output_path: Path, semitones: float) -> Path:
