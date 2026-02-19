@@ -47,8 +47,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--whisper-model", default="base",
                         choices=["tiny", "base", "small", "medium"],
                         help="Whisper model size (default: base)")
-    parser.add_argument("--aligner", default="default",
-                        help="Alignment backend (default: default)")
+    parser.add_argument("--aligner", default="auto",
+                        choices=["auto", "default", "bfa"],
+                        help="Alignment backend: auto (try BFA, fallback to default), "
+                             "default (proportional), bfa (forced alignment) (default: auto)")
+    parser.add_argument("--bfa-device", default="cpu",
+                        choices=["cpu", "cuda"],
+                        help="Device for BFA model inference (default: cpu)")
     parser.add_argument("--seed", type=int, default=None,
                         help="RNG seed for reproducible output")
 
@@ -126,6 +131,7 @@ def main(argv: list[str] | None = None) -> None:
             word_crossfade_ms=args.word_crossfade,
             aligner=args.aligner,
             whisper_model=args.whisper_model,
+            bfa_device=args.bfa_device,
             seed=args.seed,
             noise_level_db=args.noise_level,
             room_tone=args.room_tone,
@@ -192,6 +198,7 @@ def main(argv: list[str] | None = None) -> None:
                 word_crossfade_ms=args.word_crossfade,
                 aligner=args.aligner,
                 whisper_model=args.whisper_model,
+                bfa_device=args.bfa_device,
                 seed=args.seed,
                 noise_level_db=args.noise_level,
                 room_tone=args.room_tone,

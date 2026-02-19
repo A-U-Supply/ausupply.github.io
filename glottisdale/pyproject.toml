@@ -14,6 +14,7 @@ dependencies = [
 
 [project.optional-dependencies]
 slack = ["slack-sdk>=3.27.0", "requests>=2.31.0"]
+bfa = ["bournemouth-forced-aligner>=1.1.0"]
 dev = ["pytest>=8.0.0"]
 
 [project.scripts]
