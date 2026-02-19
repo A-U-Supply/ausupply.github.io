@@ -203,8 +203,9 @@ def process(
     phrase_pause: str = "400-700",
     sentence_pause: str = "800-1200",
     word_crossfade_ms: float = 50,
-    aligner: str = "default",
+    aligner: str = "auto",
     whisper_model: str = "base",
+    bfa_device: str = "cpu",
     seed: int | None = None,
     # Audio polish params
     noise_level_db: float = -40,
@@ -235,7 +236,7 @@ def process(
     pps_min, pps_max = _parse_range(phrases_per_sentence)
     pp_min, pp_max = _parse_gap(phrase_pause)
     sp_min, sp_max = _parse_gap(sentence_pause)
-    alignment_engine = get_aligner(aligner, whisper_model=whisper_model)
+    alignment_engine = get_aligner(aligner, whisper_model=whisper_model, device=bfa_device)
 
     # Process each input file
     all_syllables: dict[str, list[Syllable]] = {}

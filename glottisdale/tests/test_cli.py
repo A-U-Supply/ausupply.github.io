@@ -25,7 +25,8 @@ def test_parse_defaults():
     assert args.phrases_per_sentence == "2-3"
     assert args.word_crossfade == 50
     assert args.whisper_model == "base"
-    assert args.aligner == "default"
+    assert args.aligner == "auto"
+    assert args.bfa_device == "cpu"
     assert args.seed is None
 
 

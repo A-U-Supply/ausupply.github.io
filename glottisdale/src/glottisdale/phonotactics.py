@@ -34,12 +34,59 @@ for p in ("W", "Y"):
 # Illegal English onsets (these sounds cannot start a word/syllable)
 _ILLEGAL_ONSETS = {"NG", "ZH"}
 
+# IPA sonority mapping for BFA phonemes
+_IPA_VOWELS = set("aeiouɪɛæɑɒɔʊəɜɐʌ")
+_IPA_STOPS = set("pbtdkgʔ")
+_IPA_NASALS = set("mnɲŋɴ")
+_IPA_FRICATIVES = set("fvθðszʃʒçxɣhɦ")
+_IPA_LATERALS = set("lɫɬɮ")
+_IPA_RHOTICS = {"r", "ɹ", "ɾ", "ɽ", "ʁ", "ʀ"}
+_IPA_GLIDES = {"j", "w", "ɥ"}
+_IPA_DIPHTHONG_STARTS = {"aɪ", "aʊ", "eɪ", "oʊ", "ɔɪ"}
+
+# IPA illegal onsets (velar nasal can't start English syllables)
+_IPA_ILLEGAL_ONSETS = {"ŋ"}
+
+
+def _is_ipa(label: str) -> bool:
+    """Heuristic: IPA labels use lowercase/Unicode, ARPABET uses uppercase ASCII."""
+    if not label:
+        return False
+    return label[0].islower() or not label[0].isascii()
+
+
+def _ipa_sonority(label: str) -> int:
+    """Return sonority value for an IPA phoneme label."""
+    if not label:
+        return 0
+    if any(label.startswith(d) for d in _IPA_DIPHTHONG_STARTS):
+        return 7
+    if label[0] in _IPA_VOWELS or label.rstrip("ːˑ") in _IPA_VOWELS:
+        return 7
+    if label in _IPA_GLIDES or label[0] in {"j", "w", "ɥ"}:
+        return 6
+    if label in _IPA_RHOTICS or label[0] in {"ɹ", "ɾ", "r"}:
+        return 5
+    if label[0] in _IPA_LATERALS:
+        return 5
+    if label[0] in _IPA_NASALS:
+        return 4
+    if label[0] in _IPA_FRICATIVES:
+        return 3
+    if label[0] in _IPA_STOPS:
+        return 1
+    return 0
+
 
 def sonority(label: str) -> int:
-    """Return sonority value for an ARPABET phoneme label.
+    """Return sonority value for a phoneme label (ARPABET or IPA).
 
-    Strips stress digits (e.g. 'AH0' -> vowel). Returns 0 for unknown.
+    Strips stress digits for ARPABET (e.g. 'AH0' -> vowel). Returns 0 for unknown.
     """
+    if _is_ipa(label):
+        return _ipa_sonority(label)
+
+    # ARPABET path
     # Strip trailing stress digits for vowel lookup
     base = label.rstrip("012")
     if base in _SONORITY:
@@ -69,7 +116,7 @@ def score_junction(syl_a: Syllable, syl_b: Syllable) -> int:
 
     # Illegal onset penalty
     base_first = first_phone.rstrip("012")
-    if base_first in _ILLEGAL_ONSETS:
+    if base_first in _ILLEGAL_ONSETS or first_phone in _IPA_ILLEGAL_ONSETS:
         score -= 2
 
     # Hiatus penalty (vowel-vowel boundary)

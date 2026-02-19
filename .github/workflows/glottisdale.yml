@@ -36,16 +36,17 @@ jobs:
           path: |
             ~/.cache/whisper
             ~/.cache/torch
-          key: glottisdale-models-${{ inputs.whisper_model || 'base' }}
+            ~/.cache/bournemouth_aligner
+          key: glottisdale-models-bfa-${{ inputs.whisper_model || 'base' }}
 
       - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg espeak-ng
 
       - name: Install Python dependencies
         run: |
           pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
           pip install -r glottisdale/requirements.txt
-          pip install -e glottisdale/
+          pip install -e 'glottisdale/[bfa]'
           python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
 
       - name: Run glottisdale
@@ -55,6 +56,7 @@ jobs:
           ARGS="--target-duration ${{ inputs.target_duration || '30' }}"
           ARGS="$ARGS --max-videos ${{ inputs.max_videos || '5' }}"
           ARGS="$ARGS --whisper-model ${{ inputs.whisper_model || 'base' }}"
+          ARGS="$ARGS --aligner auto"
           if [ -n "${{ inputs.seed }}" ]; then
             ARGS="$ARGS --seed ${{ inputs.seed }}"
           fi
