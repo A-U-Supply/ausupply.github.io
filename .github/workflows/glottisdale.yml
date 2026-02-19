@@ -44,7 +44,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+          pip install torch torchaudio torchcodec --index-url https://download.pytorch.org/whl/cpu
           pip install -r glottisdale/requirements.txt
           pip install -e 'glottisdale/[bfa]'
           python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
