@@ -13,13 +13,17 @@
 
 ### Song Title Generator
 
-- [2026-01-30-slack-song-title-generator-design.md](plans/2026-01-30-slack-song-title-generator-design.md) — Python CLI that fetches song titles from Slack, filters via local Ollama LLM, and generates chaotic geocities HTML with randomized positions/colors/fonts.
-- [2026-01-30-slack-song-generator-implementation.md](plans/2026-01-30-slack-song-generator-implementation.md) — 10-task implementation plan: scaffolding, Slack fetcher, Ollama filter, chaos generator, Jinja2 template, cache, CLI, README, tests.
+Generates the chaotic `this-song-is-a-junkyard.html` page. Pulls song titles from Slack, uses a local LLM to filter for the best ones, and renders them with randomized positions/colors/fonts in geocities style.
+
+- [2026-01-30-slack-song-title-generator-design.md](plans/2026-01-30-slack-song-title-generator-design.md) — Design: Slack fetcher, Ollama LLM filter, chaotic HTML generator with Jinja2 templates.
+- [2026-01-30-slack-song-generator-implementation.md](plans/2026-01-30-slack-song-generator-implementation.md) — Implementation plan (10 tasks).
 
 ### Surreal Prompt Bot (#drawma)
 
-- [2026-01-30-surreal-prompt-bot-design.md](plans/2026-01-30-surreal-prompt-bot-design.md) — Daily GitHub Actions bot that scrapes headlines, mixes with artistic inspirations, and generates surreal drawing prompts via Groq Llama API for Slack #drawma.
-- [2026-01-30-surreal-prompt-bot-implementation.md](plans/2026-01-30-surreal-prompt-bot-implementation.md) — 10-task plan: scaffolding, config, 8-source news scraper, inspiration sampler, Groq generator, Slack poster, orchestrator, GH Actions, tests, docs.
+Daily bot that posts surrealist drawing prompts to Slack. Scrapes news headlines from 8 sources, mixes them with artistic inspirations (movements, techniques, artists), and feeds the mix to Groq's Llama API to generate a prompt.
+
+- [2026-01-30-surreal-prompt-bot-design.md](plans/2026-01-30-surreal-prompt-bot-design.md) — Design: headline scraping, inspiration sampling, Groq LLM generation, Slack posting.
+- [2026-01-30-surreal-prompt-bot-implementation.md](plans/2026-01-30-surreal-prompt-bot-implementation.md) — Implementation plan (10 tasks).
 
 ### Mire Image Gallery
 
@@ -29,39 +33,77 @@
 
 ### History Time Machine
 
-- [2026-02-05-history-time-machine-design.md](plans/2026-02-05-history-time-machine-design.md) — VCR-styled time-travel page loading historical site snapshots in an iframe with retro transport controls (rewind, play, fast-forward, stop) and optional Wayback Machine archiving.
-- [2026-02-05-history-time-machine-implementation.md](plans/2026-02-05-history-time-machine-implementation.md) — 5-task plan: snapshot generation script, history.html with VCR controls, initial snapshots, homepage link, docs.
+VCR-styled time-travel page that loads historical snapshots of the site in an iframe. A shell script generates snapshots from git history (one per day), stripping scripts and rewriting image paths to avoid duplication.
+
+- [2026-02-05-history-time-machine-design.md](plans/2026-02-05-history-time-machine-design.md) — Design: snapshot generation from git, VCR transport controls (rewind/play/fast-forward/stop), optional Wayback Machine archiving.
+- [2026-02-05-history-time-machine-implementation.md](plans/2026-02-05-history-time-machine-implementation.md) — Implementation plan (5 tasks).
 
 ### Drawma Gallery
 
-- [2026-02-05-drawma-gallery-design.md](plans/2026-02-05-drawma-gallery-design.md) — Twin Peaks-themed dark gallery for #drawma surrealist drawings: strobing chevron background, gothic frames, whisper animations, daily Slack scraper.
-- [2026-02-05-drawma-gallery-implementation.md](plans/2026-02-05-drawma-gallery-implementation.md) — 8-task plan: image directory, icon resize, scraper tests + implementation, gallery HTML/CSS/JS, homepage link, GH Actions, docs.
+Twin Peaks-themed dark gallery for surrealist drawings from the #drawma Slack channel. Features a strobing chevron background, gothic ornate frames, backwards-text animations, and "whispers" — prompt fragments that float across the screen.
+
+A daily scraper pulls new images from Slack (with auth-preserving redirect handling and content-type validation), saves them with metadata to a manifest, and also scrapes the full channel history for prompt texts used by the whisper animations.
+
+- [2026-02-05-drawma-gallery-design.md](plans/2026-02-05-drawma-gallery-design.md) — Design: gallery aesthetic, navigation, scraper architecture, whisper system, strobe toggle.
+- [2026-02-05-drawma-gallery-implementation.md](plans/2026-02-05-drawma-gallery-implementation.md) — Implementation plan (8 tasks).
 
 ### Daily MIDI Bot (#midieval)
 
-- [2026-02-06-daily-midi-bot-design.md](plans/2026-02-06-daily-midi-bot-design.md) — Daily MIDI generator: scrapes headlines, LLM generates music params (scale, chords, tempo, instruments), Magenta.js generates 4 tracks, posts to Slack #midieval.
-- [2026-02-06-daily-midi-bot-implementation.md](plans/2026-02-06-daily-midi-bot-implementation.md) — 13-task plan: scaffolding, scales/instruments DBs, inspirations, config, LLM generator, Slack uploader, Node.js MIDI generator, orchestrator, GH Actions, tests.
+Daily bot that generates 4 MIDI tracks (melody, drums, bass, chords) and posts them to Slack. Pipeline: scrape news headlines → LLM generates musical parameters (scale, tempo, chords, instruments) → Magenta.js neural networks (ImprovRNN for melody, DrumsRNN for drums) + programmatic generation (bass, chords) → post to Slack.
+
+Requires Node 18 (Magenta.js is incompatible with Node 20+). The LLM sometimes hallucinates invalid instruments or out-of-range tempos, so a validator auto-corrects bad params instead of crashing.
+
+- [2026-02-06-daily-midi-bot-design.md](plans/2026-02-06-daily-midi-bot-design.md) — Design: headline scraping, LLM param generation, Magenta.js MIDI generation, Slack posting.
+- [2026-02-06-daily-midi-bot-implementation.md](plans/2026-02-06-daily-midi-bot-implementation.md) — Implementation plan (13 tasks).
 
 ### Muzzik Playlist Bot (#muzzik)
 
-- [2026-02-11-muzzik-playlist-design.md](plans/2026-02-11-muzzik-playlist-design.md) — Slack scraper that maintains an unlisted YouTube playlist from #muzzik channel URLs, with state tracking, OAuth2 refresh token auth, and daily GH Action.
-- [2026-02-11-muzzik-playlist-implementation.md](plans/2026-02-11-muzzik-playlist-implementation.md) — Step-by-step plan: URL extraction/classification, Slack scraper, state management, YouTube API client, orchestrator, GH Actions, tests.
+Daily bot that scrapes YouTube links from the #muzzik Slack channel and adds them to an unlisted YouTube playlist. Tracks all URLs in a committed state file, classifies YouTube vs non-YouTube links, handles playlist rollover at 5,000 videos, and respects the YouTube API's daily quota (~190 inserts/day).
+
+- [2026-02-11-muzzik-playlist-design.md](plans/2026-02-11-muzzik-playlist-design.md) — Design: URL extraction/classification, state tracking, OAuth2 refresh token flow, playlist management.
+- [2026-02-11-muzzik-playlist-implementation.md](plans/2026-02-11-muzzik-playlist-implementation.md) — Implementation plan.
 
 ### Puke Box (MIDI Jukebox)
 
-- [2026-02-11-puke-box-design.md](plans/2026-02-11-puke-box-design.md) — 90s geocities jukebox page for daily MIDI output: stock photo with overlay zones (marquee, card flipper, audio player), MIDI downloads, cursor trails, blinking text.
-- [2026-02-11-puke-box-implementation.md](plans/2026-02-11-puke-box-implementation.md) — 10-task plan: Slack parser, API integration, OGG synthesis, scraper orchestrator, GH Actions, HTML shell, JS flipper/player, homepage link, E2E tests, docs.
+A 90s geocities-inspired jukebox web page for browsing daily MIDI bot output. A jukebox stock photo serves as the centerpiece with three interactive overlay zones: an amber marquee display, a card flipper showing track metadata, and an audio player with seek. Each day's entry has downloadable MIDI files and a synthesized OGG preview.
+
+A scraper pulls posts from #midieval, downloads the MIDI files, synthesizes OGG previews using pretty_midi + scipy + ffmpeg, and organizes them into per-day directories with a manifest for the page to consume.
+
+- [2026-02-11-puke-box-design.md](plans/2026-02-11-puke-box-design.md) — Design: jukebox UI, overlay zones, scraper/synthesizer, geocities aesthetic.
+- [2026-02-11-puke-box-implementation.md](plans/2026-02-11-puke-box-implementation.md) — Implementation plan (10 tasks).
 
 ### Glottisdale (Syllable Audio Collage)
 
-- [2026-02-15-glottisdale-design.md](plans/2026-02-15-glottisdale-design.md) — Syllable-level audio collage tool: Whisper ASR + g2p_en phonemes + vendored syllabifier, ffmpeg cut/concat, library-first design with optional Slack integration.
-- [2026-02-15-glottisdale-implementation.md](plans/2026-02-15-glottisdale-implementation.md) — Core implementation plan: scaffolding, Whisper transcription, ARPABET conversion, syllabifier, audio cutting, concatenation, CLI, Slack integration.
-- [2026-02-15-glottisdale-natural-speech-design.md](plans/2026-02-15-glottisdale-natural-speech-design.md) — Extension to make output sound like natural flowing speech via hierarchical prosodic phrasing (phrases → sentences) and phonotactic syllable ordering.
-- [2026-02-15-glottisdale-natural-speech-implementation.md](plans/2026-02-15-glottisdale-natural-speech-implementation.md) — Plan for phonotactics module (junction scoring), prosodic hierarchy, and updated `process()` pipeline.
-- [2026-02-15-glottisdale-audio-polish-design.md](plans/2026-02-15-glottisdale-audio-polish-design.md) — Audio quality improvements: pink noise bed, room tone extraction, pitch/volume normalization, breath insertion, prosodic dynamics, longer crossfades.
-- [2026-02-15-glottisdale-audio-polish-implementation.md](plans/2026-02-15-glottisdale-audio-polish-implementation.md) — Plan for `analysis.py` module (numpy-based WAV I/O, RMS, F0, room tone, breaths), feature integration into `process()`, CLI flags.
+Syllable-level audio collage tool. Takes speech audio, chops it into individual syllables using linguistic analysis (not duration-based), randomly shuffles them, and concatenates the result into an audio collage that sounds like someone speaking a language you don't understand.
+
+**How syllable extraction works:** The pipeline uses NLP/linguistics, not raw audio analysis, to find syllable boundaries:
+
+1. **Whisper ASR** transcribes speech to text with word-level timestamps (e.g. "hello" = 0.5s–0.9s)
+2. **g2p_en** converts each word to ARPABET phonemes (e.g. "hello" → `HH AH0 L OW1`) — a linguistic phoneme representation
+3. **Vendored syllabifier** (from kylebgorman/syllabify) splits phonemes into syllables using the **Maximum Onset Principle** — a real linguistics rule about how consonants cluster around vowel nuclei
+4. **Proportional timing** maps syllable boundaries back to audio using Whisper's word timestamps — since Whisper only provides word-level (not phoneme-level) times, intra-word syllable cuts are estimated proportionally
+5. **ffmpeg** cuts the audio at those boundaries, then pieces are shuffled and concatenated with crossfades
+
+The main design doc also discusses the abstract aligner interface (`align.py`) retained for future forced-alignment integration, which would give per-phoneme timestamps instead of the proportional estimates in step 4.
+
+- [2026-02-15-glottisdale-design.md](plans/2026-02-15-glottisdale-design.md) — **Start here.** Core design: full pipeline, package structure, Whisper → g2p_en → syllabifier → ffmpeg cut/concat, library-first architecture with optional Slack integration.
+- [2026-02-15-glottisdale-implementation.md](plans/2026-02-15-glottisdale-implementation.md) — Core implementation plan.
+
+**Natural speech extension:** Makes the output flow like natural speech instead of choppy isolated syllables. Adds hierarchical prosodic phrasing (syllables → words → phrases → sentence groups, each with appropriate pause lengths) and phonotactic ordering (scoring syllable junctions so transitions between clips sound like plausible speech).
+
+- [2026-02-15-glottisdale-natural-speech-design.md](plans/2026-02-15-glottisdale-natural-speech-design.md) — Design: prosodic hierarchy, weighted syllable-per-word distribution, phonotactic junction scoring.
+- [2026-02-15-glottisdale-natural-speech-implementation.md](plans/2026-02-15-glottisdale-natural-speech-implementation.md) — Implementation plan: phonotactics module, prosodic hierarchy, pipeline integration.
+
+**Audio polish extension:** Addresses the "digital" quality of the output. Adds a subtle pink noise bed (eliminates the void between clips), room tone extraction (fills gaps with actual ambient sound from the source instead of digital silence), pitch normalization (smooths out wild pitch variation between syllables from different moments), volume normalization, breath insertion at phrase boundaries, and prosodic dynamics (phrase-onset boost, phrase-final softening). All features use numpy for analysis and ffmpeg for processing, all CLI-configurable with `--flag`/`--no-flag` toggles.
+
+- [2026-02-15-glottisdale-audio-polish-design.md](plans/2026-02-15-glottisdale-audio-polish-design.md) — Design: pink noise, room tone, pitch/volume normalization, breath detection, prosodic dynamics.
+- [2026-02-15-glottisdale-audio-polish-implementation.md](plans/2026-02-15-glottisdale-audio-polish-implementation.md) — Implementation plan: `analysis.py` module, feature integration, CLI flags.
 
 ### Hymnal Gargler (MIDI Vocal Collage)
 
-- [2026-02-16-hymnal-gargler-design.md](plans/2026-02-16-hymnal-gargler-design.md) — Daily bot combining MIDI melodies with Glottisdale syllable collages to produce "drunk choir singing" via rubberband pitch/time shifting, vibrato, chorus, and loose melodic following.
-- [2026-02-16-hymnal-gargler-implementation.md](plans/2026-02-16-hymnal-gargler-implementation.md) — Plan: scaffolding, MIDI parser, syllable prep, vocal mapper engine, Magenta.js extender, mixer, Slack fetcher/poster, CLI, GH Actions, tests.
+Daily bot that combines Glottisdale syllable collages with Daily MIDI Bot melodies to produce "singing" — the aesthetic goal is **"drunk choir learns a melody"**. Takes syllable clips, normalizes their pitch to a common baseline using rubberband, then maps each syllable onto MIDI melody notes with intentional imperfections: gaussian pitch drift (±2 semitones), vibrato on held notes, chorus layering on long notes, and ±20% rhythmic jitter. The result is nonsensical vocal tracks that loosely follow the melody.
+
+Pipeline: fetch MIDI from #midieval → extend via Magenta.js to ~40s → fetch speech videos from #sample-sale → Whisper transcribe → Glottisdale syllabify → normalize pitch/volume → map syllables to melody notes → render with rubberband → mix vocal + MIDI backing → post to #glottisdale.
+
+- [2026-02-16-hymnal-gargler-design.md](plans/2026-02-16-hymnal-gargler-design.md) — Design: architecture, vocal mapping engine, pitch drift/vibrato/chorus, mixer, Slack integration.
+- [2026-02-16-hymnal-gargler-implementation.md](plans/2026-02-16-hymnal-gargler-implementation.md) — Implementation plan: MIDI parser, syllable prep, vocal mapper, Magenta extender, mixer, Slack fetcher/poster, CLI, tests.
