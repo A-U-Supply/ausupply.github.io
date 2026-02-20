@@ -75,7 +75,7 @@ class BFAAligner(Aligner):
         try:
             bfa_result = aligner.process_sentence(
                 text=full_text,
-                audio=audio_wav,
+                audio_wav=audio_wav,
                 do_groups=True,
             )
         except Exception as e:

@@ -160,7 +160,7 @@ class TestBFAAlignerProcess:
         # BFA was called once with full transcript
         mock_bfa.process_sentence.assert_called_once_with(
             text="hello world",
-            audio=mock_bfa.load_audio.return_value,
+            audio_wav=mock_bfa.load_audio.return_value,
             do_groups=True,
         )
 
