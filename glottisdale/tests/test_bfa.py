@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 import pytest
 
 from glottisdale.types import Phoneme, Syllable
-from glottisdale.bfa import BFAAligner, _align_word, _find_pg16_group, _infer_pg16_from_ipa
+from glottisdale.bfa import BFAAligner, _find_pg16_group, _infer_pg16_from_ipa
 
 
 def _mock_bfa_phoneme(ipa_label, start_ms, end_ms, index, confidence=0.99):
@@ -32,98 +32,6 @@ def _mock_bfa_group(pg16, start_ms, end_ms, index):
         "index": index,
         "target_seq_idx": index,
     }
-
-
-class TestAlignWord:
-    def test_basic_word_alignment(self):
-        """Test that _align_word converts BFA output to Phoneme objects."""
-        mock_aligner = MagicMock()
-        mock_aligner.process_sentence.return_value = {
-            "phoneme_ts": [
-                _mock_bfa_phoneme("k", 0.0, 50.0, 0),
-                _mock_bfa_phoneme("æ", 50.0, 150.0, 1),
-                _mock_bfa_phoneme("t", 150.0, 200.0, 2),
-            ],
-            "group_ts": [
-                _mock_bfa_group("voiced_stops", 0.0, 50.0, 0),
-                _mock_bfa_group("front_vowels", 50.0, 150.0, 1),
-                _mock_bfa_group("voiced_stops", 150.0, 200.0, 2),
-            ],
-        }
-
-        phonemes, groups = _align_word(
-            mock_aligner, MagicMock(), "cat",
-            word_start=1.0, word_end=1.5,
-        )
-
-        assert len(phonemes) == 3
-        assert len(groups) == 3
-        # Times should be offset by word_start (1.0s) and converted from ms
-        assert phonemes[0].label == "k"
-        assert phonemes[0].start == 1.0  # 1.0 + 0.0/1000
-        assert phonemes[0].end == 1.05   # 1.0 + 50.0/1000
-        assert phonemes[1].label == "æ"
-        assert groups == ["voiced_stops", "front_vowels", "voiced_stops"]
-
-    def test_timestamps_clamped_to_word_bounds(self):
-        """Phoneme timestamps should not exceed word boundaries."""
-        mock_aligner = MagicMock()
-        mock_aligner.process_sentence.return_value = {
-            "phoneme_ts": [
-                _mock_bfa_phoneme("k", 0.0, 500.0, 0),  # extends past word end
-            ],
-            "group_ts": [
-                _mock_bfa_group("voiced_stops", 0.0, 500.0, 0),
-            ],
-        }
-
-        phonemes, groups = _align_word(
-            mock_aligner, MagicMock(), "k",
-            word_start=1.0, word_end=1.2,
-        )
-
-        assert len(phonemes) == 1
-        assert phonemes[0].start == 1.0
-        assert phonemes[0].end == 1.2  # clamped to word_end
-
-    def test_zero_duration_phonemes_skipped(self):
-        """Phonemes with zero/negative duration after clamping should be dropped."""
-        mock_aligner = MagicMock()
-        mock_aligner.process_sentence.return_value = {
-            "phoneme_ts": [
-                _mock_bfa_phoneme("k", 300.0, 300.0, 0),  # zero duration
-                _mock_bfa_phoneme("æ", 50.0, 150.0, 1),
-            ],
-            "group_ts": [
-                _mock_bfa_group("voiced_stops", 300.0, 300.0, 0),
-                _mock_bfa_group("front_vowels", 50.0, 150.0, 1),
-            ],
-        }
-
-        phonemes, groups = _align_word(
-            mock_aligner, MagicMock(), "ka",
-            word_start=1.0, word_end=1.5,
-        )
-
-        assert len(phonemes) == 1
-        assert phonemes[0].label == "æ"
-
-    def test_process_sentence_called_correctly(self):
-        """Verify BFA is called with correct parameters."""
-        mock_aligner = MagicMock()
-        mock_aligner.process_sentence.return_value = {
-            "phoneme_ts": [],
-            "group_ts": [],
-        }
-        mock_audio = MagicMock()
-
-        _align_word(mock_aligner, mock_audio, "hello", 0.0, 0.5)
-
-        mock_aligner.process_sentence.assert_called_once_with(
-            text="hello",
-            audio=mock_audio,
-            do_groups=True,
-        )
 
 
 class TestFindPg16Group:
@@ -204,43 +112,32 @@ class TestBFAAlignerProcess:
             "language": "en",
         }
 
-        # Mock the BFA aligner
+        # Mock the BFA aligner — returns phonemes for full "hello world"
         mock_bfa = MagicMock()
-
-        def mock_process_sentence(text, audio, do_groups=False):
-            if text == "hello":
-                return {
-                    "phoneme_ts": [
-                        _mock_bfa_phoneme("h", 0.0, 40.0, 0),
-                        _mock_bfa_phoneme("ɛ", 40.0, 120.0, 1),
-                        _mock_bfa_phoneme("l", 120.0, 180.0, 2),
-                        _mock_bfa_phoneme("oʊ", 180.0, 300.0, 3),
-                    ],
-                    "group_ts": [
-                        _mock_bfa_group("voiceless_fricatives", 0.0, 40.0, 0),
-                        _mock_bfa_group("front_vowels", 40.0, 120.0, 1),
-                        _mock_bfa_group("laterals", 120.0, 180.0, 2),
-                        _mock_bfa_group("diphthongs", 180.0, 300.0, 3),
-                    ],
-                }
-            elif text == "world":
-                return {
-                    "phoneme_ts": [
-                        _mock_bfa_phoneme("w", 0.0, 50.0, 0),
-                        _mock_bfa_phoneme("ɜː", 50.0, 200.0, 1),
-                        _mock_bfa_phoneme("l", 200.0, 280.0, 2),
-                        _mock_bfa_phoneme("d", 280.0, 350.0, 3),
-                    ],
-                    "group_ts": [
-                        _mock_bfa_group("glides", 0.0, 50.0, 0),
-                        _mock_bfa_group("central_vowels", 50.0, 200.0, 1),
-                        _mock_bfa_group("laterals", 200.0, 280.0, 2),
-                        _mock_bfa_group("voiced_stops", 280.0, 350.0, 3),
-                    ],
-                }
-            return {"phoneme_ts": [], "group_ts": []}
-
-        mock_bfa.process_sentence = mock_process_sentence
+        mock_bfa.process_sentence.return_value = {
+            "phoneme_ts": [
+                # "hello" phonemes (absolute timestamps in ms)
+                _mock_bfa_phoneme("h", 10.0, 50.0, 0),
+                _mock_bfa_phoneme("ɛ", 50.0, 150.0, 1),
+                _mock_bfa_phoneme("l", 150.0, 230.0, 2),
+                _mock_bfa_phoneme("oʊ", 230.0, 380.0, 3),
+                # "world" phonemes
+                _mock_bfa_phoneme("w", 510.0, 570.0, 4),
+                _mock_bfa_phoneme("ɜː", 570.0, 720.0, 5),
+                _mock_bfa_phoneme("l", 720.0, 800.0, 6),
+                _mock_bfa_phoneme("d", 800.0, 870.0, 7),
+            ],
+            "group_ts": [
+                _mock_bfa_group("voiceless_fricatives", 10.0, 50.0, 0),
+                _mock_bfa_group("front_vowels", 50.0, 150.0, 1),
+                _mock_bfa_group("laterals", 150.0, 230.0, 2),
+                _mock_bfa_group("diphthongs", 230.0, 380.0, 3),
+                _mock_bfa_group("glides", 510.0, 570.0, 4),
+                _mock_bfa_group("central_vowels", 570.0, 720.0, 5),
+                _mock_bfa_group("laterals", 720.0, 800.0, 6),
+                _mock_bfa_group("voiced_stops", 800.0, 870.0, 7),
+            ],
+        }
         mock_bfa.load_audio.return_value = MagicMock()
 
         aligner = BFAAligner(whisper_model="base", device="cpu")
@@ -254,15 +151,22 @@ class TestBFAAlignerProcess:
         assert len(syllables) >= 2  # "hello" has 2 syllables, "world" has 1
         assert all(isinstance(s, Syllable) for s in syllables)
 
-        # Check hello syllables have real BFA timestamps (not proportional)
+        # Check timestamps are absolute (from BFA), not proportional
         hello_syls = [s for s in syllables if s.word == "hello"]
         assert len(hello_syls) == 2
-        # First hello syllable starts at 0.0 (word_start + 0ms)
-        assert hello_syls[0].start == 0.0
+        # First syllable starts at 0.01s (10ms from BFA)
+        assert hello_syls[0].start == 0.01
+
+        # BFA was called once with full transcript
+        mock_bfa.process_sentence.assert_called_once_with(
+            text="hello world",
+            audio=mock_bfa.load_audio.return_value,
+            do_groups=True,
+        )
 
     @patch("glottisdale.bfa.transcribe")
     def test_bfa_failure_graceful(self, mock_transcribe):
-        """If BFA fails for a word, it should be skipped (not crash)."""
+        """If BFA fails entirely, return empty syllables (not crash)."""
         mock_transcribe.return_value = {
             "text": "hello",
             "words": [
@@ -284,13 +188,11 @@ class TestBFAAlignerProcess:
         assert result["syllables"] == []  # graceful fallback
 
     @patch("glottisdale.bfa.transcribe")
-    def test_empty_words_skipped(self, mock_transcribe):
-        """Words with only whitespace should be skipped."""
+    def test_empty_transcript(self, mock_transcribe):
+        """Empty transcript should return empty syllables."""
         mock_transcribe.return_value = {
-            "text": "  ",
-            "words": [
-                {"word": "  ", "start": 0.0, "end": 0.1},
-            ],
+            "text": "",
+            "words": [],
             "language": "en",
         }
 
@@ -303,3 +205,59 @@ class TestBFAAlignerProcess:
         result = aligner.process(Path("fake.wav"))
         assert result["syllables"] == []
         mock_bfa.process_sentence.assert_not_called()
+
+    @patch("glottisdale.bfa.transcribe")
+    def test_phonemes_distributed_by_midpoint(self, mock_transcribe):
+        """Phonemes should be assigned to words by their midpoint time."""
+        mock_transcribe.return_value = {
+            "text": "a b",
+            "words": [
+                {"word": "a", "start": 0.0, "end": 0.2},
+                {"word": "b", "start": 0.3, "end": 0.5},
+            ],
+            "language": "en",
+        }
+
+        mock_bfa = MagicMock()
+        mock_bfa.process_sentence.return_value = {
+            "phoneme_ts": [
+                _mock_bfa_phoneme("ə", 50.0, 150.0, 0),   # midpoint=100ms, in word "a"
+                _mock_bfa_phoneme("b", 320.0, 480.0, 1),   # midpoint=400ms, in word "b"
+            ],
+            "group_ts": [
+                _mock_bfa_group("central_vowels", 50.0, 150.0, 0),
+                _mock_bfa_group("voiced_stops", 320.0, 480.0, 1),
+            ],
+        }
+        mock_bfa.load_audio.return_value = MagicMock()
+
+        aligner = BFAAligner()
+        aligner._aligner = mock_bfa
+
+        result = aligner.process(Path("fake.wav"))
+        syllables = result["syllables"]
+        assert len(syllables) == 2
+        assert syllables[0].word == "a"
+        assert syllables[1].word == "b"
+
+    @patch("glottisdale.bfa.transcribe")
+    def test_bfa_no_phonemes_returned(self, mock_transcribe):
+        """If BFA returns empty phoneme list, return empty syllables."""
+        mock_transcribe.return_value = {
+            "text": "hello",
+            "words": [{"word": "hello", "start": 0.0, "end": 0.4}],
+            "language": "en",
+        }
+
+        mock_bfa = MagicMock()
+        mock_bfa.process_sentence.return_value = {
+            "phoneme_ts": [],
+            "group_ts": [],
+        }
+        mock_bfa.load_audio.return_value = MagicMock()
+
+        aligner = BFAAligner()
+        aligner._aligner = mock_bfa
+
+        result = aligner.process(Path("fake.wav"))
+        assert result["syllables"] == []

@@ -44,112 +44,132 @@ class BFAAligner(Aligner):
     def process(self, audio_path: Path) -> dict:
         """Transcribe and align audio using Whisper + BFA.
 
+        Sends the full Whisper transcript to BFA for alignment against
+        the full audio. BFA returns absolute phoneme timestamps which
+        are then distributed to words using Whisper's word boundaries.
+
         Returns:
             Dict with keys:
                 text: Full transcript
                 words: List of word dicts with timestamps
                 syllables: List of Syllable objects with real BFA timestamps
         """
-        # Step 1: Whisper transcription for word boundaries
+        # Step 1: Whisper transcription for text + word boundaries
         whisper_result = transcribe(
             audio_path, model_name=self.whisper_model, language=self.language
         )
 
-        # Step 2: BFA phoneme alignment
+        full_text = whisper_result["text"].strip()
+        words = whisper_result["words"]
+        if not full_text or not words:
+            return {
+                "text": whisper_result["text"],
+                "words": words,
+                "syllables": [],
+            }
+
+        # Step 2: BFA alignment on full transcript + full audio
         aligner = self._get_aligner()
         audio_wav = aligner.load_audio(str(audio_path))
 
+        try:
+            bfa_result = aligner.process_sentence(
+                text=full_text,
+                audio=audio_wav,
+                do_groups=True,
+            )
+        except Exception as e:
+            logger.warning(f"BFA alignment failed, returning empty syllables: {e}")
+            return {
+                "text": whisper_result["text"],
+                "words": words,
+                "syllables": [],
+            }
+
+        phoneme_ts = bfa_result.get("phoneme_ts", [])
+        group_ts = bfa_result.get("group_ts", [])
+
+        if not phoneme_ts:
+            logger.warning("BFA returned no phonemes")
+            return {
+                "text": whisper_result["text"],
+                "words": words,
+                "syllables": [],
+            }
+
+        # Step 3: Convert BFA phonemes to Phoneme objects (absolute timestamps)
+        all_phonemes = []
+        all_pg16 = []
+        for ph_info in phoneme_ts:
+            ipa_label = ph_info.get("ipa_label", ph_info.get("phoneme_label", ""))
+            start_ms = ph_info.get("start_ms", 0.0)
+            end_ms = ph_info.get("end_ms", 0.0)
+            start_s = start_ms / 1000.0
+            end_s = end_ms / 1000.0
+
+            if end_s <= start_s or not ipa_label:
+                continue
+
+            all_phonemes.append(Phoneme(
+                label=ipa_label,
+                start=round(start_s, 4),
+                end=round(end_s, 4),
+            ))
+            pg16 = _find_pg16_group(ph_info, group_ts)
+            all_pg16.append(pg16)
+
+        if not all_phonemes:
+            return {
+                "text": whisper_result["text"],
+                "words": words,
+                "syllables": [],
+            }
+
+        logger.info(
+            f"BFA aligned {len(all_phonemes)} phonemes across "
+            f"{len(words)} words"
+        )
+
+        # Step 4: Distribute phonemes to words using Whisper word boundaries
         all_syllables = []
-        for word_idx, word_info in enumerate(whisper_result["words"]):
+        for word_idx, word_info in enumerate(words):
             word_text = word_info["word"].strip()
             if not word_text:
                 continue
 
+            word_start = word_info["start"]
+            word_end = word_info["end"]
+
+            # Find phonemes whose midpoint falls within this word's boundaries
+            word_phonemes = []
+            word_groups = []
+            for ph, pg in zip(all_phonemes, all_pg16):
+                if pg == "silence":
+                    continue
+                ph_mid = (ph.start + ph.end) / 2
+                if word_start <= ph_mid <= word_end:
+                    word_phonemes.append(ph)
+                    word_groups.append(pg)
+
+            if not word_phonemes:
+                continue
+
             try:
-                phonemes, pg16_groups = _align_word(
-                    aligner, audio_wav, word_text,
-                    word_info["start"], word_info["end"],
+                syls = syllabify_ipa(
+                    phonemes=word_phonemes,
+                    pg16_groups=word_groups,
+                    word=word_text,
+                    word_index=word_idx,
                 )
+                all_syllables.extend(syls)
             except Exception as e:
-                logger.debug(f"BFA failed for word '{word_text}': {e}")
-                continue
-
-            if not phonemes:
-                continue
-
-            syls = syllabify_ipa(
-                phonemes=phonemes,
-                pg16_groups=pg16_groups,
-                word=word_text,
-                word_index=word_idx,
-            )
-            all_syllables.extend(syls)
+                logger.debug(f"Syllabification failed for '{word_text}': {e}")
 
         return {
             "text": whisper_result["text"],
-            "words": whisper_result["words"],
+            "words": words,
             "syllables": all_syllables,
         }
-
-
-def _align_word(
-    aligner,
-    audio_wav,
-    word_text: str,
-    word_start: float,
-    word_end: float,
-) -> tuple[list[Phoneme], list[str]]:
-    """Run BFA alignment on a single word, returning Phoneme objects + pg16 groups.
-
-    Args:
-        aligner: PhonemeTimestampAligner instance.
-        audio_wav: Pre-loaded audio from aligner.load_audio().
-        word_text: The word to align.
-        word_start: Word start time from Whisper (seconds).
-        word_end: Word end time from Whisper (seconds).
-
-    Returns:
-        Tuple of (phoneme list, pg16 group list), parallel arrays.
-    """
-    result = aligner.process_sentence(
-        text=word_text,
-        audio=audio_wav,
-        do_groups=True,
-    )
-
-    phoneme_ts = result.get("phoneme_ts", [])
-    group_ts = result.get("group_ts", [])
-
-    phonemes = []
-    pg16_groups = []
-
-    for ph_info in phoneme_ts:
-        ipa_label = ph_info.get("ipa_label", ph_info.get("phoneme_label", ""))
-        start_ms = ph_info.get("start_ms", 0.0)
-        end_ms = ph_info.get("end_ms", 0.0)
-
-        # Convert ms to seconds, offset by word start
-        start_s = word_start + start_ms / 1000.0
-        end_s = word_start + end_ms / 1000.0
-
-        # Clamp to word boundaries
-        start_s = max(start_s, word_start)
-        end_s = min(end_s, word_end)
-
-        if end_s <= start_s:
-            continue
-
-        phonemes.append(Phoneme(
-            label=ipa_label,
-            start=round(start_s, 4),
-            end=round(end_s, 4),
-        ))
-
-        # Find pg16 group for this phoneme
-        pg16 = _find_pg16_group(ph_info, group_ts)
-        pg16_groups.append(pg16)
-
-    return phonemes, pg16_groups
 
 
 def _find_pg16_group(ph_info: dict, group_ts: list[dict]) -> str:

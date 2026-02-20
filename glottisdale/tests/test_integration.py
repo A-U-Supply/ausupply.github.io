@@ -46,6 +46,7 @@ def test_full_pipeline_local_mode(mock_transcribe, tmp_path):
         sentence_pause="0",
         word_crossfade_ms=0,
         seed=42,
+        aligner="default",
     )
 
     # Verify outputs exist
@@ -108,6 +109,7 @@ def test_audio_polish_integration(mock_transcribe, tmp_path):
         breath_probability=1.0,
         volume_normalize=True,
         prosodic_dynamics=True,
+        aligner="default",
     )
 
     assert result.concatenated.exists()
@@ -157,6 +159,7 @@ def test_audio_polish_all_disabled(mock_transcribe, tmp_path):
         breaths=False,
         volume_normalize=False,
         prosodic_dynamics=False,
+        aligner="default",
     )
 
     assert result.concatenated.exists()
