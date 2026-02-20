@@ -102,6 +102,7 @@ The main design doc also discusses the abstract aligner interface (`align.py`) r
 **Time stretch & word repeat extension:** Creative distortion effects — time stretching (5 selection modes: global speed, random syllable, alternating, boundary, random word) and repetition (word-level repeat with exact/resample styles, syllable-level stutter). All off by default, pitch-preserving via rubberband, composable with each other and existing audio polish.
 
 - [2026-02-19-glottisdale-stretch-repeat-design.md](plans/2026-02-19-glottisdale-stretch-repeat-design.md) — Design: CLI flags, pipeline integration, stretch selection logic, stutter/repeat mechanics, rubberband integration.
+- [2026-02-19-glottisdale-stretch-repeat-implementation.md](plans/2026-02-19-glottisdale-stretch-repeat-implementation.md) — Implementation plan (9 tasks): audio.py time_stretch_clip, stretch.py module, stutter/repeat logic, CLI flags, pipeline integration, CI update.
 
 ### AU Tmux Status Bar
 
