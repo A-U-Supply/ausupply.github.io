@@ -1,1 +1,2 @@
-glottisdale[slack] @ git+https://github.com/A-U-Supply/glottisdale.git
+slack-sdk>=3.0
+requests>=2.28
