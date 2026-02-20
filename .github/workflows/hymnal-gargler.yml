@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: hymnal-gargler/package-lock.json
+          cache-dependency-path: hymnal-bot/package-lock.json
 
       - name: Cache Whisper + torch models
         uses: actions/cache@v4
@@ -55,12 +55,11 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
-          pip install -r hymnal-gargler/requirements.txt
-          pip install -e glottisdale/
+          pip install -r hymnal-bot/requirements.txt
           python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
 
       - name: Install Node.js dependencies
-        run: cd hymnal-gargler && npm ci
+        run: cd hymnal-bot && npm ci
 
       - name: Run Hymnal Gargler
         env:
@@ -75,4 +74,4 @@ jobs:
           if [ "${{ inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
-          python hymnal-gargler/bot.py $ARGS
+          python hymnal-bot/bot.py $ARGS

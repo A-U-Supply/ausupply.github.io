@@ -72,49 +72,16 @@ A scraper pulls posts from #midieval, downloads the MIDI files, synthesizes OGG 
 - [2026-02-11-puke-box-design.md](plans/2026-02-11-puke-box-design.md) — Design: jukebox UI, overlay zones, scraper/synthesizer, geocities aesthetic.
 - [2026-02-11-puke-box-implementation.md](plans/2026-02-11-puke-box-implementation.md) — Implementation plan (10 tasks).
 
-### Glottisdale (Syllable Audio Collage)
+### Glottisdale (Syllable Audio Collage + Vocal MIDI Mapping)
 
-Syllable-level audio collage tool. Takes speech audio, chops it into individual syllables using linguistic analysis (not duration-based), randomly shuffles them, and concatenates the result into an audio collage that sounds like someone speaking a language you don't understand.
+Extracted to its own repository: **[A-U-Supply/glottisdale](https://github.com/A-U-Supply/glottisdale)**
 
-**How syllable extraction works:** The pipeline uses NLP/linguistics, not raw audio analysis, to find syllable boundaries:
+Syllable-level audio collage tool and vocal MIDI mapping engine. The library (`pip install`) handles all audio processing; thin bot wrappers in this repo (`glottisdale-bot/`, `hymnal-bot/`) handle Slack I/O and Magenta.js MIDI extension.
 
-1. **Whisper ASR** transcribes speech to text with word-level timestamps (e.g. "hello" = 0.5s–0.9s)
-2. **g2p_en** converts each word to ARPABET phonemes (e.g. "hello" → `HH AH0 L OW1`) — a linguistic phoneme representation
-3. **Vendored syllabifier** (from kylebgorman/syllabify) splits phonemes into syllables using the **Maximum Onset Principle** — a real linguistics rule about how consonants cluster around vowel nuclei
-4. **Proportional timing** maps syllable boundaries back to audio using Whisper's word timestamps — since Whisper only provides word-level (not phoneme-level) times, intra-word syllable cuts are estimated proportionally
-5. **ffmpeg** cuts the audio at those boundaries, then pieces are shuffled and concatenated with crossfades
-
-The main design doc also discusses the abstract aligner interface (`align.py`) retained for future forced-alignment integration, which would give per-phoneme timestamps instead of the proportional estimates in step 4.
-
-- [2026-02-15-glottisdale-design.md](plans/2026-02-15-glottisdale-design.md) — **Start here.** Core design: full pipeline, package structure, Whisper → g2p_en → syllabifier → ffmpeg cut/concat, library-first architecture with optional Slack integration.
-- [2026-02-15-glottisdale-implementation.md](plans/2026-02-15-glottisdale-implementation.md) — Core implementation plan.
-
-**Natural speech extension:** Makes the output flow like natural speech instead of choppy isolated syllables. Adds hierarchical prosodic phrasing (syllables → words → phrases → sentence groups, each with appropriate pause lengths) and phonotactic ordering (scoring syllable junctions so transitions between clips sound like plausible speech).
-
-- [2026-02-15-glottisdale-natural-speech-design.md](plans/2026-02-15-glottisdale-natural-speech-design.md) — Design: prosodic hierarchy, weighted syllable-per-word distribution, phonotactic junction scoring.
-- [2026-02-15-glottisdale-natural-speech-implementation.md](plans/2026-02-15-glottisdale-natural-speech-implementation.md) — Implementation plan: phonotactics module, prosodic hierarchy, pipeline integration.
-
-**Audio polish extension:** Addresses the "digital" quality of the output. Adds a subtle pink noise bed (eliminates the void between clips), room tone extraction (fills gaps with actual ambient sound from the source instead of digital silence), pitch normalization (smooths out wild pitch variation between syllables from different moments), volume normalization, breath insertion at phrase boundaries, and prosodic dynamics (phrase-onset boost, phrase-final softening). All features use numpy for analysis and ffmpeg for processing, all CLI-configurable with `--flag`/`--no-flag` toggles.
-
-- [2026-02-15-glottisdale-audio-polish-design.md](plans/2026-02-15-glottisdale-audio-polish-design.md) — Design: pink noise, room tone, pitch/volume normalization, breath detection, prosodic dynamics.
-- [2026-02-15-glottisdale-audio-polish-implementation.md](plans/2026-02-15-glottisdale-audio-polish-implementation.md) — Implementation plan: `analysis.py` module, feature integration, CLI flags.
-
-**Time stretch & word repeat extension:** Creative distortion effects — time stretching (5 selection modes: global speed, random syllable, alternating, boundary, random word) and repetition (word-level repeat with exact/resample styles, syllable-level stutter). All off by default, pitch-preserving via rubberband, composable with each other and existing audio polish.
-
-- [2026-02-19-glottisdale-stretch-repeat-design.md](plans/2026-02-19-glottisdale-stretch-repeat-design.md) — Design: CLI flags, pipeline integration, stretch selection logic, stutter/repeat mechanics, rubberband integration.
-- [2026-02-19-glottisdale-stretch-repeat-implementation.md](plans/2026-02-19-glottisdale-stretch-repeat-implementation.md) — Implementation plan (9 tasks): audio.py time_stretch_clip, stretch.py module, stutter/repeat logic, CLI flags, pipeline integration, CI update.
+Design docs moved to the glottisdale repo under `docs/legacy/`.
 
 ### AU Tmux Status Bar
 
 Green terminal-themed tmux status bar for the `au` tmuxinator session. Full restyle (status bar, window tabs, pane borders, messages) with a rotating right-side display cycling through git branch, moon phase, session entropy plant, and anagram roulette.
 
 - [2026-02-19-au-tmux-status-bar-design.md](plans/2026-02-19-au-tmux-status-bar-design.md) — Design: color scheme, layout, rotation script, status items.
-
-### Hymnal Gargler (MIDI Vocal Collage)
-
-Daily bot that combines Glottisdale syllable collages with Daily MIDI Bot melodies to produce "singing" — the aesthetic goal is **"drunk choir learns a melody"**. Takes syllable clips, normalizes their pitch to a common baseline using rubberband, then maps each syllable onto MIDI melody notes with intentional imperfections: gaussian pitch drift (±2 semitones), vibrato on held notes, chorus layering on long notes, and ±20% rhythmic jitter. The result is nonsensical vocal tracks that loosely follow the melody.
-
-Pipeline: fetch MIDI from #midieval → extend via Magenta.js to ~40s → fetch speech videos from #sample-sale → Whisper transcribe → Glottisdale syllabify → normalize pitch/volume → map syllables to melody notes → render with rubberband → mix vocal + MIDI backing → post to #glottisdale.
-
-- [2026-02-16-hymnal-gargler-design.md](plans/2026-02-16-hymnal-gargler-design.md) — Design: architecture, vocal mapping engine, pitch drift/vibrato/chorus, mixer, Slack integration.
-- [2026-02-16-hymnal-gargler-implementation.md](plans/2026-02-16-hymnal-gargler-implementation.md) — Implementation plan: MIDI parser, syllable prep, vocal mapper, Magenta extender, mixer, Slack fetcher/poster, CLI, tests.

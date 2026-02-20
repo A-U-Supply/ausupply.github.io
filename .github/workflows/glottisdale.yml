@@ -45,8 +45,8 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip install torch torchaudio torchcodec --index-url https://download.pytorch.org/whl/cpu
-          pip install -r glottisdale/requirements.txt
-          pip install -e 'glottisdale/[bfa]'
+          pip install -r glottisdale-bot/requirements.txt
+          pip install "glottisdale[bfa] @ git+https://github.com/A-U-Supply/glottisdale.git"
           python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
 
       - name: Run glottisdale
@@ -60,4 +60,4 @@ jobs:
           if [ -n "${{ inputs.seed }}" ]; then
             ARGS="$ARGS --seed ${{ inputs.seed }}"
           fi
-          python glottisdale/bot.py $ARGS
+          python glottisdale-bot/bot.py $ARGS

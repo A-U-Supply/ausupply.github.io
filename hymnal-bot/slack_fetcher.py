@@ -1,5 +1,4 @@
 """Fetch MIDI files from #midieval and videos from #sample-sale."""
-import importlib.util
 import logging
 import re
 from datetime import datetime, timezone
@@ -9,8 +8,6 @@ import requests
 from slack_sdk import WebClient
 
 logger = logging.getLogger(__name__)
-
-_BASE = Path(__file__).parent.parent
 
 MIDIEVAL_CHANNEL = "midieval"
 SAMPLE_SALE_CHANNEL = "sample-sale"
@@ -167,13 +164,10 @@ def fetch_videos(
     max_videos: int = 5,
     channel: str = SAMPLE_SALE_CHANNEL,
 ) -> list[dict]:
-    """Fetch random videos from #sample-sale using glottisdale's fetch module."""
-    fetch_mod_path = _BASE / "glottisdale" / "slack" / "glottisdale_slack" / "fetch.py"
-    spec = importlib.util.spec_from_file_location("glottisdale_fetch", fetch_mod_path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
+    """Fetch random videos from #sample-sale using glottisdale_slack."""
+    from glottisdale_slack.fetch import fetch_videos as _fetch
 
-    return mod.fetch_videos(
+    return _fetch(
         token=token,
         channel=f"#{channel}",
         max_videos=max_videos,
