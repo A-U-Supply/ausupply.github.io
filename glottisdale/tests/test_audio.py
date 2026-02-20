@@ -8,6 +8,7 @@ from glottisdale.audio import (
     detect_input_type,
     extract_audio,
     get_duration,
+    time_stretch_clip,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -203,3 +204,66 @@ def test_mix_audio_duration_matches_primary(tmp_path):
     primary_dur = get_duration(primary)
     mixed_dur = get_duration(out)
     assert abs(mixed_dur - primary_dur) < 0.15
+
+
+# --- time_stretch_clip tests ---
+
+
+def test_time_stretch_doubles_duration(tmp_path):
+    """Stretching by 2.0 should approximately double the duration."""
+    clip = tmp_path / "clip.wav"
+    cut_clip(FIXTURES / "test_tone.wav", clip, 0.0, 1.0, padding_ms=0, fade_ms=0)
+
+    out = tmp_path / "stretched.wav"
+    time_stretch_clip(clip, out, factor=2.0)
+    assert out.exists()
+    stretched_dur = get_duration(out)
+    assert abs(stretched_dur - 2.0) < 0.3  # ~2x original 1.0s
+
+
+def test_time_stretch_halves_duration(tmp_path):
+    """Stretching by 0.5 should approximately halve the duration."""
+    clip = tmp_path / "clip.wav"
+    cut_clip(FIXTURES / "test_tone.wav", clip, 0.0, 1.0, padding_ms=0, fade_ms=0)
+
+    out = tmp_path / "stretched.wav"
+    time_stretch_clip(clip, out, factor=0.5)
+    assert out.exists()
+    stretched_dur = get_duration(out)
+    assert abs(stretched_dur - 0.5) < 0.2
+
+
+def test_time_stretch_identity(tmp_path):
+    """Factor 1.0 should copy without processing."""
+    clip = tmp_path / "clip.wav"
+    cut_clip(FIXTURES / "test_tone.wav", clip, 0.0, 1.0, padding_ms=0, fade_ms=0)
+
+    out = tmp_path / "stretched.wav"
+    time_stretch_clip(clip, out, factor=1.0)
+    assert out.exists()
+    original_dur = get_duration(clip)
+    stretched_dur = get_duration(out)
+    assert abs(stretched_dur - original_dur) < 0.05
+
+
+def test_time_stretch_no_rubberband_fallback(tmp_path, monkeypatch):
+    """If rubberband not available, should copy the file and log warning."""
+    clip = tmp_path / "clip.wav"
+    cut_clip(FIXTURES / "test_tone.wav", clip, 0.0, 1.0, padding_ms=0, fade_ms=0)
+
+    # Simulate rubberband not installed by making ffmpeg fail with rubberband filter
+    import subprocess
+    original_run = subprocess.run
+
+    def fake_run(cmd, **kwargs):
+        if any("rubberband" in str(c) for c in cmd):
+            result = subprocess.CompletedProcess(cmd, 1, "", "No such filter: 'rubberband'")
+            result.check_returncode()  # raises CalledProcessError
+        return original_run(cmd, **kwargs)
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    out = tmp_path / "stretched.wav"
+    # Should not raise, just copy
+    time_stretch_clip(clip, out, factor=2.0)
+    assert out.exists()
