@@ -274,6 +274,36 @@ def pitch_shift_clip(input_path: Path, output_path: Path, semitones: float) -> P
     return output_path
 
 
+def time_stretch_clip(input_path: Path, output_path: Path, factor: float) -> Path:
+    """Time-stretch a WAV clip by factor. Pitch-preserving via rubberband.
+
+    factor > 1.0 = slower (longer), factor < 1.0 = faster (shorter).
+    factor = 1.0 = no-op (copy). Falls back to copy if rubberband unavailable.
+    """
+    if abs(factor - 1.0) < 0.01:
+        shutil.copy2(input_path, output_path)
+        return output_path
+
+    # rubberband tempo is inverse: factor 2.0 (twice as long) = tempo 0.5
+    tempo = 1.0 / factor
+
+    cmd = [
+        "ffmpeg", "-y", "-i", str(input_path),
+        "-af", f"rubberband=tempo={tempo:.4f}",
+        "-c:a", "pcm_s16le",
+        str(output_path),
+    ]
+    try:
+        subprocess.run(cmd, capture_output=True, text=True, timeout=60).check_returncode()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        import logging
+        logging.getLogger("glottisdale").warning(
+            "rubberband filter unavailable, skipping time stretch"
+        )
+        shutil.copy2(input_path, output_path)
+    return output_path
+
+
 def adjust_volume(input_path: Path, output_path: Path, db: float) -> Path:
     """Adjust volume by dB amount using ffmpeg volume filter."""
     cmd = [

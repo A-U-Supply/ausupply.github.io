@@ -99,6 +99,17 @@ The main design doc also discusses the abstract aligner interface (`align.py`) r
 - [2026-02-15-glottisdale-audio-polish-design.md](plans/2026-02-15-glottisdale-audio-polish-design.md) — Design: pink noise, room tone, pitch/volume normalization, breath detection, prosodic dynamics.
 - [2026-02-15-glottisdale-audio-polish-implementation.md](plans/2026-02-15-glottisdale-audio-polish-implementation.md) — Implementation plan: `analysis.py` module, feature integration, CLI flags.
 
+**Time stretch & word repeat extension:** Creative distortion effects — time stretching (5 selection modes: global speed, random syllable, alternating, boundary, random word) and repetition (word-level repeat with exact/resample styles, syllable-level stutter). All off by default, pitch-preserving via rubberband, composable with each other and existing audio polish.
+
+- [2026-02-19-glottisdale-stretch-repeat-design.md](plans/2026-02-19-glottisdale-stretch-repeat-design.md) — Design: CLI flags, pipeline integration, stretch selection logic, stutter/repeat mechanics, rubberband integration.
+- [2026-02-19-glottisdale-stretch-repeat-implementation.md](plans/2026-02-19-glottisdale-stretch-repeat-implementation.md) — Implementation plan (9 tasks): audio.py time_stretch_clip, stretch.py module, stutter/repeat logic, CLI flags, pipeline integration, CI update.
+
+### AU Tmux Status Bar
+
+Green terminal-themed tmux status bar for the `au` tmuxinator session. Full restyle (status bar, window tabs, pane borders, messages) with a rotating right-side display cycling through git branch, moon phase, session entropy plant, and anagram roulette.
+
+- [2026-02-19-au-tmux-status-bar-design.md](plans/2026-02-19-au-tmux-status-bar-design.md) — Design: color scheme, layout, rotation script, status items.
+
 ### Hymnal Gargler (MIDI Vocal Collage)
 
 Daily bot that combines Glottisdale syllable collages with Daily MIDI Bot melodies to produce "singing" — the aesthetic goal is **"drunk choir learns a melody"**. Takes syllable clips, normalizes their pitch to a common baseline using rubberband, then maps each syllable onto MIDI melody notes with intentional imperfections: gaussian pitch drift (±2 semitones), vibrato on held notes, chorus layering on long notes, and ±20% rhythmic jitter. The result is nonsensical vocal tracks that loosely follow the melody.

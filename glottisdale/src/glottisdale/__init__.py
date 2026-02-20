@@ -27,10 +27,20 @@ from glottisdale.audio import (
     get_duration,
     generate_silence,
     pitch_shift_clip,
+    time_stretch_clip,
     adjust_volume,
     mix_audio,
 )
 from glottisdale.phonotactics import order_syllables
+from glottisdale.stretch import (
+    StretchConfig,
+    parse_stretch_factor,
+    parse_count_range,
+    resolve_stretch_factor,
+    should_stretch_syllable,
+    apply_stutter,
+    apply_word_repeat,
+)
 from glottisdale.types import Clip, Result, Syllable
 
 
@@ -216,6 +226,20 @@ def process(
     breath_probability: float = 0.6,
     volume_normalize: bool = True,
     prosodic_dynamics: bool = True,
+    # Stretch params (all off by default)
+    speed: float | None = None,
+    random_stretch: float | None = None,
+    alternating_stretch: int | None = None,
+    boundary_stretch: int | None = None,
+    word_stretch: float | None = None,
+    stretch_factor: str = "2.0",
+    # Repeat params (all off by default)
+    repeat_weight: float | None = None,
+    repeat_count: str = "1-2",
+    repeat_style: str = "exact",
+    # Stutter params (all off by default)
+    stutter: float | None = None,
+    stutter_count: str = "1-2",
 ) -> Result:
     """Run the full glottisdale pipeline."""
     rng = random.Random(seed)
@@ -237,6 +261,21 @@ def process(
     pp_min, pp_max = _parse_gap(phrase_pause)
     sp_min, sp_max = _parse_gap(sentence_pause)
     alignment_engine = get_aligner(aligner, whisper_model=whisper_model, device=bfa_device)
+
+    stretch_config = StretchConfig(
+        random_stretch=random_stretch,
+        alternating_stretch=alternating_stretch,
+        boundary_stretch=boundary_stretch,
+        word_stretch=word_stretch,
+        stretch_factor=parse_stretch_factor(stretch_factor),
+    )
+    has_syllable_stretch = any([
+        random_stretch is not None,
+        alternating_stretch is not None,
+        boundary_stretch is not None,
+    ])
+    stutter_count_range = parse_count_range(stutter_count) if stutter else None
+    repeat_count_range = parse_count_range(repeat_count) if repeat_weight else None
 
     # Process each input file
     all_syllables: dict[str, list[Syllable]] = {}
@@ -445,6 +484,55 @@ def process(
             except Exception:
                 logger.debug("Volume normalization failed, skipping")
 
+        # === Step 8a: Stutter — duplicate syllable clips within words ===
+        if stutter is not None:
+            for word_idx, word_syls in enumerate(words):
+                word_syl_paths = [
+                    info[2] for info in all_syl_clip_info
+                    if info[0] == word_idx and info[2].exists()
+                ]
+                stuttered = apply_stutter(
+                    word_syl_paths, stutter, stutter_count_range, rng
+                )
+                # Replace the entries in all_syl_clip_info for this word
+                old_entries = [
+                    info for info in all_syl_clip_info
+                    if info[0] != word_idx
+                ]
+                # Add stuttered entries
+                new_entries = []
+                for syl_idx, path in enumerate(stuttered):
+                    syl = word_syls[min(syl_idx, len(word_syls) - 1)]
+                    new_entries.append((word_idx, syl_idx, path, syl))
+                all_syl_clip_info = old_entries + new_entries
+
+        # === Step 8b: Syllable stretch — stretch individual syllable clips ===
+        if has_syllable_stretch:
+            try:
+                global_syl_idx = 0
+                for word_idx, word_syls in enumerate(words):
+                    word_entries = sorted(
+                        [info for info in all_syl_clip_info if info[0] == word_idx],
+                        key=lambda x: x[1],
+                    )
+                    word_syl_count = len(word_entries)
+                    for entry in word_entries:
+                        _, syl_idx, clip_path, syl = entry
+                        if clip_path.exists() and get_duration(clip_path) >= 0.08:
+                            if should_stretch_syllable(
+                                global_syl_idx, syl_idx, word_syl_count,
+                                rng, stretch_config,
+                            ):
+                                factor = resolve_stretch_factor(
+                                    stretch_config.stretch_factor, rng
+                                )
+                                stretched = tmpdir / f"stretched_{clip_path.name}"
+                                time_stretch_clip(clip_path, stretched, factor)
+                                shutil.move(stretched, clip_path)
+                        global_syl_idx += 1
+            except Exception:
+                logger.debug("Syllable stretch failed, skipping")
+
         # Second pass: fuse syllables into words
         for word_idx, word_syls in enumerate(words):
             syl_clip_paths = [
@@ -479,6 +567,35 @@ def process(
                 output_path=word_output,
             ))
             word_clip_paths.append(word_output)
+
+        # === Step 10a: Word stretch — stretch assembled word WAVs ===
+        if word_stretch is not None:
+            try:
+                for clip in clips:
+                    if clip.output_path.exists() and rng.random() < word_stretch:
+                        dur = get_duration(clip.output_path)
+                        if dur >= 0.08:
+                            factor = resolve_stretch_factor(
+                                stretch_config.stretch_factor, rng
+                            )
+                            stretched = tmpdir / f"wstretched_{clip.output_path.name}"
+                            time_stretch_clip(clip.output_path, stretched, factor)
+                            shutil.move(stretched, clip.output_path)
+            except Exception:
+                logger.debug("Word stretch failed, skipping")
+
+        # === Step 11: Word repeat — duplicate words in clip list ===
+        if repeat_weight is not None:
+            try:
+                clips = apply_word_repeat(
+                    clips, repeat_weight, repeat_count_range,
+                    repeat_style, rng,
+                )
+            except Exception:
+                logger.debug("Word repeat failed, skipping")
+
+        # Rebuild word_clip_paths from clips after repeat
+        word_clip_paths = [c.output_path for c in clips]
 
         # Filter to valid word clip paths
         valid_word_paths = [p for p in word_clip_paths if p is not None]
@@ -617,6 +734,17 @@ def process(
                 concatenated_path,
                 crossfade_ms=0,
             )
+
+        # === Step 16: Global speed — stretch entire output ===
+        if speed is not None and concatenated_path.exists():
+            try:
+                # speed 0.5 = half speed = stretch factor 2.0
+                speed_factor = 1.0 / speed
+                sped = tmpdir / "speed_output.wav"
+                time_stretch_clip(concatenated_path, sped, speed_factor)
+                shutil.move(sped, concatenated_path)
+            except Exception:
+                logger.debug("Global speed failed, skipping")
 
         # === Phase E: Mix pink noise bed under entire output ===
         if noise_level_db != 0 and concatenated_path.exists():

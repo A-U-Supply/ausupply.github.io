@@ -181,3 +181,87 @@ def test_cli_passes_audio_polish_defaults_to_process(tmp_path):
         assert call_kwargs["room_tone"] is True
         assert call_kwargs["volume_normalize"] is True
         assert call_kwargs["prosodic_dynamics"] is True
+
+
+def test_stretch_repeat_flags_defaults():
+    """All stretch/repeat flags should default to None/off."""
+    args = parse_args([])
+    assert args.speed is None
+    assert args.random_stretch is None
+    assert args.alternating_stretch is None
+    assert args.boundary_stretch is None
+    assert args.word_stretch is None
+    assert args.stretch_factor == "2.0"
+    assert args.repeat_weight is None
+    assert args.repeat_count == "1-2"
+    assert args.repeat_style == "exact"
+    assert args.stutter is None
+    assert args.stutter_count == "1-2"
+
+
+def test_stretch_flags_set():
+    args = parse_args([
+        "--speed", "0.5",
+        "--random-stretch", "0.3",
+        "--alternating-stretch", "2",
+        "--boundary-stretch", "1",
+        "--word-stretch", "0.4",
+        "--stretch-factor", "1.5-3.0",
+    ])
+    assert args.speed == 0.5
+    assert args.random_stretch == 0.3
+    assert args.alternating_stretch == 2
+    assert args.boundary_stretch == 1
+    assert args.word_stretch == 0.4
+    assert args.stretch_factor == "1.5-3.0"
+
+
+def test_repeat_flags_set():
+    args = parse_args([
+        "--repeat-weight", "0.2",
+        "--repeat-count", "2-4",
+        "--repeat-style", "resample",
+    ])
+    assert args.repeat_weight == 0.2
+    assert args.repeat_count == "2-4"
+    assert args.repeat_style == "resample"
+
+
+def test_stutter_flags_set():
+    args = parse_args([
+        "--stutter", "0.3",
+        "--stutter-count", "2-3",
+    ])
+    assert args.stutter == 0.3
+    assert args.stutter_count == "2-3"
+
+
+def test_cli_passes_stretch_repeat_to_process(tmp_path):
+    """CLI should pass stretch/repeat flags to process()."""
+    from glottisdale.cli import main
+
+    input_file = tmp_path / "test.wav"
+    input_file.touch()
+
+    mock_result = MagicMock()
+    mock_result.transcript = "test"
+    mock_result.clips = []
+    mock_result.concatenated = MagicMock()
+    mock_result.concatenated.name = "concatenated.wav"
+
+    with patch("glottisdale.process") as mock_process:
+        mock_process.return_value = mock_result
+        main([
+            str(input_file),
+            "--output-dir", str(tmp_path / "out"),
+            "--random-stretch", "0.3",
+            "--stretch-factor", "1.5-3.0",
+            "--repeat-weight", "0.2",
+            "--stutter", "0.4",
+        ])
+
+        call_kwargs = mock_process.call_args[1]
+        assert call_kwargs["random_stretch"] == 0.3
+        assert call_kwargs["stretch_factor"] == "1.5-3.0"
+        assert call_kwargs["repeat_weight"] == 0.2
+        assert call_kwargs["stutter"] == 0.4

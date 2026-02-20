@@ -382,3 +382,102 @@ def test_process_audio_polish_all_disabled(
     )
 
     assert result.concatenated.exists()
+
+
+@patch("glottisdale.get_aligner")
+@patch("glottisdale.extract_audio")
+@patch("glottisdale.detect_input_type")
+@patch("glottisdale.cut_clip")
+@patch("glottisdale.concatenate_clips")
+@patch("glottisdale.get_duration", return_value=2.0)
+def test_process_accepts_stretch_params(
+    mock_duration, mock_concat, mock_cut, mock_detect, mock_extract, mock_aligner, tmp_path
+):
+    """process() should accept all stretch/repeat parameters without TypeError."""
+    mock_detect.return_value = "audio"
+
+    def fake_extract(input_path, output_path):
+        output_path.touch()
+        return output_path
+    mock_extract.side_effect = fake_extract
+
+    aligner_instance = MagicMock()
+    aligner_instance.process.return_value = {
+        "text": "hello world",
+        "words": [],
+        "syllables": _make_syllables(),
+    }
+    mock_aligner.return_value = aligner_instance
+
+    def fake_cut(input_path, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_cut.side_effect = fake_cut
+
+    def fake_concat(clips, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_concat.side_effect = fake_concat
+
+    result = process(
+        input_paths=[tmp_path / "audio.wav"],
+        output_dir=tmp_path / "out",
+        target_duration=10.0,
+        seed=42,
+        # Stretch params
+        random_stretch=0.3,
+        stretch_factor="1.5-3.0",
+        # Repeat params
+        repeat_weight=0.2,
+        repeat_count="1-2",
+        repeat_style="exact",
+        # Stutter params
+        stutter=0.3,
+        stutter_count="1-2",
+    )
+    assert result.concatenated.exists()
+
+
+@patch("glottisdale.get_aligner")
+@patch("glottisdale.extract_audio")
+@patch("glottisdale.detect_input_type")
+@patch("glottisdale.cut_clip")
+@patch("glottisdale.concatenate_clips")
+@patch("glottisdale.get_duration", return_value=2.0)
+def test_process_all_stretch_repeat_disabled(
+    mock_duration, mock_concat, mock_cut, mock_detect, mock_extract, mock_aligner, tmp_path
+):
+    """With all stretch/repeat features at None/default, behavior is unchanged."""
+    mock_detect.return_value = "audio"
+
+    def fake_extract(input_path, output_path):
+        output_path.touch()
+        return output_path
+    mock_extract.side_effect = fake_extract
+
+    aligner_instance = MagicMock()
+    aligner_instance.process.return_value = {
+        "text": "hello",
+        "words": [],
+        "syllables": _make_syllables(),
+    }
+    mock_aligner.return_value = aligner_instance
+
+    def fake_cut(input_path, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_cut.side_effect = fake_cut
+
+    def fake_concat(clips, output_path, **kwargs):
+        output_path.touch()
+        return output_path
+    mock_concat.side_effect = fake_concat
+
+    result = process(
+        input_paths=[tmp_path / "audio.wav"],
+        output_dir=tmp_path / "out",
+        target_duration=10.0,
+        seed=42,
+        # All defaults — no stretch or repeat
+    )
+    assert result.concatenated.exists()
