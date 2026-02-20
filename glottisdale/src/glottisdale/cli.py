@@ -87,6 +87,35 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--prosodic-dynamics", action=argparse.BooleanOptionalAction, default=True,
                         help="Apply phrase-level volume envelope (default: enabled)")
 
+    # Time stretch options (all off by default)
+    parser.add_argument("--speed", type=float, default=None,
+                        help="Global speed factor: 0.5=half speed, 2.0=double (default: off)")
+    parser.add_argument("--random-stretch", type=float, default=None,
+                        help="Probability (0-1) that a syllable gets stretched (default: off)")
+    parser.add_argument("--alternating-stretch", type=int, default=None,
+                        help="Stretch every Nth syllable (default: off)")
+    parser.add_argument("--boundary-stretch", type=int, default=None,
+                        help="Stretch first/last N syllables per word (default: off)")
+    parser.add_argument("--word-stretch", type=float, default=None,
+                        help="Probability (0-1) that all syllables in a word get stretched (default: off)")
+    parser.add_argument("--stretch-factor", default="2.0",
+                        help="Stretch amount: '2.0' or '1.5-3.0' for random range (default: 2.0)")
+
+    # Word repeat options (all off by default)
+    parser.add_argument("--repeat-weight", type=float, default=None,
+                        help="Probability (0-1) that a word gets repeated (default: off)")
+    parser.add_argument("--repeat-count", default="1-2",
+                        help="Extra copies per repeated word: '2' or '1-3' (default: 1-2)")
+    parser.add_argument("--repeat-style", default="exact",
+                        choices=["exact", "resample"],
+                        help="Repeat style: exact (duplicate WAV) or resample (default: exact)")
+
+    # Stutter options (all off by default)
+    parser.add_argument("--stutter", type=float, default=None,
+                        help="Probability (0-1) that a syllable gets stuttered (default: off)")
+    parser.add_argument("--stutter-count", default="1-2",
+                        help="Extra copies of stuttered syllable: '2' or '1-3' (default: 1-2)")
+
     args = parser.parse_args(argv)
 
     # Backward compat: --syllables-per-clip -> --syllables-per-word
@@ -141,6 +170,17 @@ def main(argv: list[str] | None = None) -> None:
             breath_probability=args.breath_probability,
             volume_normalize=args.volume_normalize,
             prosodic_dynamics=args.prosodic_dynamics,
+            speed=args.speed,
+            random_stretch=args.random_stretch,
+            alternating_stretch=args.alternating_stretch,
+            boundary_stretch=args.boundary_stretch,
+            word_stretch=args.word_stretch,
+            stretch_factor=args.stretch_factor,
+            repeat_weight=args.repeat_weight,
+            repeat_count=args.repeat_count,
+            repeat_style=args.repeat_style,
+            stutter=args.stutter,
+            stutter_count=args.stutter_count,
         )
 
         # Print summary to stdout
@@ -208,6 +248,17 @@ def main(argv: list[str] | None = None) -> None:
                 breath_probability=args.breath_probability,
                 volume_normalize=args.volume_normalize,
                 prosodic_dynamics=args.prosodic_dynamics,
+                speed=args.speed,
+                random_stretch=args.random_stretch,
+                alternating_stretch=args.alternating_stretch,
+                boundary_stretch=args.boundary_stretch,
+                word_stretch=args.word_stretch,
+                stretch_factor=args.stretch_factor,
+                repeat_weight=args.repeat_weight,
+                repeat_count=args.repeat_count,
+                repeat_style=args.repeat_style,
+                stutter=args.stutter,
+                stutter_count=args.stutter_count,
             )
 
             # Print summary
