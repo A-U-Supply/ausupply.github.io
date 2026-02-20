@@ -40,7 +40,7 @@ jobs:
           key: glottisdale-models-bfa-${{ inputs.whisper_model || 'base' }}
 
       - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg espeak-ng
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg espeak-ng librubberband-dev
 
       - name: Install Python dependencies
         run: |
