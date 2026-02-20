@@ -41,12 +41,15 @@ class BFAAligner(Aligner):
             )
         return self._aligner
 
+    # BFA's default duration_max is 10s; keep chunks under that
+    MAX_CHUNK_DURATION = 8.0
+    SAMPLE_RATE = 16000  # BFA resamples to 16kHz
+
     def process(self, audio_path: Path) -> dict:
         """Transcribe and align audio using Whisper + BFA.
 
-        Sends the full Whisper transcript to BFA for alignment against
-        the full audio. BFA returns absolute phoneme timestamps which
-        are then distributed to words using Whisper's word boundaries.
+        Chunks the Whisper transcript into segments that fit within BFA's
+        duration limit, aligns each chunk separately, then merges results.
 
         Returns:
             Dict with keys:
@@ -59,66 +62,79 @@ class BFAAligner(Aligner):
             audio_path, model_name=self.whisper_model, language=self.language
         )
 
-        full_text = whisper_result["text"].strip()
         words = whisper_result["words"]
-        if not full_text or not words:
+        if not whisper_result["text"].strip() or not words:
             return {
                 "text": whisper_result["text"],
                 "words": words,
                 "syllables": [],
             }
 
-        # Step 2: BFA alignment on full transcript + full audio
+        # Step 2: Load audio and chunk words into BFA-sized segments
         aligner = self._get_aligner()
         audio_wav = aligner.load_audio(str(audio_path))
 
-        try:
-            bfa_result = aligner.process_sentence(
-                text=full_text,
-                audio_wav=audio_wav,
-                do_groups=True,
-            )
-        except Exception as e:
-            logger.warning(f"BFA alignment failed, returning empty syllables: {e}")
-            return {
-                "text": whisper_result["text"],
-                "words": words,
-                "syllables": [],
-            }
+        chunks = self._chunk_words(words)
+        logger.info(f"Split {len(words)} words into {len(chunks)} BFA chunks")
 
-        phoneme_ts = bfa_result.get("phoneme_ts", [])
-        group_ts = bfa_result.get("group_ts", [])
-
-        if not phoneme_ts:
-            logger.warning("BFA returned no phonemes")
-            return {
-                "text": whisper_result["text"],
-                "words": words,
-                "syllables": [],
-            }
-
-        # Step 3: Convert BFA phonemes to Phoneme objects (absolute timestamps)
+        # Step 3: Align each chunk, collect phonemes with absolute timestamps
         all_phonemes = []
         all_pg16 = []
-        for ph_info in phoneme_ts:
-            ipa_label = ph_info.get("ipa_label", ph_info.get("phoneme_label", ""))
-            start_ms = ph_info.get("start_ms", 0.0)
-            end_ms = ph_info.get("end_ms", 0.0)
-            start_s = start_ms / 1000.0
-            end_s = end_ms / 1000.0
+        for chunk in chunks:
+            chunk_text = " ".join(w["word"].strip() for w in chunk)
+            chunk_start = chunk[0]["start"]
+            chunk_end = chunk[-1]["end"]
 
-            if end_s <= start_s or not ipa_label:
+            # Slice audio tensor (add 0.2s padding on each side)
+            pad = 0.2
+            slice_start = max(0.0, chunk_start - pad)
+            slice_end = chunk_end + pad
+            start_sample = int(slice_start * self.SAMPLE_RATE)
+            end_sample = min(int(slice_end * self.SAMPLE_RATE), audio_wav.shape[1])
+            chunk_audio = audio_wav[:, start_sample:end_sample]
+
+            if chunk_audio.shape[1] == 0:
                 continue
 
-            all_phonemes.append(Phoneme(
-                label=ipa_label,
-                start=round(start_s, 4),
-                end=round(end_s, 4),
-            ))
-            pg16 = _find_pg16_group(ph_info, group_ts)
-            all_pg16.append(pg16)
+            try:
+                bfa_result = aligner.process_sentence(
+                    text=chunk_text,
+                    audio_wav=chunk_audio,
+                    do_groups=True,
+                )
+            except Exception as e:
+                logger.warning(
+                    f"BFA chunk failed ({len(chunk)} words, "
+                    f"{chunk_end - chunk_start:.1f}s): {e}"
+                )
+                continue
+
+            phoneme_ts = bfa_result.get("phoneme_ts", [])
+            group_ts = bfa_result.get("group_ts", [])
+
+            for ph_info in phoneme_ts:
+                ipa_label = ph_info.get(
+                    "ipa_label", ph_info.get("phoneme_label", "")
+                )
+                start_ms = ph_info.get("start_ms", 0.0)
+                end_ms = ph_info.get("end_ms", 0.0)
+                # BFA timestamps are relative to chunk — offset to absolute
+                abs_start = start_ms / 1000.0 + slice_start
+                abs_end = end_ms / 1000.0 + slice_start
+
+                if abs_end <= abs_start or not ipa_label:
+                    continue
+
+                all_phonemes.append(Phoneme(
+                    label=ipa_label,
+                    start=round(abs_start, 4),
+                    end=round(abs_end, 4),
+                ))
+                pg16 = _find_pg16_group(ph_info, group_ts)
+                all_pg16.append(pg16)
 
         if not all_phonemes:
+            logger.warning("BFA returned no phonemes across all chunks")
             return {
                 "text": whisper_result["text"],
                 "words": words,
@@ -170,6 +186,32 @@ class BFAAligner(Aligner):
             "words": words,
             "syllables": all_syllables,
         }
+
+    @classmethod
+    def _chunk_words(cls, words: list[dict]) -> list[list[dict]]:
+        """Group words into chunks that fit within BFA's duration limit."""
+        chunks = []
+        current_chunk = []
+        chunk_start = None
+
+        for word in words:
+            w_start = word["start"]
+            w_end = word["end"]
+
+            if chunk_start is None:
+                chunk_start = w_start
+
+            if w_end - chunk_start > cls.MAX_CHUNK_DURATION and current_chunk:
+                chunks.append(current_chunk)
+                current_chunk = [word]
+                chunk_start = w_start
+            else:
+                current_chunk.append(word)
+
+        if current_chunk:
+            chunks.append(current_chunk)
+
+        return chunks
 
 
 def _find_pg16_group(ph_info: dict, group_ts: list[dict]) -> str:

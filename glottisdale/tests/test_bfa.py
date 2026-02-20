@@ -9,6 +9,17 @@ from glottisdale.types import Phoneme, Syllable
 from glottisdale.bfa import BFAAligner, _find_pg16_group, _infer_pg16_from_ipa
 
 
+def _fake_audio_tensor(duration_s=10.0, sr=16000):
+    """Create a fake audio tensor-like object for BFA mocking.
+
+    Supports .shape[1] and [:, start:end] slicing like a real tensor.
+    """
+    import numpy as np
+    samples = int(duration_s * sr)
+    arr = np.zeros((1, samples), dtype=np.float32)
+    return arr
+
+
 def _mock_bfa_phoneme(ipa_label, start_ms, end_ms, index, confidence=0.99):
     """Create a mock BFA phoneme timestamp entry."""
     return {
@@ -99,6 +110,39 @@ class TestInferPg16FromIpa:
         assert _infer_pg16_from_ipa("") == "silence"
 
 
+class TestChunkWords:
+    def test_short_transcript_single_chunk(self):
+        words = [
+            {"word": "hello", "start": 0.0, "end": 0.4},
+            {"word": "world", "start": 0.5, "end": 0.9},
+        ]
+        chunks = BFAAligner._chunk_words(words)
+        assert len(chunks) == 1
+        assert len(chunks[0]) == 2
+
+    def test_long_transcript_multiple_chunks(self):
+        # Create 20 words spanning 20 seconds (1s each)
+        words = [
+            {"word": f"word{i}", "start": float(i), "end": float(i) + 0.8}
+            for i in range(20)
+        ]
+        chunks = BFAAligner._chunk_words(words)
+        assert len(chunks) >= 2
+        # Each chunk should be ≤8s
+        for chunk in chunks:
+            duration = chunk[-1]["end"] - chunk[0]["start"]
+            assert duration <= BFAAligner.MAX_CHUNK_DURATION + 1.0  # allow 1 word overshoot
+
+    def test_empty_words(self):
+        assert BFAAligner._chunk_words([]) == []
+
+    def test_single_word(self):
+        words = [{"word": "hi", "start": 0.0, "end": 0.3}]
+        chunks = BFAAligner._chunk_words(words)
+        assert len(chunks) == 1
+        assert chunks[0] == words
+
+
 class TestBFAAlignerProcess:
     @patch("glottisdale.bfa.transcribe")
     def test_full_pipeline(self, mock_transcribe):
@@ -138,7 +182,7 @@ class TestBFAAlignerProcess:
                 _mock_bfa_group("voiced_stops", 800.0, 870.0, 7),
             ],
         }
-        mock_bfa.load_audio.return_value = MagicMock()
+        mock_bfa.load_audio.return_value = _fake_audio_tensor()
 
         aligner = BFAAligner(whisper_model="base", device="cpu")
         aligner._aligner = mock_bfa
@@ -157,12 +201,11 @@ class TestBFAAlignerProcess:
         # First syllable starts at 0.01s (10ms from BFA)
         assert hello_syls[0].start == 0.01
 
-        # BFA was called once with full transcript
-        mock_bfa.process_sentence.assert_called_once_with(
-            text="hello world",
-            audio_wav=mock_bfa.load_audio.return_value,
-            do_groups=True,
-        )
+        # BFA was called once (both words fit in one chunk)
+        mock_bfa.process_sentence.assert_called_once()
+        call_kwargs = mock_bfa.process_sentence.call_args
+        assert call_kwargs.kwargs["text"] == "hello world"
+        assert call_kwargs.kwargs["do_groups"] is True
 
     @patch("glottisdale.bfa.transcribe")
     def test_bfa_failure_graceful(self, mock_transcribe):
@@ -177,7 +220,7 @@ class TestBFAAlignerProcess:
 
         mock_bfa = MagicMock()
         mock_bfa.process_sentence.side_effect = RuntimeError("BFA crashed")
-        mock_bfa.load_audio.return_value = MagicMock()
+        mock_bfa.load_audio.return_value = _fake_audio_tensor()
 
         aligner = BFAAligner()
         aligner._aligner = mock_bfa
@@ -197,7 +240,7 @@ class TestBFAAlignerProcess:
         }
 
         mock_bfa = MagicMock()
-        mock_bfa.load_audio.return_value = MagicMock()
+        mock_bfa.load_audio.return_value = _fake_audio_tensor()
 
         aligner = BFAAligner()
         aligner._aligner = mock_bfa
@@ -229,7 +272,7 @@ class TestBFAAlignerProcess:
                 _mock_bfa_group("voiced_stops", 320.0, 480.0, 1),
             ],
         }
-        mock_bfa.load_audio.return_value = MagicMock()
+        mock_bfa.load_audio.return_value = _fake_audio_tensor()
 
         aligner = BFAAligner()
         aligner._aligner = mock_bfa
@@ -254,7 +297,7 @@ class TestBFAAlignerProcess:
             "phoneme_ts": [],
             "group_ts": [],
         }
-        mock_bfa.load_audio.return_value = MagicMock()
+        mock_bfa.load_audio.return_value = _fake_audio_tensor()
 
         aligner = BFAAligner()
         aligner._aligner = mock_bfa
