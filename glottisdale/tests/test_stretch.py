@@ -9,9 +9,11 @@ from glottisdale.stretch import (
     should_stretch_syllable,
     resolve_stretch_factor,
     apply_stutter,
+    apply_word_repeat,
     parse_count_range,
 )
 from pathlib import Path
+from glottisdale.types import Clip, Syllable, Phoneme
 
 
 class TestParseStretchFactor:
@@ -160,3 +162,54 @@ class TestApplyStutter:
         assert result[3] == Path("b.wav")
         assert result[4] == Path("c.wav")
         assert result[5] == Path("c.wav")
+
+
+def _make_clip(name: str) -> Clip:
+    """Helper to create a Clip with a given output path name."""
+    syl = Syllable([Phoneme("AH0", 0.0, 0.1)], 0.0, 0.1, "test", 0)
+    return Clip(syllables=[syl], start=0.0, end=0.1,
+                source="test", output_path=Path(f"{name}.wav"))
+
+
+class TestApplyWordRepeat:
+    def test_no_repeat_when_probability_zero(self):
+        words = [_make_clip("a"), _make_clip("b")]
+        rng = random.Random(42)
+        result = apply_word_repeat(words, probability=0.0,
+                                   count_range=(1, 1), style="exact", rng=rng)
+        assert len(result) == 2
+
+    def test_all_repeat_exact(self):
+        words = [_make_clip("a"), _make_clip("b")]
+        rng = random.Random(42)
+        result = apply_word_repeat(words, probability=1.0,
+                                   count_range=(1, 1), style="exact", rng=rng)
+        assert len(result) == 4
+        # Each word followed by its duplicate
+        assert result[0].output_path == result[1].output_path
+        assert result[2].output_path == result[3].output_path
+
+    def test_repeat_count_range(self):
+        words = [_make_clip("a")]
+        rng = random.Random(42)
+        result = apply_word_repeat(words, probability=1.0,
+                                   count_range=(3, 3), style="exact", rng=rng)
+        # Original + 3 copies = 4
+        assert len(result) == 4
+
+    def test_preserves_order(self):
+        words = [_make_clip("a"), _make_clip("b"), _make_clip("c")]
+        rng = random.Random(42)
+        result = apply_word_repeat(words, probability=1.0,
+                                   count_range=(1, 1), style="exact", rng=rng)
+        # a, a, b, b, c, c
+        paths = [c.output_path.stem for c in result]
+        assert paths == ["a", "a", "b", "b", "c", "c"]
+
+    def test_probabilistic_repeat(self):
+        words = [_make_clip(f"w{i}") for i in range(100)]
+        rng = random.Random(42)
+        result = apply_word_repeat(words, probability=0.3,
+                                   count_range=(1, 1), style="exact", rng=rng)
+        assert len(result) > 100
+        assert len(result) < 200

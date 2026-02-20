@@ -4,6 +4,8 @@ import random
 from dataclasses import dataclass
 from pathlib import Path
 
+from glottisdale.types import Clip
+
 
 @dataclass
 class StretchConfig:
@@ -89,4 +91,28 @@ def apply_stutter(
         if rng.random() < probability:
             n = rng.randint(count_range[0], count_range[1])
             result.extend([path] * n)
+    return result
+
+
+def apply_word_repeat(
+    words: list[Clip],
+    probability: float,
+    count_range: tuple[int, int],
+    style: str,
+    rng: random.Random,
+) -> list[Clip]:
+    """Duplicate words in the word list for repetition effect.
+
+    style='exact': duplicate the same Clip (same WAV file).
+    style='resample': not implemented here — caller handles re-assembly.
+    Returns new list with repeated words inserted after originals.
+    """
+    result = []
+    for word in words:
+        result.append(word)
+        if rng.random() < probability:
+            n = rng.randint(count_range[0], count_range[1])
+            if style == "exact":
+                result.extend([word] * n)
+            # 'resample' handled by caller in pipeline
     return result
