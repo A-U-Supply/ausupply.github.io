@@ -41,25 +41,32 @@ jobs:
           cache: 'npm'
           cache-dependency-path: hymnal-bot/package-lock.json
 
-      - name: Cache Whisper + torch models
+      - name: Cache Whisper models
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/whisper
-            ~/.cache/torch
-          key: hymnal-gargler-models-${{ inputs.whisper_model || 'base' }}
+          path: ~/.cache/whisper
+          key: whisper-models-${{ inputs.whisper_model || 'base' }}
 
       - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg librubberband-dev
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
       - name: Install Python dependencies
         run: |
           pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+          pip install openai-whisper
           pip install -r hymnal-bot/requirements.txt
-          python -c "import nltk; nltk.download('averaged_perceptron_tagger_eng')"
 
       - name: Install Node.js dependencies
         run: cd hymnal-bot && npm ci
+
+      - name: Download glottisdale binary
+        run: |
+          gh release download --repo A-U-Supply/glottisdale --pattern 'glottisdale-linux-amd64' --dir /tmp
+          chmod +x /tmp/glottisdale-linux-amd64
+          sudo mv /tmp/glottisdale-linux-amd64 /usr/local/bin/glottisdale
+          glottisdale --version
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Run Hymnal Gargler
         env:

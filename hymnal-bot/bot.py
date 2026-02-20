@@ -1,24 +1,18 @@
 """Hymnal Gargler Slack bot — fetches MIDI + videos, runs sing pipeline, posts results.
 
-This is a thin wrapper around the glottisdale library. The library handles
-audio processing and vocal MIDI mapping; this script handles Slack I/O and
-Magenta.js MIDI extension.
+This is a thin wrapper that handles Slack I/O and MIDI extension, then invokes
+the glottisdale Rust CLI binary for vocal MIDI mapping.
 """
 
 import argparse
 import logging
 import os
+import subprocess
 import sys
 from pathlib import Path
-from statistics import median
 
 # Add bot directory to path for local modules
 sys.path.insert(0, str(Path(__file__).parent))
-
-from glottisdale.sing.midi_parser import parse_midi
-from glottisdale.sing.syllable_prep import prepare_syllables
-from glottisdale.sing.vocal_mapper import plan_note_mapping, render_vocal_track
-from glottisdale.sing.mixer import mix_tracks
 
 logger = logging.getLogger(__name__)
 
@@ -55,30 +49,56 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def run_glottisdale_sing(audio_paths: list[Path], midi_dir: Path, args) -> dict:
+    """Run the glottisdale sing CLI and return parsed output info."""
+    cmd = [
+        "glottisdale", "sing",
+        *[str(p) for p in audio_paths],
+        "--midi", str(midi_dir),
+        "--output-dir", str(args.output_dir),
+        "--target-duration", str(args.target_duration),
+        "--whisper-model", args.whisper_model,
+        "--drift-range", str(args.drift_range),
+    ]
+    if args.seed is not None:
+        cmd.extend(["--seed", str(args.seed)])
+    if not args.vibrato:
+        cmd.append("--no-vibrato")
+    if not args.chorus:
+        cmd.append("--no-chorus")
+
+    logger.info(f"Running: {' '.join(cmd)}")
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    if result.returncode != 0:
+        logger.error(f"CLI stderr: {result.stderr}")
+        raise RuntimeError(f"glottisdale sing failed: {result.stderr.strip().splitlines()[-1]}")
+
+    info = {"full_mix": None, "acappella": None}
+    for line in result.stdout.splitlines():
+        if line.startswith("Output: "):
+            info["full_mix"] = Path(line.split("Output: ", 1)[1].strip())
+        elif line.startswith("A cappella: "):
+            info["acappella"] = Path(line.split("A cappella: ", 1)[1].strip())
+
+    if not info["full_mix"] or not info["full_mix"].exists():
+        raise RuntimeError(f"CLI did not produce expected output. stdout: {result.stdout}")
+
+    logger.info(f"Output: {info['full_mix']}, A cappella: {info['acappella']}")
+    return info
+
+
 def _run_local(args):
     """Run in local mode with provided MIDI and audio files."""
-    output_dir = args.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
-    work_dir = output_dir / "work"
-    work_dir.mkdir(parents=True, exist_ok=True)
+    args.output_dir.mkdir(parents=True, exist_ok=True)
 
-    track = parse_midi(args.midi / "melody.mid")
-    logger.info(f"Melody: {len(track.notes)} notes, {track.tempo} BPM, {track.total_duration:.1f}s")
-
-    syllables = prepare_syllables(args.audio, work_dir, args.whisper_model)
-    logger.info(f"Prepared {len(syllables)} syllables")
-
-    voiced_f0 = [s.f0 for s in syllables if s.f0 and s.f0 > 0]
-    median_f0 = median(voiced_f0) if voiced_f0 else 220.0
-
-    mappings = plan_note_mapping(
-        track.notes, len(syllables),
-        seed=args.seed, drift_range=args.drift_range,
+    info = run_glottisdale_sing(
+        audio_paths=args.audio,
+        midi_dir=args.midi,
+        args=args,
     )
-
-    acappella = render_vocal_track(mappings, syllables, work_dir, median_f0, args.target_duration)
-    full_mix, acappella_out = mix_tracks(acappella, args.midi, output_dir)
-    logger.info(f"Output: {full_mix}, A cappella: {acappella_out}")
+    logger.info(f"Output: {info['full_mix']}, A cappella: {info['acappella']}")
 
 
 def _run_slack(args):
@@ -92,9 +112,8 @@ def _run_slack(args):
         print("Error: SLACK_BOT_TOKEN required for Slack mode", file=sys.stderr)
         sys.exit(1)
 
-    output_dir = args.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
-    work_dir = output_dir / "work"
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    work_dir = args.output_dir / "work"
     work_dir.mkdir(parents=True, exist_ok=True)
 
     # Fetch MIDI from #midieval
@@ -127,29 +146,20 @@ def _run_slack(args):
     video_dir.mkdir(parents=True, exist_ok=True)
     fetch_videos(token, video_dir, args.max_videos, args.video_channel)
 
-    # Parse extended melody
-    track = parse_midi(extended_dir / "melody.mid")
-    logger.info(f"Extended melody: {len(track.notes)} notes, {track.total_duration:.1f}s")
-
-    # Prepare syllables
     video_files = list(video_dir.glob("*"))
-    syllables = prepare_syllables(video_files, work_dir, args.whisper_model)
-    logger.info(f"Prepared {len(syllables)} syllables")
+    if not video_files:
+        print("No videos downloaded", file=sys.stderr)
+        sys.exit(1)
 
-    voiced_f0 = [s.f0 for s in syllables if s.f0 and s.f0 > 0]
-    median_f0 = median(voiced_f0) if voiced_f0 else 220.0
-
-    mappings = plan_note_mapping(
-        track.notes, len(syllables),
-        seed=args.seed, drift_range=args.drift_range,
+    # Run glottisdale sing
+    info = run_glottisdale_sing(
+        audio_paths=video_files,
+        midi_dir=extended_dir,
+        args=args,
     )
 
-    acappella = render_vocal_track(mappings, syllables, work_dir, median_f0, args.target_duration)
-    full_mix, acappella_out = mix_tracks(acappella, extended_dir, output_dir)
-    logger.info(f"Output: {full_mix}, A cappella: {acappella_out}")
-
     if not args.dry_run and not args.no_post:
-        post_results(token, args.dest_channel, full_mix, acappella_out, metadata, permalink)
+        post_results(token, args.dest_channel, info["full_mix"], info["acappella"], metadata, permalink)
 
 
 def main():

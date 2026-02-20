@@ -8,7 +8,6 @@ from pathlib import Path
 
 from slack_sdk import WebClient
 
-from glottisdale.types import Result
 from glottisdale_slack.fetch import find_channel_id
 
 logger = logging.getLogger(__name__)
@@ -55,9 +54,11 @@ def _get_thread_ts(client: WebClient, file_id: str, max_attempts: int = 5) -> tu
 def post_results(
     token: str,
     channel: str,
-    result: Result,
+    concatenated_path: Path,
+    run_dir: Path,
+    clip_count: int,
     sources: list[dict],
-    output_dir: Path,
+    source_clip_counts: dict[str, int] | None = None,
     _client: WebClient | None = None,
 ) -> None:
     """Post glottisdale results to a Slack channel.
@@ -69,7 +70,7 @@ def post_results(
     client = _client or WebClient(token=token, timeout=120)
 
     today = date.today().isoformat()
-    summary = f":scissors: *Glottisdale* — {len(result.clips)} words from {len(sources)} source(s)"
+    summary = f":scissors: *Glottisdale* — {clip_count} words from {len(sources)} source(s)"
 
     # Resolve channel name to ID (files_upload_v2 requires channel ID)
     channel_id = find_channel_id(client, channel) if channel.startswith("#") else channel
@@ -78,17 +79,16 @@ def post_results(
     _log(f"Resolved channel {channel} -> {channel_id}")
 
     # === WAV UPLOAD — MANDATORY, MUST SUCCEED ===
-    concat_path = result.concatenated
-    if not concat_path.exists():
-        raise FileNotFoundError(f"Concatenated audio not found: {concat_path}")
+    if not concatenated_path.exists():
+        raise FileNotFoundError(f"Concatenated audio not found: {concatenated_path}")
 
-    file_size = concat_path.stat().st_size
-    _log(f"Uploading WAV: {concat_path} ({file_size} bytes)")
+    file_size = concatenated_path.stat().st_size
+    _log(f"Uploading WAV: {concatenated_path} ({file_size} bytes)")
 
     resp = _upload_with_retry(
         client,
         channel=channel_id,
-        file=str(concat_path),
+        file=str(concatenated_path),
         filename=f"glottisdale-{today}.wav",
         initial_comment=summary,
     )
@@ -115,11 +115,12 @@ def post_results(
         for src in sources:
             name = src.get("name", "unknown")
             link = src.get("permalink", "")
-            clip_count = len([c for c in result.clips if c.source == Path(name).stem])
+            stem = Path(name).stem
+            count = (source_clip_counts or {}).get(stem, 0)
             if link:
-                source_lines.append(f"  - <{link}|{name}> ({clip_count} words)")
+                source_lines.append(f"  - <{link}|{name}> ({count} words)")
             else:
-                source_lines.append(f"  - {name} ({clip_count} words)")
+                source_lines.append(f"  - {name} ({count} words)")
         try:
             client.chat_postMessage(
                 channel=channel_id,
@@ -132,7 +133,7 @@ def post_results(
             _log("Source links failed (non-fatal)")
 
     # Upload clips zip in thread (after source links)
-    zip_path = output_dir / "clips.zip"
+    zip_path = run_dir / "clips.zip"
     if zip_path.exists() and thread_ts:
         _log(f"Uploading zip in thread: {zip_path}")
         try:
