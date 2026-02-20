@@ -1,0 +1,106 @@
+"""Tests for stretch selection logic and config parsing."""
+
+import random
+import pytest
+
+from glottisdale.stretch import (
+    StretchConfig,
+    parse_stretch_factor,
+    should_stretch_syllable,
+    resolve_stretch_factor,
+)
+
+
+class TestParseStretchFactor:
+    def test_single_value(self):
+        assert parse_stretch_factor("2.0") == (2.0, 2.0)
+
+    def test_range(self):
+        assert parse_stretch_factor("1.5-3.0") == (1.5, 3.0)
+
+    def test_integer(self):
+        assert parse_stretch_factor("2") == (2.0, 2.0)
+
+    def test_invalid_raises(self):
+        with pytest.raises(ValueError):
+            parse_stretch_factor("abc")
+
+
+class TestResolveStretchFactor:
+    def test_fixed_factor(self):
+        rng = random.Random(42)
+        factor = resolve_stretch_factor((2.0, 2.0), rng)
+        assert factor == 2.0
+
+    def test_range_factor_within_bounds(self):
+        rng = random.Random(42)
+        for _ in range(100):
+            factor = resolve_stretch_factor((1.5, 3.0), rng)
+            assert 1.5 <= factor <= 3.0
+
+
+class TestShouldStretchSyllable:
+    def test_random_stretch_selects_probabilistically(self):
+        rng = random.Random(42)
+        config = StretchConfig(random_stretch=0.5)
+        selected = sum(
+            should_stretch_syllable(i, 0, 3, rng, config)
+            for i in range(1000)
+        )
+        # ~50% should be selected, allow wide margin
+        assert 350 < selected < 650
+
+    def test_alternating_stretch_every_other(self):
+        rng = random.Random(42)
+        config = StretchConfig(alternating_stretch=2)
+        results = [
+            should_stretch_syllable(i, 0, 3, rng, config)
+            for i in range(6)
+        ]
+        assert results == [True, False, True, False, True, False]
+
+    def test_alternating_stretch_every_third(self):
+        rng = random.Random(42)
+        config = StretchConfig(alternating_stretch=3)
+        results = [
+            should_stretch_syllable(i, 0, 3, rng, config)
+            for i in range(6)
+        ]
+        assert results == [True, False, False, True, False, False]
+
+    def test_boundary_stretch_first_and_last(self):
+        rng = random.Random(42)
+        config = StretchConfig(boundary_stretch=1)
+        # 4-syllable word: indices 0, 1, 2, 3
+        results = [
+            should_stretch_syllable(i, syl_idx, 4, rng, config)
+            for i, syl_idx in enumerate(range(4))
+        ]
+        assert results == [True, False, False, True]
+
+    def test_boundary_stretch_all_selected_short_word(self):
+        """For a 2-syllable word with boundary=1, both syllables selected."""
+        rng = random.Random(42)
+        config = StretchConfig(boundary_stretch=1)
+        results = [
+            should_stretch_syllable(i, syl_idx, 2, rng, config)
+            for i, syl_idx in enumerate(range(2))
+        ]
+        assert results == [True, True]
+
+    def test_no_modes_active_returns_false(self):
+        rng = random.Random(42)
+        config = StretchConfig()
+        assert not should_stretch_syllable(0, 0, 3, rng, config)
+
+    def test_combined_modes_or_logic(self):
+        """A syllable selected by ANY active mode gets stretched."""
+        rng = random.Random(42)
+        config = StretchConfig(alternating_stretch=2, boundary_stretch=1)
+        # 4-syllable word: alternating selects 0,2; boundary selects 0,3
+        # Union: 0, 2, 3
+        results = [
+            should_stretch_syllable(i, syl_idx, 4, rng, config)
+            for i, syl_idx in enumerate(range(4))
+        ]
+        assert results == [True, False, True, True]
