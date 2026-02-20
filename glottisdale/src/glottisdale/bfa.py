@@ -38,6 +38,7 @@ class BFAAligner(Aligner):
             self._aligner = PhonemeTimestampAligner(
                 preset="en-us",
                 device=self.device,
+                silence_anchors=3,
             )
         return self._aligner
 
@@ -109,8 +110,14 @@ class BFAAligner(Aligner):
                 )
                 continue
 
-            phoneme_ts = bfa_result.get("phoneme_ts", [])
-            group_ts = bfa_result.get("group_ts", [])
+            # BFA wraps output in segments list
+            if "segments" in bfa_result and bfa_result["segments"]:
+                seg = bfa_result["segments"][0]
+                phoneme_ts = seg.get("phoneme_ts", [])
+                group_ts = seg.get("group_ts", [])
+            else:
+                phoneme_ts = bfa_result.get("phoneme_ts", [])
+                group_ts = bfa_result.get("group_ts", [])
 
             for ph_info in phoneme_ts:
                 ipa_label = ph_info.get(
