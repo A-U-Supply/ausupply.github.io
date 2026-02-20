@@ -2,6 +2,7 @@
 
 import random
 from dataclasses import dataclass
+from pathlib import Path
 
 
 @dataclass
@@ -61,3 +62,31 @@ def should_stretch_syllable(
             return True
 
     return False
+
+
+def parse_count_range(s: str) -> tuple[int, int]:
+    """Parse count string: '2' or '1-3' into (min, max)."""
+    if "-" in s:
+        parts = s.split("-", 1)
+        return int(parts[0]), int(parts[1])
+    val = int(s)
+    return val, val
+
+
+def apply_stutter(
+    syllable_paths: list[Path],
+    probability: float,
+    count_range: tuple[int, int],
+    rng: random.Random,
+) -> list[Path]:
+    """Duplicate syllable clips in-place for stuttering effect.
+
+    Returns new list with stuttered syllables repeated.
+    """
+    result = []
+    for path in syllable_paths:
+        result.append(path)
+        if rng.random() < probability:
+            n = rng.randint(count_range[0], count_range[1])
+            result.extend([path] * n)
+    return result

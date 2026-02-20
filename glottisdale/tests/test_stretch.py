@@ -8,7 +8,10 @@ from glottisdale.stretch import (
     parse_stretch_factor,
     should_stretch_syllable,
     resolve_stretch_factor,
+    apply_stutter,
+    parse_count_range,
 )
+from pathlib import Path
 
 
 class TestParseStretchFactor:
@@ -104,3 +107,56 @@ class TestShouldStretchSyllable:
             for i, syl_idx in enumerate(range(4))
         ]
         assert results == [True, False, True, True]
+
+
+class TestParseCountRange:
+    def test_single_value(self):
+        assert parse_count_range("2") == (2, 2)
+
+    def test_range(self):
+        assert parse_count_range("1-3") == (1, 3)
+
+
+class TestApplyStutter:
+    def test_no_stutter_when_probability_zero(self):
+        paths = [Path("a.wav"), Path("b.wav"), Path("c.wav")]
+        rng = random.Random(42)
+        result = apply_stutter(paths, probability=0.0, count_range=(1, 2), rng=rng)
+        assert result == paths
+
+    def test_all_stutter_when_probability_one(self):
+        paths = [Path("a.wav"), Path("b.wav")]
+        rng = random.Random(42)
+        result = apply_stutter(paths, probability=1.0, count_range=(1, 1), rng=rng)
+        # Each path should appear twice (original + 1 copy)
+        assert len(result) == 4
+        assert result == [Path("a.wav"), Path("a.wav"),
+                          Path("b.wav"), Path("b.wav")]
+
+    def test_stutter_count_range(self):
+        paths = [Path("a.wav")]
+        rng = random.Random(42)
+        result = apply_stutter(paths, probability=1.0, count_range=(2, 2), rng=rng)
+        # Original + 2 copies = 3
+        assert len(result) == 3
+        assert all(p == Path("a.wav") for p in result)
+
+    def test_stutter_probabilistic(self):
+        paths = [Path(f"{i}.wav") for i in range(100)]
+        rng = random.Random(42)
+        result = apply_stutter(paths, probability=0.3, count_range=(1, 1), rng=rng)
+        # Should have more than 100 (some duplicated) but not all
+        assert len(result) > 100
+        assert len(result) < 200
+
+    def test_stutter_preserves_order(self):
+        paths = [Path("a.wav"), Path("b.wav"), Path("c.wav")]
+        rng = random.Random(42)
+        result = apply_stutter(paths, probability=1.0, count_range=(1, 1), rng=rng)
+        # Should be a, a, b, b, c, c — originals in order with copies after each
+        assert result[0] == Path("a.wav")
+        assert result[1] == Path("a.wav")
+        assert result[2] == Path("b.wav")
+        assert result[3] == Path("b.wav")
+        assert result[4] == Path("c.wav")
+        assert result[5] == Path("c.wav")
