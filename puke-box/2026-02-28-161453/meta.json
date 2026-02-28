@@ -1,0 +1,16 @@
+{
+  "scale": "Bebop Dorian",
+  "root": "Eb",
+  "tempo": 120,
+  "description": "As the pipe organ screams in agony, a banjo-wielding drone swarm descends upon the ruins of Tehran :helicopter::boom::fire:",
+  "chords": [
+    "Ebmaj7",
+    "Ab7",
+    "Dbmaj7",
+    "Gb7"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-28"
+}
