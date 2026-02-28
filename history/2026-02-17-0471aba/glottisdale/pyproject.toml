@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glottisdale"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "openai-whisper",
+    "g2p_en",
+    "scipy",
+]
+
+[project.optional-dependencies]
+slack = ["slack-sdk>=3.27.0", "requests>=2.31.0"]
+dev = ["pytest>=8.0.0"]
+
+[project.scripts]
+glottisdale = "glottisdale.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "slack"]
+testpaths = ["tests"]

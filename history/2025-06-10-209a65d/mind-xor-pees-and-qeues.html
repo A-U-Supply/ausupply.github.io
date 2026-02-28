@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synth Band Logic Gates</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background-color: #f0f0f0; /* Light grey background */
+      color: #0000ff;
+      margin: 20px;
+    }
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      color: #ff00ff;
+      text-shadow: 2px 2px #0000ff;
+    }
+    .controls {
+      background-color: #ffff99;
+      padding: 20px;
+      border: 5px dashed #ff00ff;
+      margin-bottom: 20px;
+    }
+    .controls label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    canvas {
+      border: 5px solid #0000ff;
+      margin-top: 20px;
+      background-color: #000;
+    }
+    .key {
+      background-color: #ccffcc;
+      padding: 10px;
+      border: 3px dotted #00ff00;
+      margin-top: 20px;
+    }
+    .key span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+    .key .steady-clock {
+      background-color: blue;
+    }
+    .key .random-clock {
+      background-color: green;
+    }
+    .key .logic-output {
+      background-color: red;
+    }
+    .truth-tables {
+      background-color: #ffcc99;
+      padding: 20px;
+      border: 5px solid #ff6600;
+      margin-top: 20px;
+    }
+    .truth-tables table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    .truth-tables th, .truth-tables td {
+      border: 2px solid #000;
+      padding: 8px;
+      text-align: center;
+    }
+    .marquee {
+      font-size: 24px;
+      color: #ff0000;
+      background-color: #0000ff;
+      padding: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="marquee">
+    <span>🎵 Welcome to the Synth Band Logic Gates Simulator! 🎵</span>
+  </div>
+  <h1>Synth Band Logic Gates</h1>
+  <div class="controls">
+    <label for="gate-select">Select Logic Gate:</label>
+    <select id="gate-select">
+      <option value="AND">AND</option>
+      <option value="OR">OR</option>
+      <option value="XOR">XOR</option>
+      <option value="NAND">NAND</option>
+      <option value="NOR">NOR</option>
+      <option value="NOT">NOT</option>
+    </select>
+
+    <label for="steady-clock-tempo">Steady Clock Tempo (ms): <span id="tempo-value">200</span></label>
+    <input type="range" id="steady-clock-tempo" min="1" max="1000" value="200">
+    <small>(Sliding left decreases speed, sliding right increases speed)</small>
+
+    <label for="random-clock-probability">Random Clock Probability (%): <span id="probability-value">50</span></label>
+    <input type="range" id="random-clock-probability" min="0" max="100" value="50">
+
+    <label for="oscilloscope-zoom">Oscilloscope Zoom: <span id="zoom-value">5</span></label>
+    <input type="range" id="oscilloscope-zoom" min="1" max="10" value="5">
+
+    <label for="oscilloscope-update-frequency">Oscilloscope Update Frequency (ms): <span id="frequency-value">100</span></label>
+    <input type="range" id="oscilloscope-update-frequency" min="50" max="500" value="100">
+
+    <label for="kick-pitch">Kick Drum Pitch (Hz): <span id="kick-pitch-value">100</span></label>
+    <input type="range" id="kick-pitch" min="50" max="500" value="100">
+
+    <label for="kick-envelope">Kick Drum Envelope Size (ms): <span id="kick-envelope-value">500</span></label>
+    <input type="range" id="kick-envelope" min="100" max="1000" value="500">
+
+    <label for="kick-waveform">Kick Drum Waveform:</label>
+    <select id="kick-waveform">
+      <option value="sine">Sine</option>
+      <option value="square">Square</option>
+      <option value="sawtooth">Sawtooth</option>
+      <option value="triangle">Triangle</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="random-pitch"> Randomize Kick Drum Pitch
+    </label>
+
+    <label>
+      <input type="checkbox" id="pause"> Pause Everything
+    </label>
+  </div>
+
+  <canvas id="oscilloscope" width="800" height="300"></canvas>
+
+  <div class="key">
+    <h2>Oscilloscope Key</h2>
+    <p>
+      <span class="steady-clock"></span> <strong>Steady Clock (Blue)</strong>: A regular clock signal that toggles between 0 and 1 at a fixed tempo.
+    </p>
+    <p>
+      <span class="random-clock"></span> <strong>Random Clock (Green)</strong>: A random signal that toggles between 0 and 1 based on a configurable probability.
+    </p>
+    <p>
+      <span class="logic-output"></span> <strong>Logic Output (Red)</strong>: The result of applying the selected logic gate to the two input signals.
+    </p>
+  </div>
+
+  <div class="truth-tables">
+    <h2>Truth Tables</h2>
+    <table>
+      <caption>AND Gate</caption>
+      <tr><th>A</th><th>B</th><th>Output</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <table>
+      <caption>OR Gate</caption>
+      <tr><th>A</th><th>B</th><th>Output</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>1</td></tr>
+    </table>
+    <table>
+      <caption>XOR Gate</caption>
+      <tr><th>A</th><th>B</th><th>Output</th></tr>
+      <tr><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <table>
+      <caption>NAND Gate</caption>
+      <tr><th>A</th><th>B</th><th>Output</th></tr>
+      <tr><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td>0</td><td>1</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <table>
+      <caption>NOR Gate</caption>
+      <tr><th>A</th><th>B</th><th>Output</th></tr>
+      <tr><td>0</td><td>0</td><td>1</td></tr>
+      <tr><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>1</td><td>0</td></tr>
+    </table>
+    <table>
+      <caption>NOT Gate</caption>
+      <tr><th>A</th><th>Output</th></tr>
+      <tr><td>0</td><td>1</td></tr>
+      <tr><td>1</td><td>0</td></tr>
+    </table>
+  </div>
+
+</body>
+</html>

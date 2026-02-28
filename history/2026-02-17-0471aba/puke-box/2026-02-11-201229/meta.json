@@ -1,0 +1,16 @@
+{
+  "scale": "Hexatonic (Blues Minor)",
+  "root": "E",
+  "tempo": 120,
+  "description": "A requiem for *Dawson's Creek* echoes through a desolate parking garage :city",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am9"
+  ],
+  "melody_instrument": 111,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-11"
+}
