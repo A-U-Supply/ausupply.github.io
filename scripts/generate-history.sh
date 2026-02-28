@@ -107,7 +107,7 @@ while IFS=$'\t' read -r date short_hash full_hash message; do
     #   url("/img/        -> url("../../img/
     #   href="vcfmw.css"  -> href="../../vcfmw.css"
     #   href="/vcfmw.css" -> href="../../vcfmw.css"
-    find "$snapshot_dir" -name '*.html' -print0 | xargs -0 sed -i "${SED_INPLACE[@]}" \
+    find "$snapshot_dir" -name '*.html' -print0 | xargs -0 -r sed -i "${SED_INPLACE[@]}" \
         -e 's|src="img/|src="../../img/|g' \
         -e 's|src="/img/|src="../../img/|g' \
         -e 's|src="CSimages/|src="../../CSimages/|g' \
@@ -134,7 +134,7 @@ while IFS=$'\t' read -r date short_hash full_hash message; do
         -e "s|href='/vcfmw.css'|href='../../vcfmw.css'|g"
 
     # Rewrite CSS files too (e.g. vcfmw.css font paths)
-    find "$snapshot_dir" -name '*.css' -print0 | xargs -0 sed -i "${SED_INPLACE[@]}" \
+    find "$snapshot_dir" -name '*.css' -print0 | xargs -0 -r sed -i "${SED_INPLACE[@]}" \
         -e 's|url("fonts/|url("../../fonts/|g' \
         -e 's|url("/fonts/|url("../../fonts/|g' \
         -e 's|url("img/|url("../../img/|g' \
@@ -143,7 +143,7 @@ while IFS=$'\t' read -r date short_hash full_hash message; do
     # Strip <script> tags (and their contents) from snapshot HTML files
     # to prevent localStorage collisions and show pages in default layout.
     # Handles both inline scripts and multi-line script blocks.
-    find "$snapshot_dir" -name '*.html' -print0 | xargs -0 sed -i "${SED_INPLACE[@]}" \
+    find "$snapshot_dir" -name '*.html' -print0 | xargs -0 -r sed -i "${SED_INPLACE[@]}" \
         -e '/<script/,/<\/script>/d'
 
     # Clean up temp dir
