@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Misheberakh",
+  "root": "E",
+  "tempo": 120,
+  "description": "As the world burns, a cello plays a haunting melody underwater, accompanied by a baroque harpsichord and the sound of accordion music drifting from a distant, apocalyptic shoreline :ocean::fire::skull:",
+  "chords": [
+    "Em",
+    "B7",
+    "Gm",
+    "Cmaj7"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-03"
+}
