@@ -1,0 +1,16 @@
+{
+  "scale": "Mi Sheberakh",
+  "root": "E",
+  "tempo": 120,
+  "description": "A gospel choir echoes through a submerged submarine, surrounded by an endless, dark ocean :ocean::skull:, as the calliope's midnight melody whispers secrets to the deep.",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am9"
+  ],
+  "melody_instrument": 72,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-06"
+}
