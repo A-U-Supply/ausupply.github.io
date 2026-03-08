@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAWMA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #0a0a0a;
+            background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' fill='%23111'/%3E%3C/svg%3E");
+            color: #d4c5a9;
+            font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* --- Chevron / zig-zag floor pattern --- */
+        .floor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                linear-gradient(135deg, #8b0000 25%, transparent 25%) -20px 0,
+                linear-gradient(225deg, #8b0000 25%, transparent 25%) -20px 0,
+                linear-gradient(315deg, #8b0000 25%, transparent 25%),
+                linear-gradient(45deg, #8b0000 25%, transparent 25%);
+            background-size: 40px 40px;
+            background-color: #1a0000;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 1;
+            animation: strobe 0.15s infinite;
+        }
+
+
+        /* --- Title --- */
+        .title {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 18px 0 14px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .title h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: 0.35em;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            animation: strobe 0.15s infinite;
+        }
+
+        .title .subtitle {
+            font-size: 0.95rem;
+            font-style: italic;
+            font-weight: 400;
+            color: #8b0000;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+            animation: strobe 0.15s infinite;
+        }
+
+        @keyframes strobe {
+            0%, 49% { filter: invert(1); }
+            50%, 100% { filter: none; }
+        }
+
+        /* --- Back link --- */
+        .back-link {
+            position: fixed;
+            top: 22px;
+            left: 22px;
+            z-index: 20;
+            color: #555;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #8b0000;
+        }
+
+        /* --- Counter --- */
+        .counter {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            z-index: 20;
+            color: #555;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* --- Image stage --- */
+        .stage {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9;
+            max-width: 90vw;
+            pointer-events: none;
+        }
+
+        .stage__gallery-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        /* --- Navigation arrows --- */
+        .nav-arrow {
+            pointer-events: auto;
+            background: rgba(10, 10, 10, 0.6);
+            border: 2px solid #4a3728;
+            color: #d4c5a9;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 7rem;
+            cursor: pointer;
+            padding: 40px 24px;
+            min-width: 70px;
+            min-height: 120px;
+            opacity: 0.85;
+            transition: opacity 0.3s, text-shadow 0.3s, border-color 0.3s, color 0.3s, background 0.3s;
+            line-height: 1;
+            text-shadow: 0 0 12px rgba(139, 0, 0, 0.5);
+            box-shadow: inset 0 0 12px rgba(139, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-arrow:hover {
+            opacity: 1;
+            color: #fff;
+            border-color: #8b0000;
+            background: rgba(139, 0, 0, 0.15);
+            text-shadow: 0 0 30px rgba(139, 0, 0, 1);
+            box-shadow: inset 0 0 20px rgba(139, 0, 0, 0.4), 0 0 15px rgba(139, 0, 0, 0.3);
+        }
+
+        .nav-arrow:active {
+            opacity: 1;
+            color: #fff;
+            background: rgba(139, 0, 0, 0.3);
+            border-color: #cc0000;
+            text-shadow: 0 0 40px rgba(139, 0, 0, 1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-arrow {
+                font-size: 5rem;
+                padding: 20px 16px;
+                min-width: 56px;
+                min-height: 80px;
+                border-width: 1px;
+            }
+        }
+
+        /* --- Gothic frame --- */
+        .stage__image-wrap {
+            position: relative;
+            pointer-events: auto;
+            cursor: pointer;
+            line-height: 0;
+            padding: 8px;
+            border: 2px solid #4a3728;
+            background: linear-gradient(135deg, #1a1008, #0d0804, #1a1008);
+            box-shadow:
+                inset 0 0 15px rgba(139, 0, 0, 0.3),
+                0 0 30px rgba(139, 0, 0, 0.3),
+                0 0 60px rgba(139, 0, 0, 0.1),
+                0 0 3px #4a3728;
+        }
+
+        /* Corner accents */
+        .stage__image-wrap::before,
+        .stage__image-wrap::after {
+            position: absolute;
+            color: #6b5438;
+            font-size: 0.85rem;
+            pointer-events: none;
+            z-index: 2;
+            text-shadow: 0 0 6px rgba(139, 0, 0, 0.4);
+        }
+
+        .stage__image-wrap::before {
+            content: '✦';
+            top: -2px;
+            left: -2px;
+        }
+
+        .stage__image-wrap::after {
+            content: '✦';
+            top: -2px;
+            right: -2px;
+        }
+
+        .stage__corner-bl,
+        .stage__corner-br {
+            position: absolute;
+            color: #6b5438;
+            font-size: 0.85rem;
+            pointer-events: none;
+            z-index: 2;
+            text-shadow: 0 0 6px rgba(139, 0, 0, 0.4);
+            bottom: -2px;
+        }
+
+        .stage__corner-bl { left: -2px; }
+        .stage__corner-br { right: -2px; }
+
+        .stage__image-wrap img {
+            max-width: 80vw;
+            max-height: 60vh;
+            width: auto;
+            height: auto;
+            display: block;
+            border: 1px solid #8b0000;
+            transition: opacity 0.8s ease;
+            animation: strobe 0.15s infinite;
+        }
+
+        body.strobe-paused .stage__image-wrap img {
+            animation-play-state: paused;
+        }
+
+        .stage__image-wrap img.fade-out {
+            opacity: 0;
+        }
+
+        /* --- Prompt text --- */
+        .prompt-area {
+            text-align: center;
+            margin-top: 16px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            max-width: 85vw;
+        }
+
+        .prompt-area.visible {
+            opacity: 1;
+        }
+
+        .prompt-text {
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #d4c5a9;
+            text-shadow: 0 0 12px rgba(139, 0, 0, 0.6);
+            line-height: 1.5;
+        }
+
+        .prompt-text.backwards-flash {
+            animation: backwardsFlash 0.6s ease-out;
+        }
+
+        @keyframes backwardsFlash {
+            0% { transform: scaleX(-1); opacity: 0.6; color: #cc0000; }
+            40% { transform: scaleX(-1); opacity: 0.8; color: #cc0000; }
+            50% { transform: scaleX(1); opacity: 0.3; }
+            100% { transform: scaleX(1); opacity: 1; }
+        }
+
+        .prompt-date {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .artist-name {
+            position: fixed;
+            bottom: 28px;
+            right: 22px;
+            z-index: 20;
+            font-size: 0.85rem;
+            color: #d4c5a9;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            text-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
+        }
+
+        .artist-name.visible {
+            opacity: 0.8;
+        }
+
+        /* --- Status messages --- */
+        .status-message {
+            font-size: 1.3rem;
+            color: #555;
+            letter-spacing: 0.15em;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .status-message--error {
+            color: #8b0000;
+            font-style: italic;
+            animation: strobe 0.15s infinite;
+        }
+
+        /* --- Loading dots --- */
+        .loading-dots span {
+            animation: loadPulse 1.4s infinite;
+        }
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes loadPulse {
+            0%, 80%, 100% { opacity: 0.2; }
+            40% { opacity: 1; }
+        }
+
+
+        /* --- Backwards flashing text --- */
+        .backwards-whisper {
+            position: fixed;
+            z-index: 2;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #8b0000;
+            opacity: 0;
+            transform: scaleX(-1);
+            pointer-events: none;
+            text-shadow: 0 0 8px rgba(139, 0, 0, 0.5);
+            white-space: nowrap;
+            max-width: 60vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* No strobe — just the fade envelope */
+        .backwards-whisper.fade-only {
+            animation: whisperFade var(--whisper-dur, 5s) ease-in-out forwards;
+        }
+
+        /* Fade envelope + fast strobe (0.15s to match background) */
+        .backwards-whisper.strobe1 {
+            animation:
+                whisperFade var(--whisper-dur, 5s) ease-in-out forwards,
+                whisperInvert1 0.15s infinite;
+        }
+
+        .backwards-whisper.strobe2 {
+            animation:
+                whisperFade var(--whisper-dur, 5s) ease-in-out forwards,
+                whisperInvert2 0.15s infinite;
+        }
+
+        .backwards-whisper.strobe3 {
+            animation:
+                whisperFade var(--whisper-dur, 5s) ease-in-out forwards,
+                whisperInvert3 0.15s infinite;
+        }
+
+        /* Whisper fade envelope — slow fade in, long linger, slow fade out.
+           The strobe is layered on via a separate fast animation. */
+        @keyframes whisperFade {
+            0% { opacity: 0; }
+            8% { opacity: 0.6; }
+            70% { opacity: 0.55; }
+            100% { opacity: 0; }
+        }
+
+        /* Fast strobe matching the background speed (0.15s cycle),
+           but each variant is offset by shifting which half inverts */
+        @keyframes whisperInvert1 {
+            0%, 49% { filter: invert(1); }
+            50%, 100% { filter: none; }
+        }
+
+        @keyframes whisperInvert2 {
+            0%, 32% { filter: none; }
+            33%, 82% { filter: invert(1); }
+            83%, 100% { filter: none; }
+        }
+
+        @keyframes whisperInvert3 {
+            0%, 15% { filter: none; }
+            16%, 65% { filter: invert(1); }
+            66%, 100% { filter: none; }
+        }
+
+        /* --- Save me button (strobe toggle) --- */
+        .save-me {
+            position: fixed;
+            bottom: 22px;
+            left: 22px;
+            z-index: 20;
+            cursor: pointer;
+            width: 48px;
+            height: 48px;
+            border: none;
+            background: none;
+            padding: 0;
+            opacity: 0.4;
+            transition: opacity 0.3s;
+        }
+
+        .save-me:hover {
+            opacity: 0.8;
+        }
+
+        .save-me img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        body.strobe-paused .floor,
+        body.strobe-paused .title h1,
+        body.strobe-paused .title .subtitle,
+        body.strobe-paused .status-message--error,
+        body.strobe-paused .backwards-whisper {
+            animation-play-state: paused;
+        }
+
+        /* --- Decorative HR --- */
+        .red-rule {
+            width: 60%;
+            max-width: 400px;
+            height: 1px;
+            border: none;
+            background: linear-gradient(to right, transparent, #8b0000, transparent);
+            margin: 0 auto;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; back</a>
+
+    <div class="title">
+        <h1>DRAWMA</h1>
+        <div class="subtitle">neither contemplative, neither reflexive, nor communicative</div>
+    </div>
+
+    <div class="counter" id="counter"></div>
+
+    <div id="content">
+        <div class="status-message loading-dots">
+            <span>.</span> <span>.</span> <span>.</span>
+        </div>
+    </div>
+
+    <div class="artist-name" id="artistName"></div>
+
+    <div id="whispers"></div>
+
+    <button class="save-me" id="saveMe" title="Toggle strobe">
+        <img src="../../img/saveme.png" alt="Save me">
+    </button>
+
+    <div class="floor"></div>
+
+</body>
+</html>
