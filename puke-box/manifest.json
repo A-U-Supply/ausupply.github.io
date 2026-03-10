@@ -1,5 +1,29 @@
 [
   {
+    "id": "2026-03-10-203505",
+    "date": "2026-03-10",
+    "description": "A medieval lute plays a haunting melody in a stormy Strait of Hormuz :thunder",
+    "scale": "Maqam Saba",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-03-10-173820",
+    "date": "2026-03-10",
+    "description": "A *calliope* plays a haunting melody amidst the *gunfire* and *midnight* shadows :night",
+    "scale": "Dorian",
+    "root": "E",
+    "tempo": 140
+  },
+  {
+    "id": "2026-03-10-164524",
+    "date": "2026-03-10",
+    "description": "A gamelan orchestra on a space station echoes through the void as a music box plays a haunting melody amidst a thunderstorm on a distant planet :milky",
+    "scale": "Raga Malkauns",
+    "root": "E",
+    "tempo": 120
+  },
+  {
     "id": "2026-03-09-164600",
     "date": "2026-03-09",
     "description": "A theremin weeps in the desert as a spaghetti western unfolds in reverse, with *boot prints* that lead to nowhere :cyclone::skull:",
