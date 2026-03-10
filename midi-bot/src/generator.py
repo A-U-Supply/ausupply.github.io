@@ -135,7 +135,11 @@ def validate_params(
         params["scale"] = random.choice(list(scale_names))
         logger.warning(f"Unknown scale '{old}', using '{params['scale']}' instead")
 
-    tempo = params.get("tempo", 120)
+    tempo = params.get("tempo", None)
+    if tempo is None:
+        params["tempo"] = 120
+        logger.warning("No tempo in LLM response, defaulting to 120 BPM")
+        tempo = 120
     if not (40 <= tempo <= 200):
         params["tempo"] = max(40, min(200, tempo))
         logger.warning(f"Clamped tempo {tempo} to {params['tempo']}")
