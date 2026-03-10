@@ -4,7 +4,7 @@ Given the headlines and inspirations below, output a JSON object with these exac
 - "scale": You MUST choose one of the numbered scales below. Copy the name EXACTLY. Do NOT use any scale not on this list.
 - "root": a root note (e.g. "C", "F#", "Bb") — vary this, don't always pick C or A
 - "chords": an array of exactly 4 chord symbols that work with the chosen scale (e.g. ["Am", "Dm7", "G7", "Cmaj7"])
-- "tempo": a number between 40 and 200
+- "tempo": a number between 40 and 200 (e.g. 60-80 for somber/meditative, 90-110 for groovy/laid-back, 120-140 for energetic, 150+ for frantic/chaotic — let the headlines guide you)
 - "temperature": a number between 0.5 and 1.5 (how wild the AI-generated melody and drums should be)
 - "melody_instrument": a MIDI program number from the MELODY INSTRUMENTS list below
 - "chord_instrument": a MIDI program number from the CHORD INSTRUMENTS list below
