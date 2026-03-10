@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Nahawand",
+  "root": "Eb",
+  "tempo": 160,
+  "description": "A *tornado* of jazz flutes :tornado: wreaks havoc on a demolition derby, fueled by the chaotic hum of a church organ :boom:, as the *world burns* :earth",
+  "chords": [
+    "Em7",
+    "G7",
+    "Am7",
+    "Dm7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-01"
+}
