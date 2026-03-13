@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONG TITLE LIBRARY</title>
+    <link rel="stylesheet" href="vcfmw.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff);
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 70px;
+            transition: background 0.3s ease;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 2rem;
+            color: #ff00ff;
+            text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00;
+            position: relative;
+            z-index: 9999;
+        }
+
+        .title {
+            position: absolute;
+            white-space: nowrap;
+            cursor: grab;
+            transition: transform 0.1s ease;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .title:active {
+            cursor: grabbing;
+        }
+
+        .title.selected {
+            outline: 3px dashed #ff00ff;
+            outline-offset: 4px;
+        }
+
+        .title:hover {
+            z-index: 10000 !important;
+        }
+
+        .media {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            17% { color: #ff8800; }
+            33% { color: #ffff00; }
+            50% { color: #00ff00; }
+            67% { color: #0088ff; }
+            83% { color: #8800ff; }
+            100% { color: #ff0000; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px) rotate(-1deg); }
+            75% { transform: translateX(3px) rotate(1deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .anim-blink { animation: blink 1s infinite; }
+        .anim-pulse { animation: pulse 1s infinite; }
+        .anim-rainbow { animation: rainbow 3s linear infinite; }
+        .anim-shake { animation: shake 0.3s infinite; }
+        .anim-float { animation: float 2s ease-in-out infinite; }
+        .anim-none { animation: none; }
+
+        /* Toolbar */
+        .toolbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
+            border-top: 3px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 20px;
+            z-index: 99999;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .toolbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar button {
+            padding: 6px 12px;
+            font-size: 13px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.1s;
+        }
+
+        .toolbar button:hover {
+            transform: scale(1.05);
+            background: #ffff00;
+        }
+
+        .toolbar button:active {
+            transform: scale(0.95);
+        }
+
+        .toolbar button.active {
+            background: #00ff00;
+        }
+
+        .toolbar select {
+            padding: 6px;
+            font-size: 13px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .toolbar .divider {
+            width: 2px;
+            height: 24px;
+            background: #000;
+            margin: 0 4px;
+        }
+
+        .toolbar .label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #000;
+            background: rgba(255,255,255,0.7);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .color-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #000 !important;
+            padding: 0 !important;
+        }
+
+        .bg-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid #000 !important;
+            padding: 0 !important;
+        }
+
+        .rotate-btn {
+            font-size: 16px !important;
+            padding: 4px 10px !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="img/cheeze-bourger2.png" alt="Header Image"></a>
+        <h1>AUDIO UNITS SUPPLY</h1>
+    </header>
+    <div class="header">
+        ★ SONG TITLE LIBRARY ★
+    </div>
+
+    {% for t in titles %}
+    <div class="title" data-id="{{ t.id }}" style="left: {{ t.left }}%; top: {{ t.top }}px; font-size: {{ t.font_size }}px; color: {{ t.color }}; font-family: {{ t.font_family }}; transform: rotate({{ t.rotation }}deg); z-index: {{ t.z_index }};">{{ t.title }}</div>
+    {% endfor %}
+
+    <div class="toolbar">
+        <div class="toolbar-row">
+            <span class="label">TEXT</span>
+            <button class="color-btn" style="background: #ff00ff" data-color="#ff00ff"></button>
+            <button class="color-btn" style="background: #00ff00" data-color="#00ff00"></button>
+            <button class="color-btn" style="background: #00ffff" data-color="#00ffff"></button>
+            <button class="color-btn" style="background: #ffff00" data-color="#ffff00"></button>
+            <button class="color-btn" style="background: #ff0000" data-color="#ff0000"></button>
+            <button class="color-btn" style="background: #ff8800" data-color="#ff8800"></button>
+            <button class="color-btn" style="background: #ffffff" data-color="#ffffff"></button>
+            <button class="color-btn" style="background: #000000" data-color="#000000"></button>
+
+            <div class="divider"></div>
+
+            <span class="label">SIZE</span>
+            <button class="rotate-btn" id="sizeDown">−</button>
+            <button class="rotate-btn" id="sizeUp">+</button>
+
+            <div class="divider"></div>
+
+            <span class="label">ROTATE</span>
+            <button class="rotate-btn" id="rotateLeft">↺</button>
+            <button class="rotate-btn" id="rotateRight">↻</button>
+
+            <div class="divider"></div>
+
+            <select id="animSelect">
+                <option value="">Animation...</option>
+                <option value="anim-none">None</option>
+                <option value="anim-blink">Blink</option>
+                <option value="anim-pulse">Pulse</option>
+                <option value="anim-rainbow">Rainbow</option>
+                <option value="anim-shake">Shake</option>
+                <option value="anim-float">Float</option>
+            </select>
+
+            <div class="divider"></div>
+
+            <span class="label">BG</span>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff)" data-bg="linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff)"></button>
+            <button class="bg-btn" style="background: #000000" data-bg="#000000"></button>
+            <button class="bg-btn" style="background: #ffffff" data-bg="#ffffff"></button>
+            <button class="bg-btn" style="background: #1a1a2e" data-bg="#1a1a2e"></button>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #ff00ff, #00ffff)" data-bg="linear-gradient(45deg, #ff00ff, #00ffff)"></button>
+            <button class="bg-btn" style="background: linear-gradient(180deg, #000428, #004e92)" data-bg="linear-gradient(180deg, #000428, #004e92)"></button>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #232526, #414345)" data-bg="linear-gradient(45deg, #232526, #414345)"></button>
+            <button class="bg-btn" style="background: #ff6b6b" data-bg="repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 10px, #feca57 10px, #feca57 20px)"></button>
+
+            <div class="divider"></div>
+
+            <button id="resetBtn">Reset</button>
+            <button id="saveBtn">💾</button>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'songTitlePositions_v2';
+        const BG_STORAGE_KEY = 'songTitleBackground';
+        let selectedTitle = null;
+        let isDragging = false;
+        let dragOffset = { x: 0, y: 0 };
+
+        // Touch gesture state
+        let initialPinchDist = null;
+        let initialPinchAngle = null;
+        let initialFontSize = null;
+        let initialRotation = null;
+        let touchGesture = null; // 'drag' or 'pinch'
+
+        function getDistance(t1, t2) {
+            const dx = t1.clientX - t2.clientX;
+            const dy = t1.clientY - t2.clientY;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function getAngle(t1, t2) {
+            return Math.atan2(t2.clientY - t1.clientY, t2.clientX - t1.clientX) * (180 / Math.PI);
+        }
+
+        // Load saved background
+        function loadBackground() {
+            const savedBg = localStorage.getItem(BG_STORAGE_KEY);
+            if (savedBg) {
+                document.body.style.background = savedBg;
+            }
+        }
+
+        // Save background
+        function saveBackground(bg) {
+            localStorage.setItem(BG_STORAGE_KEY, bg);
+        }
+
+        // Load saved positions
+        function loadPositions() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (!saved) return;
+
+            try {
+                const positions = JSON.parse(saved);
+                document.querySelectorAll('.title').forEach(title => {
+                    const id = title.dataset.id;
+                    if (positions[id]) {
+                        const p = positions[id];
+                        if (p.left !== undefined) title.style.left = p.left;
+                        if (p.top !== undefined) title.style.top = p.top;
+                        if (p.rotation !== undefined) {
+                            title.dataset.rotation = p.rotation;
+                            title.style.transform = `rotate(${p.rotation}deg)`;
+                        }
+                        if (p.color !== undefined) title.style.color = p.color;
+                        if (p.fontSize !== undefined) title.style.fontSize = p.fontSize;
+                        if (p.animation !== undefined) {
+                            title.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
+                            if (p.animation) title.classList.add(p.animation);
+                        }
+                    }
+                });
+            } catch (e) {
+                console.error('Failed to load positions:', e);
+            }
+        }
+
+        // Save positions
+        function savePositions() {
+            const positions = {};
+            document.querySelectorAll('.title').forEach(title => {
+                const id = title.dataset.id;
+                const animClass = Array.from(title.classList).find(c => c.startsWith('anim-'));
+                positions[id] = {
+                    left: title.style.left,
+                    top: title.style.top,
+                    rotation: parseInt(title.dataset.rotation) || 0,
+                    color: title.style.color,
+                    fontSize: title.style.fontSize,
+                    animation: animClass || ''
+                };
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
+        }
+
+        // Rotate selected title
+        function rotateSelected(degrees) {
+            if (!selectedTitle) return;
+            let rotation = parseInt(selectedTitle.dataset.rotation) || 0;
+            rotation += degrees;
+            selectedTitle.dataset.rotation = rotation;
+            selectedTitle.style.transform = `rotate(${rotation}deg)`;
+            autoSave();
+        }
+
+        // Resize selected title
+        function resizeSelected(delta) {
+            if (!selectedTitle) return;
+            let size = parseFloat(selectedTitle.style.fontSize) || 16;
+            size = Math.max(8, Math.min(120, size + delta));
+            selectedTitle.style.fontSize = size + 'px';
+            autoSave();
+        }
+
+        // Select title
+        function selectTitle(title) {
+            if (selectedTitle) {
+                selectedTitle.classList.remove('selected');
+            }
+            selectedTitle = title;
+            if (title) {
+                title.classList.add('selected');
+            }
+        }
+
+        // Title mouse + touch handlers
+        document.querySelectorAll('.title').forEach(title => {
+            // Mouse drag
+            title.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                isDragging = true;
+                const rect = title.getBoundingClientRect();
+                dragOffset.x = e.clientX - rect.left;
+                dragOffset.y = e.clientY - rect.top;
+                title.style.zIndex = 10001;
+            });
+
+            // Scroll to rotate
+            title.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                let rotation = parseInt(title.dataset.rotation) || 0;
+                rotation += e.deltaY > 0 ? 5 : -5;
+                title.dataset.rotation = rotation;
+                title.style.transform = `rotate(${rotation}deg)`;
+            });
+
+            // Touch start
+            title.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                selectTitle(title);
+                title.style.zIndex = 10001;
+
+                if (e.touches.length === 1) {
+                    // Single finger drag
+                    touchGesture = 'drag';
+                    isDragging = true;
+                    const touch = e.touches[0];
+                    const rect = title.getBoundingClientRect();
+                    dragOffset.x = touch.clientX - rect.left;
+                    dragOffset.y = touch.clientY - rect.top;
+                } else if (e.touches.length === 2) {
+                    // Two finger pinch/rotate
+                    touchGesture = 'pinch';
+                    isDragging = false;
+                    initialPinchDist = getDistance(e.touches[0], e.touches[1]);
+                    initialPinchAngle = getAngle(e.touches[0], e.touches[1]);
+                    initialFontSize = parseFloat(title.style.fontSize) || 16;
+                    initialRotation = parseInt(title.dataset.rotation) || 0;
+                }
+            });
+
+            // Touch move
+            title.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!selectedTitle || selectedTitle !== title) return;
+
+                if (touchGesture === 'drag' && e.touches.length === 1) {
+                    const touch = e.touches[0];
+                    const x = touch.clientX - dragOffset.x;
+                    const y = touch.clientY - dragOffset.y;
+                    const leftPercent = (x / window.innerWidth) * 100;
+                    const topPercent = (y / window.innerHeight) * 100;
+                    selectedTitle.style.left = `${leftPercent}%`;
+                    selectedTitle.style.top = `${topPercent}%`;
+                } else if (e.touches.length === 2) {
+                    // Switch to pinch if started as drag
+                    if (touchGesture === 'drag') {
+                        touchGesture = 'pinch';
+                        isDragging = false;
+                        initialPinchDist = getDistance(e.touches[0], e.touches[1]);
+                        initialPinchAngle = getAngle(e.touches[0], e.touches[1]);
+                        initialFontSize = parseFloat(title.style.fontSize) || 16;
+                        initialRotation = parseInt(title.dataset.rotation) || 0;
+                    }
+
+                    // Pinch to resize
+                    const currentDist = getDistance(e.touches[0], e.touches[1]);
+                    const scale = currentDist / initialPinchDist;
+                    const newSize = Math.max(8, Math.min(120, initialFontSize * scale));
+                    selectedTitle.style.fontSize = newSize + 'px';
+
+                    // Two-finger rotate
+                    const currentAngle = getAngle(e.touches[0], e.touches[1]);
+                    const angleDelta = currentAngle - initialPinchAngle;
+                    const newRotation = Math.round(initialRotation + angleDelta);
+                    selectedTitle.dataset.rotation = newRotation;
+                    selectedTitle.style.transform = `rotate(${newRotation}deg)`;
+                }
+            });
+
+            // Touch end
+            title.addEventListener('touchend', (e) => {
+                if (e.touches.length === 0) {
+                    isDragging = false;
+                    touchGesture = null;
+                    initialPinchDist = null;
+                    initialPinchAngle = null;
+                    autoSave();
+                } else if (e.touches.length === 1 && touchGesture === 'pinch') {
+                    // Went from 2 fingers to 1, switch back to drag
+                    touchGesture = 'drag';
+                    isDragging = true;
+                    const touch = e.touches[0];
+                    const rect = title.getBoundingClientRect();
+                    dragOffset.x = touch.clientX - rect.left;
+                    dragOffset.y = touch.clientY - rect.top;
+                }
+            });
+        });
+
+        // Mouse move for dragging
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging || !selectedTitle) return;
+
+            const x = e.clientX - dragOffset.x;
+            const y = e.clientY - dragOffset.y;
+
+            // Convert to percentage
+            const leftPercent = (x / window.innerWidth) * 100;
+            const topPercent = (y / window.innerHeight) * 100;
+
+            selectedTitle.style.left = `${leftPercent}%`;
+            selectedTitle.style.top = `${topPercent}%`;
+        });
+
+        // Mouse up
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Click/tap elsewhere to deselect
+        document.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('title') &&
+                !e.target.closest('.toolbar')) {
+                selectTitle(null);
+            }
+        });
+
+        // Color buttons
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (selectedTitle) {
+                    selectedTitle.style.color = btn.dataset.color;
+                    autoSave();
+                }
+            });
+        });
+
+        // Background buttons
+        document.querySelectorAll('.bg-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const bg = btn.dataset.bg;
+                document.body.style.background = bg;
+                saveBackground(bg);
+            });
+        });
+
+        // Size buttons
+        document.getElementById('sizeDown').addEventListener('click', () => resizeSelected(-4));
+        document.getElementById('sizeUp').addEventListener('click', () => resizeSelected(4));
+
+        // Rotate buttons
+        document.getElementById('rotateLeft').addEventListener('click', () => rotateSelected(-15));
+        document.getElementById('rotateRight').addEventListener('click', () => rotateSelected(15));
+
+        // Animation select
+        document.getElementById('animSelect').addEventListener('change', (e) => {
+            if (selectedTitle && e.target.value) {
+                selectedTitle.classList.remove('anim-blink', 'anim-pulse', 'anim-rainbow', 'anim-shake', 'anim-float', 'anim-none');
+                selectedTitle.classList.add(e.target.value);
+                e.target.value = '';
+                autoSave();
+            }
+        });
+
+        // Reset button
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            if (confirm('Reset all titles and background to original?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(BG_STORAGE_KEY);
+                location.reload();
+            }
+        });
+
+        // Save button
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            savePositions();
+            alert('Saved!');
+        });
+
+        // Auto-save on changes
+        let saveTimeout;
+        function autoSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(savePositions, 1000);
+        }
+
+        document.addEventListener('mouseup', autoSave);
+        document.querySelectorAll('.title').forEach(t => t.addEventListener('wheel', autoSave));
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (!selectedTitle) return;
+            if (e.key === 'ArrowLeft' || e.key === '[') {
+                e.preventDefault();
+                rotateSelected(-5);
+            } else if (e.key === 'ArrowRight' || e.key === ']') {
+                e.preventDefault();
+                rotateSelected(5);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                resizeSelected(2);
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                resizeSelected(-2);
+            }
+        });
+
+        // Load on start
+        loadBackground();
+        loadPositions();
+    </script>
+</body>
+</html>
