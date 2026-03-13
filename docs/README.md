@@ -11,12 +11,13 @@
 
 - [2026-02-05-shared-header-design.md](plans/2026-02-05-shared-header-design.md) — Unified header component (cheeze-bourger2.png + h1) shared across pages via vcfmw.css, with draggable content and touch support on index.html.
 
-### Song Title Generator
+### Song Title Integration
 
-Generates the chaotic `this-song-is-a-junkyard.html` page. Pulls song titles from Slack, uses a local LLM to filter for the best ones, and renders them with randomized positions/colors/fonts in geocities style.
+Song titles from #song-titles Slack channel used as creative seeds across the generation pipeline. A new `song-titles-bot/` scrapes and filters titles via HF Inference API, stores them with metadata, and regenerates the interactive `this-song-is-a-junkyard.html` page. The midi-bot uses titles as the primary LLM prompt seed (replacing headlines), and glottisdale-bot uses them for deterministic seeding and labeling.
 
-- [2026-01-30-slack-song-title-generator-design.md](plans/2026-01-30-slack-song-title-generator-design.md) — Design: Slack fetcher, Ollama LLM filter, chaotic HTML generator with Jinja2 templates.
-- [2026-01-30-slack-song-generator-implementation.md](plans/2026-01-30-slack-song-generator-implementation.md) — Implementation plan (10 tasks).
+- [2026-03-13-song-title-integration-design.md](plans/2026-03-13-song-title-integration-design.md) — Design: song-titles-bot scraper, midi-bot prompt rework, glottisdale-bot seeding, hymnal-bot parser tweak, scheduling.
+- [2026-01-30-slack-song-title-generator-design.md](plans/2026-01-30-slack-song-title-generator-design.md) — (Superseded) Original design: Slack fetcher, Ollama LLM filter, chaotic HTML generator.
+- [2026-01-30-slack-song-generator-implementation.md](plans/2026-01-30-slack-song-generator-implementation.md) — (Superseded) Original implementation plan.
 
 ### Surreal Prompt Bot (#drawma)
 

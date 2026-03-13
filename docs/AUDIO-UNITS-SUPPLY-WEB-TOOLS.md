@@ -11,42 +11,37 @@ A guide to our website tools and ideas for new chaotic web art. Use this doc wit
 A deliberately chaotic, geocities-inspired website. Pages are scattered, weird, and fun. Current pages:
 
 - **index.html** - Main landing with embedded videos and images
-- **songtitles.html** - Static chaos page of song titles
-- **this-song-is-a-junkyard.html** - Interactive song title collage (drag, rotate, colorize)
+- **this-song-is-a-junkyard.html** - Interactive song title collage (drag, rotate, colorize), auto-generated daily
 - Various other experimental pages (mire.html, audex pages, etc.)
 
-### The Song Title Generator Tool
+### The Song Titles Bot
 
-Location: `slack-song-generator/`
+Location: `song-titles-bot/`
 
 **What it does:**
-1. Pulls messages from our `#song-titles` Slack channel
-2. Uses a local AI (Ollama) to filter out discussion and keep only actual title ideas
-3. Generates a chaotic HTML page with titles scattered everywhere
+1. Pulls messages from our `#song-titles` Slack channel (daily via GitHub Actions)
+2. Uses HF Inference API (Llama-3.3-70B) to filter out discussion and keep only actual title ideas
+3. Stores titles with metadata in `titles.json`
+4. Regenerates the interactive `this-song-is-a-junkyard.html` page
+5. Titles also seed the midi-bot (musical parameters) and glottisdale-bot (deterministic seed)
 
 **Key features:**
 - Randomized positions, rotations, colors, fonts
-- Multiple color palettes: neon, pastel, mono
-- Optional media (GIFs, images) scattered in
-- Reproducible chaos with seed numbers
-- Cached titles for quick regeneration
-
-**Current interactive features (this-song-is-a-junkyard.html):**
-- Drag titles anywhere
-- Scroll wheel to rotate
+- Drag titles anywhere, pinch-resize, two-finger rotate
 - Click color buttons to change colors
 - Animation effects: blink, pulse, rainbow, shake, float
 - Saves your arrangement to browser storage
+- Titles feed into other bots as creative seeds
 
 ---
 
 ## How It Works (Non-Technical)
 
-1. **Slack → Tool**: The tool reads our `#song-titles` channel
-2. **AI Filter**: Ollama (local AI) decides what's a title vs. what's just chat
+1. **Slack → Bot**: The song-titles-bot reads our `#song-titles` channel daily
+2. **AI Filter**: HF Inference API (Llama-3.3-70B) decides what's a title vs. what's just chat
 3. **Chaos Engine**: Randomly positions everything with different sizes/colors/angles
-4. **HTML Output**: Spits out a single HTML file we push to the website
-5. **Interactive Mode**: JavaScript lets viewers rearrange things
+4. **HTML Output**: Regenerates the interactive HTML page and commits to the site
+5. **Cross-bot seeding**: Song titles feed into midi-bot and glottisdale-bot as creative seeds
 
 ---
 
@@ -133,16 +128,11 @@ Use these with `/superpowers:brainstorm`:
 For whoever has Claude Code set up:
 
 ```bash
-cd slack-song-generator
+# Regenerate HTML from existing titles (no Slack API needed)
+cd song-titles-bot && python bot.py --dry-run
 
-# Fetch fresh titles from Slack
-uv run ./generate-song-page.py --fetch-only
-
-# Generate a new page with random chaos
-uv run ./generate-song-page.py --generate-only --random --output ../new-page.html
-
-# Generate with specific settings
-uv run ./generate-song-page.py --generate-only --color-palette neon --max-rotation 45 --output ../new-page.html
+# Full run (scrape + filter + save + generate)
+cd song-titles-bot && python bot.py
 ```
 
 ---
@@ -152,12 +142,11 @@ uv run ./generate-song-page.py --generate-only --color-palette neon --max-rotati
 ```
 ausupply.github.io/
 ├── index.html                    # Main page
-├── songtitles.html              # Static song title chaos
-├── this-song-is-a-junkyard.html # Interactive version
+├── this-song-is-a-junkyard.html # Interactive version (auto-generated daily)
 ├── img/                         # Images and GIFs
-├── slack-song-generator/        # The generator tool
-│   ├── src/templates/           # HTML templates (edit these for new styles)
-│   └── cache/titles.json        # Cached song titles
+├── song-titles-bot/             # Scraper + page generator
+│   ├── titles.json              # Canonical song titles database
+│   └── templates/junkyard.html.j2
 └── docs/
     └── AUDIO-UNITS-SUPPLY-WEB-TOOLS.md  # This file
 ```

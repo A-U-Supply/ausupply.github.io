@@ -30,7 +30,10 @@ def parse_midi_message(text: str) -> dict | None:
 
     scale, root, tempo = header.group(1), header.group(2), int(header.group(3))
 
-    desc_match = re.search(r'_(.+?)_', text)
+    # Search for description only AFTER the *Daily MIDI* header
+    # (song title on first line may contain underscores)
+    text_after_header = text[header.end():]
+    desc_match = re.search(r'_(.+?)_', text_after_header)
     description = desc_match.group(1) if desc_match else ""
 
     chords_match = re.search(r':musical_score: Chords\s*—\s*(.+)', text)

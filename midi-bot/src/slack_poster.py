@@ -1,5 +1,6 @@
 """Slack poster with MIDI file upload support."""
 import logging
+import re
 from pathlib import Path
 
 from slack_sdk import WebClient
@@ -28,7 +29,13 @@ def format_message(params: dict, instruments: dict) -> str:
     chord_name = _find_instrument_name(params["chord_instrument"], instruments["chords"])
     chords_str = "  ".join(params["chords"])
 
-    lines = [
+    lines = []
+
+    # Song title as bold first line (when using song-titles mode)
+    if params.get("song_title"):
+        lines.append(f'*"{params["song_title"]}"*')
+
+    lines.extend([
         f":musical_note: *Daily MIDI* — {params['scale']} in {params['root']} ({params['tempo']} BPM)",
         f"_{params['description']}_",
         "",
@@ -36,7 +43,7 @@ def format_message(params: dict, instruments: dict) -> str:
         f":drum_with_drumsticks: Drums — DrumsRNN, temperature {params['temperature']}",
         f":guitar: Bass — Programmatic from chord roots",
         f":musical_score: Chords — {chords_str}",
-    ]
+    ])
     return "\n".join(lines)
 
 
@@ -50,6 +57,14 @@ def post_midi_to_slack(
     """Post main message + 4 MIDI files as threaded replies."""
     try:
         client = WebClient(token=token)
+
+        # Build filename-safe prefix from song title (or fallback)
+        song_title = params.get("song_title", "")
+        if song_title:
+            # Slugify: lowercase, replace non-alphanum with hyphens, collapse
+            slug = re.sub(r'[^a-z0-9]+', '-', song_title.lower()).strip('-')[:50]
+        else:
+            slug = f"{params['scale'].lower().replace(' ', '-')}-in-{params['root']}"
 
         # Post main message
         message = format_message(params, instruments)
@@ -65,7 +80,7 @@ def post_midi_to_slack(
                 client.files_upload_v2(
                     channel=channel_id,
                     file=str(preview_path),
-                    filename="preview.wav",
+                    filename=f"{slug}_midi-preview.wav",
                     initial_comment=":loud_sound: Preview (sine wave synthesis)",
                     thread_ts=thread_ts,
                 )
@@ -74,6 +89,8 @@ def post_midi_to_slack(
                 logger.warning(f"Failed to upload preview: {e}")
 
         # Upload each MIDI file as a threaded reply
+        # Keep standard filenames (melody.mid etc.) so downstream parsers
+        # (hymnal-bot, puke-box) can find them. Use title for display name.
         upload_failures = 0
         for track in ["melody", "drums", "bass", "chords"]:
             filepath = midi_dir / f"{track}.mid"
@@ -87,6 +104,7 @@ def post_midi_to_slack(
                     channel=channel_id,
                     file=str(filepath),
                     filename=f"{track}.mid",
+                    title=f"{slug}_{track}",
                     initial_comment=TRACK_LABELS[track],
                     thread_ts=thread_ts,
                 )

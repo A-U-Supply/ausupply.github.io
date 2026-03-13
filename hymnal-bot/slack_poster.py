@@ -14,11 +14,13 @@ def format_message(
     tempo: int,
     description: str,
     source_link: str,
+    song_title: str | None = None,
 ) -> str:
     """Format the Slack message for posting."""
-    lines = [
-        f":microphone: *Hymnal Gargler* — {scale} in {root} ({tempo} BPM)",
-    ]
+    lines = []
+    if song_title:
+        lines.append(f'*"{song_title}"*')
+    lines.append(f":microphone: *Hymnal Gargler* — {scale} in {root} ({tempo} BPM)")
     if description:
         lines.append(f"_{description}_")
     lines.append("")
@@ -49,6 +51,7 @@ def post_results(
         tempo=metadata["tempo"],
         description=metadata.get("description", ""),
         source_link=source_link,
+        song_title=metadata.get("song_title"),
     )
 
     # Post intro message first, then upload files as thread replies
