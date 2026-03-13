@@ -18,6 +18,9 @@ on:
         description: 'RNG seed (empty for random)'
         default: ''
 
+permissions:
+  contents: write
+
 jobs:
   glottisdale:
     runs-on: ubuntu-latest

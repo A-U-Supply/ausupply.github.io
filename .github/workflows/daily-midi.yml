@@ -5,6 +5,9 @@ on:
     - cron: '0 16 * * *'  # 4pm UTC (8am PT)
   workflow_dispatch:  # Manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   generate-midi:
     runs-on: ubuntu-latest

@@ -19,7 +19,7 @@ CHORD INSTRUMENTS:
 
 Output a JSON object with these exact keys:
 - "scale": You MUST choose one of the numbered scales above. Copy the name EXACTLY. Do NOT use any scale not on this list.
-- "root": a root note (e.g. "C", "F#", "Bb") — vary this, don't always pick C or A
+- "root": a root note — pick from ALL 12 notes (C, C#, D, Eb, E, F, F#, G, Ab, A, Bb, B). Vary widely — do NOT default to E, C, or A
 - "chords": an array of exactly 4 chord symbols that work with the chosen scale (e.g. ["Am", "Dm7", "G7", "Cmaj7"])
 - "tempo": a number between 40 and 200 (let the song title guide the energy)
 - "temperature": a number between 0.5 and 1.5 (how wild the AI-generated melody and drums should be)
