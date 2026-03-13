@@ -76,6 +76,7 @@ def build_llm_prompt(
     inspirations: list[str],
     scales: list[dict],
     instruments: dict[str, list[dict]],
+    root_note: str = "",
 ) -> str:
     """Build the prompt with all context injected."""
     headlines_text = "\n".join(f"- {h}" for h in headlines)
@@ -94,6 +95,7 @@ def build_llm_prompt(
         scales=scales_text,
         melody_instruments=melody_text,
         chord_instruments=chords_text,
+        root_note=root_note,
     )
 
 
@@ -103,6 +105,7 @@ def build_llm_prompt_from_title(
     inspirations: list[str],
     scales: list[dict],
     instruments: dict[str, list[dict]],
+    root_note: str = "",
 ) -> str:
     """Build prompt with a song title as the primary seed (no headlines)."""
     inspirations_text = "\n".join(f"- {i}" for i in inspirations) if inspirations else "(none)"
@@ -120,6 +123,7 @@ def build_llm_prompt_from_title(
         scales=scales_text,
         melody_instruments=melody_text,
         chord_instruments=chords_text,
+        root_note=root_note,
     )
 
 
@@ -147,6 +151,7 @@ def validate_params(
     params: dict[str, Any],
     scales: list[dict],
     instruments: dict[str, list[dict]],
+    root_note: str = "",
 ) -> None:
     """Validate and auto-correct LLM-generated params.
 
@@ -154,6 +159,11 @@ def validate_params(
     Only raises ValueError for completely unrecoverable issues (e.g. no JSON at all).
     """
     import random
+
+    # Enforce pre-selected root note if LLM ignored the instruction
+    if root_note and params.get("root") != root_note:
+        logger.warning(f"LLM picked root '{params.get('root')}', forcing to pre-selected '{root_note}'")
+        params["root"] = root_note
 
     scale_names = {s["name"] for s in scales}
     if params.get("scale") not in scale_names:
@@ -208,11 +218,13 @@ def generate_music_params(
     api_key: str,
     headlines: list[str] | None = None,
     song_title: str | None = None,
+    root_note: str = "",
     template_path: Path = None,
 ) -> dict[str, Any]:
     """Generate structured music parameters via LLM.
 
     Provide either headlines or song_title (not both).
+    root_note is pre-selected and injected into the prompt.
     """
     client = InferenceClient(token=api_key)
 
@@ -221,14 +233,16 @@ def generate_music_params(
             template_path = Path(__file__).parent.parent / "prompt_template_song_title.txt"
         system_prompt, user_template = load_template(template_path)
         user_prompt = build_llm_prompt_from_title(
-            user_template, song_title, inspirations, scales, instruments
+            user_template, song_title, inspirations, scales, instruments,
+            root_note=root_note,
         )
     else:
         if template_path is None:
             template_path = Path(__file__).parent.parent / "prompt_template.txt"
         system_prompt, user_template = load_template(template_path)
         user_prompt = build_llm_prompt(
-            user_template, headlines or [], inspirations, scales, instruments
+            user_template, headlines or [], inspirations, scales, instruments,
+            root_note=root_note,
         )
 
     messages = []
@@ -247,6 +261,6 @@ def generate_music_params(
     logger.info(f"LLM response: {result_text[:200]}")
 
     params = parse_llm_response(result_text)
-    validate_params(params, scales, instruments)
+    validate_params(params, scales, instruments, root_note=root_note)
 
     return params

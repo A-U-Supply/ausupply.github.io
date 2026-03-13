@@ -147,6 +147,11 @@ def run_bot(args) -> int:
     # chooses intelligently instead of defaulting to its favorites
     llm_scales = random.sample(scales, min(5, len(scales)))
 
+    # Pre-select root note to prevent LLM bias (it defaults to E or G)
+    root_notes = ["C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B"]
+    chosen_root = random.choice(root_notes)
+    logger.info(f"Pre-selected root note: {chosen_root}")
+
     # Generate music parameters via LLM
     logger.info("Generating music parameters via LLM...")
     generate_kwargs = {
@@ -156,6 +161,7 @@ def run_bot(args) -> int:
         "model": config["prompt"]["model"],
         "temperature": config["prompt"]["temperature"],
         "api_key": hf_token,
+        "root_note": chosen_root,
     }
     if song_title_entry:
         generate_kwargs["song_title"] = song_title_entry["title"]
