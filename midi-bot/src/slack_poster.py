@@ -89,6 +89,8 @@ def post_midi_to_slack(
                 logger.warning(f"Failed to upload preview: {e}")
 
         # Upload each MIDI file as a threaded reply
+        # Keep standard filenames (melody.mid etc.) so downstream parsers
+        # (hymnal-bot, puke-box) can find them. Use title for display name.
         upload_failures = 0
         for track in ["melody", "drums", "bass", "chords"]:
             filepath = midi_dir / f"{track}.mid"
@@ -101,7 +103,8 @@ def post_midi_to_slack(
                 client.files_upload_v2(
                     channel=channel_id,
                     file=str(filepath),
-                    filename=f"{slug}_{track}.mid",
+                    filename=f"{track}.mid",
+                    title=f"{slug}_{track}",
                     initial_comment=TRACK_LABELS[track],
                     thread_ts=thread_ts,
                 )
