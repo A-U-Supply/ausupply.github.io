@@ -1,0 +1,16 @@
+{
+  "scale": "Hungarian Minor",
+  "root": "E",
+  "tempo": 120,
+  "description": "As rallies for Iran's revolution clash with discontent, a lonely medieval lute weeps in the darkness of an abandoned factory :dove",
+  "chords": [
+    "Em7",
+    "B7",
+    "Gmaj7",
+    "Cadd9"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-11"
+}
