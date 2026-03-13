@@ -1,5 +1,6 @@
 """Slack poster with MIDI file upload support."""
 import logging
+import re
 from pathlib import Path
 
 from slack_sdk import WebClient
@@ -57,6 +58,14 @@ def post_midi_to_slack(
     try:
         client = WebClient(token=token)
 
+        # Build filename-safe prefix from song title (or fallback)
+        song_title = params.get("song_title", "")
+        if song_title:
+            # Slugify: lowercase, replace non-alphanum with hyphens, collapse
+            slug = re.sub(r'[^a-z0-9]+', '-', song_title.lower()).strip('-')[:50]
+        else:
+            slug = f"{params['scale'].lower().replace(' ', '-')}-in-{params['root']}"
+
         # Post main message
         message = format_message(params, instruments)
         resp = client.chat_postMessage(channel=channel, text=message)
@@ -71,7 +80,7 @@ def post_midi_to_slack(
                 client.files_upload_v2(
                     channel=channel_id,
                     file=str(preview_path),
-                    filename="preview.wav",
+                    filename=f"{slug}_midi-preview.wav",
                     initial_comment=":loud_sound: Preview (sine wave synthesis)",
                     thread_ts=thread_ts,
                 )
@@ -92,7 +101,7 @@ def post_midi_to_slack(
                 client.files_upload_v2(
                     channel=channel_id,
                     file=str(filepath),
-                    filename=f"{track}.mid",
+                    filename=f"{slug}_{track}.mid",
                     initial_comment=TRACK_LABELS[track],
                     thread_ts=thread_ts,
                 )
