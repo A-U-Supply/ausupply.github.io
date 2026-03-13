@@ -1,0 +1,16 @@
+{
+  "scale": "Hungarian Minor",
+  "root": "Eb",
+  "tempo": 120,
+  "description": "A mariachi band on the moon is singing a gospel choir's lament for a crashed Olympic dream :full",
+  "chords": [
+    "Ebmaj7",
+    "G7",
+    "Cm7",
+    "Abmaj7"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-08"
+}
