@@ -1,0 +1,4 @@
+channel: song-titles
+model: meta-llama/Llama-3.3-70B-Instruct
+titles_path: titles.json
+html_output_path: ../this-song-is-a-junkyard.html
