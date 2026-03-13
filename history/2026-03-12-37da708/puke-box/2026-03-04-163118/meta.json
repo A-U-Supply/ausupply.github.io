@@ -1,0 +1,16 @@
+{
+  "scale": "Moorish",
+  "root": "E",
+  "tempo": 120,
+  "description": "Steel drums echo across a frozen lake, as a handpan meditation summons a rogue submarine from the depths :ocean::loud",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am9"
+  ],
+  "melody_instrument": 111,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-04"
+}
