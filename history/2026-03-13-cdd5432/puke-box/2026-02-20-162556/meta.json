@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Shankarabharanam",
+  "root": "E",
+  "tempo": 120,
+  "description": "A *ghost employee* haunts the demolition derby, where a church organ plays lo-fi jazz in the midst of chaos :racing",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-20"
+}
