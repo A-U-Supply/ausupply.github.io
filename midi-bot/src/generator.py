@@ -97,6 +97,32 @@ def build_llm_prompt(
     )
 
 
+def build_llm_prompt_from_title(
+    template: str,
+    title: str,
+    inspirations: list[str],
+    scales: list[dict],
+    instruments: dict[str, list[dict]],
+) -> str:
+    """Build prompt with a song title as the primary seed (no headlines)."""
+    inspirations_text = "\n".join(f"- {i}" for i in inspirations) if inspirations else "(none)"
+    scales_lines = []
+    for i, s in enumerate(scales, 1):
+        desc = describe_scale(s)
+        scales_lines.append(f'{i}. "{s["name"]}" — {s["origin"]}, {desc}')
+    scales_text = "\n".join(scales_lines)
+    melody_text = "\n".join(f"- {i['program']}: {i['name']}" for i in instruments["melody"])
+    chords_text = "\n".join(f"- {i['program']}: {i['name']}" for i in instruments["chords"])
+
+    return template.format(
+        title=title,
+        inspirations=inspirations_text,
+        scales=scales_text,
+        melody_instruments=melody_text,
+        chord_instruments=chords_text,
+    )
+
+
 def parse_llm_response(response: str) -> dict[str, Any]:
     """Parse the LLM's JSON response, handling code fences and think tags."""
     # Strip think tags
@@ -174,23 +200,36 @@ def validate_params(
 
 
 def generate_music_params(
-    headlines: list[str],
     inspirations: list[str],
     scales: list[dict],
     instruments: dict[str, list[dict]],
     model: str,
     temperature: float,
     api_key: str,
+    headlines: list[str] | None = None,
+    song_title: str | None = None,
     template_path: Path = None,
 ) -> dict[str, Any]:
-    """Generate structured music parameters via LLM."""
+    """Generate structured music parameters via LLM.
+
+    Provide either headlines or song_title (not both).
+    """
     client = InferenceClient(token=api_key)
 
-    if template_path is None:
-        template_path = Path(__file__).parent.parent / "prompt_template.txt"
-
-    system_prompt, user_template = load_template(template_path)
-    user_prompt = build_llm_prompt(user_template, headlines, inspirations, scales, instruments)
+    if song_title:
+        if template_path is None:
+            template_path = Path(__file__).parent.parent / "prompt_template_song_title.txt"
+        system_prompt, user_template = load_template(template_path)
+        user_prompt = build_llm_prompt_from_title(
+            user_template, song_title, inspirations, scales, instruments
+        )
+    else:
+        if template_path is None:
+            template_path = Path(__file__).parent.parent / "prompt_template.txt"
+        system_prompt, user_template = load_template(template_path)
+        user_prompt = build_llm_prompt(
+            user_template, headlines or [], inspirations, scales, instruments
+        )
 
     messages = []
     if system_prompt:

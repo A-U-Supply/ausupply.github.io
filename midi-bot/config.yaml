@@ -19,3 +19,6 @@ sources:
   - npr
   - guardian
   - breitbart
+
+seed_source: "song-titles"
+song_titles_path: "../song-titles-bot/titles.json"

@@ -26,7 +26,9 @@ def parse_midi_message(text: str) -> dict | None:
     root = header.group(2)
     tempo = int(header.group(3))
 
-    desc_match = re.search(r'_(.+?)_', text)
+    # Search for description only AFTER the *Daily MIDI* header
+    text_after_header = text[header.end():]
+    desc_match = re.search(r'_(.+?)_', text_after_header)
     description = desc_match.group(1) if desc_match else ""
 
     chords_match = re.search(r'Chords\s*—\s*(.+?)(?:\n|$)', text)
@@ -38,7 +40,11 @@ def parse_midi_message(text: str) -> dict | None:
     temp_match = re.search(r'temperature\s+([\d.]+)', text)
     temperature = float(temp_match.group(1)) if temp_match else 1.0
 
-    return {
+    # Extract song title from first line (if present)
+    title_match = re.match(r'^\*"(.+?)"\*', text)
+    song_title = title_match.group(1) if title_match else None
+
+    result = {
         "scale": scale,
         "root": root,
         "tempo": tempo,
@@ -47,6 +53,10 @@ def parse_midi_message(text: str) -> dict | None:
         "melody_instrument": melody_instrument,
         "temperature": temperature,
     }
+    if song_title:
+        result["song_title"] = song_title
+
+    return result
 
 
 def find_channel_id(client: WebClient, channel_name: str) -> str | None:

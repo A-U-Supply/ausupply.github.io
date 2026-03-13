@@ -59,6 +59,7 @@ def post_results(
     clip_count: int,
     sources: list[dict],
     source_clip_counts: dict[str, int] | None = None,
+    song_title: str | None = None,
     _client: WebClient | None = None,
 ) -> None:
     """Post glottisdale results to a Slack channel.
@@ -70,7 +71,11 @@ def post_results(
     client = _client or WebClient(token=token, timeout=120)
 
     today = date.today().isoformat()
-    summary = f":scissors: *Glottisdale* — {clip_count} words from {len(sources)} source(s)"
+    lines = []
+    if song_title:
+        lines.append(f'*"{song_title}"*')
+    lines.append(f":scissors: *Glottisdale* — {clip_count} words from {len(sources)} source(s)")
+    summary = "\n".join(lines)
 
     # Resolve channel name to ID (files_upload_v2 requires channel ID)
     channel_id = find_channel_id(client, channel) if channel.startswith("#") else channel

@@ -19,6 +19,7 @@ from src.generator import (
 )
 from src.slack_poster import post_midi_to_slack
 from src.synthesizer import synthesize_preview
+from src.title_selector import select_title
 
 
 # Import scraper/sampler from surreal-prompt-bot using importlib.util
@@ -99,17 +100,34 @@ def run_bot(args) -> int:
         logger.error("SLACK_BOT_TOKEN environment variable not set")
         return 1
 
-    # Scrape headlines (reusing surreal-prompt-bot scraper)
-    logger.info(f"Scraping headlines from {len(config['sources'])} sources...")
-    headlines = scrape_all_sources(config["sources"])
-    if not headlines:
-        logger.error("No headlines scraped from any source")
-        return 1
+    # Select creative seed based on config
+    seed_source = config.get("seed_source", "song-titles")
+    song_title_entry = None
 
-    max_headlines = config["prompt"]["max_headlines"]
-    if len(headlines) > max_headlines:
-        headlines = random.sample(headlines, max_headlines)
-    logger.info(f"Using {len(headlines)} headlines")
+    if seed_source == "song-titles":
+        titles_path = script_dir / config.get("song_titles_path", "../song-titles-bot/titles.json")
+        used_path = script_dir / "used-song-titles.json"
+        song_title_entry = select_title(titles_path, used_path)
+
+        if not song_title_entry:
+            logger.warning("No song titles available, falling back to headlines")
+            seed_source = "headlines"
+        else:
+            logger.info(f"Song title: \"{song_title_entry['title']}\"")
+
+    headlines = None
+    if seed_source == "headlines":
+        # Scrape headlines (reusing surreal-prompt-bot scraper)
+        logger.info(f"Scraping headlines from {len(config['sources'])} sources...")
+        headlines = scrape_all_sources(config["sources"])
+        if not headlines:
+            logger.error("No headlines scraped from any source")
+            return 1
+
+        max_headlines = config["prompt"]["max_headlines"]
+        if len(headlines) > max_headlines:
+            headlines = random.sample(headlines, max_headlines)
+        logger.info(f"Using {len(headlines)} headlines")
 
     # Sample musical inspirations
     inspirations = []
@@ -131,15 +149,25 @@ def run_bot(args) -> int:
 
     # Generate music parameters via LLM
     logger.info("Generating music parameters via LLM...")
-    params = generate_music_params(
-        headlines=headlines,
-        inspirations=inspirations,
-        scales=llm_scales,
-        instruments=instruments,
-        model=config["prompt"]["model"],
-        temperature=config["prompt"]["temperature"],
-        api_key=hf_token,
-    )
+    generate_kwargs = {
+        "inspirations": inspirations,
+        "scales": llm_scales,
+        "instruments": instruments,
+        "model": config["prompt"]["model"],
+        "temperature": config["prompt"]["temperature"],
+        "api_key": hf_token,
+    }
+    if song_title_entry:
+        generate_kwargs["song_title"] = song_title_entry["title"]
+    else:
+        generate_kwargs["headlines"] = headlines
+
+    params = generate_music_params(**generate_kwargs)
+
+    # Attach song title to params for Slack poster
+    if song_title_entry:
+        params["song_title"] = song_title_entry["title"]
+
     logger.info(f"Music params: {json.dumps(params, indent=2)}")
 
     # Generate MIDI files
@@ -200,6 +228,8 @@ def main():
     parser.add_argument("--temperature", type=float, help="LLM temperature")
     parser.add_argument("--sources", help="Comma-separated news sources")
     parser.add_argument("--no-inspirations", action="store_true")
+    parser.add_argument("--seed-source", choices=["song-titles", "headlines"],
+                        help="Override seed source (default from config)")
     parser.add_argument("--config", default="config.yaml")
 
     args = parser.parse_args()

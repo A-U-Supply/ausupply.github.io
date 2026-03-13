@@ -22,6 +22,8 @@ DEFAULT_CONFIG = {
         "reuters", "foxnews", "cnn", "bbc",
         "ft", "npr", "guardian", "breitbart"
     ],
+    "seed_source": "song-titles",
+    "song_titles_path": "../song-titles-bot/titles.json",
 }
 
 
@@ -56,4 +58,6 @@ def merge_cli_args(config: dict[str, Any], args) -> dict[str, Any]:
         config["sources"] = args.sources.split(",")
     if hasattr(args, 'no_inspirations') and args.no_inspirations:
         config["inspirations"]["pick_count"] = 0
+    if hasattr(args, 'seed_source') and args.seed_source:
+        config["seed_source"] = args.seed_source
     return config

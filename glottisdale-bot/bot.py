@@ -5,6 +5,7 @@ Rust CLI binary for audio processing.
 """
 
 import argparse
+import hashlib
 import json
 import logging
 import os
@@ -18,6 +19,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from glottisdale_slack.fetch import fetch_videos
 from glottisdale_slack.post import post_results
+from src.title_selector import select_title
 
 logger = logging.getLogger(__name__)
 
@@ -109,6 +111,22 @@ def main():
             print("No videos found in channel", file=sys.stderr)
             sys.exit(1)
 
+        # Select song title for labeling and seed derivation
+        script_dir = Path(__file__).parent
+        titles_path = script_dir / "../song-titles-bot/titles.json"
+        used_path = script_dir / "used-song-titles.json"
+        song_title_entry = select_title(titles_path, used_path)
+
+        song_title = None
+        if song_title_entry:
+            song_title = song_title_entry["title"]
+            logger.info(f"Song title: \"{song_title}\"")
+
+            # Derive deterministic seed from title (if no explicit seed given)
+            if args.seed is None:
+                args.seed = int(hashlib.sha256(song_title.encode()).hexdigest()[:8], 16)
+                logger.info(f"Derived seed from title: {args.seed}")
+
         info = run_glottisdale_cli(
             video_paths=[v["path"] for v in videos],
             args=args,
@@ -132,6 +150,7 @@ def main():
                 clip_count=info["clip_count"],
                 sources=videos,
                 source_clip_counts=source_clip_counts,
+                song_title=song_title,
             )
 
 

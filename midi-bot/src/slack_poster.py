@@ -28,7 +28,13 @@ def format_message(params: dict, instruments: dict) -> str:
     chord_name = _find_instrument_name(params["chord_instrument"], instruments["chords"])
     chords_str = "  ".join(params["chords"])
 
-    lines = [
+    lines = []
+
+    # Song title as bold first line (when using song-titles mode)
+    if params.get("song_title"):
+        lines.append(f'*"{params["song_title"]}"*')
+
+    lines.extend([
         f":musical_note: *Daily MIDI* — {params['scale']} in {params['root']} ({params['tempo']} BPM)",
         f"_{params['description']}_",
         "",
@@ -36,7 +42,7 @@ def format_message(params: dict, instruments: dict) -> str:
         f":drum_with_drumsticks: Drums — DrumsRNN, temperature {params['temperature']}",
         f":guitar: Bass — Programmatic from chord roots",
         f":musical_score: Chords — {chords_str}",
-    ]
+    ])
     return "\n".join(lines)
 
 
