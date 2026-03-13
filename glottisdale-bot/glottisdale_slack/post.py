@@ -1,6 +1,7 @@
 """Post glottisdale results to a Slack channel."""
 
 import logging
+import re
 import sys
 import time
 from datetime import date
@@ -71,6 +72,13 @@ def post_results(
     client = _client or WebClient(token=token, timeout=120)
 
     today = date.today().isoformat()
+
+    # Build filename-safe slug from song title
+    if song_title:
+        slug = re.sub(r'[^a-z0-9]+', '-', song_title.lower()).strip('-')[:50]
+    else:
+        slug = "glottisdale"
+
     lines = []
     if song_title:
         lines.append(f'*"{song_title}"*')
@@ -94,7 +102,7 @@ def post_results(
         client,
         channel=channel_id,
         file=str(concatenated_path),
-        filename=f"glottisdale-{today}.wav",
+        filename=f"{slug}_{today}_glottisdale.wav",
         initial_comment=summary,
     )
     # No try/except — if this fails, the whole run fails.
@@ -146,7 +154,7 @@ def post_results(
                 client,
                 channel=channel_id,
                 file=str(zip_path),
-                filename=f"glottisdale-{today}-clips.zip",
+                filename=f"{slug}_{today}_glottisdale-clips.zip",
                 initial_comment="Individual word clips",
                 thread_ts=thread_ts,
             )
