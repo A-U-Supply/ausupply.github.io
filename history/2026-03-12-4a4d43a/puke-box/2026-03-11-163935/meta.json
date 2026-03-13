@@ -1,0 +1,16 @@
+{
+  "scale": "Kurdilihicazkar",
+  "root": "E",
+  "tempo": 100,
+  "description": "A dystopian harp orchestra plays in a deserted oil rig as the world plunges into chaos :tornado::boom:",
+  "chords": [
+    "Em7",
+    "B7",
+    "Gmaj7",
+    "C#m7"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-11"
+}
