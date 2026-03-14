@@ -50,9 +50,6 @@ def run_glottisdale_cli(video_paths: list[Path], args) -> dict:
         "--target-duration", str(args.target_duration),
         "--whisper-model", args.whisper_model,
         "--aligner", args.aligner,
-        "--phrase-pause", "200-400",
-        "--sentence-pause", "500-800",
-        "--syllables-per-word", "2-4",
     ]
     if args.seed is not None:
         cmd.extend(["--seed", str(args.seed)])
