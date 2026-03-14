@@ -1,5 +1,69 @@
 [
   {
+    "id": "2026-03-14-161836",
+    "date": "2026-03-14",
+    "description": "A troll in a bathtub plays the harpsichord underwater, surrounded by swimming orchestral elements :ocean::musical",
+    "scale": "Kurdilihicazkar",
+    "root": "C#",
+    "tempo": 160
+  },
+  {
+    "id": "2026-03-13-205336",
+    "date": "2026-03-13",
+    "description": "A decrepit, trad-jazz band plays in a haunted elevator &lt;i&gt;during a thunderstorm&lt;/i&gt; :thunder",
+    "scale": "Hungarian Major",
+    "root": "B",
+    "tempo": 100
+  },
+  {
+    "id": "2026-03-13-204251",
+    "date": "2026-03-13",
+    "description": "As the mariachi band on the moon played a haunting melody on their didgeridoo, a UFO appeared in the sky, but it was just a reflection of the parking garage lights :full",
+    "scale": "Ethiopic Bati Minor",
+    "root": "G",
+    "tempo": 130
+  },
+  {
+    "id": "2026-03-13-202359",
+    "date": "2026-03-13",
+    "description": "As the storm intensifies, the sound of a music box in the distance eerily harmonizes with the thunder :tornado::dizzy:",
+    "scale": "Phrygian Dominant",
+    "root": "G",
+    "tempo": 120
+  },
+  {
+    "id": "2026-03-13-202037",
+    "date": "2026-03-13",
+    "description": "As the two celebrities roll a hoop, they stumble into an orchestral swell in a bathroom :shower::sweat",
+    "scale": "Hemitonic Pentatonic",
+    "root": "E",
+    "tempo": 120
+  },
+  {
+    "id": "2026-03-13-201125",
+    "date": "2026-03-13",
+    "description": "A submarine gospel choir echoes through the frozen lake, as steel drums whisper secrets to the *judges of the deep* :ocean::snowflake::cop:",
+    "scale": "Raga Bhairavi",
+    "root": "E",
+    "tempo": 100
+  },
+  {
+    "id": "2026-03-13-195001",
+    "date": "2026-03-13",
+    "description": "As the oil tankers burn, a lone trumpet wails in the distance, its melancholy tune echoing off the cathedral's stained glass windows :dove",
+    "scale": "Arabian",
+    "root": "E",
+    "tempo": 140
+  },
+  {
+    "id": "2026-03-13-162726",
+    "date": "2026-03-13",
+    "description": "A mariachi band on the moon discovers a hidden *gamelan orchestra* :full",
+    "scale": "Madenda",
+    "root": "E",
+    "tempo": 130
+  },
+  {
     "id": "2026-03-12-164918",
     "date": "2026-03-12",
     "description": "As the ruins of war crumble, a lone *soprano sax* wails in the desert :cyclone::fire:",
