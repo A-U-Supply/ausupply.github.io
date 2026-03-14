@@ -62,8 +62,12 @@ def run_glottisdale_cli(video_paths: list[Path], args) -> dict:
         text=True,
     )
 
+    # Log CLI diagnostics (pitch normalization, syllable counts, etc.)
+    if result.stderr:
+        for line in result.stderr.strip().splitlines():
+            logger.info(f"[glottisdale] {line}")
+
     if result.returncode != 0:
-        logger.error(f"CLI stderr: {result.stderr}")
         raise RuntimeError(f"glottisdale CLI failed: {result.stderr.strip().splitlines()[-1]}")
 
     # Parse stdout for output path and clip count
