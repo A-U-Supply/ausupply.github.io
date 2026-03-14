@@ -10,7 +10,7 @@ on:
         default: '30'
       max_videos:
         description: 'Max source videos'
-        default: '10'
+        default: '7'
       whisper_model:
         description: 'Whisper model (tiny/base/small)'
         default: 'base'
