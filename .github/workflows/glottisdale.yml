@@ -7,7 +7,7 @@ on:
     inputs:
       target_duration:
         description: 'Target duration in seconds'
-        default: '30'
+        default: '60'
       max_videos:
         description: 'Max source videos'
         default: '5'
@@ -50,7 +50,7 @@ jobs:
 
       - name: Download glottisdale binary
         run: |
-          gh release download v0.5.10 --repo A-U-Supply/glottisdale --pattern 'glottisdale-linux-amd64' --dir /tmp
+          gh release download --repo A-U-Supply/glottisdale --pattern 'glottisdale-linux-amd64' --dir /tmp
           chmod +x /tmp/glottisdale-linux-amd64
           sudo mv /tmp/glottisdale-linux-amd64 /usr/local/bin/glottisdale
           glottisdale --version
