@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Malkauns",
+  "root": "E",
+  "tempo": 120,
+  "description": "A gamelan orchestra on a space station echoes through the void as a music box plays a haunting melody amidst a thunderstorm on a distant planet :milky",
+  "chords": [
+    "Em",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-10"
+}
