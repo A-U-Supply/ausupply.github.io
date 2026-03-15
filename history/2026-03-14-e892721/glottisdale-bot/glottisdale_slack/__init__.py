@@ -1,0 +1,1 @@
+"""Glottisdale Slack integration."""
