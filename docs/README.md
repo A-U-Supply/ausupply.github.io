@@ -2,6 +2,7 @@
 
 ## Top-Level
 
+- [au-supply-complete-reference.md](au-supply-complete-reference.md) — Comprehensive reference document for the A-U.Supply label, the band Complete, catalog, aliases, tools, and aesthetic framework. Designed as LLM context for creative work.
 - [AUDIO-UNITS-SUPPLY-WEB-TOOLS.md](AUDIO-UNITS-SUPPLY-WEB-TOOLS.md) — Overview of the site's tools and capabilities: song title generator, interactive pages, and brainstorming prompts for new features.
 - [how-to-edit-this-site.md](how-to-edit-this-site.md) — Non-technical walkthrough for editing the site using GitHub Desktop (cloning, branching, editing HTML, previewing, committing, PRs).
 
@@ -80,6 +81,12 @@ Extracted to its own repository: **[A-U-Supply/glottisdale](https://github.com/A
 Syllable-level audio collage tool and vocal MIDI mapping engine. The library (`pip install`) handles all audio processing; thin bot wrappers in this repo (`glottisdale-bot/`, `hymnal-bot/`) handle Slack I/O and Magenta.js MIDI extension.
 
 Design docs moved to the glottisdale repo under `docs/legacy/`.
+
+### Press Kit
+
+Industrial-manufacturer-styled press kits for the A-U.Supply label and the Complete double album. Formatted as product catalogs, spec sheets, and product bulletins. Generated as HTML → PDF via Chrome headless.
+
+- [2026-03-23-press-kit-design.md](plans/2026-03-23-press-kit-design.md) — Design: visual system, document structure, content mapping from reference docs, asset inventory.
 
 ### AU Tmux Status Bar
 
