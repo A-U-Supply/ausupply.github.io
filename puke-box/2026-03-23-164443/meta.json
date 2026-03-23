@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Malkauns",
+  "root": "F",
+  "tempo": 90,
+  "description": "I'm wearing a shirt that says it all, but the words are backwards like a spaghetti western soundtrack :face",
+  "chords": [
+    "Fm",
+    "Cm7",
+    "Ab7",
+    "Ebmaj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-23"
+}
