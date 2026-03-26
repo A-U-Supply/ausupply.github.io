@@ -88,6 +88,12 @@ Industrial-manufacturer-styled press kits for the A-U.Supply label and the Compl
 
 - [2026-03-23-press-kit-design.md](plans/2026-03-23-press-kit-design.md) — Design: visual system, document structure, content mapping from reference docs, asset inventory.
 
+### Sparagmos (Image Destruction Bot)
+
+Standalone repo (A-U-Supply/sparagmos) — daily automated image destruction bot. Scrapes a random image from #image-gen, applies a randomly selected recipe of chained glitch/decay/neural effects spanning four decades of techniques (NetPBM, DeepDream, datamosh, pixel sorting, neural style transfer, and more), and posts the result with full provenance to #img-junkyard.
+
+- [2026-03-26-sparagmos-design.md](plans/2026-03-26-sparagmos-design.md) — Design: effects toolkit, recipe system, vendoring strategy, pipeline architecture.
+
 ### AU Tmux Status Bar
 
 Green terminal-themed tmux status bar for the `au` tmuxinator session. Full restyle (status bar, window tabs, pane borders, messages) with a rotating right-side display cycling through git branch, moon phase, session entropy plant, and anagram roulette.
