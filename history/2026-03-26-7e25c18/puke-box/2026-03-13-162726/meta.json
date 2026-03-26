@@ -1,0 +1,16 @@
+{
+  "scale": "Madenda",
+  "root": "E",
+  "tempo": 130,
+  "description": "A mariachi band on the moon discovers a hidden *gamelan orchestra* :full",
+  "chords": [
+    "Em",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-13"
+}

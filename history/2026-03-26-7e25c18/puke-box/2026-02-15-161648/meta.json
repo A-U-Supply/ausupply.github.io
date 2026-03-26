@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian",
+  "root": "E",
+  "tempo": 120,
+  "description": "A spaghetti western showdown unfolds in a dark, cave-like cathedral :dove",
+  "chords": [
+    "Em",
+    "B7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 64,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-15"
+}
