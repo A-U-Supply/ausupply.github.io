@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Augmented",
+  "root": "E",
+  "tempo": 128,
+  "description": "A baroque harpsichord played underwater by a **mermaid** :mermaid:, wearing a gown made of *oscillating waves* and *stardust* :dizzy:",
+  "chords": [
+    "Emaj7",
+    "G#m7",
+    "C#m7",
+    "B7"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-11"
+}
