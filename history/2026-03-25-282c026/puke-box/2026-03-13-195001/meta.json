@@ -1,0 +1,16 @@
+{
+  "scale": "Arabian",
+  "root": "E",
+  "tempo": 140,
+  "description": "As the oil tankers burn, a lone trumpet wails in the distance, its melancholy tune echoing off the cathedral's stained glass windows :dove",
+  "chords": [
+    "Em7",
+    "G7",
+    "Am7",
+    "B7"
+  ],
+  "melody_instrument": 56,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-13"
+}
