@@ -1,0 +1,16 @@
+{
+  "scale": "Dorian",
+  "root": "E",
+  "tempo": 140,
+  "description": "A *calliope* plays a haunting melody amidst the *gunfire* and *midnight* shadows :night",
+  "chords": [
+    "Em",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-10"
+}

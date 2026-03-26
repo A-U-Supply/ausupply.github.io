@@ -1,0 +1,16 @@
+{
+  "scale": "Messiaen Mode 2",
+  "root": "F",
+  "tempo": 180,
+  "description": "The metric system was swallowed by a giant xylophone-playing worm :bug::fire::skull:",
+  "chords": [
+    "Fmaj7",
+    "G7",
+    "Am",
+    "Em7"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-16"
+}
