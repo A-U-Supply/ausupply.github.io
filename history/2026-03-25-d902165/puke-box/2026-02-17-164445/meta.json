@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Shree",
+  "root": "E",
+  "tempo": 120,
+  "description": "As the *apocalypse* unfolds, a haunting oboe melody echoes through a desolate hospital waiting room :tornado::skull:, where the *free jazz* of suffering and redemption plays on repeat.",
+  "chords": [
+    "E7",
+    "Bm7",
+    "G#m",
+    "C#m"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-17"
+}
