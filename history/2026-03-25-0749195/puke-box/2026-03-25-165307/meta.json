@@ -1,0 +1,16 @@
+{
+  "scale": "Superlocrian bb7",
+  "root": "Ab",
+  "tempo": 168,
+  "description": "As the tornado of deceit swirls, a lone jazz flute player clings to a lamp post for dear life :tornado::broken",
+  "chords": [
+    "Ab7",
+    "Db9",
+    "Gb7",
+    "Bb13"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-25"
+}

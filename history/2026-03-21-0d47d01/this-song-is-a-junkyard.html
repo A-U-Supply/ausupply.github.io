@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SONG TITLE LIBRARY</title>
+    <link rel="stylesheet" href="../../vcfmw.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff);
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 70px;
+            transition: background 0.3s ease;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 2rem;
+            color: #ff00ff;
+            text-shadow: 3px 3px 0 #00ffff, -3px -3px 0 #ffff00;
+            position: relative;
+            z-index: 9999;
+        }
+
+        .title {
+            position: absolute;
+            white-space: nowrap;
+            cursor: grab;
+            transition: transform 0.1s ease;
+            user-select: none;
+            touch-action: none;
+        }
+
+        .title:active {
+            cursor: grabbing;
+        }
+
+        .title.selected {
+            outline: 3px dashed #ff00ff;
+            outline-offset: 4px;
+        }
+
+        .title:hover {
+            z-index: 10000 !important;
+        }
+
+        .media {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            17% { color: #ff8800; }
+            33% { color: #ffff00; }
+            50% { color: #00ff00; }
+            67% { color: #0088ff; }
+            83% { color: #8800ff; }
+            100% { color: #ff0000; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px) rotate(-1deg); }
+            75% { transform: translateX(3px) rotate(1deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .anim-blink { animation: blink 1s infinite; }
+        .anim-pulse { animation: pulse 1s infinite; }
+        .anim-rainbow { animation: rainbow 3s linear infinite; }
+        .anim-shake { animation: shake 0.3s infinite; }
+        .anim-float { animation: float 2s ease-in-out infinite; }
+        .anim-none { animation: none; }
+
+        /* Toolbar */
+        .toolbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
+            border-top: 3px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 20px;
+            z-index: 99999;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .toolbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar button {
+            padding: 6px 12px;
+            font-size: 13px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.1s;
+        }
+
+        .toolbar button:hover {
+            transform: scale(1.05);
+            background: #ffff00;
+        }
+
+        .toolbar button:active {
+            transform: scale(0.95);
+        }
+
+        .toolbar button.active {
+            background: #00ff00;
+        }
+
+        .toolbar select {
+            padding: 6px;
+            font-size: 13px;
+            font-family: 'Comic Sans MS', cursive;
+            border: 2px solid #000;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .toolbar .divider {
+            width: 2px;
+            height: 24px;
+            background: #000;
+            margin: 0 4px;
+        }
+
+        .toolbar .label {
+            font-size: 11px;
+            font-weight: bold;
+            color: #000;
+            background: rgba(255,255,255,0.7);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .color-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #000 !important;
+            padding: 0 !important;
+        }
+
+        .bg-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 2px solid #000 !important;
+            padding: 0 !important;
+        }
+
+        .rotate-btn {
+            font-size: 16px !important;
+            padding: 4px 10px !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="../../img/cheeze-bourger2.png" alt="Header Image"></a>
+        <h1>AUDIO UNITS SUPPLY</h1>
+    </header>
+    <div class="header">
+        ★ SONG TITLE LIBRARY ★
+    </div>
+
+    
+    <div class="title" data-id="legacy-0000" style="left: 70.32766960976217%; top: 2045px; font-size: 38px; color: #66ff66; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-21deg); z-index: 1;">sweat wheat meet and greet come an beat the heat</div>
+    
+    <div class="title" data-id="legacy-0001" style="left: 2.8909567869849218%; top: 661px; font-size: 37px; color: #6666ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-10deg); z-index: 2;">I wasn&#39;t ear starving</div>
+    
+    <div class="title" data-id="legacy-0002" style="left: 20.95135041351135%; top: 474px; font-size: 17px; color: #4400ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-24deg); z-index: 3;">mustard so I can cream</div>
+    
+    <div class="title" data-id="legacy-0003" style="left: 72.94676183176428%; top: 491px; font-size: 26px; color: #66ff66; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(11deg); z-index: 4;">between the extremes p...p</div>
+    
+    <div class="title" data-id="legacy-0004" style="left: 79.20456720797581%; top: 1632px; font-size: 23px; color: #66ff66; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-15deg); z-index: 5;">Tip of the Fatberg</div>
+    
+    <div class="title" data-id="legacy-0005" style="left: 6.1454550517832995%; top: 1793px; font-size: 39px; color: #00ffff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-28deg); z-index: 6;">Music to play over your conspiring</div>
+    
+    <div class="title" data-id="legacy-0006" style="left: 6.8674739358520345%; top: 1518px; font-size: 26px; color: #ffff66; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(22deg); z-index: 7;">a certian kind of freedom</div>
+    
+    <div class="title" data-id="legacy-0007" style="left: 11.1126732044695%; top: 1752px; font-size: 23px; color: #00ff88; font-family: &#39;Georgia&#39;, serif; transform: rotate(-15deg); z-index: 8;">_l&#39;argent des autres._ †</div>
+    
+    <div class="title" data-id="legacy-0008" style="left: 10.43274685831461%; top: 512px; font-size: 14px; color: #6666ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-15deg); z-index: 9;">pair a dice prison</div>
+    
+    <div class="title" data-id="legacy-0009" style="left: 84.49082121509633%; top: 1070px; font-size: 28px; color: #88ff00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(18deg); z-index: 10;">yeah not so bad</div>
+    
+    <div class="title" data-id="legacy-0010" style="left: 52.705319899457294%; top: 1237px; font-size: 31px; color: #8800ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-4deg); z-index: 11;">only 1%, pretty good</div>
+    
+    <div class="title" data-id="legacy-0011" style="left: 77.16232793203037%; top: 159px; font-size: 40px; color: #ff4400; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-4deg); z-index: 12;">my inventory is 99% accurate and im 1% more dead</div>
+    
+    <div class="title" data-id="legacy-0012" style="left: 54.71402172279475%; top: 1290px; font-size: 35px; color: #4400ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-25deg); z-index: 13;">glad ur still alive</div>
+    
+    <div class="title" data-id="legacy-0013" style="left: 35.25516236280784%; top: 2364px; font-size: 27px; color: #ff00ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(19deg); z-index: 14;">the lyrics to this song is a series of yes and nose :nose:</div>
+    
+    <div class="title" data-id="legacy-0014" style="left: 47.22275019711096%; top: 2497px; font-size: 22px; color: #66ff66; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-22deg); z-index: 15;">Is &#39;is&#39; an is as any &#39;is&#39; is?</div>
+    
+    <div class="title" data-id="legacy-0015" style="left: 12.963853021041901%; top: 1286px; font-size: 30px; color: #00ff00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-9deg); z-index: 16;">beard with bald guy</div>
+    
+    <div class="title" data-id="legacy-0016" style="left: 73.61483638798674%; top: 593px; font-size: 41px; color: #0088ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(17deg); z-index: 17;">DO NOT REPEAT THIS INSIGHT</div>
+    
+    <div class="title" data-id="legacy-0017" style="left: 62.59555258404376%; top: 842px; font-size: 14px; color: #0000ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-7deg); z-index: 18;">song title idea:
+each track is named a single word. the album forms a complete sentence</div>
+    
+    <div class="title" data-id="legacy-0018" style="left: 8.383353810606383%; top: 197px; font-size: 33px; color: #6666ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-22deg); z-index: 19;">read war and peace or watch one piece</div>
+    
+    <div class="title" data-id="legacy-0019" style="left: 60.78766525104167%; top: 2085px; font-size: 16px; color: #ffcc00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(5deg); z-index: 20;">return to animism</div>
+    
+    <div class="title" data-id="legacy-0020" style="left: 47.85781311888932%; top: 1271px; font-size: 33px; color: #ff0088; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-13deg); z-index: 21;">...To Exist Is To Be a Subject of Blind Compulsion.</div>
+    
+    <div class="title" data-id="legacy-0021" style="left: 44.813481470353274%; top: 1347px; font-size: 35px; color: #88ff00; font-family: &#39;Georgia&#39;, serif; transform: rotate(-8deg); z-index: 22;">Again There Comes an Experiment With the Human Work</div>
+    
+    <div class="title" data-id="legacy-0022" style="left: 80.18833857715356%; top: 694px; font-size: 42px; color: #8800ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-3deg); z-index: 23;">director 69</div>
+    
+    <div class="title" data-id="legacy-0023" style="left: 51.38981999248096%; top: 2408px; font-size: 38px; color: #8800ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-23deg); z-index: 24;">sleep cartel</div>
+    
+    <div class="title" data-id="legacy-0024" style="left: 55.89547710238128%; top: 1298px; font-size: 18px; color: #ffff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(27deg); z-index: 25;">rewards viral engagement at all costs</div>
+    
+    <div class="title" data-id="legacy-0025" style="left: 66.92781192187377%; top: 723px; font-size: 35px; color: #ff0000; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-30deg); z-index: 26;">What is to be done, fellas?</div>
+    
+    <div class="title" data-id="legacy-0026" style="left: 14.773907950614175%; top: 178px; font-size: 26px; color: #0000ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-3deg); z-index: 27;">You Lamp! You Towel! You Plate!</div>
+    
+    <div class="title" data-id="legacy-0027" style="left: 7.976930158207376%; top: 1134px; font-size: 36px; color: #ff6666; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(24deg); z-index: 28;">The Wurly Durly World of the Visually Too Much</div>
+    
+    <div class="title" data-id="legacy-0028" style="left: 17.187919944353368%; top: 1702px; font-size: 16px; color: #00ffff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(14deg); z-index: 29;">world capitalist intercourse</div>
+    
+    <div class="title" data-id="legacy-0029" style="left: 75.74181985954272%; top: 1047px; font-size: 29px; color: #00ffff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(3deg); z-index: 30;">f.a.t.
+failed attitude test</div>
+    
+    <div class="title" data-id="legacy-0030" style="left: 32.54561332207116%; top: 397px; font-size: 34px; color: #ffff66; font-family: &#39;Georgia&#39;, serif; transform: rotate(-12deg); z-index: 31;">normal university</div>
+    
+    <div class="title" data-id="legacy-0031" style="left: 20.591636463403795%; top: 1443px; font-size: 42px; color: #ff4400; font-family: &#39;Courier New&#39;, monospace; transform: rotate(24deg); z-index: 32;">this is real</div>
+    
+    <div class="title" data-id="legacy-0032" style="left: 17.92280429751299%; top: 1767px; font-size: 20px; color: #ff4400; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-23deg); z-index: 33;">Supersaturated Mother Liquor</div>
+    
+    <div class="title" data-id="legacy-0033" style="left: 82.68994277584842%; top: 506px; font-size: 42px; color: #ff6666; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(2deg); z-index: 34;">ipad dads</div>
+    
+    <div class="title" data-id="legacy-0034" style="left: 9.394027633229651%; top: 1481px; font-size: 33px; color: #0088ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-2deg); z-index: 35;">the flesh was sense. it made no soft</div>
+    
+    <div class="title" data-id="legacy-0035" style="left: 81.86564683968437%; top: 270px; font-size: 34px; color: #8800ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-1deg); z-index: 36;">Despite All My Tabs I&#39;m Still Just a Rat in a Cage</div>
+    
+    <div class="title" data-id="legacy-0036" style="left: 48.68062103313567%; top: 204px; font-size: 40px; color: #ffff66; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(26deg); z-index: 37;">Spillikins!</div>
+    
+    <div class="title" data-id="legacy-0037" style="left: 84.52655947830159%; top: 1429px; font-size: 33px; color: #ff0000; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(21deg); z-index: 38;">The flesh was soft. It made no sense.</div>
+    
+    <div class="title" data-id="legacy-0038" style="left: 34.84400041464047%; top: 542px; font-size: 37px; color: #0088ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(19deg); z-index: 39;">*people are always brendan</div>
+    
+    <div class="title" data-id="legacy-0039" style="left: 18.310032812713658%; top: 565px; font-size: 25px; color: #6666ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(1deg); z-index: 40;">people are always human</div>
+    
+    <div class="title" data-id="legacy-0040" style="left: 43.989250215367555%; top: 1912px; font-size: 32px; color: #0000ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(14deg); z-index: 41;">defund the chat</div>
+    
+    <div class="title" data-id="legacy-0041" style="left: 29.564913672795445%; top: 1838px; font-size: 32px; color: #ff8800; font-family: &#39;Georgia&#39;, serif; transform: rotate(1deg); z-index: 42;">controlling interests
+trolling interests</div>
+    
+    <div class="title" data-id="legacy-0042" style="left: 16.492342280463443%; top: 2425px; font-size: 41px; color: #0088ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-30deg); z-index: 43;">Verdad y Certeza</div>
+    
+    <div class="title" data-id="legacy-0043" style="left: 61.73002532353659%; top: 1751px; font-size: 22px; color: #4400ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(19deg); z-index: 44;">npc:
+non playable citizen
+non patterning citizen 
+non paying citizen 
+nano paternal citizen 
+nonetised personal chastity
+nonentary payable cogent
+neurotic pizza chart
+novel personhood crash
+no problems canceling 
+narrative pattern corrosion 
+narrative postmodern condition 
+now personhood clickbait
+non pictured century
+negative profit culture 
+npc player connection 
+narrative personhood conditioning
+
+
+whiped these out while watching P.G. Talk 1.0. feel free to mix and match, add more</div>
+    
+    <div class="title" data-id="legacy-0044" style="left: 32.24756039918709%; top: 2225px; font-size: 42px; color: #ffffff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-30deg); z-index: 45;">[recalling a sign i saw in the philippines on the back of a trike:]
+
+drugs are retarted [sic]
+don&#39;t get started</div>
+    
+    <div class="title" data-id="legacy-0045" style="left: 42.104689916893015%; top: 1659px; font-size: 18px; color: #8800ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-8deg); z-index: 46;">Josh and the fucks who don&#39;t matter</div>
+    
+    <div class="title" data-id="legacy-0046" style="left: 34.81753445796485%; top: 1733px; font-size: 22px; color: #ff4400; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-4deg); z-index: 47;">negazine</div>
+    
+    <div class="title" data-id="legacy-0047" style="left: 72.19611580751017%; top: 1802px; font-size: 22px; color: #ffffff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(7deg); z-index: 48;">For Us By U</div>
+    
+    <div class="title" data-id="legacy-0048" style="left: 53.29567971778256%; top: 409px; font-size: 35px; color: #66ff66; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-12deg); z-index: 49;">Capitalists, don’t invest your capital in the cement industry!</div>
+    
+    <div class="title" data-id="legacy-0049" style="left: 25.026286416951802%; top: 868px; font-size: 16px; color: #66ff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(14deg); z-index: 50;">{{},{},{}}; III; Three; 3, 3, 3, ... :  Mimesis</div>
+    
+    <div class="title" data-id="legacy-0050" style="left: 8.105590014155958%; top: 1397px; font-size: 41px; color: #ff00ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(23deg); z-index: 51;">Always the Candle in the Bovine Eye</div>
+    
+    <div class="title" data-id="legacy-0051" style="left: 33.32172024997454%; top: 1945px; font-size: 15px; color: #0088ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-11deg); z-index: 52;">The craftsman dances upon a volcano</div>
+    
+    <div class="title" data-id="legacy-0052" style="left: 45.667122334413605%; top: 1236px; font-size: 22px; color: #ff6666; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(10deg); z-index: 53;">Metaphysically Attacking Others</div>
+    
+    <div class="title" data-id="legacy-0053" style="left: 27.8644671971546%; top: 1703px; font-size: 18px; color: #ffff00; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(10deg); z-index: 54;">are we the badies</div>
+    
+    <div class="title" data-id="legacy-0054" style="left: 45.64162688954441%; top: 1004px; font-size: 15px; color: #88ff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(23deg); z-index: 55;">Bic Mag
+Bag Mic
+Mig Bac
+Mc Bag
+MAGA Big</div>
+    
+    <div class="title" data-id="legacy-0055" style="left: 6.352611643768499%; top: 1384px; font-size: 26px; color: #ff00ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(27deg); z-index: 56;">Every Big Mac Is Liquid In State With A Change In Scale</div>
+    
+    <div class="title" data-id="legacy-0056" style="left: 80.77429213809843%; top: 497px; font-size: 40px; color: #00ff00; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-27deg); z-index: 57;">Big Mac Tax</div>
+    
+    <div class="title" data-id="legacy-0057" style="left: 74.73861608806529%; top: 1842px; font-size: 17px; color: #ff0000; font-family: &#39;Georgia&#39;, serif; transform: rotate(16deg); z-index: 58;">Communal Pursuit of the Big Mac</div>
+    
+    <div class="title" data-id="legacy-0058" style="left: 73.54241781821341%; top: 563px; font-size: 21px; color: #ff4400; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(11deg); z-index: 59;">Cute Cute, In a Stupid-Ass Way</div>
+    
+    <div class="title" data-id="legacy-0059" style="left: 81.74574416462595%; top: 1012px; font-size: 36px; color: #0000ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(19deg); z-index: 60;">bad job</div>
+    
+    <div class="title" data-id="legacy-0060" style="left: 72.70721002605663%; top: 2457px; font-size: 21px; color: #ff0088; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(21deg); z-index: 61;">Spicy Axiom</div>
+    
+    <div class="title" data-id="legacy-0061" style="left: 12.30893406697304%; top: 1011px; font-size: 24px; color: #4400ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(12deg); z-index: 62;">audio sensory memory reprogramming</div>
+    
+    <div class="title" data-id="legacy-0062" style="left: 54.431084597171754%; top: 899px; font-size: 29px; color: #ffff00; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-21deg); z-index: 63;">sleep story
+I think thats the name. category of video on YouTube that people listen to to fall asleep</div>
+    
+    <div class="title" data-id="legacy-0063" style="left: 75.00640051658442%; top: 996px; font-size: 19px; color: #6666ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(27deg); z-index: 64;">strategic schizophrenia</div>
+    
+    <div class="title" data-id="legacy-0064" style="left: 29.245981946279894%; top: 1991px; font-size: 34px; color: #ff0000; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-13deg); z-index: 65;">once is was</div>
+    
+    <div class="title" data-id="legacy-0065" style="left: 38.6370446967163%; top: 579px; font-size: 32px; color: #ff4400; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(6deg); z-index: 66;">Green Ray Machine</div>
+    
+    <div class="title" data-id="legacy-0066" style="left: 11.854113740824827%; top: 2096px; font-size: 18px; color: #88ff00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(22deg); z-index: 67;">be the do</div>
+    
+    <div class="title" data-id="legacy-0067" style="left: 70.05711982138727%; top: 1627px; font-size: 22px; color: #ffff66; font-family: &#39;Courier New&#39;, monospace; transform: rotate(26deg); z-index: 68;">fucked up feelings</div>
+    
+    <div class="title" data-id="legacy-0068" style="left: 56.70004346100077%; top: 1238px; font-size: 14px; color: #ffffff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(14deg); z-index: 69;">we should have more</div>
+    
+    <div class="title" data-id="legacy-0069" style="left: 76.07300243946436%; top: 1045px; font-size: 32px; color: #ffff66; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-11deg); z-index: 70;">viewpoint abyss</div>
+    
+    <div class="title" data-id="legacy-0070" style="left: 39.488639012911904%; top: 1124px; font-size: 18px; color: #0088ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(13deg); z-index: 71;">system vacuum</div>
+    
+    <div class="title" data-id="legacy-0071" style="left: 10.37993504869877%; top: 717px; font-size: 26px; color: #ff8800; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-17deg); z-index: 72;">hetero/homo coin :coin:</div>
+    
+    <div class="title" data-id="legacy-0072" style="left: 19.104401953756376%; top: 372px; font-size: 38px; color: #ff0088; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(9deg); z-index: 73;">temporal index</div>
+    
+    <div class="title" data-id="legacy-0073" style="left: 9.509531750271215%; top: 671px; font-size: 20px; color: #00ffff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(21deg); z-index: 74;">architectural apparition</div>
+    
+    <div class="title" data-id="legacy-0074" style="left: 82.86014810313907%; top: 2000px; font-size: 30px; color: #ffff66; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(17deg); z-index: 75;">playing with dead things</div>
+    
+    <div class="title" data-id="legacy-0075" style="left: 22.37782905695758%; top: 1472px; font-size: 22px; color: #88ff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-21deg); z-index: 76;">irreality</div>
+    
+    <div class="title" data-id="legacy-0076" style="left: 14.609603487720506%; top: 857px; font-size: 29px; color: #00ffff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(4deg); z-index: 77;">Two celebrities roll a hoop</div>
+    
+    <div class="title" data-id="legacy-0077" style="left: 77.15607593921479%; top: 1466px; font-size: 15px; color: #00ff88; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-7deg); z-index: 78;">&lt;https://www.urbandictionary.com/define.php?term=fell+off|Mom Fell Off&gt;</div>
+    
+    <div class="title" data-id="legacy-0078" style="left: 40.580826009173094%; top: 1743px; font-size: 31px; color: #0000ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(24deg); z-index: 79;">Watching the Cats Grow</div>
+    
+    <div class="title" data-id="legacy-0079" style="left: 7.855594803654018%; top: 2401px; font-size: 25px; color: #ff4400; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(2deg); z-index: 80;">The Genesis of the Capitalist Farmer</div>
+    
+    <div class="title" data-id="legacy-0080" style="left: 17.32693878775548%; top: 1795px; font-size: 37px; color: #ffffff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(9deg); z-index: 81;">Beggars Licence</div>
+    
+    <div class="title" data-id="legacy-0081" style="left: 82.69948066587364%; top: 1720px; font-size: 27px; color: #00ffff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(3deg); z-index: 82;">_A Minnesota farmer’s suicide note:_
+&amp;gt; _&#34;Farming is just one long goodby.&#34;_</div>
+    
+    <div class="title" data-id="legacy-0082" style="left: 67.92931779062484%; top: 1319px; font-size: 18px; color: #88ff00; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(1deg); z-index: 83;">Orange Man Bad</div>
+    
+    <div class="title" data-id="legacy-0083" style="left: 65.87097625693164%; top: 2231px; font-size: 21px; color: #00ff88; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-8deg); z-index: 84;">good news coal miners</div>
+    
+    <div class="title" data-id="legacy-0084" style="left: 22.213651407142404%; top: 1699px; font-size: 39px; color: #ff00ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(12deg); z-index: 85;">Nothing for Money, and the Tricks for Free</div>
+    
+    <div class="title" data-id="legacy-0085" style="left: 7.041206428578727%; top: 1324px; font-size: 33px; color: #4400ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-6deg); z-index: 86;">ear wyrm</div>
+    
+    <div class="title" data-id="legacy-0086" style="left: 61.541217331862406%; top: 1574px; font-size: 41px; color: #ff6666; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(5deg); z-index: 87;">Market Gardening</div>
+    
+    <div class="title" data-id="legacy-0087" style="left: 84.96357343088341%; top: 770px; font-size: 38px; color: #4400ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-8deg); z-index: 88;">Alien Arrows</div>
+    
+    <div class="title" data-id="legacy-0088" style="left: 48.10061120405065%; top: 248px; font-size: 25px; color: #4400ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-27deg); z-index: 89;">knowledge-labor  decoupling</div>
+    
+    <div class="title" data-id="legacy-0089" style="left: 19.374358049581332%; top: 1629px; font-size: 15px; color: #66ff66; font-family: &#39;Georgia&#39;, serif; transform: rotate(0deg); z-index: 90;">exploitation index</div>
+    
+    <div class="title" data-id="legacy-0090" style="left: 66.84858967726204%; top: 1732px; font-size: 38px; color: #ff8800; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(23deg); z-index: 91;">stonks</div>
+    
+    <div class="title" data-id="legacy-0091" style="left: 21.89387034240484%; top: 232px; font-size: 41px; color: #8800ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-24deg); z-index: 92;">what we gotta do</div>
+    
+    <div class="title" data-id="legacy-0092" style="left: 55.30181957713786%; top: 1262px; font-size: 35px; color: #ff0088; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(3deg); z-index: 93;">I dont like using the word art</div>
+    
+    <div class="title" data-id="legacy-0093" style="left: 83.43741788268693%; top: 2229px; font-size: 19px; color: #00ff88; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(8deg); z-index: 94;">The Earth is a Cat</div>
+    
+    <div class="title" data-id="legacy-0094" style="left: 15.16065542444807%; top: 923px; font-size: 23px; color: #ff8800; font-family: &#39;Georgia&#39;, serif; transform: rotate(19deg); z-index: 95;">The Timecutter</div>
+    
+    <div class="title" data-id="legacy-0095" style="left: 64.38952743476422%; top: 1817px; font-size: 35px; color: #ff0000; font-family: &#39;Courier New&#39;, monospace; transform: rotate(18deg); z-index: 96;">volatility smile</div>
+    
+    <div class="title" data-id="legacy-0096" style="left: 34.4504460701047%; top: 2380px; font-size: 20px; color: #00ff88; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-22deg); z-index: 97;">authority of the steam</div>
+    
+    <div class="title" data-id="legacy-0097" style="left: 20.350021802561063%; top: 2020px; font-size: 42px; color: #ffff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-5deg); z-index: 98;">art critism is &#34;harmful&#34; because it disturbs wealthy people in their enjoyment of eye way way</div>
+    
+    <div class="title" data-id="legacy-0098" style="left: 79.21724691599466%; top: 1397px; font-size: 18px; color: #66ff66; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(19deg); z-index: 99;">stab adam smith</div>
+    
+    <div class="title" data-id="legacy-0099" style="left: 29.29774390623461%; top: 1124px; font-size: 35px; color: #00ff88; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(27deg); z-index: 100;">consumption assumption</div>
+    
+    <div class="title" data-id="legacy-0100" style="left: 49.95765506584757%; top: 199px; font-size: 26px; color: #00ff00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-15deg); z-index: 101;">decelerationist</div>
+    
+    <div class="title" data-id="legacy-0101" style="left: 11.576605541295592%; top: 1470px; font-size: 21px; color: #00ff88; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-7deg); z-index: 102;">_ain&#39;t got no date_</div>
+    
+    <div class="title" data-id="legacy-0102" style="left: 5.082639773797287%; top: 2304px; font-size: 25px; color: #ffcc00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-21deg); z-index: 103;">Serf&#39;s Up!</div>
+    
+    <div class="title" data-id="legacy-0103" style="left: 29.5706021723597%; top: 891px; font-size: 23px; color: #ff0088; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-4deg); z-index: 104;">Forgetting the Metric</div>
+    
+    <div class="title" data-id="legacy-0104" style="left: 71.41766344177614%; top: 2393px; font-size: 26px; color: #6666ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(25deg); z-index: 105;">co-boredism</div>
+    
+    <div class="title" data-id="legacy-0105" style="left: 31.54624488767409%; top: 1932px; font-size: 17px; color: #ffcc00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(26deg); z-index: 106;">newmark</div>
+    
+    <div class="title" data-id="legacy-0106" style="left: 63.884211110347856%; top: 1353px; font-size: 37px; color: #ff4400; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-10deg); z-index: 107;">news/life balance</div>
+    
+    <div class="title" data-id="legacy-0107" style="left: 17.603506047684885%; top: 326px; font-size: 33px; color: #8800ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-5deg); z-index: 108;">they can&#39;t stop us</div>
+    
+    <div class="title" data-id="legacy-0108" style="left: 26.623993503411448%; top: 1055px; font-size: 17px; color: #ff0000; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(26deg); z-index: 109;">they can&#39;t even stop themselves</div>
+    
+    <div class="title" data-id="legacy-0109" style="left: 36.65698224352967%; top: 2050px; font-size: 16px; color: #ff0088; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-29deg); z-index: 110;">cathode cafe</div>
+    
+    <div class="title" data-id="legacy-0110" style="left: 46.12495949193206%; top: 366px; font-size: 32px; color: #ff6666; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-29deg); z-index: 111;">Jeu d&#39;esprit</div>
+    
+    <div class="title" data-id="legacy-0111" style="left: 70.75569898421435%; top: 1797px; font-size: 17px; color: #ffff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(23deg); z-index: 112;">The body of departure
+The body of arrival</div>
+    
+    <div class="title" data-id="legacy-0112" style="left: 23.88866370860817%; top: 975px; font-size: 32px; color: #ff0000; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(10deg); z-index: 113;">*Synthetic Solidarity™*</div>
+    
+    <div class="title" data-id="legacy-0113" style="left: 55.768181923886985%; top: 816px; font-size: 32px; color: #0088ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-1deg); z-index: 114;">the hole is where the magic is</div>
+    
+    <div class="title" data-id="legacy-0114" style="left: 41.39043678126184%; top: 1571px; font-size: 16px; color: #6666ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-10deg); z-index: 115;">The expenditures of a primitive being</div>
+    
+    <div class="title" data-id="legacy-0115" style="left: 40.02974415201357%; top: 2322px; font-size: 18px; color: #ffcc00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-18deg); z-index: 116;">BEDO “we’re all brendans after all.”</div>
+    
+    <div class="title" data-id="legacy-0116" style="left: 16.24152723352701%; top: 1834px; font-size: 18px; color: #ffff00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-14deg); z-index: 117;">in reference to Juan Atkins quote</div>
+    
+    <div class="title" data-id="legacy-0117" style="left: 49.11051165253782%; top: 803px; font-size: 30px; color: #6666ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(5deg); z-index: 118;">note for future self</div>
+    
+    <div class="title" data-id="legacy-0118" style="left: 35.55809861851122%; top: 544px; font-size: 37px; color: #ff8800; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(22deg); z-index: 119;">There Are No UFOs
+
+(_note for future self:_ in reference to Juan Atkins quote: &#34;There are no UFOs. Machine music is the only way forward&#34;)</div>
+    
+    <div class="title" data-id="legacy-0119" style="left: 22.201387139039138%; top: 1032px; font-size: 15px; color: #00ffff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(21deg); z-index: 120;">immoral tally</div>
+    
+    <div class="title" data-id="legacy-0120" style="left: 19.179457213041363%; top: 1040px; font-size: 28px; color: #ffffff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-30deg); z-index: 121;">Immortality Sale</div>
+    
+    <div class="title" data-id="legacy-0121" style="left: 21.374883117672045%; top: 925px; font-size: 33px; color: #ffcc00; font-family: &#39;Georgia&#39;, serif; transform: rotate(16deg); z-index: 122;">&#34;Don&#39;t Die&#34;</div>
+    
+    <div class="title" data-id="legacy-0122" style="left: 35.98490382760007%; top: 403px; font-size: 27px; color: #4400ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(3deg); z-index: 123;">The Vortex of Central Suspicion</div>
+    
+    <div class="title" data-id="legacy-0123" style="left: 15.890764785232383%; top: 1073px; font-size: 17px; color: #ff8800; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-22deg); z-index: 124;">more womp-womps</div>
+    
+    <div class="title" data-id="legacy-0124" style="left: 36.1314937266108%; top: 1588px; font-size: 25px; color: #ff0088; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(14deg); z-index: 125;">Gesundheit</div>
+    
+    <div class="title" data-id="legacy-0125" style="left: 83.36619280242084%; top: 1485px; font-size: 42px; color: #ffcc00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-21deg); z-index: 126;">Murph from Earph Lights the Land on Fire</div>
+    
+    <div class="title" data-id="legacy-0126" style="left: 75.99271384800275%; top: 1799px; font-size: 36px; color: #ff6666; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-26deg); z-index: 127;">Doubt is a Paper Tiger</div>
+    
+    <div class="title" data-id="legacy-0127" style="left: 45.099649533161376%; top: 2216px; font-size: 15px; color: #00ff88; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-11deg); z-index: 128;">home is where the generationally amassed wealth is</div>
+    
+    <div class="title" data-id="legacy-0128" style="left: 2.3899816290283518%; top: 2495px; font-size: 19px; color: #ffff66; font-family: &#39;Courier New&#39;, monospace; transform: rotate(22deg); z-index: 129;">A serious tutorial for funny learning.
+A funny tutorial for serious learning.</div>
+    
+    <div class="title" data-id="legacy-0129" style="left: 50.821779819258104%; top: 629px; font-size: 39px; color: #ff6666; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(26deg); z-index: 130;">shpilmgrim</div>
+    
+    <div class="title" data-id="legacy-0130" style="left: 33.61610819955604%; top: 2302px; font-size: 21px; color: #00ff00; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(15deg); z-index: 131;">floating in a mire of semantical puzzles</div>
+    
+    <div class="title" data-id="legacy-0131" style="left: 18.32268483666665%; top: 1410px; font-size: 28px; color: #66ff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(5deg); z-index: 132;">shirts say it for me</div>
+    
+    <div class="title" data-id="legacy-0132" style="left: 62.900847148375384%; top: 1929px; font-size: 34px; color: #6666ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-19deg); z-index: 133;">trad bad</div>
+    
+    <div class="title" data-id="legacy-0133" style="left: 11.27490253127512%; top: 1450px; font-size: 32px; color: #00ff88; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-25deg); z-index: 134;">Just so you know, I&#39;m not a trad cath, byyyyeeee!!!</div>
+    
+    <div class="title" data-id="legacy-0134" style="left: 57.65326286594221%; top: 518px; font-size: 26px; color: #ffff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-22deg); z-index: 135;">clacker wacker</div>
+    
+    <div class="title" data-id="legacy-0135" style="left: 6.988864401085474%; top: 346px; font-size: 38px; color: #ff6666; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-8deg); z-index: 136;">poor person shoots the gun and poor art comes out</div>
+    
+    <div class="title" data-id="legacy-0136" style="left: 63.364798312753386%; top: 465px; font-size: 26px; color: #00ff88; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(8deg); z-index: 137;">Trousers of Awakening</div>
+    
+    <div class="title" data-id="legacy-0137" style="left: 72.6916425464234%; top: 1847px; font-size: 19px; color: #ffffff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-28deg); z-index: 138;">the beating of great hinds</div>
+    
+    <div class="title" data-id="legacy-0138" style="left: 75.03255227849414%; top: 1915px; font-size: 24px; color: #00ff00; font-family: &#39;Georgia&#39;, serif; transform: rotate(-19deg); z-index: 139;">the price of a working hour is 3D</div>
+    
+    <div class="title" data-id="1773416865.001749" style="left: 27.151068195588177%; top: 1491px; font-size: 20px; color: #66ff66; font-family: &#39;Georgia&#39;, serif; transform: rotate(0deg); z-index: 140;">under a gaze that does not wait for meaning</div>
+    
+    <div class="title" data-id="1773416026.754569" style="left: 70.75898537467451%; top: 2258px; font-size: 17px; color: #88ff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-13deg); z-index: 141;">boar croak</div>
+    
+    <div class="title" data-id="1773415899.772509" style="left: 20.05008064717521%; top: 295px; font-size: 31px; color: #88ff00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(20deg); z-index: 142;">Bore roke</div>
+    
+    <div class="title" data-id="1773415799.190719" style="left: 17.87468339897378%; top: 1790px; font-size: 22px; color: #00ff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-7deg); z-index: 143;">Bare awk</div>
+    
+    <div class="title" data-id="1773415767.770959" style="left: 41.755784556943645%; top: 1990px; font-size: 35px; color: #00ff00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(15deg); z-index: 144;">Bar OK</div>
+    
+    <div class="title" data-id="1773415744.079079" style="left: 29.331840464735453%; top: 1414px; font-size: 19px; color: #ffffff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-6deg); z-index: 145;">bar oak</div>
+    
+    <div class="title" data-id="1773415637.712339" style="left: 41.951988282895776%; top: 456px; font-size: 40px; color: #0088ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(0deg); z-index: 146;">barrow oak</div>
+    
+    <div class="title" data-id="1773414795.108609" style="left: 2.0737611265385465%; top: 800px; font-size: 23px; color: #0088ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-20deg); z-index: 147;">borrowque</div>
+    
+    <div class="title" data-id="1773414726.892139" style="left: 66.15317391737683%; top: 1797px; font-size: 34px; color: #00ff88; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-9deg); z-index: 148;">barrowque</div>
+    
+    <div class="title" data-id="1773386886.884209" style="left: 5.107076304375493%; top: 135px; font-size: 23px; color: #ff4400; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-25deg); z-index: 149;">note to torture self</div>
+    
+    <div class="title" data-id="1773252224.465479" style="left: 6.6365746090241995%; top: 699px; font-size: 28px; color: #ffff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-5deg); z-index: 150;">General Exudation</div>
+    
+    <div class="title" data-id="1773252220.075329" style="left: 84.27561399009147%; top: 2476px; font-size: 24px; color: #00ff88; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-1deg); z-index: 151;">The General Movement of Exudation</div>
+    
+    <div class="title" data-id="1773246976.230789" style="left: 3.160497054688409%; top: 992px; font-size: 16px; color: #ff6666; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(22deg); z-index: 152;">(all my [all my {happiness} is gone] is gone)</div>
+    
+    <div class="title" data-id="1773246904.866109" style="left: 17.96312958197553%; top: 2310px; font-size: 24px; color: #4400ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(26deg); z-index: 153;">stop listening to me</div>
+    
+    <div class="title" data-id="1773204895.374779" style="left: 76.79014923509058%; top: 1938px; font-size: 31px; color: #00ff88; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-5deg); z-index: 154;">I could go for a gland slam rn</div>
+    
+    <div class="title" data-id="1772776999.315699" style="left: 39.8894579547515%; top: 1196px; font-size: 41px; color: #ff00ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(18deg); z-index: 155;">Sinwarian Acceleration</div>
+    
+    <div class="title" data-id="1772495750.012829" style="left: 29.455906643225454%; top: 612px; font-size: 25px; color: #00ffff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-1deg); z-index: 156;">reminds me of this &lt;https://www.careyyoung.com/declared-void&gt; and this &#34;The story for the film was conceived when director &lt;https://en.wikipedia.org/wiki/Ruben_%C3%96stlund|Ruben Östlund&gt; and producer &lt;https://en.wikipedia.org/wiki/Kalle_Boman|Kalle Boman&gt; entered an installation into the Vandalorum Museum in &lt;https://en.wikipedia.org/wiki/V%C3%A4rnamo|Värnamo&gt; in 2014.&lt;https://en.wikipedia.org/wiki/The_Square_(2017_film)#cite_note-Page-11|[10]&gt; In their artists&#39; statement, they wrote that &#34;The Square is a sanctuary of trust and caring. Within it we all share equal rights and obligations.&#34;&lt;https://en.wikipedia.org/wiki/The_Square_(2017_film)#cite_note-Page-11|[10]&gt;</div>
+    
+    <div class="title" data-id="1772495198.853509" style="left: 24.255547448825094%; top: 2400px; font-size: 41px; color: #4400ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-17deg); z-index: 157;">first amedendment speech area</div>
+    
+    <div class="title" data-id="1771726375.543239" style="left: 55.81470888926694%; top: 843px; font-size: 24px; color: #0088ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(14deg); z-index: 158;">make you sure how you know how much power you have</div>
+    
+    <div class="title" data-id="1771521440.557799" style="left: 71.88100185106859%; top: 120px; font-size: 41px; color: #00ff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(1deg); z-index: 159;">Janus pointing</div>
+    
+    <div class="title" data-id="1771462721.954979" style="left: 7.350919021963419%; top: 2055px; font-size: 24px; color: #ffffff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-5deg); z-index: 160;">focus on living not coding</div>
+    
+    <div class="title" data-id="1771462408.135919" style="left: 76.90206044495243%; top: 658px; font-size: 24px; color: #88ff00; font-family: &#39;Georgia&#39;, serif; transform: rotate(29deg); z-index: 161;">You should never be clicking these days!</div>
+    
+    <div class="title" data-id="1770244823.318079" style="left: 8.91158626116808%; top: 259px; font-size: 40px; color: #ff0000; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(3deg); z-index: 162;">I would have the honor if you could verify me as The Orlando Asian Mogger</div>
+    
+    <div class="title" data-id="1769631342.052999" style="left: 33.88377802746929%; top: 2128px; font-size: 37px; color: #ff0000; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-23deg); z-index: 163;">sweat wheat meet and greet come an beat the heat</div>
+    
+    <div class="title" data-id="1769047034.703229" style="left: 67.7932690860281%; top: 1391px; font-size: 38px; color: #ffff66; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(18deg); z-index: 164;">I wasn&#39;t ear starving</div>
+    
+    <div class="title" data-id="1769045858.420799" style="left: 78.434804289111%; top: 2218px; font-size: 39px; color: #ff6666; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(21deg); z-index: 165;">mustard so I can cream</div>
+    
+    <div class="title" data-id="1769016806.600829" style="left: 51.32676507274192%; top: 740px; font-size: 18px; color: #ff8800; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-29deg); z-index: 166;">between the extremes p...p</div>
+    
+    <div class="title" data-id="1769015461.318739" style="left: 44.4658034250694%; top: 1296px; font-size: 24px; color: #ffff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(20deg); z-index: 167;">Tip of the Fatberg</div>
+    
+    <div class="title" data-id="1768015701.536759" style="left: 75.03608016836515%; top: 2380px; font-size: 31px; color: #00ff88; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(20deg); z-index: 168;">Music to play over your conspiring</div>
+    
+    <div class="title" data-id="1767746987.482579" style="left: 14.16279287782119%; top: 1661px; font-size: 33px; color: #00ff00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-30deg); z-index: 169;">a certian kind of freedom</div>
+    
+    <div class="title" data-id="1767719004.714269" style="left: 22.86355054414419%; top: 927px; font-size: 38px; color: #ffff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(4deg); z-index: 170;">_l&#39;argent des autres._ †</div>
+    
+    <div class="title" data-id="1767223453.255579" style="left: 31.74994771183012%; top: 2342px; font-size: 19px; color: #ff6666; font-family: &#39;Georgia&#39;, serif; transform: rotate(-2deg); z-index: 171;">pair a dice prison</div>
+    
+    <div class="title" data-id="1766168550.216759" style="left: 81.7568457805098%; top: 1915px; font-size: 39px; color: #ff4400; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-10deg); z-index: 172;">yeah not so bad</div>
+    
+    <div class="title" data-id="1766168216.371969" style="left: 4.07938587423025%; top: 1681px; font-size: 18px; color: #ffff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-16deg); z-index: 173;">only 1%, pretty good</div>
+    
+    <div class="title" data-id="1766167910.692539" style="left: 45.85545953764857%; top: 790px; font-size: 37px; color: #00ffff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-26deg); z-index: 174;">my inventory is 99% accurate and im 1% more dead</div>
+    
+    <div class="title" data-id="1766167842.295879" style="left: 17.55906767110532%; top: 1566px; font-size: 14px; color: #88ff00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-8deg); z-index: 175;">glad ur still alive</div>
+    
+    <div class="title" data-id="1766167835.556329" style="left: 29.621326410143602%; top: 1044px; font-size: 30px; color: #ffffff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(6deg); z-index: 176;">hi @dave</div>
+    
+    <div class="title" data-id="1766167819.644799" style="left: 40.69010607971939%; top: 593px; font-size: 37px; color: #0088ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-4deg); z-index: 177;">the lyrics to this song is a series of yes and nose :nose:</div>
+    
+    <div class="title" data-id="1766167699.122439" style="left: 16.604532947268694%; top: 643px; font-size: 40px; color: #00ff88; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(8deg); z-index: 178;">Is &#39;is&#39; an is as any &#39;is&#39; is?</div>
+    
+    <div class="title" data-id="1763515621.260599" style="left: 71.86524315041873%; top: 753px; font-size: 36px; color: #ffff66; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(2deg); z-index: 179;">beard with bald guy</div>
+    
+    <div class="title" data-id="1763051380.050159" style="left: 48.35399891618684%; top: 2256px; font-size: 28px; color: #ffffff; font-family: &#39;Georgia&#39;, serif; transform: rotate(5deg); z-index: 180;">DO NOT REPEAT THIS INSIGHT</div>
+    
+    <div class="title" data-id="1762311312.356189" style="left: 72.97290174069894%; top: 1657px; font-size: 39px; color: #ffff66; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-29deg); z-index: 181;">song title idea:
+each track is named a single word. the album forms a complete sentence</div>
+    
+    <div class="title" data-id="1762311220.855899" style="left: 35.75161243231767%; top: 1633px; font-size: 28px; color: #0000ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(16deg); z-index: 182;">read war and peace or watch one piece</div>
+    
+    <div class="title" data-id="1762306985.817599" style="left: 14.111192107528796%; top: 2329px; font-size: 31px; color: #8800ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-30deg); z-index: 183;">return to animism</div>
+    
+    <div class="title" data-id="1761329034.604439" style="left: 71.85199495039534%; top: 1915px; font-size: 15px; color: #6666ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-22deg); z-index: 184;">...To Exist Is To Be a Subject of Blind Compulsion.</div>
+    
+    <div class="title" data-id="1761248932.741029" style="left: 78.38043557818479%; top: 813px; font-size: 22px; color: #88ff00; font-family: &#39;Georgia&#39;, serif; transform: rotate(-27deg); z-index: 185;">Again There Comes an Experiment With the Human Work</div>
+    
+    <div class="title" data-id="1761095539.766789" style="left: 4.811952467671125%; top: 1313px; font-size: 25px; color: #8800ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(8deg); z-index: 186;">director 69</div>
+    
+    <div class="title" data-id="1761093606.098319" style="left: 19.882616074817854%; top: 318px; font-size: 16px; color: #0000ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(0deg); z-index: 187;">sleep cartel</div>
+    
+    <div class="title" data-id="1761093601.166799" style="left: 21.521077741950634%; top: 2024px; font-size: 36px; color: #ff4400; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-16deg); z-index: 188;">rewards viral engagement at all costs</div>
+    
+    <div class="title" data-id="1761090012.473989" style="left: 55.5086570972178%; top: 1773px; font-size: 22px; color: #ff8800; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-8deg); z-index: 189;">What is to be done, fellas?</div>
+    
+    <div class="title" data-id="1760717909.030059" style="left: 17.61885262071725%; top: 145px; font-size: 25px; color: #00ff88; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-8deg); z-index: 190;">You Lamp! You Towel! You Plate!</div>
+    
+    <div class="title" data-id="1759880563.348559" style="left: 15.50071891505179%; top: 1171px; font-size: 41px; color: #ffff66; font-family: &#39;Georgia&#39;, serif; transform: rotate(-10deg); z-index: 191;">The Wurly Durly World of the Visually Too Much</div>
+    
+    <div class="title" data-id="1759866831.732419" style="left: 65.55566035394065%; top: 2439px; font-size: 14px; color: #ffffff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-19deg); z-index: 192;">world capitalist intercourse</div>
+    
+    <div class="title" data-id="1759451126.861169" style="left: 45.97324153207379%; top: 2292px; font-size: 42px; color: #00ff88; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(18deg); z-index: 193;">f.a.t.
+failed attitude test</div>
+    
+    <div class="title" data-id="1759354583.749699" style="left: 41.76054194418779%; top: 1735px; font-size: 29px; color: #66ff66; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(26deg); z-index: 194;">normal university</div>
+    
+    <div class="title" data-id="1758323131.930019" style="left: 65.11477503187737%; top: 1488px; font-size: 36px; color: #ffff00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(5deg); z-index: 195;">this is real</div>
+    
+    <div class="title" data-id="1758303652.112599" style="left: 56.248808590919424%; top: 2169px; font-size: 23px; color: #4400ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(7deg); z-index: 196;">Supersaturated Mother Liquor</div>
+    
+    <div class="title" data-id="1758145108.890459" style="left: 43.54487506439775%; top: 491px; font-size: 15px; color: #0088ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-29deg); z-index: 197;">ipad dads</div>
+    
+    <div class="title" data-id="1758139911.705779" style="left: 44.67126498628973%; top: 437px; font-size: 42px; color: #00ffff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(4deg); z-index: 198;">I drive my tractor. I study mathematics. I sleep well.</div>
+    
+    <div class="title" data-id="1758084720.930029" style="left: 60.07799108319145%; top: 907px; font-size: 20px; color: #ffcc00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-3deg); z-index: 199;">the flesh was sense. it made no soft</div>
+    
+    <div class="title" data-id="1758066246.184249" style="left: 64.52562367358334%; top: 1880px; font-size: 24px; color: #ffcc00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(23deg); z-index: 200;">Despite All My Tabs I&#39;m Still Just a Rat in a Cage</div>
+    
+    <div class="title" data-id="1758054284.374679" style="left: 44.04965528445927%; top: 237px; font-size: 38px; color: #00ffff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-12deg); z-index: 201;">Spillikins!</div>
+    
+    <div class="title" data-id="1757852822.157019" style="left: 22.798260559776%; top: 903px; font-size: 14px; color: #88ff00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-18deg); z-index: 202;">The flesh was soft. It made no sense.</div>
+    
+    <div class="title" data-id="1757726527.534849" style="left: 40.54547604175334%; top: 1528px; font-size: 21px; color: #66ff66; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-30deg); z-index: 203;">*people are always brendan</div>
+    
+    <div class="title" data-id="1757690836.327639" style="left: 6.428259356331324%; top: 837px; font-size: 24px; color: #00ffff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(29deg); z-index: 204;">people are always human</div>
+    
+    <div class="title" data-id="1757465535.501939" style="left: 27.042939351549336%; top: 1973px; font-size: 33px; color: #ffff66; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-6deg); z-index: 205;">defund the chat</div>
+    
+    <div class="title" data-id="1757465511.007479" style="left: 13.277003827463338%; top: 1323px; font-size: 18px; color: #0000ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(18deg); z-index: 206;">the worksheet</div>
+    
+    <div class="title" data-id="1757464600.111669" style="left: 48.84873180489404%; top: 930px; font-size: 29px; color: #ff0088; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(3deg); z-index: 207;">controlling interests
+trolling interests</div>
+    
+    <div class="title" data-id="1757194767.351929" style="left: 14.292691730330029%; top: 2387px; font-size: 28px; color: #ffffff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(14deg); z-index: 208;">Verdad y Certeza</div>
+    
+    <div class="title" data-id="1756746187.076079" style="left: 2.6282165101762494%; top: 1602px; font-size: 28px; color: #ff0000; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(10deg); z-index: 209;">I haven&#39;t read this</div>
+    
+    <div class="title" data-id="1756745350.222879" style="left: 4.92967943228195%; top: 1331px; font-size: 25px; color: #0088ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(24deg); z-index: 210;">npc:
+non playable citizen
+non patterning citizen 
+non paying citizen 
+nano paternal citizen 
+nonetised personal chastity
+nonentary payable cogent
+neurotic pizza chart
+novel personhood crash
+no problems canceling 
+narrative pattern corrosion 
+narrative postmodern condition 
+now personhood clickbait
+non pictured century
+negative profit culture 
+npc player connection 
+narrative personhood conditioning
+
+
+whiped these out while watching P.G. Talk 1.0. feel free to mix and match, add more</div>
+    
+    <div class="title" data-id="1756738814.593329" style="left: 51.57523514717774%; top: 1543px; font-size: 35px; color: #00ffff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(5deg); z-index: 211;">:point_up:hearing this in a philipino accent really makes it for me</div>
+    
+    <div class="title" data-id="1756698672.698019" style="left: 62.99562762238469%; top: 2073px; font-size: 32px; color: #6666ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-28deg); z-index: 212;">[recalling a sign i saw in the philippines on the back of a trike:]
+
+drugs are retarted [sic]
+don&#39;t get started</div>
+    
+    <div class="title" data-id="1756663003.168539" style="left: 49.06977704791295%; top: 2184px; font-size: 40px; color: #00ffff; font-family: &#39;Georgia&#39;, serif; transform: rotate(27deg); z-index: 213;">can of beans</div>
+    
+    <div class="title" data-id="1756611021.532829" style="left: 27.625671844618406%; top: 1198px; font-size: 33px; color: #00ff88; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(14deg); z-index: 214;">Josh and the fucks who don&#39;t matter</div>
+    
+    <div class="title" data-id="1756592809.168689" style="left: 7.122828132402901%; top: 1131px; font-size: 33px; color: #ffcc00; font-family: &#39;Georgia&#39;, serif; transform: rotate(-28deg); z-index: 215;">negazine</div>
+    
+    <div class="title" data-id="1755982636.105009" style="left: 42.191795327360126%; top: 1081px; font-size: 31px; color: #88ff00; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-19deg); z-index: 216;">For Us By U</div>
+    
+    <div class="title" data-id="1755967756.552509" style="left: 65.7767824912149%; top: 355px; font-size: 34px; color: #88ff00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-26deg); z-index: 217;">Capitalists, don’t invest your capital in the cement industry!</div>
+    
+    <div class="title" data-id="1755966872.839159" style="left: 66.55793038873712%; top: 1796px; font-size: 31px; color: #ff0088; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-14deg); z-index: 218;">{{},{},{}}; III; Three; 3, 3, 3, ... :  Mimesis</div>
+    
+    <div class="title" data-id="1755830207.251089" style="left: 73.8307656195338%; top: 2125px; font-size: 17px; color: #ff00ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-14deg); z-index: 219;">Always the Candle in the Bovine Eye</div>
+    
+    <div class="title" data-id="1755719315.227449" style="left: 82.0288853593712%; top: 732px; font-size: 27px; color: #88ff00; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-20deg); z-index: 220;">The craftsman dances upon a volcano</div>
+    
+    <div class="title" data-id="1755530210.290749" style="left: 57.41510977981337%; top: 1996px; font-size: 17px; color: #ffff66; font-family: &#39;Courier New&#39;, monospace; transform: rotate(24deg); z-index: 221;">Metaphysically Attacking Others</div>
+    
+    <div class="title" data-id="1755092189.773129" style="left: 6.952962420100087%; top: 1052px; font-size: 17px; color: #8800ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-18deg); z-index: 222;">are we the badies</div>
+    
+    <div class="title" data-id="1754336951.476729" style="left: 47.75414449203682%; top: 424px; font-size: 42px; color: #66ff66; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(2deg); z-index: 223;">Bic Mag
+Bag Mic
+Mig Bac
+Mc Bag
+MAGA Big</div>
+    
+    <div class="title" data-id="1754336826.961139" style="left: 61.00455257291043%; top: 809px; font-size: 18px; color: #0000ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(11deg); z-index: 224;">Every Big Mac Is Liquid In State With A Change In Scale</div>
+    
+    <div class="title" data-id="1754336742.702979" style="left: 9.476910474761212%; top: 374px; font-size: 37px; color: #66ff66; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-2deg); z-index: 225;">Big Mac Tax</div>
+    
+    <div class="title" data-id="1754336730.604539" style="left: 59.19878133535312%; top: 936px; font-size: 29px; color: #0088ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(10deg); z-index: 226;">Section 5B Big Mac Tax Exemption Permit</div>
+    
+    <div class="title" data-id="1754326480.777669" style="left: 11.994642825984721%; top: 384px; font-size: 27px; color: #ff0000; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-27deg); z-index: 227;">Communal Pursuit of the Big Mac</div>
+    
+    <div class="title" data-id="1753234419.145369" style="left: 63.845816684210064%; top: 924px; font-size: 39px; color: #8800ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-1deg); z-index: 228;">Cute Cute, In a Stupid-Ass Way</div>
+    
+    <div class="title" data-id="1753230415.653939" style="left: 36.144052543058706%; top: 1990px; font-size: 18px; color: #ffffff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(21deg); z-index: 229;">bad job</div>
+    
+    <div class="title" data-id="1753228503.920229" style="left: 35.60305202340011%; top: 2314px; font-size: 26px; color: #00ffff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-12deg); z-index: 230;">Spicy Axiom</div>
+    
+    <div class="title" data-id="1752939786.154489" style="left: 75.98696964040762%; top: 2458px; font-size: 38px; color: #ffcc00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-14deg); z-index: 231;">audio sensory memory reprogramming</div>
+    
+    <div class="title" data-id="1752939432.187669" style="left: 4.373945191145058%; top: 243px; font-size: 39px; color: #ffff00; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(21deg); z-index: 232;">sleep story
+I think thats the name. category of video on YouTube that people listen to to fall asleep</div>
+    
+    <div class="title" data-id="1752875618.800729" style="left: 54.43120959430391%; top: 583px; font-size: 42px; color: #66ff66; font-family: &#39;Georgia&#39;, serif; transform: rotate(30deg); z-index: 233;">strategic schizophrenia</div>
+    
+    <div class="title" data-id="1752875530.882059" style="left: 42.77682368651233%; top: 383px; font-size: 35px; color: #ffcc00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(12deg); z-index: 234;">once is was</div>
+    
+    <div class="title" data-id="1752809529.491759" style="left: 61.09266080608662%; top: 1731px; font-size: 19px; color: #00ff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-10deg); z-index: 235;">Green Ray Machine</div>
+    
+    <div class="title" data-id="1752626575.168599" style="left: 67.8893067998155%; top: 1723px; font-size: 34px; color: #6666ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(4deg); z-index: 236;">be the do</div>
+    
+    <div class="title" data-id="1752626434.443219" style="left: 75.0684180088207%; top: 2398px; font-size: 30px; color: #6666ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-3deg); z-index: 237;">fucked up feelings</div>
+    
+    <div class="title" data-id="1752515014.962129" style="left: 76.34082242510436%; top: 1922px; font-size: 32px; color: #ffff00; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(8deg); z-index: 238;">we should have more</div>
+    
+    <div class="title" data-id="1752422169.856139" style="left: 82.64761407211276%; top: 1553px; font-size: 34px; color: #ff00ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-6deg); z-index: 239;">viewpoint abyss</div>
+    
+    <div class="title" data-id="1752422139.982309" style="left: 42.140549142552615%; top: 1888px; font-size: 40px; color: #6666ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(6deg); z-index: 240;">system vacuum</div>
+    
+    <div class="title" data-id="1752421612.723379" style="left: 35.080292587437214%; top: 440px; font-size: 24px; color: #88ff00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(29deg); z-index: 241;">hetero/homo coin :coin:</div>
+    
+    <div class="title" data-id="1752421533.091959" style="left: 58.105184159038224%; top: 767px; font-size: 33px; color: #ff4400; font-family: &#39;Georgia&#39;, serif; transform: rotate(-15deg); z-index: 242;">temporal index</div>
+    
+    <div class="title" data-id="1752421448.198209" style="left: 63.802539797211104%; top: 2164px; font-size: 21px; color: #00ffff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-19deg); z-index: 243;">architectural apparition</div>
+    
+    <div class="title" data-id="1752421398.881689" style="left: 48.29376260724616%; top: 401px; font-size: 16px; color: #00ff00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-4deg); z-index: 244;">playing with dead things</div>
+    
+    <div class="title" data-id="1752421372.815659" style="left: 48.9655189958964%; top: 772px; font-size: 16px; color: #ff0088; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-19deg); z-index: 245;">irreality</div>
+    
+    <div class="title" data-id="1752288962.694969" style="left: 83.5696167710736%; top: 1819px; font-size: 42px; color: #ffff00; font-family: &#39;Georgia&#39;, serif; transform: rotate(2deg); z-index: 246;">Two celebrities roll a hoop</div>
+    
+    <div class="title" data-id="1751919460.141549" style="left: 8.515894823242277%; top: 1499px; font-size: 39px; color: #ff6666; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-22deg); z-index: 247;">&lt;https://www.urbandictionary.com/define.php?term=fell+off|Mom Fell Off&gt;</div>
+    
+    <div class="title" data-id="1751417350.339739" style="left: 21.40188269296268%; top: 624px; font-size: 32px; color: #0000ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(14deg); z-index: 248;">Watching the Cats Grow</div>
+    
+    <div class="title" data-id="1751416811.154269" style="left: 66.05379801725269%; top: 299px; font-size: 32px; color: #ff0088; font-family: &#39;Georgia&#39;, serif; transform: rotate(-19deg); z-index: 249;">The Genesis of the Capitalist Farmer</div>
+    
+    <div class="title" data-id="1751414158.915069" style="left: 63.850978629214396%; top: 2208px; font-size: 23px; color: #00ff88; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-15deg); z-index: 250;">Beggars Licence</div>
+    
+    <div class="title" data-id="1751403102.972619" style="left: 44.22685414406975%; top: 1865px; font-size: 33px; color: #ffffff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-8deg); z-index: 251;">_A Minnesota farmer’s suicide note:_
+&amp;gt; _&#34;Farming is just one long goodby.&#34;_</div>
+    
+    <div class="title" data-id="1751307505.225029" style="left: 8.661614808312757%; top: 809px; font-size: 35px; color: #ffff66; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(5deg); z-index: 252;">Orange Man Bad</div>
+    
+    <div class="title" data-id="1751160053.559829" style="left: 43.703647628199235%; top: 1994px; font-size: 20px; color: #ff00ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-29deg); z-index: 253;">good news coal miners</div>
+    
+    <div class="title" data-id="1751144705.256459" style="left: 20.39428293429937%; top: 1687px; font-size: 33px; color: #ffcc00; font-family: &#39;Georgia&#39;, serif; transform: rotate(10deg); z-index: 254;">Nothing for Money, and the Tricks for Free</div>
+    
+    <div class="title" data-id="1750853977.895609" style="left: 83.29965185580177%; top: 478px; font-size: 42px; color: #ff8800; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-5deg); z-index: 255;">I need a new shoelace for the pie</div>
+    
+    <div class="title" data-id="1750718363.095169" style="left: 58.52645002509745%; top: 2356px; font-size: 41px; color: #00ffff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-13deg); z-index: 256;">vibe compression</div>
+    
+    <div class="title" data-id="1750330718.115809" style="left: 48.010339324729955%; top: 1114px; font-size: 42px; color: #0088ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(17deg); z-index: 257;">ear wyrm</div>
+    
+    <div class="title" data-id="1749599904.528909" style="left: 40.08875892917031%; top: 324px; font-size: 15px; color: #8800ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-26deg); z-index: 258;">Market Gardening</div>
+    
+    <div class="title" data-id="1749599812.995029" style="left: 69.41737654208838%; top: 959px; font-size: 23px; color: #66ff66; font-family: &#39;Georgia&#39;, serif; transform: rotate(-29deg); z-index: 259;">Alien Arrows</div>
+    
+    <div class="title" data-id="1748995966.428399" style="left: 60.20781911601272%; top: 2190px; font-size: 31px; color: #66ff66; font-family: &#39;Georgia&#39;, serif; transform: rotate(2deg); z-index: 260;">knowledge-labor  decoupling</div>
+    
+    <div class="title" data-id="1748995844.396849" style="left: 56.130001642956614%; top: 565px; font-size: 26px; color: #ff0088; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-27deg); z-index: 261;">exploitation index</div>
+    
+    <div class="title" data-id="1748995834.049729" style="left: 55.162424203095235%; top: 1477px; font-size: 41px; color: #6666ff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-30deg); z-index: 262;">stonks</div>
+    
+    <div class="title" data-id="1748395762.671389" style="left: 2.8170850126563525%; top: 2020px; font-size: 30px; color: #6666ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(20deg); z-index: 263;">what we gotta do</div>
+    
+    <div class="title" data-id="1748395742.188769" style="left: 36.82885868458183%; top: 1333px; font-size: 34px; color: #ff8800; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(17deg); z-index: 264;">I dont like using the word art</div>
+    
+    <div class="title" data-id="1748394644.276999" style="left: 66.49478556334556%; top: 1800px; font-size: 39px; color: #ffff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(22deg); z-index: 265;">The Earth is a Cat</div>
+    
+    <div class="title" data-id="1748394553.575929" style="left: 72.76326315329234%; top: 209px; font-size: 26px; color: #ffff66; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-25deg); z-index: 266;">The Timecutter</div>
+    
+    <div class="title" data-id="1748225653.510769" style="left: 10.665673585376924%; top: 810px; font-size: 17px; color: #0088ff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(24deg); z-index: 267;">decorate the white house with his entrails like it&#39;s Christmas eve</div>
+    
+    <div class="title" data-id="1747872166.849859" style="left: 84.30033795031073%; top: 1664px; font-size: 14px; color: #4400ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(11deg); z-index: 268;">from Steph:
+I&#39;ll serenade you with information about the composition of ashes</div>
+    
+    <div class="title" data-id="1746580957.890049" style="left: 83.83625554742179%; top: 456px; font-size: 35px; color: #8800ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(12deg); z-index: 269;">volatility smile</div>
+    
+    <div class="title" data-id="1746579908.477029" style="left: 16.614578549656184%; top: 1686px; font-size: 30px; color: #ff8800; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(-18deg); z-index: 270;">authority of the steam</div>
+    
+    <div class="title" data-id="1746578506.514669" style="left: 5.242590184563582%; top: 386px; font-size: 17px; color: #ffffff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(12deg); z-index: 271;">or tupperware</div>
+    
+    <div class="title" data-id="1746578494.009289" style="left: 33.917707529767114%; top: 2003px; font-size: 38px; color: #ff6666; font-family: &#39;Georgia&#39;, serif; transform: rotate(17deg); z-index: 272;">wei wi</div>
+    
+    <div class="title" data-id="1746578481.423839" style="left: 57.75704554200927%; top: 2045px; font-size: 29px; color: #0000ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-15deg); z-index: 273;">art critism is &#34;harmful&#34; because it disturbs wealthy people in their enjoyment of eye way way</div>
+    
+    <div class="title" data-id="1746576643.502819" style="left: 76.25883790349009%; top: 2134px; font-size: 18px; color: #66ff66; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-3deg); z-index: 274;">stab adam smith</div>
+    
+    <div class="title" data-id="1746576454.624699" style="left: 33.024024007789876%; top: 126px; font-size: 14px; color: #0000ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(24deg); z-index: 275;">consumption assumption</div>
+    
+    <div class="title" data-id="1746576264.360659" style="left: 54.164683143280335%; top: 1556px; font-size: 27px; color: #00ff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(17deg); z-index: 276;">decelerationist</div>
+    
+    <div class="title" data-id="1746559638.867029" style="left: 81.4299039603264%; top: 838px; font-size: 19px; color: #ffffff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-27deg); z-index: 277;">david might have used this one already i can&#39;t remember. 
+
+memes a couple o biz bops</div>
+    
+    <div class="title" data-id="1746555153.459199" style="left: 60.54138390500783%; top: 1129px; font-size: 21px; color: #00ff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(28deg); z-index: 278;">_ain&#39;t got no date_</div>
+    
+    <div class="title" data-id="1745855355.369719" style="left: 70.3195530489017%; top: 194px; font-size: 36px; color: #66ff66; font-family: &#39;Courier New&#39;, monospace; transform: rotate(5deg); z-index: 279;">Serf&#39;s Up!</div>
+    
+    <div class="title" data-id="1744588502.438859" style="left: 20.547674139568212%; top: 2367px; font-size: 33px; color: #88ff00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-26deg); z-index: 280;">Forgetting the Metric</div>
+    
+    <div class="title" data-id="1744586792.518979" style="left: 24.41129750585255%; top: 2306px; font-size: 27px; color: #4400ff; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(1deg); z-index: 281;">co-boredism</div>
+    
+    <div class="title" data-id="1741648373.886609" style="left: 28.64691992332979%; top: 608px; font-size: 16px; color: #ff8800; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-5deg); z-index: 282;">newmark</div>
+    
+    <div class="title" data-id="1741648331.153179" style="left: 73.64944695018167%; top: 176px; font-size: 38px; color: #ff8800; font-family: &#39;Georgia&#39;, serif; transform: rotate(-15deg); z-index: 283;">news/life balance</div>
+    
+    <div class="title" data-id="1741648273.987869" style="left: 30.91890681656487%; top: 1859px; font-size: 30px; color: #ffffff; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-1deg); z-index: 284;">they can&#39;t stop us</div>
+    
+    <div class="title" data-id="1741648266.419819" style="left: 62.398769122062355%; top: 830px; font-size: 39px; color: #ff0000; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(11deg); z-index: 285;">they can&#39;t even stop themselves</div>
+    
+    <div class="title" data-id="1740535365.308289" style="left: 9.431748830144834%; top: 1404px; font-size: 29px; color: #ff8800; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(17deg); z-index: 286;">cathode cafe</div>
+    
+    <div class="title" data-id="1740519546.418649" style="left: 33.123442012485384%; top: 464px; font-size: 31px; color: #0088ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(7deg); z-index: 287;">Jeu d&#39;esprit</div>
+    
+    <div class="title" data-id="1740512349.336759" style="left: 8.040457362652788%; top: 979px; font-size: 28px; color: #ffffff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-27deg); z-index: 288;">The body of departure
+The body of arrival</div>
+    
+    <div class="title" data-id="1739495817.365509" style="left: 21.540291420375155%; top: 1865px; font-size: 40px; color: #ffffff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-28deg); z-index: 289;">*Synthetic Solidarity™*</div>
+    
+    <div class="title" data-id="1739483393.703169" style="left: 60.951093670445125%; top: 369px; font-size: 20px; color: #4400ff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(27deg); z-index: 290;">the hole is where the magic is</div>
+    
+    <div class="title" data-id="1739480869.949599" style="left: 25.333986156537744%; top: 1836px; font-size: 18px; color: #ffffff; font-family: &#39;Arial Black&#39;, sans-serif; transform: rotate(-8deg); z-index: 291;">The expenditures of a primitive being</div>
+    
+    <div class="title" data-id="1739468533.657849" style="left: 52.88282996668877%; top: 1460px; font-size: 37px; color: #66ff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-14deg); z-index: 292;">BEDO “we’re all brendans after all.”</div>
+    
+    <div class="title" data-id="1739460597.015879" style="left: 36.61297652957671%; top: 367px; font-size: 14px; color: #8800ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(16deg); z-index: 293;">venue diagram</div>
+    
+    <div class="title" data-id="1738796841.363679" style="left: 6.716246897129875%; top: 1476px; font-size: 27px; color: #ff0088; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-3deg); z-index: 294;">in reference to Juan Atkins quote</div>
+    
+    <div class="title" data-id="1738796819.535019" style="left: 61.17573939804616%; top: 944px; font-size: 17px; color: #ff0088; font-family: &#39;Georgia&#39;, serif; transform: rotate(-30deg); z-index: 295;">note for future self</div>
+    
+    <div class="title" data-id="1738784800.577369" style="left: 68.78575545677971%; top: 2209px; font-size: 40px; color: #ffff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(6deg); z-index: 296;">There Are No UFOs
+
+(_note for future self:_ in reference to Juan Atkins quote: &#34;There are no UFOs. Machine music is the only way forward&#34;)</div>
+    
+    <div class="title" data-id="1738281942.314259" style="left: 22.197162248530496%; top: 1346px; font-size: 37px; color: #ffff00; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(12deg); z-index: 297;">immoral tally</div>
+    
+    <div class="title" data-id="1738179104.718109" style="left: 37.392603414530825%; top: 656px; font-size: 18px; color: #66ff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-16deg); z-index: 298;">Immortality Sale</div>
+    
+    <div class="title" data-id="1738179094.945119" style="left: 33.712315733283035%; top: 2300px; font-size: 36px; color: #4400ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-22deg); z-index: 299;">&#34;Don&#39;t Die&#34;</div>
+    
+    <div class="title" data-id="1738003835.416309" style="left: 78.43986421424128%; top: 1859px; font-size: 15px; color: #ff00ff; font-family: &#39;Georgia&#39;, serif; transform: rotate(-10deg); z-index: 300;">The Vortex of Central Suspicion</div>
+    
+    <div class="title" data-id="1737512215.011429" style="left: 66.0645882780916%; top: 471px; font-size: 18px; color: #ffffff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-13deg); z-index: 301;">more womp-womps</div>
+    
+    <div class="title" data-id="1736631131.777319" style="left: 18.97104560283652%; top: 2099px; font-size: 19px; color: #ffffff; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-5deg); z-index: 302;">Gesundheit</div>
+    
+    <div class="title" data-id="1736610033.802749" style="left: 48.148282650220196%; top: 1424px; font-size: 31px; color: #88ff00; font-family: &#39;Georgia&#39;, serif; transform: rotate(-7deg); z-index: 303;">Murph from Earph Lights the Land on Fire</div>
+    
+    <div class="title" data-id="1736479540.433349" style="left: 24.347920760224447%; top: 636px; font-size: 39px; color: #00ff00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(1deg); z-index: 304;">Doubt is a Paper Tiger</div>
+    
+    <div class="title" data-id="1735421168.957409" style="left: 58.59627047928507%; top: 834px; font-size: 36px; color: #66ff66; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(16deg); z-index: 305;">home is where the generationally amassed wealth is</div>
+    
+    <div class="title" data-id="1734898117.267119" style="left: 39.11194048884992%; top: 914px; font-size: 14px; color: #ffff66; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-2deg); z-index: 306;">A serious tutorial for funny learning.
+A funny tutorial for serious learning.</div>
+    
+    <div class="title" data-id="1734488842.601239" style="left: 2.1603078827276576%; top: 1427px; font-size: 30px; color: #ffff00; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(25deg); z-index: 307;">shpilmgrim</div>
+    
+    <div class="title" data-id="1734487523.589419" style="left: 76.1486076063105%; top: 1733px; font-size: 15px; color: #ffff66; font-family: &#39;Trebuchet MS&#39;, sans-serif; transform: rotate(-1deg); z-index: 308;">floating in a mire of semantical puzzles</div>
+    
+    <div class="title" data-id="1734124572.404279" style="left: 34.69156651462746%; top: 1247px; font-size: 37px; color: #00ff00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(16deg); z-index: 309;">shirts say it for me</div>
+    
+    <div class="title" data-id="1733884542.055709" style="left: 3.1175764067767617%; top: 1588px; font-size: 28px; color: #0088ff; font-family: &#39;Courier New&#39;, monospace; transform: rotate(8deg); z-index: 310;">&lt;https://i.kym-cdn.com/photos/images/newsfeed/002/519/353/e4f.png&gt;</div>
+    
+    <div class="title" data-id="1733884538.645399" style="left: 40.98554786315307%; top: 424px; font-size: 25px; color: #00ff00; font-family: &#39;Comic Sans MS&#39;, cursive; transform: rotate(-7deg); z-index: 311;">trad bad</div>
+    
+    <div class="title" data-id="1733884388.243789" style="left: 20.905708185747756%; top: 1120px; font-size: 17px; color: #ff0000; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(22deg); z-index: 312;">Just so you know, I&#39;m not a trad cath, byyyyeeee!!!</div>
+    
+    <div class="title" data-id="1733884107.195699" style="left: 4.738793047996129%; top: 1298px; font-size: 29px; color: #ff00ff; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(30deg); z-index: 313;">clacker wacker</div>
+    
+    <div class="title" data-id="1733879276.586179" style="left: 29.89303515736546%; top: 574px; font-size: 37px; color: #ff0000; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-18deg); z-index: 314;">poor person shoots the gun and poor art comes out</div>
+    
+    <div class="title" data-id="1733641762.883589" style="left: 5.783104353989249%; top: 2334px; font-size: 34px; color: #88ff00; font-family: &#39;Courier New&#39;, monospace; transform: rotate(-13deg); z-index: 315;">God speed the plough</div>
+    
+    <div class="title" data-id="1733434617.940239" style="left: 52.68407709548384%; top: 301px; font-size: 23px; color: #ff0000; font-family: &#39;Verdana&#39;, sans-serif; transform: rotate(14deg); z-index: 316;">Trousers of Awakening</div>
+    
+    <div class="title" data-id="1732750138.114479" style="left: 68.62221734892255%; top: 482px; font-size: 26px; color: #0088ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(29deg); z-index: 317;">the beating of great hinds</div>
+    
+    <div class="title" data-id="1732653617.788709" style="left: 10.598180268709577%; top: 1080px; font-size: 30px; color: #4400ff; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-18deg); z-index: 318;">the price of a working hour is 3D</div>
+    
+    <div class="title" data-id="1773771985.901439" style="left: 43.20675212388369%; top: 1522px; font-size: 42px; color: #00ff88; font-family: &#39;Impact&#39;, sans-serif; transform: rotate(-5deg); z-index: 319;">corrupted man island</div>
+    
+    <div class="title" data-id="1773771476.524399" style="left: 81.57022032157809%; top: 1809px; font-size: 39px; color: #ff0000; font-family: &#39;Papyrus&#39;, fantasy; transform: rotate(-13deg); z-index: 320;">Corrupted Island Man</div>
+    
+
+    <div class="toolbar">
+        <div class="toolbar-row">
+            <span class="label">TEXT</span>
+            <button class="color-btn" style="background: #ff00ff" data-color="#ff00ff"></button>
+            <button class="color-btn" style="background: #00ff00" data-color="#00ff00"></button>
+            <button class="color-btn" style="background: #00ffff" data-color="#00ffff"></button>
+            <button class="color-btn" style="background: #ffff00" data-color="#ffff00"></button>
+            <button class="color-btn" style="background: #ff0000" data-color="#ff0000"></button>
+            <button class="color-btn" style="background: #ff8800" data-color="#ff8800"></button>
+            <button class="color-btn" style="background: #ffffff" data-color="#ffffff"></button>
+            <button class="color-btn" style="background: #000000" data-color="#000000"></button>
+
+            <div class="divider"></div>
+
+            <span class="label">SIZE</span>
+            <button class="rotate-btn" id="sizeDown">−</button>
+            <button class="rotate-btn" id="sizeUp">+</button>
+
+            <div class="divider"></div>
+
+            <span class="label">ROTATE</span>
+            <button class="rotate-btn" id="rotateLeft">↺</button>
+            <button class="rotate-btn" id="rotateRight">↻</button>
+
+            <div class="divider"></div>
+
+            <select id="animSelect">
+                <option value="">Animation...</option>
+                <option value="anim-none">None</option>
+                <option value="anim-blink">Blink</option>
+                <option value="anim-pulse">Pulse</option>
+                <option value="anim-rainbow">Rainbow</option>
+                <option value="anim-shake">Shake</option>
+                <option value="anim-float">Float</option>
+            </select>
+
+            <div class="divider"></div>
+
+            <span class="label">BG</span>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff)" data-bg="linear-gradient(45deg, #ffcccc, #ccffcc, #ccccff)"></button>
+            <button class="bg-btn" style="background: #000000" data-bg="#000000"></button>
+            <button class="bg-btn" style="background: #ffffff" data-bg="#ffffff"></button>
+            <button class="bg-btn" style="background: #1a1a2e" data-bg="#1a1a2e"></button>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #ff00ff, #00ffff)" data-bg="linear-gradient(45deg, #ff00ff, #00ffff)"></button>
+            <button class="bg-btn" style="background: linear-gradient(180deg, #000428, #004e92)" data-bg="linear-gradient(180deg, #000428, #004e92)"></button>
+            <button class="bg-btn" style="background: linear-gradient(45deg, #232526, #414345)" data-bg="linear-gradient(45deg, #232526, #414345)"></button>
+            <button class="bg-btn" style="background: #ff6b6b" data-bg="repeating-linear-gradient(45deg, #ff6b6b, #ff6b6b 10px, #feca57 10px, #feca57 20px)"></button>
+
+            <div class="divider"></div>
+
+            <button id="resetBtn">Reset</button>
+            <button id="saveBtn">💾</button>
+        </div>
+    </div>
+
+</body>
+</html>

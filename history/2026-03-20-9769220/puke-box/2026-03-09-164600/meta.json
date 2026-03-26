@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Marwa",
+  "root": "E",
+  "tempo": 120,
+  "description": "A theremin weeps in the desert as a spaghetti western unfolds in reverse, with *boot prints* that lead to nowhere :cyclone::skull:",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am6"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-09"
+}

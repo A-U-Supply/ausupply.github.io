@@ -1,0 +1,16 @@
+{
+  "scale": "Algerian",
+  "root": "E",
+  "tempo": 120,
+  "description": "A gospel choir sings hymns in a submarine sinking into a sea of &lt;i&gt;disinformation&lt;/i&gt; :ocean::boom:",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-24"
+}

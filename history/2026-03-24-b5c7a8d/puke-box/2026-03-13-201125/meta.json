@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Bhairavi",
+  "root": "E",
+  "tempo": 100,
+  "description": "A submarine gospel choir echoes through the frozen lake, as steel drums whisper secrets to the *judges of the deep* :ocean::snowflake::cop:",
+  "chords": [
+    "Em",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-13"
+}
