@@ -1,0 +1,50 @@
+name: Collage Bot
+
+on:
+  schedule:
+    - cron: '0 18 * * *'  # 10am PT daily
+  workflow_dispatch:
+    inputs:
+      no_post:
+        description: 'Dry run (skip Slack post)'
+        type: boolean
+        default: false
+
+jobs:
+  collage-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: collage-bot-pip-${{ hashFiles('collage-bot/requirements.txt') }}
+
+      - name: Cache LaMa model weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/torch/hub/checkpoints
+          key: lama-weights-v1
+
+      - name: Install Python dependencies
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r collage-bot/requirements.txt
+
+      - name: Run Collage Bot
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        run: |
+          ARGS=""
+          if [ "${{ inputs.no_post }}" = "true" ]; then
+            ARGS="--no-post"
+          fi
+          python collage-bot/bot.py $ARGS
