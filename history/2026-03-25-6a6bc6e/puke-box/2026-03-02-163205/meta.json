@@ -1,0 +1,16 @@
+{
+  "scale": "Byzantine",
+  "root": "E",
+  "tempo": 120,
+  "description": "As the medieval lute player drops the beat at the rave, the *pipe organ* rises from the ashes like a phoenix, clashing with the *drum machine* in a frenzy of sound :guitar::fire::boom:",
+  "chords": [
+    "Em7",
+    "G7",
+    "Am9",
+    "Dmaj7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-02"
+}
