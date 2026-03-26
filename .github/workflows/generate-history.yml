@@ -1,4 +1,4 @@
-name: Generate history snapshots and archive to Wayback Machine
+name: Generate history snapshots
 
 on:
   push:
@@ -35,28 +35,3 @@ jobs:
             git commit -m "chore: generate history snapshots [skip ci]"
             git push
           fi
-
-      - name: Archive pages to Wayback Machine
-        continue-on-error: true
-        run: |
-          SITE_URL="https://ausupply.github.io"
-          for html_file in *.html; do
-            url="${SITE_URL}/${html_file}"
-            echo "Archiving: $url"
-            attempt=1
-            while [ $attempt -le 3 ]; do
-              http_code=$(curl -s -o /dev/null -w "%{http_code}" \
-                "https://web.archive.org/save/${url}" 2>/dev/null || echo "000")
-              if [ "$http_code" = "200" ] || [ "$http_code" = "302" ]; then
-                echo "  -> OK (HTTP $http_code)"
-                break
-              else
-                echo "  -> HTTP $http_code (attempt $attempt/3)"
-                if [ $attempt -lt 3 ]; then
-                  sleep $((attempt * 5))
-                fi
-              fi
-              attempt=$((attempt + 1))
-            done
-            sleep 3
-          done
