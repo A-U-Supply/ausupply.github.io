@@ -50,7 +50,7 @@ def main():
     output_paths = []
     for i, composite in enumerate(composites):
         transformed = apply_transform(composite)
-        blended = blend_seams(transformed, strip_width=200)
+        blended = blend_seams(transformed, strip_width=70)
         dest = out_dir / f"collage_{i + 1}.png"
         blended.save(dest)
         logger.info(f"Saved {dest.name}")
