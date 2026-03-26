@@ -1,0 +1,16 @@
+{
+  "scale": "Hungarian Major",
+  "root": "B",
+  "tempo": 100,
+  "description": "A decrepit, trad-jazz band plays in a haunted elevator &lt;i&gt;during a thunderstorm&lt;/i&gt; :thunder",
+  "chords": [
+    "Bm",
+    "E7",
+    "G#m",
+    "C#m"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-13"
+}
