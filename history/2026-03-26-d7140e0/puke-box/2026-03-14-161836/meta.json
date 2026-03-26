@@ -1,0 +1,16 @@
+{
+  "scale": "Kurdilihicazkar",
+  "root": "C#",
+  "tempo": 160,
+  "description": "A troll in a bathtub plays the harpsichord underwater, surrounded by swimming orchestral elements :ocean::musical",
+  "chords": [
+    "C#m",
+    "G#m7",
+    "Amaj7",
+    "E#dim"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-14"
+}

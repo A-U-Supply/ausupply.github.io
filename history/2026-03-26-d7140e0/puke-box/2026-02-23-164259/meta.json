@@ -1,0 +1,16 @@
+{
+  "scale": "Hexatonic (Augmented)",
+  "root": "E",
+  "tempo": 120,
+  "description": "As the *jazz flute* swirls in a tornado :tornado:, it finds itself on a space station, echoing the haunting sounds of a *gamelan orchestra* :satellite:, amidst a blizzard of orange molten waterfalls :ocean:",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am9"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-23"
+}
