@@ -131,10 +131,12 @@ def blend_seams(img: Image.Image, strip_width: int = 30) -> Image.Image:
 
     mask = Image.fromarray(mask_arr)
 
-    # Patch jit.load to force CPU mapping (model may be saved with CUDA tensors)
     import torch
     _orig_load = torch.jit.load
-    torch.jit.load = lambda path, **kwargs: _orig_load(path, map_location="cpu", **kwargs)
+    def _cpu_load(f, **kwargs):
+        kwargs.setdefault("map_location", "cpu")
+        return _orig_load(f, **kwargs)
+    torch.jit.load = _cpu_load
     try:
         lama = SimpleLama(device=torch.device("cpu"))
     finally:
