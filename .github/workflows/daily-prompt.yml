@@ -1,11 +1,11 @@
 name: Daily Surreal Prompt
 
 on:
-  schedule:
-    # 7am PT = 3pm UTC (during PST)
-    # 7am PT = 2pm UTC (during PDT)
-    # Using 3pm UTC for consistency
-    - cron: '0 15 * * *'
+  # schedule:
+  #   # 7am PT = 3pm UTC (during PST)
+  #   # 7am PT = 2pm UTC (during PDT)
+  #   # Using 3pm UTC for consistency
+  #   - cron: '0 15 * * *'
   workflow_dispatch:  # Manual trigger button
 
 jobs:
