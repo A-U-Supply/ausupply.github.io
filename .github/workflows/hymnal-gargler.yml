@@ -1,26 +1,26 @@
 name: Hymnal Gargler
 
 on:
-  schedule:
-    - cron: '0 23 * * *'  # 3pm PT daily
-  workflow_dispatch:
-    inputs:
-      target_duration:
-        description: 'Target duration in seconds'
-        default: '40'
-      max_videos:
-        description: 'Max source videos'
-        default: '5'
-      whisper_model:
-        description: 'Whisper model (tiny/base/small)'
-        default: 'base'
-      seed:
-        description: 'RNG seed (empty for random)'
-        default: ''
-      dry_run:
-        description: 'Dry run (skip Slack post)'
-        type: boolean
-        default: false
+  # schedule:
+  #   - cron: '0 23 * * *'  # 3pm PT daily
+  # workflow_dispatch:
+  #   inputs:
+  #     target_duration:
+  #       description: 'Target duration in seconds'
+  #       default: '40'
+  #     max_videos:
+  #       description: 'Max source videos'
+  #       default: '5'
+  #     whisper_model:
+  #       description: 'Whisper model (tiny/base/small)'
+  #       default: 'base'
+  #     seed:
+  #       description: 'RNG seed (empty for random)'
+  #       default: ''
+  #     dry_run:
+  #       description: 'Dry run (skip Slack post)'
+  #       type: boolean
+  #       default: false
 
 jobs:
   hymnal-gargler:
