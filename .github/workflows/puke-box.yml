@@ -40,5 +40,9 @@ jobs:
             echo "No new entries to commit."
           else
             git commit -m "chore: archive midieval entries ($(date -u +%Y-%m-%d)) [skip ci]"
-            git push
+            for i in 1 2 3; do
+              git pull --rebase origin master && git push && break
+              echo "Push attempt $i failed; retrying..."
+              sleep 2
+            done
           fi
