@@ -19,4 +19,4 @@ jobs:
 
       - name: Pull latest on server
         run: |
-          ssh dokku@204.168.201.89 run au-supply git -C /srv/legacy-site pull --ff-only
+          ssh dokku@204.168.201.89 run au-supply git -c safe.directory=/srv/legacy-site -C /srv/legacy-site pull --ff-only
