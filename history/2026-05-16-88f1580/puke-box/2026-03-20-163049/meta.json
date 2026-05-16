@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Saba",
+  "root": "E",
+  "tempo": 60,
+  "description": "As I lay my head on the pillow, a honky-tonk piano in an empty cathedral whispers sleepy tales to a refrigerator humming a lullaby :crescent",
+  "chords": [
+    "Em",
+    "B7",
+    "Gmaj7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 0,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-20"
+}

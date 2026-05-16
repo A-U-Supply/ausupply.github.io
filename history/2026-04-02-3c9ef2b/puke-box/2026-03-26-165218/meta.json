@@ -1,0 +1,16 @@
+{
+  "scale": "Huseyni",
+  "root": "Bb",
+  "tempo": 100,
+  "description": "A suburban dad's *ipad dads* support group meets in a haunted bathroom :toilet::computer:",
+  "chords": [
+    "Bbm",
+    "G7",
+    "Cm7",
+    "Ebmaj7"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-26"
+}

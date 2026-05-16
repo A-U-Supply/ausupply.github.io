@@ -1,0 +1,16 @@
+{
+  "scale": "Hungarian Minor",
+  "root": "E",
+  "tempo": 120,
+  "description": "A frozen lake of steel drums echoes with the haunting melodies of a *gen Z accordion apocalypse* :ocean::skull:",
+  "chords": [
+    "Em7",
+    "Gmaj7",
+    "Cadd9",
+    "Am11"
+  ],
+  "melody_instrument": 22,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-11"
+}

@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Dominant",
+  "root": "G",
+  "tempo": 128,
+  "description": "As I read War and Peace, the characters started to morph into One Piece pirates, sailing through the pages on a banjo-powered ship :shield::books:",
+  "chords": [
+    "G7",
+    "Cmaj7",
+    "Am7",
+    "D7"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-30"
+}

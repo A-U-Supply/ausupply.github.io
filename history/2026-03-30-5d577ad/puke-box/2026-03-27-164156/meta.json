@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Malkauns",
+  "root": "F#",
+  "tempo": 90,
+  "description": "A primitive being's expenditures are like steel drums echoing on a frozen lake, where demolition derby cars smash into the remnants of a bygone era :racing",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#m"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-27"
+}

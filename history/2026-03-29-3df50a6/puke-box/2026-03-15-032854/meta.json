@@ -1,0 +1,16 @@
+{
+  "scale": "Major Pentatonic",
+  "root": "A",
+  "tempo": 100,
+  "description": "As I floated on the moon with a mariachi band, I realized I *wasn't ear starving* :full",
+  "chords": [
+    "A",
+    "D",
+    "E",
+    "C#m"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-15"
+}

@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Saba",
+  "root": "C#",
+  "tempo": 66,
+  "description": "A lone violin whispers secrets to a music box in a deserted farmhouse bathroom, as the sound of thunderstorms outside echoes the despair of a *Farming is just one long goodby* :pensive::skull::tornado:",
+  "chords": [
+    "C#m",
+    "G7",
+    "Am",
+    "Ebm"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-28"
+}

@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Misheberakh",
+  "root": "F#",
+  "tempo": 168,
+  "description": "A chaotic hormone surge is crashing through the city like a *zither solo at rush hour* :car::boom:",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#m"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-17"
+}

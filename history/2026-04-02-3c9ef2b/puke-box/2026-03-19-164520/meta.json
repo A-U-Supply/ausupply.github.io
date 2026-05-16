@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Kafi",
+  "root": "G",
+  "tempo": 100,
+  "description": "A handpan player's dark assumptions consume them as a music box echoes in the distance, amidst a chaotic thunderstorm :zap::boom::fire:",
+  "chords": [
+    "Gm",
+    "Em7",
+    "C7",
+    "Am"
+  ],
+  "melody_instrument": 108,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-19"
+}

@@ -1,0 +1,16 @@
+{
+  "scale": "Tcherepnin Nonatonic",
+  "root": "Eb",
+  "tempo": 120,
+  "description": "A king's arrest sparks a *free jazz* uprising in a hospital bathroom :toilet::fire::boom:",
+  "chords": [
+    "Ebmaj7",
+    "Ab7",
+    "Dbmaj7",
+    "Gbmaj7"
+  ],
+  "melody_instrument": 65,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-19"
+}

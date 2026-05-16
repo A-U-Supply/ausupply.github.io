@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Augmented",
+  "root": "Bb",
+  "tempo": 160,
+  "description": "A calliope player's frantic midnight solo is interrupted by a tornado made of MAGA hats :tornado::trumpet:",
+  "chords": [
+    "Bbmaj7",
+    "G7",
+    "Cmaj7",
+    "Eb7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-21"
+}

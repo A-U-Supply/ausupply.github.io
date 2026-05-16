@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Todi",
+  "root": "C#",
+  "tempo": 180,
+  "description": "As the poor person's gunfire echoes, a *baroque harpsichord* played underwater fills the bathroom with *orchestral swells* of chaotic beauty :ocean::droplet:",
+  "chords": [
+    "C#m",
+    "G#m7",
+    "A",
+    "E#m"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-15"
+}
