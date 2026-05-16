@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Bhairav",
+  "root": "C",
+  "tempo": 140,
+  "description": "As the two celebrities roll a hoop, it starts to glow with an otherworldly aura :globe",
+  "chords": [
+    "Cmaj7",
+    "G7",
+    "Am",
+    "Dm7"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-10"
+}

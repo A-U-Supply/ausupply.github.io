@@ -1,0 +1,4 @@
+slack-sdk>=3.0
+requests>=2.28
+simple-lama-inpainting>=0.1.2
+numpy>=1.21,<2

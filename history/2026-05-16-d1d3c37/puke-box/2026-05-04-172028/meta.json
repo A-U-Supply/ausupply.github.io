@@ -1,0 +1,16 @@
+{
+  "scale": "Locrian #2",
+  "root": "Ab",
+  "tempo": 90,
+  "description": "As the existential elevator shaft creaks open, a harpist wearing oven mitts begins to play a haunting melody :guitar::dizzy",
+  "chords": [
+    "Abm7",
+    "Db7",
+    "Gbmaj7",
+    "Eb7"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-04"
+}

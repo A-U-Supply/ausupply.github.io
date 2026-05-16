@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Marwa",
+  "root": "F#",
+  "tempo": 160,
+  "description": "The craftsman's feet move swiftly to avoid the lava, as the sounds of the *xylophone* echo through the volcanic ash cloud :partly",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#maj7"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-03"
+}

@@ -1,0 +1,16 @@
+{
+  "scale": "Mixolydian",
+  "root": "F#",
+  "tempo": 130,
+  "description": "A medieval lute rave erupts in the middle of a market garden, surrounded by tornadoes of jazz flute players :tornado::dancer::skin-tone-4:",
+  "chords": [
+    "F#maj7",
+    "C#m7",
+    "Bm7",
+    "G#m7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-12"
+}

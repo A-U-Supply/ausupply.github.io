@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian Dominant",
+  "root": "G",
+  "tempo": 120,
+  "description": "As the storm intensifies, the sound of a music box in the distance eerily harmonizes with the thunder :tornado::dizzy:",
+  "chords": [
+    "G7",
+    "Em7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-13"
+}

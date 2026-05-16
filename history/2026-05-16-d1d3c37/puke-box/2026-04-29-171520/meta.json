@@ -1,0 +1,16 @@
+{
+  "scale": "Pelog",
+  "root": "A",
+  "tempo": 100,
+  "description": "A jazz flute swirls in a tornado of emotions :tornado:, as a toy piano concerto whispers anxious secrets to the wind :musical",
+  "chords": [
+    "Am",
+    "Em",
+    "G",
+    "C"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-29"
+}

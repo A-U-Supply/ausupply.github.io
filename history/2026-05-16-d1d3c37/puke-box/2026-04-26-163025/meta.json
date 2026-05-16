@@ -1,0 +1,16 @@
+{
+  "scale": "Balkan",
+  "root": "G",
+  "tempo": 140,
+  "description": "A gospel choir submerged in a submarine, screaming in harmony as the church organ plays a dire melody amidst a demolition derby :construction::ocean::scream:",
+  "chords": [
+    "Gm",
+    "Em7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-26"
+}
