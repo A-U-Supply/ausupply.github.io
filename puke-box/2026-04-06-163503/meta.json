@@ -1,0 +1,16 @@
+{
+  "scale": "Okinawan",
+  "root": "Bb",
+  "tempo": 100,
+  "description": "As the astral plane aligns with the animistic realm, a lone space station gamelan orchestra improvises an otherworldly melody :milky",
+  "chords": [
+    "Bbm",
+    "Gbm",
+    "Ab",
+    "Db"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-06"
+}

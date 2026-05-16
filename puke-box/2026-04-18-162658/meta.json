@@ -1,0 +1,16 @@
+{
+  "scale": "Locrian #2",
+  "root": "C#",
+  "tempo": 180,
+  "description": "As I metaphysically attack others, the harp played with oven mitts summons a maelstrom of chaos :cyclone::boom::fire:",
+  "chords": [
+    "C#m7",
+    "G7",
+    "Am",
+    "Ebmaj7"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-18"
+}

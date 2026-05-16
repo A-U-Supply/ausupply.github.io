@@ -1,0 +1,16 @@
+{
+  "scale": "Byzantine",
+  "root": "Bb",
+  "tempo": 180,
+  "description": "The ghost of Adam Smith is being stabbed by a swarm of jellyfish in a dream :whale::skull::hocho:",
+  "chords": [
+    "Bbm",
+    "G7",
+    "Cm7",
+    "Ebmaj7"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-15"
+}

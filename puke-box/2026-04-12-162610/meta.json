@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Minor",
+  "root": "Eb",
+  "tempo": 168,
+  "description": "A jazz flute gets swept away in a tornado made of pipe organ sounds and drum machine beats :tornado::boom::guitar:",
+  "chords": [
+    "EbMaj7",
+    "Ab7",
+    "DbMaj7",
+    "Gb7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-12"
+}

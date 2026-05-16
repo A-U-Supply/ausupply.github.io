@@ -1,0 +1,16 @@
+{
+  "scale": "Balkan",
+  "root": "D",
+  "tempo": 180,
+  "description": "A jazz saxophonist's frantic solo echoes through a hospital waiting room where patients *can't even stop themselves* from tapping their feet :ambulance::boom:",
+  "chords": [
+    "Dm",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-05"
+}

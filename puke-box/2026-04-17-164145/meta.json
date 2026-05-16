@@ -1,0 +1,16 @@
+{
+  "scale": "Diminished (Half-Whole)",
+  "root": "C",
+  "tempo": 90,
+  "description": "Janus pointing at the clock tower with two faces, one screaming in harmony :mantelpiece",
+  "chords": [
+    "Cdim7",
+    "Ebdim7",
+    "Gbdim7",
+    "Adim7"
+  ],
+  "melody_instrument": 41,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-17"
+}

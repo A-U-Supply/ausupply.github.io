@@ -1,0 +1,16 @@
+{
+  "scale": "Blues Nonatonic",
+  "root": "F",
+  "tempo": 130,
+  "description": "A coin spinning on a frozen lake, harmonizing the hetero and homo energies of the universe :ocean::dizzy:",
+  "chords": [
+    "F7",
+    "C7",
+    "Bb7",
+    "Eb7"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-13"
+}

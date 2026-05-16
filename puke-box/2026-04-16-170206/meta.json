@@ -1,0 +1,16 @@
+{
+  "scale": "Diminished (Half-Whole)",
+  "root": "Ab",
+  "tempo": 130,
+  "description": "As the mad scientist flips the switch, a maelstrom of pipes and wires comes to life, fueled by the eerie glow of experimentation :tornado::bulb::microscope:",
+  "chords": [
+    "Abdim",
+    "Dbmaj7",
+    "Gbmaj7",
+    "Cbmaj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-16"
+}

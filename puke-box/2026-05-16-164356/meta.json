@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian",
+  "root": "C#",
+  "tempo": 140,
+  "description": "A swirling vortex of sound erupts from the Supersaturated Mother Liquor, like a &lt;i&gt;medieval lute&lt;/i&gt; soloing over a &lt;b&gt;rave&lt;/b&gt; in a bathroom :shower::droplet:",
+  "chords": [
+    "C#m",
+    "G#m7",
+    "D#maj7",
+    "A#dim"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-16"
+}

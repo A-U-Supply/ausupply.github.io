@@ -1,0 +1,16 @@
+{
+  "scale": "Dorian b2",
+  "root": "C#",
+  "tempo": 160,
+  "description": "A disgruntled factory worker is playing a *ragtime piano solo* on top of a malfunctioning assembly line :exploding",
+  "chords": [
+    "C#m",
+    "G#m7",
+    "A",
+    "E"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-25"
+}

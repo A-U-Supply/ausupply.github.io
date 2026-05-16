@@ -1,5 +1,341 @@
 [
   {
+    "id": "2026-05-16-164356",
+    "date": "2026-05-16",
+    "description": "A swirling vortex of sound erupts from the Supersaturated Mother Liquor, like a &lt;i&gt;medieval lute&lt;/i&gt; soloing over a &lt;b&gt;rave&lt;/b&gt; in a bathroom :shower::droplet:",
+    "scale": "Lydian",
+    "root": "C#",
+    "tempo": 140
+  },
+  {
+    "id": "2026-05-15-172032",
+    "date": "2026-05-15",
+    "description": "A haunted banjo player summons the spirits of the dead in a creepy, abandoned carnival :circus",
+    "scale": "Ethiopic Tizita Minor",
+    "root": "A",
+    "tempo": 100
+  },
+  {
+    "id": "2026-05-14-173015",
+    "date": "2026-05-14",
+    "description": "The crumbling church organ played a haunting tune as a demolition derby car crashed into a calliope at midnight :night",
+    "scale": "Persian",
+    "root": "C",
+    "tempo": 100
+  },
+  {
+    "id": "2026-05-13-175410",
+    "date": "2026-05-13",
+    "description": "A coin spinning on a frozen lake, harmonizing the hetero and homo energies of the universe :ocean::dizzy:",
+    "scale": "Blues Nonatonic",
+    "root": "F",
+    "tempo": 130
+  },
+  {
+    "id": "2026-05-12-175219",
+    "date": "2026-05-12",
+    "description": "A medieval lute rave erupts in the middle of a market garden, surrounded by tornadoes of jazz flute players :tornado::dancer::skin-tone-4:",
+    "scale": "Mixolydian",
+    "root": "F#",
+    "tempo": 130
+  },
+  {
+    "id": "2026-05-11-174812",
+    "date": "2026-05-11",
+    "description": "A lone knight's lament echoes through a deserted castle, where the only date is with a rusty suit of armor :bow",
+    "scale": "Phrygian",
+    "root": "E",
+    "tempo": 100
+  },
+  {
+    "id": "2026-05-10-164055",
+    "date": "2026-05-10",
+    "description": "As the two celebrities roll a hoop, it starts to glow with an otherworldly aura :globe",
+    "scale": "Raga Bhairav",
+    "root": "C",
+    "tempo": 140
+  },
+  {
+    "id": "2026-05-09-163957",
+    "date": "2026-05-09",
+    "description": "A whirlwind of jazz flute tornadoes sweeps across the prairie as a lone spaghetti western cowboy rides backwards into the sunset :sunrise::tornado:",
+    "scale": "Klezmer Freygish",
+    "root": "E",
+    "tempo": 110
+  },
+  {
+    "id": "2026-05-08-170119",
+    "date": "2026-05-08",
+    "description": "The corrupted island man's mechanical heartbeat echoes through the abandoned carnival at midnight :carousel",
+    "scale": "Ichikosucho",
+    "root": "A",
+    "tempo": 180
+  },
+  {
+    "id": "2026-05-07-173057",
+    "date": "2026-05-07",
+    "description": "Juan Atkins' quote echoes through a midnight carnival, where banjos summon interdimensional calliope spirits :circus",
+    "scale": "Romanian Minor",
+    "root": "F",
+    "tempo": 110
+  },
+  {
+    "id": "2026-05-06-172057",
+    "date": "2026-05-06",
+    "description": "As the two celebrities rolled the hoop, it morphed into a giant spinning top, propelled by a jet engine fueled by espresso and disco music :boom::tada:",
+    "scale": "Maqam Hijaz",
+    "root": "A",
+    "tempo": 140
+  },
+  {
+    "id": "2026-05-05-171238",
+    "date": "2026-05-05",
+    "description": "A lonely steel drum echoes across a frozen lake, as the barrow oak trees loom in the distance like skeletal fingers :evergreen",
+    "scale": "Leading Whole Tone",
+    "root": "C#",
+    "tempo": 100
+  },
+  {
+    "id": "2026-05-04-172028",
+    "date": "2026-05-04",
+    "description": "As the existential elevator shaft creaks open, a harpist wearing oven mitts begins to play a haunting melody :guitar::dizzy",
+    "scale": "Locrian #2",
+    "root": "Ab",
+    "tempo": 90
+  },
+  {
+    "id": "2026-05-03-163546",
+    "date": "2026-05-03",
+    "description": "The craftsman's feet move swiftly to avoid the lava, as the sounds of the *xylophone* echo through the volcanic ash cloud :partly",
+    "scale": "Raga Marwa",
+    "root": "F#",
+    "tempo": 160
+  },
+  {
+    "id": "2026-05-02-163535",
+    "date": "2026-05-02",
+    "description": "A mystical banjo player floats on a frozen lake, surrounded by glowing bovine eyes :cow::dizzy:",
+    "scale": "Ukrainian Dorian",
+    "root": "G",
+    "tempo": 100
+  },
+  {
+    "id": "2026-05-01-164320",
+    "date": "2026-05-01",
+    "description": "In the heart of the Wurly Durly World, a calliope plays a haunting tune at midnight, while a harpist wearing oven mitts conjures a whirlwind of sound :tornado::dizzy::fire:",
+    "scale": "Diminished (Whole-Half)",
+    "root": "A",
+    "tempo": 180
+  },
+  {
+    "id": "2026-04-30-170825",
+    "date": "2026-04-30",
+    "description": "A jazz flute swirls in a tornado of desperation, screaming *don't die* :tornado::skull:",
+    "scale": "Raga Kafi",
+    "root": "D",
+    "tempo": 100
+  },
+  {
+    "id": "2026-04-29-171520",
+    "date": "2026-04-29",
+    "description": "A jazz flute swirls in a tornado of emotions :tornado:, as a toy piano concerto whispers anxious secrets to the wind :musical",
+    "scale": "Pelog",
+    "root": "A",
+    "tempo": 100
+  },
+  {
+    "id": "2026-04-28-172847",
+    "date": "2026-04-28",
+    "description": "As the jazz flute swirled in the tornado, it reprogrammed the wind chimes to play a haunting melody :tornado::boom::loud",
+    "scale": "Huseyni",
+    "root": "B",
+    "tempo": 160
+  },
+  {
+    "id": "2026-04-27-171350",
+    "date": "2026-04-27",
+    "description": "A church organ screams in delight as it's smashed to pieces at a demolition derby, while the driver shouts *I'm not a trad cath, byyyyeeee!!!* :guitar::boom::fire:",
+    "scale": "Hemitonic Pentatonic",
+    "root": "G",
+    "tempo": 160
+  },
+  {
+    "id": "2026-04-26-163025",
+    "date": "2026-04-26",
+    "description": "A gospel choir submerged in a submarine, screaming in harmony as the church organ plays a dire melody amidst a demolition derby :construction::ocean::scream:",
+    "scale": "Balkan",
+    "root": "G",
+    "tempo": 140
+  },
+  {
+    "id": "2026-04-25-162946",
+    "date": "2026-04-25",
+    "description": "A disgruntled factory worker is playing a *ragtime piano solo* on top of a malfunctioning assembly line :exploding",
+    "scale": "Dorian b2",
+    "root": "C#",
+    "tempo": 160
+  },
+  {
+    "id": "2026-04-23-170835",
+    "date": "2026-04-23",
+    "description": "Frederic Wertham's comic book sanity hearing is interrupted by a swarm of *wind tunnel bees* :bee::tornado:",
+    "scale": "Hirajoshi",
+    "root": "B",
+    "tempo": 160
+  },
+  {
+    "id": "2026-04-21-164737",
+    "date": "2026-04-21",
+    "description": "A clown is giving a lecture on quantum physics while riding a unicycle :clown",
+    "scale": "Klezmer Freygish",
+    "root": "Bb",
+    "tempo": 130
+  },
+  {
+    "id": "2026-04-20-165302",
+    "date": "2026-04-20",
+    "description": "As machines learn to think, human workers are left to play harp with oven mitts in a desolate hospital waiting room :hospital::computer:",
+    "scale": "Messiaen Mode 3",
+    "root": "Ab",
+    "tempo": 110
+  },
+  {
+    "id": "2026-04-19-162726",
+    "date": "2026-04-19",
+    "description": "As I drive my tractor through the frozen tundra, the ambient hum of the engine merges with the howling wind to create a symphony of mathematical certainty :tractor::dash::alien:",
+    "scale": "Hicaz",
+    "root": "Eb",
+    "tempo": 90
+  },
+  {
+    "id": "2026-04-18-162658",
+    "date": "2026-04-18",
+    "description": "As I metaphysically attack others, the harp played with oven mitts summons a maelstrom of chaos :cyclone::boom::fire:",
+    "scale": "Locrian #2",
+    "root": "C#",
+    "tempo": 180
+  },
+  {
+    "id": "2026-04-17-164145",
+    "date": "2026-04-17",
+    "description": "Janus pointing at the clock tower with two faces, one screaming in harmony :mantelpiece",
+    "scale": "Diminished (Half-Whole)",
+    "root": "C",
+    "tempo": 90
+  },
+  {
+    "id": "2026-04-16-170206",
+    "date": "2026-04-16",
+    "description": "As the mad scientist flips the switch, a maelstrom of pipes and wires comes to life, fueled by the eerie glow of experimentation :tornado::bulb::microscope:",
+    "scale": "Diminished (Half-Whole)",
+    "root": "Ab",
+    "tempo": 130
+  },
+  {
+    "id": "2026-04-15-165220",
+    "date": "2026-04-15",
+    "description": "The ghost of Adam Smith is being stabbed by a swarm of jellyfish in a dream :whale::skull::hocho:",
+    "scale": "Byzantine",
+    "root": "Bb",
+    "tempo": 180
+  },
+  {
+    "id": "2026-04-14-165428",
+    "date": "2026-04-14",
+    "description": "As the *ear wyrm* burrows into your eardrum, it leaves a trail of resonant, otherworldly echoes :ant::skull::loud",
+    "scale": "Hexatonic (Augmented)",
+    "root": "F",
+    "tempo": 160
+  },
+  {
+    "id": "2026-04-13-165252",
+    "date": "2026-04-13",
+    "description": "As the last remnants of memories fade away, a lone violinist plays a haunting melody amidst the rusting ruins of a forgotten world :fog::broken",
+    "scale": "Klezmer Misheberakh",
+    "root": "F#",
+    "tempo": 90
+  },
+  {
+    "id": "2026-04-12-162610",
+    "date": "2026-04-12",
+    "description": "A jazz flute gets swept away in a tornado made of pipe organ sounds and drum machine beats :tornado::boom::guitar:",
+    "scale": "Lydian Minor",
+    "root": "Eb",
+    "tempo": 168
+  },
+  {
+    "id": "2026-04-11-162404",
+    "date": "2026-04-11",
+    "description": "In a cave of clockwork gears, the sound of a working hour echoes through the darkness :mantelpiece",
+    "scale": "Raga Natabhairavi",
+    "root": "Bb",
+    "tempo": 100
+  },
+  {
+    "id": "2026-04-10-163943",
+    "date": "2026-04-10",
+    "description": "As the toy pianos waltz on the frozen lake, the steel drums scream in protest of the *world capitalist intercourse* :exploding",
+    "scale": "Blues Nonatonic",
+    "root": "B",
+    "tempo": 160
+  },
+  {
+    "id": "2026-04-09-165613",
+    "date": "2026-04-09",
+    "description": "A farmer's fields are overflowing with cash, but the crops are whispering socialist ideologies to each other at night :ear",
+    "scale": "Lydian Minor",
+    "root": "Bb",
+    "tempo": 110
+  },
+  {
+    "id": "2026-04-08-165109",
+    "date": "2026-04-08",
+    "description": "A social media algorithm spins out of control, fuelling a frenzy of likes and shares in a never-ending cycle of digital validation :chart",
+    "scale": "Messiaen Mode 6",
+    "root": "E",
+    "tempo": 180
+  },
+  {
+    "id": "2026-04-07-164436",
+    "date": "2026-04-07",
+    "description": "As the markets crashed, a *volatility smile* spread across the face of the trading floor, like a chaotic clown :clown",
+    "scale": "Enigmatic",
+    "root": "Eb",
+    "tempo": 170
+  },
+  {
+    "id": "2026-04-06-163503",
+    "date": "2026-04-06",
+    "description": "As the astral plane aligns with the animistic realm, a lone space station gamelan orchestra improvises an otherworldly melody :milky",
+    "scale": "Okinawan",
+    "root": "Bb",
+    "tempo": 100
+  },
+  {
+    "id": "2026-04-05-162402",
+    "date": "2026-04-05",
+    "description": "A jazz saxophonist's frantic solo echoes through a hospital waiting room where patients *can't even stop themselves* from tapping their feet :ambulance::boom:",
+    "scale": "Balkan",
+    "root": "D",
+    "tempo": 180
+  },
+  {
+    "id": "2026-04-04-162221",
+    "date": "2026-04-04",
+    "description": "As the two celebrities roll a hoop across a frozen lake, they summon a mystical steel drum orchestra from another dimension :milky",
+    "scale": "Maqam Bayati",
+    "root": "F#",
+    "tempo": 100
+  },
+  {
+    "id": "2026-04-03-162812",
+    "date": "2026-04-03",
+    "description": "A didgeridoo-wielding clown is chasing a harp-playing ninja through a parking garage :clown",
+    "scale": "Romanian Minor",
+    "root": "C#",
+    "tempo": 140
+  },
+  {
     "id": "2026-04-02-164424",
     "date": "2026-04-02",
     "description": "As the *Spillikins* game pieces scattered everywhere, a didgeridoo player in a bright pink wig appeared in the hospital waiting room, playing a frantic solo :exploding",

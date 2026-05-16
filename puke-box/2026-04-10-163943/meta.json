@@ -1,0 +1,16 @@
+{
+  "scale": "Blues Nonatonic",
+  "root": "B",
+  "tempo": 160,
+  "description": "As the toy pianos waltz on the frozen lake, the steel drums scream in protest of the *world capitalist intercourse* :exploding",
+  "chords": [
+    "B7",
+    "Gbm9",
+    "Ebm7",
+    "C#m7"
+  ],
+  "melody_instrument": 57,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-10"
+}

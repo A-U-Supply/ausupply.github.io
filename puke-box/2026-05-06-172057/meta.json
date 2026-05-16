@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Hijaz",
+  "root": "A",
+  "tempo": 140,
+  "description": "As the two celebrities rolled the hoop, it morphed into a giant spinning top, propelled by a jet engine fueled by espresso and disco music :boom::tada:",
+  "chords": [
+    "Am",
+    "G7",
+    "Fmaj7",
+    "Em7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-06"
+}

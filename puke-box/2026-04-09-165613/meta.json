@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Minor",
+  "root": "Bb",
+  "tempo": 110,
+  "description": "A farmer's fields are overflowing with cash, but the crops are whispering socialist ideologies to each other at night :ear",
+  "chords": [
+    "BbM7",
+    "Eb7",
+    "Fm7",
+    "G7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-09"
+}
