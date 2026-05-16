@@ -1,22 +1,20 @@
 name: Glottisdale
 
 on:
-  # schedule:
-  #   - cron: '0 18 * * *'  # 10am PT daily
-  # workflow_dispatch:
-  #   inputs:
-  #     target_duration:
-  #       description: 'Target duration in seconds'
-  #       default: '60'
-  #     max_videos:
-  #       description: 'Max source videos'
-  #       default: '5'
-  #     whisper_model:
-  #       description: 'Whisper model (tiny/base/small)'
-  #       default: 'base'
-  #     seed:
-  #       description: 'RNG seed (empty for random)'
-  #       default: ''
+  workflow_dispatch:
+    inputs:
+      target_duration:
+        description: 'Target duration in seconds'
+        default: '60'
+      max_videos:
+        description: 'Max source videos'
+        default: '5'
+      whisper_model:
+        description: 'Whisper model (tiny/base/small)'
+        default: 'base'
+      seed:
+        description: 'RNG seed (empty for random)'
+        default: ''
 
 permissions:
   contents: write
