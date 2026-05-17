@@ -1,0 +1,16 @@
+{
+  "scale": "Huseyni",
+  "root": "B",
+  "tempo": 160,
+  "description": "As the jazz flute swirled in the tornado, it reprogrammed the wind chimes to play a haunting melody :tornado::boom::loud",
+  "chords": [
+    "Bm7",
+    "G7",
+    "C#m7",
+    "Ebmaj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-28"
+}

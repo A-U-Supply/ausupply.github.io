@@ -1,0 +1,16 @@
+{
+  "scale": "Messiaen Mode 6",
+  "root": "E",
+  "tempo": 180,
+  "description": "A social media algorithm spins out of control, fuelling a frenzy of likes and shares in a never-ending cycle of digital validation :chart",
+  "chords": [
+    "E7",
+    "G#m7",
+    "C#m7",
+    "Bmaj7"
+  ],
+  "melody_instrument": 65,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-08"
+}

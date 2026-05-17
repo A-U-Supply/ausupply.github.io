@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Freygish",
+  "root": "E",
+  "tempo": 110,
+  "description": "A whirlwind of jazz flute tornadoes sweeps across the prairie as a lone spaghetti western cowboy rides backwards into the sunset :sunrise::tornado:",
+  "chords": [
+    "Em",
+    "B7",
+    "G#m",
+    "C#m7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-09"
+}

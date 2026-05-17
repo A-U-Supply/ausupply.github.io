@@ -1,0 +1,16 @@
+{
+  "scale": "Persian",
+  "root": "C",
+  "tempo": 100,
+  "description": "The crumbling church organ played a haunting tune as a demolition derby car crashed into a calliope at midnight :night",
+  "chords": [
+    "Cmaj7",
+    "G7",
+    "Am7",
+    "E7"
+  ],
+  "melody_instrument": 41,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-14"
+}

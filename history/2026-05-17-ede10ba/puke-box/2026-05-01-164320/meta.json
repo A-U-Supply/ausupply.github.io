@@ -1,0 +1,16 @@
+{
+  "scale": "Diminished (Whole-Half)",
+  "root": "A",
+  "tempo": 180,
+  "description": "In the heart of the Wurly Durly World, a calliope plays a haunting tune at midnight, while a harpist wearing oven mitts conjures a whirlwind of sound :tornado::dizzy::fire:",
+  "chords": [
+    "Am",
+    "Dm7",
+    "G7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-01"
+}

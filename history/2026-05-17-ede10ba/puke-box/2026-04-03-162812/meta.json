@@ -1,0 +1,16 @@
+{
+  "scale": "Romanian Minor",
+  "root": "C#",
+  "tempo": 140,
+  "description": "A didgeridoo-wielding clown is chasing a harp-playing ninja through a parking garage :clown",
+  "chords": [
+    "C#m",
+    "G7",
+    "Am",
+    "Ebdim"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-03"
+}

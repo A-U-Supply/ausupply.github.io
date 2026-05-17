@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Natabhairavi",
+  "root": "Bb",
+  "tempo": 100,
+  "description": "In a cave of clockwork gears, the sound of a working hour echoes through the darkness :mantelpiece",
+  "chords": [
+    "Bbm",
+    "Gbm7",
+    "Dbm7",
+    "Abm7"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-11"
+}

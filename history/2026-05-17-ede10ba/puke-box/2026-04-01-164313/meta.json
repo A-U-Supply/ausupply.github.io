@@ -1,0 +1,16 @@
+{
+  "scale": "Locrian",
+  "root": "Eb",
+  "tempo": 100,
+  "description": "A toy piano whispers secrets to a kalimba in a square of trust :classical",
+  "chords": [
+    "Eb5",
+    "Ab7",
+    "Bb7",
+    "Db9"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-01"
+}

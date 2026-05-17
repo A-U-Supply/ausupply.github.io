@@ -1,0 +1,16 @@
+{
+  "scale": "Hexatonic (Augmented)",
+  "root": "F",
+  "tempo": 160,
+  "description": "As the *ear wyrm* burrows into your eardrum, it leaves a trail of resonant, otherworldly echoes :ant::skull::loud",
+  "chords": [
+    "Fmaj7",
+    "G7",
+    "Cmaj7",
+    "Dm7"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-14"
+}

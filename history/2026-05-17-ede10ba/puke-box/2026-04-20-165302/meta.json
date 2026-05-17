@@ -1,0 +1,16 @@
+{
+  "scale": "Messiaen Mode 3",
+  "root": "Ab",
+  "tempo": 110,
+  "description": "As machines learn to think, human workers are left to play harp with oven mitts in a desolate hospital waiting room :hospital::computer:",
+  "chords": [
+    "Ab7",
+    "Bbmaj7",
+    "Cm7",
+    "Db7"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-20"
+}
