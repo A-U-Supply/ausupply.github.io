@@ -1,0 +1,16 @@
+{
+  "scale": "Ukrainian Dorian",
+  "root": "G",
+  "tempo": 100,
+  "description": "A mystical banjo player floats on a frozen lake, surrounded by glowing bovine eyes :cow::dizzy:",
+  "chords": [
+    "Gm",
+    "Em7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-02"
+}

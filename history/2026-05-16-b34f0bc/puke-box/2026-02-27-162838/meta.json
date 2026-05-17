@@ -1,0 +1,16 @@
+{
+  "scale": "Double Harmonic Major",
+  "root": "E",
+  "tempo": 120,
+  "description": "A surreal showdown unfolds in a *desert landscape* :cactus:, where *politicians* engage in a frantic ragtime dance as the ground *shakes* :cyclone:",
+  "chords": [
+    "Ebmaj7",
+    "B7",
+    "F#m",
+    "G#m"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-02-27"
+}

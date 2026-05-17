@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Saba",
+  "root": "E",
+  "tempo": 120,
+  "description": "A medieval lute plays a haunting melody in a stormy Strait of Hormuz :thunder",
+  "chords": [
+    "Em7",
+    "G7",
+    "Am7",
+    "D7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-03-10"
+}
