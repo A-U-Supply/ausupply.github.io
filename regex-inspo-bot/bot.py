@@ -74,6 +74,10 @@ def main() -> int:
     slack = WebClient(token=os.environ["SLACK_BOT_TOKEN"])
     video_ids = fetch_thread_video_ids(slack)
     log.info(f"Found {len(video_ids)} unique YouTube video IDs in thread")
+    log.info("--- VIDEO IDS (in thread order) ---")
+    for i, vid in enumerate(video_ids, start=1):
+        log.info(f"  {i:>3}. https://youtu.be/{vid}")
+    log.info("--- end IDS ---")
     if not video_ids:
         log.info("Nothing to add. Exiting.")
         return 0
