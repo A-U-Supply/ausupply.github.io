@@ -1,0 +1,16 @@
+{
+  "scale": "Ichikosucho",
+  "root": "A",
+  "tempo": 180,
+  "description": "The corrupted island man's mechanical heartbeat echoes through the abandoned carnival at midnight :carousel",
+  "chords": [
+    "Am",
+    "E7",
+    "Gbm",
+    "Cmaj7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-08"
+}

@@ -1,0 +1,16 @@
+{
+  "scale": "Ethiopic Tizita Minor",
+  "root": "A",
+  "tempo": 100,
+  "description": "A haunted banjo player summons the spirits of the dead in a creepy, abandoned carnival :circus",
+  "chords": [
+    "Am",
+    "Em",
+    "G",
+    "Dm"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-15"
+}

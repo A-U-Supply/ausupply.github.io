@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian",
+  "root": "E",
+  "tempo": 100,
+  "description": "A lone knight's lament echoes through a deserted castle, where the only date is with a rusty suit of armor :bow",
+  "chords": [
+    "Em",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-11"
+}

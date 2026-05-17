@@ -1,0 +1,16 @@
+{
+  "scale": "Hemitonic Pentatonic",
+  "root": "G",
+  "tempo": 160,
+  "description": "A church organ screams in delight as it's smashed to pieces at a demolition derby, while the driver shouts *I'm not a trad cath, byyyyeeee!!!* :guitar::boom::fire:",
+  "chords": [
+    "G",
+    "Em",
+    "C",
+    "D"
+  ],
+  "melody_instrument": 69,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-27"
+}

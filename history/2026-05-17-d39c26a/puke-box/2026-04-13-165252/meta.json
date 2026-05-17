@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Misheberakh",
+  "root": "F#",
+  "tempo": 90,
+  "description": "As the last remnants of memories fade away, a lone violinist plays a haunting melody amidst the rusting ruins of a forgotten world :fog::broken",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#maj7"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-13"
+}

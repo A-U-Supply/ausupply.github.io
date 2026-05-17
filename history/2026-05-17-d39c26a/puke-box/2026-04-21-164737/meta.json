@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Freygish",
+  "root": "Bb",
+  "tempo": 130,
+  "description": "A clown is giving a lecture on quantum physics while riding a unicycle :clown",
+  "chords": [
+    "BbMaj7",
+    "G7",
+    "EbMaj7",
+    "Cm7"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-04-21"
+}
