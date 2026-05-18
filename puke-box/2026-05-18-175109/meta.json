@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Dominant",
+  "root": "D",
+  "tempo": 160,
+  "description": "as the cement trucks drive recklessly through the city, their horns bleat out a frantic melody :construction::dash::loud",
+  "chords": [
+    "Dmaj7",
+    "E7",
+    "G7",
+    "C#m7"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-18"
+}
