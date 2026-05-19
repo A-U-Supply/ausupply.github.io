@@ -1,0 +1,16 @@
+{
+  "scale": "Nikriz",
+  "root": "F",
+  "tempo": 100,
+  "description": "A lone bartender polishes a mug with a dirty rag at 3am, waiting for the apocalypse to arrive :beer::skull:",
+  "chords": [
+    "Fm",
+    "C7",
+    "Gbmaj7",
+    "Eb7"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-19"
+}
