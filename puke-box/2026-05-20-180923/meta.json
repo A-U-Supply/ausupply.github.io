@@ -1,0 +1,16 @@
+{
+  "scale": "Ethiopic Tizita Minor",
+  "root": "A",
+  "tempo": 60,
+  "description": "A calliope organ plays a mournful tune at a demolition derby, as cars crash in slow motion :car::boom::ghost:",
+  "chords": [
+    "Am",
+    "Em",
+    "G",
+    "C"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-20"
+}
