@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Misheberakh",
+  "root": "D",
+  "tempo": 130,
+  "description": "A haunted mansion's grand ballroom is filled with the ghosts of ancestral wealth, all wearing top hats and monocles :spider::gem:",
+  "chords": [
+    "Dm",
+    "E7",
+    "Gm",
+    "Cmaj7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-21"
+}
