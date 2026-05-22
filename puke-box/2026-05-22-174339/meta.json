@@ -1,0 +1,16 @@
+{
+  "scale": "Ethiopic Bati Major",
+  "root": "G",
+  "tempo": 100,
+  "description": "A lonely 1% chance of success still sparks joy :rocket::dizzy:",
+  "chords": [
+    "G",
+    "D",
+    "Em",
+    "C"
+  ],
+  "melody_instrument": 65,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-22"
+}
