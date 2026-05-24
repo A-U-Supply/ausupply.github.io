@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Chandrakauns",
+  "root": "D",
+  "tempo": 60,
+  "description": "A lone zither player weaves a somber melody at rush hour, as lo-fi jazz elevator music whispers secrets to the sleepy commuters :couch",
+  "chords": [
+    "Dm",
+    "E7",
+    "G",
+    "Am"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 0.8,
+  "date": "2026-05-24"
+}
