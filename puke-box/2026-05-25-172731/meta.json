@@ -1,0 +1,16 @@
+{
+  "scale": "Algerian",
+  "root": "F",
+  "tempo": 140,
+  "description": "A gambler's soul is trapped in a *pair a dice prison* :game",
+  "chords": [
+    "Fm7",
+    "C7",
+    "Gm7",
+    "Bb7"
+  ],
+  "melody_instrument": 80,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-25"
+}
