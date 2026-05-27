@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Hamsadhwani",
+  "root": "E",
+  "tempo": 160,
+  "description": "A space station's gamelan orchestra plays a frantic melody amidst whirring industrial machinery, fueled by a sugary rush of *Skittles* :candy::rocket:",
+  "chords": [
+    "E5",
+    "B5",
+    "G#5",
+    "C#5"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-27"
+}
