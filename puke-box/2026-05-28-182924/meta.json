@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Todi",
+  "root": "F#",
+  "tempo": 100,
+  "description": "A futuristic gambler's lament echoes through the *pair a dice prison*, where space Station Vegas meets intergalactic despair :rocket::dizzy:",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#m"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-28"
+}
