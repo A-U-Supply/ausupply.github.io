@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Kafi",
+  "root": "Bb",
+  "tempo": 100,
+  "description": "Frozen steel drums echo across a desolate, moonlit lake, as a lone *swan* glides effortlessly, leaving ripples in the *irreality* :full",
+  "chords": [
+    "Bbm",
+    "G7",
+    "Ebmaj7",
+    "Ab7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-29"
+}
