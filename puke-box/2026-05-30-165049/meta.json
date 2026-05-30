@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian",
+  "root": "D",
+  "tempo": 100,
+  "description": "As the capitalist farmer's empire rises, wind chimes clang in the darkness, echoed by the *drowning* sounds of a baroque harpsichord :ocean::money",
+  "chords": [
+    "Dm",
+    "G7",
+    "Cmaj7",
+    "Em7"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-05-30"
+}
