@@ -1,0 +1,16 @@
+{
+  "scale": "Spanish 8-Tone",
+  "root": "E",
+  "tempo": 100,
+  "description": "As I stared into the mirror, a paper tiger made of doubts began to *shred* my reflection :tiger::broken",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 64,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-01"
+}
