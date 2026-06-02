@@ -1,0 +1,16 @@
+{
+  "scale": "Huseyni",
+  "root": "Ab",
+  "tempo": 100,
+  "description": "A flooded thrift store orchestra plays a lament for the dollar, &lt;i&gt;with&lt;/i&gt; rusty cash registers as percussion :woman-swimming::money",
+  "chords": [
+    "Abm",
+    "Db7",
+    "Gbmaj7",
+    "Ebdim"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-02"
+}
