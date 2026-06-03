@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Bayati",
+  "root": "C",
+  "tempo": 180,
+  "description": "A dark vortex swirls in the depths of a cyberpunk city, sucking all hope into the *system vacuum* :put",
+  "chords": [
+    "Cm",
+    "G7",
+    "Am",
+    "Em7"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-03"
+}
