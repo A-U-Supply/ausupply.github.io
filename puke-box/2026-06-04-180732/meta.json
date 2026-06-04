@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Nahawand",
+  "root": "D",
+  "tempo": 160,
+  "description": "In a dystopian future, a lone sitar-wielding revolutionary faces off against an army of robotic capitalists :robot",
+  "chords": [
+    "Dm",
+    "E7",
+    "Gmaj7",
+    "Cadd9"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-04"
+}
