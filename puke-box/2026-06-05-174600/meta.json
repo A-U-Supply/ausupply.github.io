@@ -1,0 +1,16 @@
+{
+  "scale": "Mi Sheberakh",
+  "root": "A",
+  "tempo": 90,
+  "description": "As I drowned in the abyss of unutterable thoughts, the steel drums on the frozen lake whispered secrets to the reversed spaghetti western soundtracks :cyclone::skull::repeat:",
+  "chords": [
+    "Am",
+    "E7",
+    "Gadd9",
+    "Cmaj7"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-05"
+}
