@@ -1,0 +1,16 @@
+{
+  "scale": "Kyemyonjo",
+  "root": "F",
+  "tempo": 130,
+  "description": "A music box plays a discordant tune in the eye of a hurricane, surrounded by &lt;i&gt;confused&lt;/i&gt; sculptures :tornado::boom:",
+  "chords": [
+    "Fm",
+    "Cm7",
+    "Ab7",
+    "Eb"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-06"
+}
