@@ -1,0 +1,16 @@
+{
+  "scale": "Kumoi",
+  "root": "D",
+  "tempo": 100,
+  "description": "A gospel choir in a submarine is reprogramming the audio sensory memories of a space station's gamelan orchestra :rocket::alien::computer:",
+  "chords": [
+    "Dm",
+    "G",
+    "Am",
+    "E"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-10"
+}
