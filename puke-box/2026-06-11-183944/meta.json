@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Misheberakh",
+  "root": "F#",
+  "tempo": 170,
+  "description": "A mad scientist stirs a bubbling cauldron of *Supersaturated Mother Liquor* :male",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#maj7"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-11"
+}
