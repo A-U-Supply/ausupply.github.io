@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Kafi",
+  "root": "B",
+  "tempo": 60,
+  "description": "Echoes of a theremin at a funeral haunt the *temporal index* :mantelpiece",
+  "chords": [
+    "Bm",
+    "G7",
+    "Em",
+    "Am"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-13"
+}
