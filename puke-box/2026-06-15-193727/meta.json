@@ -1,0 +1,16 @@
+{
+  "scale": "Iwato",
+  "root": "B",
+  "tempo": 140,
+  "description": "The craftsman's feet move swiftly as he dances upon the volcano's fiery rim :volcano:, with the sound of the baroque harpsichord echoing through the molten lava :ocean:",
+  "chords": [
+    "Bm",
+    "G",
+    "Em",
+    "C#m"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-15"
+}
