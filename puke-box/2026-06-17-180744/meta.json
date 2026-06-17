@@ -1,0 +1,16 @@
+{
+  "scale": "Huseyni",
+  "root": "E",
+  "tempo": 130,
+  "description": "As the general exudation commenced, a lone violinist played a discordant tune while standing on a giant soap bubble :woman",
+  "chords": [
+    "Em",
+    "B7",
+    "G#m",
+    "C#m"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-17"
+}
