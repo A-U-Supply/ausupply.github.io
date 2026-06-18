@@ -1,0 +1,16 @@
+{
+  "scale": "Minor Pentatonic",
+  "root": "F#",
+  "tempo": 90,
+  "description": "In the Cathode Cafe, patrons sipped neon-colored cocktails while watching old computer monitors display a mesmerizing loop of code <https://example.com|:robot",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#m",
+    "D#m7"
+  ],
+  "melody_instrument": 11,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-18"
+}
