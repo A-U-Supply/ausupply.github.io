@@ -1,0 +1,16 @@
+{
+  "scale": "Istrian",
+  "root": "E",
+  "tempo": 170,
+  "description": "As I sat in the hospital waiting room, the banjo-playing demon from another dimension whispered *God bless the algorithm that sent me this* in my ear :exploding",
+  "chords": [
+    "Em",
+    "Gbm",
+    "Cmaj7",
+    "Ab7"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-21"
+}
