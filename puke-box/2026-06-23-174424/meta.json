@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Chandrakauns",
+  "root": "G",
+  "tempo": 180,
+  "description": "As the crowd frantically chases a gargantuan Big Mac through the city streets, the earth shakes and the church organ plays a wild ragtime tune :hamburger::ghost::boom:",
+  "chords": [
+    "G5",
+    "Cmaj7",
+    "Am7",
+    "Em7"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-23"
+}
