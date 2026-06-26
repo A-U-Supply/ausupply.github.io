@@ -1,0 +1,16 @@
+{
+  "scale": "Aeolian Dominant",
+  "root": "E",
+  "tempo": 128,
+  "description": "As the robots rise, they play medieval lutes at neon-lit raves, fueling the *knowledge-labor decoupling* :robot",
+  "chords": [
+    "Em7",
+    "G7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-26"
+}
