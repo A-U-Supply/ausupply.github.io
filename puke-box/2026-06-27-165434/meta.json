@@ -1,0 +1,16 @@
+{
+  "scale": "Ethiopic Anchihoye",
+  "root": "Bb",
+  "tempo": 100,
+  "description": "In the *Wurly Durly World*, mesmerizing clockwork machines perform a haunting ballet under a barrage of disco balls :globe",
+  "chords": [
+    "Bbm",
+    "Gbm",
+    "Dbm",
+    "Abm"
+  ],
+  "melody_instrument": 11,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-27"
+}
