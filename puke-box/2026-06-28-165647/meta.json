@@ -1,0 +1,16 @@
+{
+  "scale": "Algerian",
+  "root": "D",
+  "tempo": 140,
+  "description": "Andy's fun is like a *crashing* demolition derby in a flooded church :european",
+  "chords": [
+    "Dm7",
+    "G7",
+    "Cmaj7",
+    "E7"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-28"
+}
