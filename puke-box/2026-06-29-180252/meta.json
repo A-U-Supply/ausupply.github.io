@@ -1,0 +1,16 @@
+{
+  "scale": "Messiaen Mode 2",
+  "root": "Bb",
+  "tempo": 90,
+  "description": "As the mariachi band on the moon plays a haunting melody, ashes start to compose themselves into a celestial waltz :dizzy::man",
+  "chords": [
+    "Bbm",
+    "Gbmaj7",
+    "Eb7",
+    "Abmaj7"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-29"
+}
