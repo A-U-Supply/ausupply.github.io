@@ -1,0 +1,16 @@
+{
+  "scale": "Celtic Dorian",
+  "root": "C",
+  "tempo": 130,
+  "description": "Echoes of unheard feasts haunt my starving ears :fork",
+  "chords": [
+    "Cm",
+    "G7",
+    "Am",
+    "Em"
+  ],
+  "melody_instrument": 74,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-06-30"
+}
