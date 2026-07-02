@@ -1,0 +1,16 @@
+{
+  "scale": "Piongio",
+  "root": "C#",
+  "tempo": 100,
+  "description": "As the clock strikes, the wind tunnel whispers secrets to the <https://en.wikipedia.org/wiki/Wage|wages> of forgotten souls :mantelpiece",
+  "chords": [
+    "C#m7",
+    "G#m7",
+    "Aadd9",
+    "Ebmaj7"
+  ],
+  "melody_instrument": 65,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-02"
+}
