@@ -1,0 +1,16 @@
+{
+  "scale": "Dorian",
+  "root": "A",
+  "tempo": 90,
+  "description": "A medieval lute is spinning tracks at a rave while a tractor is ploughing through the dance floor :ear",
+  "chords": [
+    "Am",
+    "Dm7",
+    "G7",
+    "Em7"
+  ],
+  "melody_instrument": 74,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-03"
+}
