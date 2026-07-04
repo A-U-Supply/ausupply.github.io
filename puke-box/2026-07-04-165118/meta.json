@@ -1,0 +1,16 @@
+{
+  "scale": "Locrian #2",
+  "root": "F#",
+  "tempo": 100,
+  "description": "A patient in the hospital waiting room starts to hallucinate after tasting *mustard so I can cream* on their stale crackers :exploding",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#m7b5",
+    "D#m"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-04"
+}
