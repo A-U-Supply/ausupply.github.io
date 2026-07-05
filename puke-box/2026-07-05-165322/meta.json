@@ -1,0 +1,16 @@
+{
+  "scale": "Mystic Chord",
+  "root": "B",
+  "tempo": 130,
+  "description": "As I try to *be the do*, I find myself lost in a maze of zithers and toy pianos :hole::musical",
+  "chords": [
+    "Bm",
+    "Gbmaj7",
+    "Eb7",
+    "Abmaj7"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-05"
+}
