@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Natabhairavi",
+  "root": "A",
+  "tempo": 110,
+  "description": "As Andy stumbles through the weeds, his luck is accompanied by a swarm of wild, *didgeridoo-playing* bees :bee::herb:",
+  "chords": [
+    "Am",
+    "E7",
+    "G",
+    "Cmaj7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-06"
+}
