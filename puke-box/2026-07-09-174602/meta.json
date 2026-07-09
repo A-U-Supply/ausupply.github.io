@@ -1,0 +1,16 @@
+{
+  "scale": "Diminished (Half-Whole)",
+  "root": "C#",
+  "tempo": 130,
+  "description": "Two celebrities roll a hoop across a frozen lake, the sound of their laughter echoing through the ice caves :ice",
+  "chords": [
+    "C#m7b5",
+    "G#m7b5",
+    "D#m7b5",
+    "A#m7b5"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-09"
+}
