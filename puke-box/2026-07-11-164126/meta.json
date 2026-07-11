@@ -1,0 +1,16 @@
+{
+  "scale": "Messiaen Mode 7",
+  "root": "A",
+  "tempo": 160,
+  "description": "A swarm of confused clockworkers are trying to repair a broken music box while the floor is shaking :mantelpiece",
+  "chords": [
+    "Am7",
+    "E7",
+    "Gmaj7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-11"
+}
