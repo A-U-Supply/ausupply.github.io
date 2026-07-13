@@ -1,0 +1,16 @@
+{
+  "scale": "Algerian",
+  "root": "D",
+  "tempo": 100,
+  "description": "As I wander through the echoes of an infinite parking garage, I yearn to be swallowed by the didgeridoo's haunting wail :cyclone::repeat:",
+  "chords": [
+    "Dm7",
+    "E7",
+    "Gm7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-13"
+}
