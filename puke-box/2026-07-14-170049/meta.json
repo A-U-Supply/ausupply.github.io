@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Dominant",
+  "root": "Bb",
+  "tempo": 110,
+  "description": "A bathroom mirror reflects a spaghetti western showdown, where the hero is 99% unsure, but 1% is *pretty good* :face",
+  "chords": [
+    "Bbmaj7",
+    "Eb7",
+    "Fmaj7",
+    "Cm7"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-14"
+}
