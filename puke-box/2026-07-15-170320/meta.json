@@ -1,0 +1,16 @@
+{
+  "scale": "Blues Nonatonic",
+  "root": "E",
+  "tempo": 130,
+  "description": "As the steam-powered locomotive careens out of control, its whistle shrieks in discordant harmony with the *raging* harmonica solo :steam",
+  "chords": [
+    "E7",
+    "G#9",
+    "C#m7",
+    "B7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-15"
+}
