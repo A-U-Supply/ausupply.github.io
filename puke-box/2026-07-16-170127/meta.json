@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Kalyani",
+  "root": "F#",
+  "tempo": 130,
+  "description": "As the experiment begins, a cacophony of clockwork limbs and whispering organs echoes through the abandoned laboratory :fog::bulb::microscope:",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#maj7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-16"
+}
