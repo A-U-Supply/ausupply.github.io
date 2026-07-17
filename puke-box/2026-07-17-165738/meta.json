@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Misheberakh",
+  "root": "E",
+  "tempo": 100,
+  "description": "A gospel choir echoes through the *Interstitium*, a mystical realm hidden between the notes of a spaghetti western soundtrack played in reverse :hole::skull:",
+  "chords": [
+    "Em",
+    "B7",
+    "G#m",
+    "C#m7"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-17"
+}
