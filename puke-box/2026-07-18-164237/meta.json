@@ -1,0 +1,16 @@
+{
+  "scale": "Tritone",
+  "root": "F#",
+  "tempo": 180,
+  "description": "Wealthy art patrons are swirling like &lt;i&gt;tornadoes&lt;/i&gt; in a sea of jazz flute chaos :tornado::money",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#m7",
+    "D#maj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-18"
+}
