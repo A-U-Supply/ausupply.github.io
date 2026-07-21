@@ -1,0 +1,16 @@
+{
+  "scale": "Double Harmonic",
+  "root": "Bb",
+  "tempo": 130,
+  "description": "A lonely toy piano concerto echoes through a surreal Burger King bathroom :toilet::hamburger::bulb:",
+  "chords": [
+    "Bbmaj7",
+    "G7",
+    "Eb7",
+    "Abmaj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-21"
+}
