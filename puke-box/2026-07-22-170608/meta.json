@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Chandrakauns",
+  "root": "G",
+  "tempo": 100,
+  "description": "A gospel choir in a submarine is singing yes and no in harmony with a giant nose :nose: that's playing ragtime piano during an earthquake :ocean:",
+  "chords": [
+    "Gm",
+    "Em7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-22"
+}
