@@ -1,0 +1,16 @@
+{
+  "scale": "Mi Sheberakh",
+  "root": "A",
+  "tempo": 130,
+  "description": "In the depths of a dark cave, a synthesizer soloist discovers a hidden immortality sale, but the price is a haunting melody that echoes forever :skull::loud",
+  "chords": [
+    "Am",
+    "E7",
+    "Gbm",
+    "Cmaj7"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-23"
+}
