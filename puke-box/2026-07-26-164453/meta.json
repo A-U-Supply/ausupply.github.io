@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Minor",
+  "root": "Ab",
+  "tempo": 140,
+  "description": "The clacker wacker lamented its existence with a xylophone requiem :musical",
+  "chords": [
+    "Abmaj7",
+    "Eb7",
+    "Dbmaj7",
+    "Gbmaj7"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-26"
+}
