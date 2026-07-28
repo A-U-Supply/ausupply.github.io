@@ -1,0 +1,16 @@
+{
+  "scale": "Tritone",
+  "root": "B",
+  "tempo": 130,
+  "description": "As I sent a tweet to @dave, a mariachi band on the moon began to play a synthesizer solo in a cave :full",
+  "chords": [
+    "Bm",
+    "Gbmaj7",
+    "Eb7",
+    "Ab"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-28"
+}
