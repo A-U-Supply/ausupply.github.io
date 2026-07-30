@@ -1,0 +1,16 @@
+{
+  "scale": "Ryukyu",
+  "root": "B",
+  "tempo": 130,
+  "description": "A jazz flute swirls in a tornado, carrying the essence of a heath bar :tornado::dash:",
+  "chords": [
+    "Bm7",
+    "D",
+    "G",
+    "Em7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-07-30"
+}
