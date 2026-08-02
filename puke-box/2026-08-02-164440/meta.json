@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Bhairavi",
+  "root": "G",
+  "tempo": 60,
+  "description": "The sleep cartel controls your dreams from a wind tunnel filled with whispering wind chimes :wind",
+  "chords": [
+    "Gm",
+    "Eb7",
+    "Cm",
+    "Ab"
+  ],
+  "melody_instrument": 11,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-02"
+}
