@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Bhairavi",
+  "root": "C#",
+  "tempo": 100,
+  "description": "A broken refrigerator hums a haunting melody in a dimly lit parking garage :car::bulb:",
+  "chords": [
+    "C#m",
+    "G#m7",
+    "A",
+    "E#dim"
+  ],
+  "melody_instrument": 22,
+  "chord_instrument": 0,
+  "temperature": 1.1,
+  "date": "2026-08-03"
+}
