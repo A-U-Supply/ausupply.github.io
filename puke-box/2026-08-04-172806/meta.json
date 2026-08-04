@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Nahawand",
+  "root": "C#",
+  "tempo": 130,
+  "description": "In a world where time is currency, the demolition derby of existence is fueled by *banjo bluegrass from another dimension* :car::money",
+  "chords": [
+    "C#m7",
+    "G#m7",
+    "A",
+    "E"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-04"
+}
