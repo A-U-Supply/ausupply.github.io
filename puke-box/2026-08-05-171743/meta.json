@@ -1,0 +1,16 @@
+{
+  "scale": "Diminished (Half-Whole)",
+  "root": "Ab",
+  "tempo": 180,
+  "description": "As I played the toy piano, all my happiness disappeared in a puff of smoke, leaving only *ash* and *despair* :fog:",
+  "chords": [
+    "Abdim",
+    "Bb7",
+    "Cbmaj7",
+    "Ddim"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-05"
+}
