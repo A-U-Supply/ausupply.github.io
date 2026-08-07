@@ -1,0 +1,16 @@
+{
+  "scale": "Gnawa",
+  "root": "Eb",
+  "tempo": 90,
+  "description": "The theremin wept at the funeral of a disembodied hand :skull::spider:",
+  "chords": [
+    "Ebmaj7",
+    "Bb7",
+    "Ab7",
+    "Dbmaj7"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-07"
+}
