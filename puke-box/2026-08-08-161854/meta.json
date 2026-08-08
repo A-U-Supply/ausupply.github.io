@@ -1,0 +1,16 @@
+{
+  "scale": "Klezmer Freygish",
+  "root": "A",
+  "tempo": 130,
+  "description": "In a bizarre fusion of free jazz and gamelan, a abandoned hospital waiting room on a space station is filled with the sounds of wailing saxophones and swinging space suits :dizzy::man",
+  "chords": [
+    "Am",
+    "Dm7",
+    "G7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-08"
+}
