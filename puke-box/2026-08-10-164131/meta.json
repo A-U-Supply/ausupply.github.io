@@ -1,0 +1,16 @@
+{
+  "scale": "Hungarian Major",
+  "root": "D",
+  "tempo": 100,
+  "description": "As the *shpilmgrim* procession marched through the abandoned carnival, a lone theremin wailed in mourning :jack",
+  "chords": [
+    "Dmaj7",
+    "E7",
+    "G#m",
+    "C#m7"
+  ],
+  "melody_instrument": 80,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-10"
+}
