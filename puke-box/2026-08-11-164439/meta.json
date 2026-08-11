@@ -1,0 +1,16 @@
+{
+  "scale": "Romanian Minor",
+  "root": "A",
+  "tempo": 90,
+  "description": "On a desolate moonlit beach, steel drums echo with the haunting whispers of starving hearts :full",
+  "chords": [
+    "Am",
+    "E7",
+    "Gmaj7",
+    "Cm7"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-11"
+}
