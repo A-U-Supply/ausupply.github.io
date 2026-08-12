@@ -1,0 +1,16 @@
+{
+  "scale": "Mixolydian",
+  "root": "C",
+  "tempo": 110,
+  "description": "Wind chimes in a wind tunnel teach insomniacs to laugh at their sleepless *lullabies* :crescent",
+  "chords": [
+    "Cmaj7",
+    "G7",
+    "Am7",
+    "Dm7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-12"
+}
