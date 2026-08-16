@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Kalyani",
+  "root": "E",
+  "tempo": 130,
+  "description": "A bureaucratic Big Mac enthusiast frantically searches for *Section 5B* amidst a vortex of paperwork :memo::dash::twisted",
+  "chords": [
+    "Em",
+    "B7",
+    "G#m",
+    "C#m"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-16"
+}
