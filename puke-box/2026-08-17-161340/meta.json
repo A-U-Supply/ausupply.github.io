@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Kafi",
+  "root": "F",
+  "tempo": 100,
+  "description": "The campus quad is filled with the eerie sound of a thousand music boxes playing a haunting lullaby to keep the insomnia-plagued students company :mantelpiece",
+  "chords": [
+    "Fm",
+    "G7",
+    "Am",
+    "Em7"
+  ],
+  "melody_instrument": 108,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-17"
+}
