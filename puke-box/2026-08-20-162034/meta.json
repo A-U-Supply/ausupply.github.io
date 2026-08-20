@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Durga",
+  "root": "C",
+  "tempo": 60,
+  "description": "The shirt had been hanging in the closet for years, its inert fabric somehow echoing the mournful wails of a *theremin* at a funeral :guitar::skull:",
+  "chords": [
+    "Csus2",
+    "G7",
+    "Am7",
+    "Cadd9"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-20"
+}
