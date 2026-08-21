@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Saba",
+  "root": "F",
+  "tempo": 90,
+  "description": "As the paper tiger's whiskers began to rustle, a *funeral procession* of forgotten doubts marched silently through the city, accompanied by the mournful wail of a theremin :trumpet::skull:",
+  "chords": [
+    "Fm7",
+    "G7",
+    "Am7",
+    "E7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-21"
+}
