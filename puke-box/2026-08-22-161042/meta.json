@@ -1,0 +1,16 @@
+{
+  "scale": "Tritone",
+  "root": "B",
+  "tempo": 130,
+  "description": "On a space station, good news is delivered to coal miners via a cryptic message encoded in the rhythmic clanging of industrial machinery :bulb::rocket:",
+  "chords": [
+    "Bmaj7",
+    "D#m7",
+    "Gbmaj7",
+    "E7"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-22"
+}
