@@ -1,0 +1,16 @@
+{
+  "scale": "Locrian #2",
+  "root": "A",
+  "tempo": 100,
+  "description": "A chaotic coin flip summons a *tornado* of jazz flute solos at a *funeral* for binary identity :cyclone::skull:",
+  "chords": [
+    "Am",
+    "E7",
+    "Gm7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-23"
+}
