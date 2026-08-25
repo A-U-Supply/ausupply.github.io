@@ -1,0 +1,16 @@
+{
+  "scale": "Superlocrian bb7",
+  "root": "F",
+  "tempo": 180,
+  "description": "The baroque harpsichord was drowning in a sea of *fucked up feelings* :ocean::musical",
+  "chords": [
+    "Fm7",
+    "G7",
+    "Abmaj7",
+    "Cdim"
+  ],
+  "melody_instrument": 6,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-25"
+}
