@@ -1,0 +1,16 @@
+{
+  "scale": "Iwato",
+  "root": "B",
+  "tempo": 100,
+  "description": "The mariachi band on the moon played a lament for the wind chimes that were silenced by the lack of atmosphere :full",
+  "chords": [
+    "Bm",
+    "G7",
+    "Em",
+    "C#m"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-26"
+}
