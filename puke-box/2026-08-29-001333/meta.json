@@ -1,0 +1,16 @@
+{
+  "scale": "Locrian",
+  "root": "D",
+  "tempo": 130,
+  "description": "A *somewhat hairy ape* is smashing a church organ at a demolition derby :exploding",
+  "chords": [
+    "Dm",
+    "G7",
+    "Cmaj7",
+    "Em7"
+  ],
+  "melody_instrument": 41,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-29"
+}
