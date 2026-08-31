@@ -1,0 +1,16 @@
+{
+  "scale": "Enigmatic",
+  "root": "Bb",
+  "tempo": 110,
+  "description": "The calliope at midnight whispered secrets to the zither player, who wore a coat made of *free* dreams :zzz::guitar::mantelpiece",
+  "chords": [
+    "Bbmaj7",
+    "G7",
+    "Eb7",
+    "Abmaj7"
+  ],
+  "melody_instrument": 107,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-08-30"
+}
