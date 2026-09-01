@@ -1,0 +1,16 @@
+{
+  "scale": "Kurdilihicazkar",
+  "root": "D",
+  "tempo": 100,
+  "description": "A politician's face turns orange as he plays the harp with oven mitts :exploding",
+  "chords": [
+    "Dm7",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-01"
+}
