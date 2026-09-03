@@ -1,0 +1,16 @@
+{
+  "scale": "Leading Whole Tone",
+  "root": "C",
+  "tempo": 180,
+  "description": "The stock market is a <https://en.wikipedia.org/wiki/Casino|casino> on fire :office::fire::money",
+  "chords": [
+    "Cmaj7",
+    "D7",
+    "E7",
+    "G7"
+  ],
+  "melody_instrument": 56,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-03"
+}
