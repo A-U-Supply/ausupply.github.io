@@ -1,0 +1,16 @@
+{
+  "scale": "Hexatonic (Augmented)",
+  "root": "A",
+  "tempo": 160,
+  "description": "As the mariachi band on the moon plays their accordionfallback apocalypse set, the algorithms align to summon the *chosen ones* :full",
+  "chords": [
+    "Amaj7",
+    "D7",
+    "E7",
+    "G#m7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-11"
+}
