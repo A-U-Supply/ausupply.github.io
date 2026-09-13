@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Augmented",
+  "root": "B",
+  "tempo": 180,
+  "description": "In a world where thunderstorms are fueled by accordion music, *more womp-womps* echo through the chaotic skies :tornado::boom:",
+  "chords": [
+    "Bmaj7",
+    "D#m7",
+    "G#m7",
+    "E#maj7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-13"
+}
