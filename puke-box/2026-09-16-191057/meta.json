@@ -1,0 +1,16 @@
+{
+  "scale": "Hirajoshi",
+  "root": "A",
+  "tempo": 110,
+  "description": "As I slipped on the *Trousers of Awakening*, I felt the fabric whisper strange melodies to my legs :speaking",
+  "chords": [
+    "Am",
+    "E7",
+    "Gbmaj7",
+    "C#m"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-16"
+}
