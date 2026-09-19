@@ -1,0 +1,16 @@
+{
+  "scale": "Huseyni",
+  "root": "D",
+  "tempo": 140,
+  "description": "A mariachi band on the moon is trying to defund the chat of a rogue AI, but it keeps interrupting with *horrible dad jokes* :rocket::computer:",
+  "chords": [
+    "Dm",
+    "E7",
+    "Gm",
+    "Cmaj7"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-19"
+}
