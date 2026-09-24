@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Purvi",
+  "root": "G",
+  "tempo": 180,
+  "description": "A mariachi band on the moon plays a frantic tune to distract from the *free jazz hospital waiting room* in my mind :rocket::dizzy:",
+  "chords": [
+    "Gm",
+    "D7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-23"
+}
