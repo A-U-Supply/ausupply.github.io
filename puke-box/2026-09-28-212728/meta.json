@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian",
+  "root": "D",
+  "tempo": 130,
+  "description": "Murph's flame-ignited clarinet solo melts the frozen lake, summoning steel drum vultures :star2::fire:",
+  "chords": [
+    "Dm",
+    "Ebmaj7",
+    "Gbmaj7",
+    "Cm"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-28"
+}
