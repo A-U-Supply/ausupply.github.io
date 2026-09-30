@@ -1,0 +1,16 @@
+{
+  "scale": "Tcherepnin Nonatonic",
+  "root": "Eb",
+  "tempo": 130,
+  "description": "A medieval lute player crashes a rave and starts a mosh pit :exploding",
+  "chords": [
+    "Ebmaj7",
+    "G7",
+    "Bb7",
+    "Abmaj7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-09-29"
+}
