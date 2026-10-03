@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Hijaz",
+  "root": "G",
+  "tempo": 130,
+  "description": "As the clock strikes midnight, a lone oboe player summons the apocalypse with a haunting melody :tornado::skull::fire:",
+  "chords": [
+    "Gmaj7",
+    "Em7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-02"
+}
