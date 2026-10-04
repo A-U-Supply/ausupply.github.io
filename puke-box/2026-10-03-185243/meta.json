@@ -1,0 +1,16 @@
+{
+  "scale": "Nikriz",
+  "root": "F#",
+  "tempo": 180,
+  "description": "As the last accordion player on earth wandered through the desolate landscape, the twisted remains of a spaghetti western town seemed to *play* the apocalypse in reverse :tornado::skull:",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#maj7"
+  ],
+  "melody_instrument": 109,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-03"
+}
