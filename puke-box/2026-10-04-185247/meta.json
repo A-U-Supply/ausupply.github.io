@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Hamsadhwani",
+  "root": "C#",
+  "tempo": 100,
+  "description": "A whirlwind of jazz flute solos echoes through the streets of Manila, warning of the dangers of substance abuse with a frantic *tornado of sound* :tornado::boom:",
+  "chords": [
+    "C#m",
+    "G#m7",
+    "A",
+    "E#m"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-04"
+}
