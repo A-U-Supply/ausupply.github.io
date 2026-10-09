@@ -1,0 +1,16 @@
+{
+  "scale": "Messiaen Mode 2",
+  "root": "Eb",
+  "tempo": 180,
+  "description": "A tryhard insomniac's frantic lullaby echoes through a cave of shattered dreams :new",
+  "chords": [
+    "Ebmaj7",
+    "Ab7",
+    "Bbmaj7",
+    "Dbmaj7"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-08"
+}
