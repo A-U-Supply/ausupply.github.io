@@ -1,0 +1,16 @@
+{
+  "scale": "Mi Sheberakh",
+  "root": "F#",
+  "tempo": 90,
+  "description": "As the last ape on a desolate planet plucks a banjo, the haunting melodies summon a swarm of *ghostly space locusts* :ant::skull:",
+  "chords": [
+    "F#m",
+    "C#m7",
+    "G#7",
+    "D#m"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-12"
+}
