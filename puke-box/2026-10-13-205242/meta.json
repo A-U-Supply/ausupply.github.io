@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian",
+  "root": "D",
+  "tempo": 180,
+  "description": "As the Sinwarian Acceleration begins, a harp played with oven mitts echoes through an orchestral swell in a bathroom :shower::dash::loud",
+  "chords": [
+    "Dm",
+    "Ebm",
+    "Ab",
+    "Bb"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-13"
+}
