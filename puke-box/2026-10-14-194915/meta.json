@@ -1,0 +1,16 @@
+{
+  "scale": "Hexatonic (Augmented)",
+  "root": "A",
+  "tempo": 180,
+  "description": "The song *NARF!* is like a spaghetti western showdown between a music box ballerina and a shanai-wielding cowboy :face",
+  "chords": [
+    "A+",
+    "D#m",
+    "G+",
+    "C#m"
+  ],
+  "melody_instrument": 111,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-14"
+}
