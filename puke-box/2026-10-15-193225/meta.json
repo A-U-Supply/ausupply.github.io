@@ -1,0 +1,16 @@
+{
+  "scale": "Hexatonic (Blues Minor)",
+  "root": "A",
+  "tempo": 140,
+  "description": "Frederic Wertham's psychiatric notes were scattered all over the bathroom floor, next to a synthesizer playing a haunting solo in a cave :european",
+  "chords": [
+    "Am",
+    "Dm7",
+    "G7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-15"
+}
