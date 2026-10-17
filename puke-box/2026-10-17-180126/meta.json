@@ -1,0 +1,16 @@
+{
+  "scale": "Diminished (Whole-Half)",
+  "root": "Eb",
+  "tempo": 100,
+  "description": "A mariachi band on the moon plays a mournful tune while wind chimes in a wind tunnel echo through the *dumpster dive bar* :full",
+  "chords": [
+    "Ebdim",
+    "Gbdim",
+    "Bb7",
+    "Ddim"
+  ],
+  "melody_instrument": 25,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-17"
+}
