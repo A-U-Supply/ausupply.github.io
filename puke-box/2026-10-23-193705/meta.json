@@ -1,0 +1,16 @@
+{
+  "scale": "Istrian",
+  "root": "A",
+  "tempo": 180,
+  "description": "The demolition derby church organ played a haunting melody as the *exploitation index* ticker tape wrapped around the crash barrier :rotating",
+  "chords": [
+    "Am",
+    "E7",
+    "G",
+    "C"
+  ],
+  "melody_instrument": 46,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-23"
+}
