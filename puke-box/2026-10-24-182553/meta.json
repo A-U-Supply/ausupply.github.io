@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian",
+  "root": "Eb",
+  "tempo": 100,
+  "description": "As the broadcast signal wafts *over the air*, a lone church organist plays a haunting melody amidst the wreckage of a demolition derby :racing",
+  "chords": [
+    "Ebmaj7",
+    "Ab7",
+    "Dbmaj7",
+    "Gb7"
+  ],
+  "melody_instrument": 71,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-24"
+}
