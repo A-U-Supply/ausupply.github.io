@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian",
+  "root": "Bb",
+  "tempo": 100,
+  "description": "A trad bad musician plays a haunting melody on a rusty pipe organ in a abandoned elevator shaft :tokyo",
+  "chords": [
+    "Bbmaj7",
+    "Cm7",
+    "Dm7",
+    "Eb7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-25"
+}
