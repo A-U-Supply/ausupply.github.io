@@ -1,0 +1,16 @@
+{
+  "scale": "Istrian",
+  "root": "G",
+  "tempo": 130,
+  "description": "As Mista Boiga slithers through the swamp, the cypress trees start playing a wonky ragtime tune on their roots :herb::snake:",
+  "chords": [
+    "Gm",
+    "Em7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-26"
+}
