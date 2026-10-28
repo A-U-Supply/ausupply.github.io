@@ -1,0 +1,16 @@
+{
+  "scale": "Messiaen Mode 3",
+  "root": "F#",
+  "tempo": 180,
+  "description": "The mangled wreckage of a calliope screams in anguish as the church organ plays a haunting requiem at the demolition derby :racing",
+  "chords": [
+    "F#m",
+    "G#m7",
+    "C#m7",
+    "D#m"
+  ],
+  "melody_instrument": 42,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-27"
+}
