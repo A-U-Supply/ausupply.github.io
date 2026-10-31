@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian",
+  "root": "Ab",
+  "tempo": 110,
+  "description": "As we echo *what we gotta do* in an abandoned cathedral, the honky-tonk piano magically fills the space with an orchestral swell :star2::musical",
+  "chords": [
+    "Abmaj7",
+    "Dbmaj7",
+    "Eb7",
+    "Gbmaj7"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-30"
+}
