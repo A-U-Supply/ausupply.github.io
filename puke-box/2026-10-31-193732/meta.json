@@ -1,0 +1,16 @@
+{
+  "scale": "Pelog",
+  "root": "A",
+  "tempo": 130,
+  "description": "In the *Wurly Durly World*, a gamelan orchestra on a space station plays haunting melodies amidst a maelstrom of colorful chaos :tornado::dizzy:",
+  "chords": [
+    "Am",
+    "Em7",
+    "Gm",
+    "Cadd9"
+  ],
+  "melody_instrument": 11,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-10-31"
+}
