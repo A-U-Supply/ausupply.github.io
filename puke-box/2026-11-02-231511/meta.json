@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Bhairav",
+  "root": "G",
+  "tempo": 140,
+  "description": "As the galactic stock market crashes, a lone banjo player on a space station weeps into the void :rocket::money",
+  "chords": [
+    "G7",
+    "Em7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-02"
+}
