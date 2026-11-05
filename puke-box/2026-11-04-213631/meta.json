@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian Dominant",
+  "root": "D",
+  "tempo": 100,
+  "description": "As we question whether *we* are the badies, a lone pan flute player wanders a desolate parking garage :man-running::loud",
+  "chords": [
+    "Dm7",
+    "G7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 75,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-04"
+}
