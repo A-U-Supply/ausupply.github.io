@@ -1,0 +1,16 @@
+{
+  "scale": "Tritone",
+  "root": "Ab",
+  "tempo": 160,
+  "description": "As the last Big Mac on the space station floated away, the astronauts embarked on a frantic *Communal Pursuit of the Big Mac* :rocket::hamburger::dizzy:",
+  "chords": [
+    "Abmaj7",
+    "Db7",
+    "Gb7",
+    "Cbmaj7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-05"
+}
