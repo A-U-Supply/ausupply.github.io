@@ -1,0 +1,16 @@
+{
+  "scale": "Nikriz",
+  "root": "G",
+  "tempo": 160,
+  "description": "As the space station's gamelan orchestra played a frantic farewell, a former trad cath enthusiast blasted off into the unknown, screaming *byyyyeeee!!!* :rocket::dizzy::fire:",
+  "chords": [
+    "Gm",
+    "E7",
+    "Cmaj7",
+    "Am"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-07"
+}
