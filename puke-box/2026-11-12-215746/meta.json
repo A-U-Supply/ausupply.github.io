@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian Minor",
+  "root": "G",
+  "tempo": 110,
+  "description": "A mariachi band on the moon plays a frantic rendition of the university's fight song in a hospital waiting room :full",
+  "chords": [
+    "Gmaj7",
+    "Cmaj7",
+    "Am7",
+    "D7"
+  ],
+  "melody_instrument": 64,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-12"
+}
