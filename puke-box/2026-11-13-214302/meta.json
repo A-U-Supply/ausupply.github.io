@@ -1,0 +1,16 @@
+{
+  "scale": "Istrian",
+  "root": "C#",
+  "tempo": 130,
+  "description": "A lonely theremin mourns the withering of robotic harvests :ear",
+  "chords": [
+    "C#m",
+    "G#m",
+    "A",
+    "E#"
+  ],
+  "melody_instrument": 81,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-13"
+}
