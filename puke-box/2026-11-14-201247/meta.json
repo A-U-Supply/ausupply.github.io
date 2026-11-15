@@ -1,0 +1,16 @@
+{
+  "scale": "Lydian",
+  "root": "Bb",
+  "tempo": 130,
+  "description": "A chaotic tea party erupts with *You Lamp! You Towel! You Plate!* as the honored guest :exploding",
+  "chords": [
+    "Bbmaj7",
+    "Cm7",
+    "Dm7",
+    "Eb7"
+  ],
+  "melody_instrument": 66,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-14"
+}
