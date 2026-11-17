@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Natabhairavi",
+  "root": "F",
+  "tempo": 100,
+  "description": "A mariachi band on the moon watches as a corrupted island man emerges from a submarine with a gospel choir :full",
+  "chords": [
+    "Fm",
+    "G7",
+    "Am",
+    "Em7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-16"
+}
