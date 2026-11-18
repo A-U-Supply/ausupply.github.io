@@ -1,0 +1,16 @@
+{
+  "scale": "Raga Bhairav",
+  "root": "E",
+  "tempo": 100,
+  "description": "In the depths of a mystical cave, a didgeridoo whispers secrets to a synthesizer, as the universe is nursed into existence :milky",
+  "chords": [
+    "Em7",
+    "B7",
+    "G#m",
+    "C#m7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-17"
+}
