@@ -1,0 +1,16 @@
+{
+  "scale": "Akebono",
+  "root": "G",
+  "tempo": 90,
+  "description": "A ghostly gospel choir echoes through a submarine while a didgeridoo player jams in a abandoned parking garage :woman-rowing-boat::skull::loud",
+  "chords": [
+    "Gm",
+    "Em7",
+    "Cmaj7",
+    "Am7"
+  ],
+  "melody_instrument": 68,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-18"
+}
