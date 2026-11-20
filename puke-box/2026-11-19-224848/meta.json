@@ -1,0 +1,16 @@
+{
+  "scale": "Kumoi",
+  "root": "C#",
+  "tempo": 100,
+  "description": "The immoral tally was kept by a mysterious figure playing a haunting melody on a kalimba in a dark, windy cave :european",
+  "chords": [
+    "C#m",
+    "G#m",
+    "A",
+    "E"
+  ],
+  "melody_instrument": 108,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-19"
+}
