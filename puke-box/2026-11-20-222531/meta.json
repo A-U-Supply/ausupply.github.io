@@ -1,0 +1,16 @@
+{
+  "scale": "Phrygian",
+  "root": "B",
+  "tempo": 100,
+  "description": "The pipes in the bathroom are whispering eerie melodies to the *shower curtain* :shower::sweat",
+  "chords": [
+    "Bm",
+    "G7",
+    "Em",
+    "Cmaj7"
+  ],
+  "melody_instrument": 40,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-20"
+}
