@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Sikah",
+  "root": "A",
+  "tempo": 130,
+  "description": "As the didgeridoo echoes through the parking garage, a banjo-wielding alien whispers *there are no UFOs* :flying",
+  "chords": [
+    "Am",
+    "G7",
+    "Fmaj7",
+    "Em7"
+  ],
+  "melody_instrument": 105,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-21"
+}
