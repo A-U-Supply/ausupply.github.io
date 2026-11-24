@@ -1,0 +1,16 @@
+{
+  "scale": "Hungarian Major",
+  "root": "Ab",
+  "tempo": 100,
+  "description": "As I float through the space station's library, I realize *I haven't read this* galactic encyclopedia :rocket::books::dizzy:",
+  "chords": [
+    "Abmaj7",
+    "Cm7",
+    "D7",
+    "Gbmaj7"
+  ],
+  "melody_instrument": 73,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-24"
+}
