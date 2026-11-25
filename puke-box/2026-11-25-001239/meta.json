@@ -1,0 +1,16 @@
+{
+  "scale": "Maqam Suznak",
+  "root": "D",
+  "tempo": 130,
+  "description": "A dreamcatcher weaving prompts into a sonic tapestry :thread::computer::crystal",
+  "chords": [
+    "Dmaj7",
+    "E7",
+    "Gmaj7",
+    "Cmaj7"
+  ],
+  "melody_instrument": 104,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-25"
+}
