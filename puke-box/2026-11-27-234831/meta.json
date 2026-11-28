@@ -1,0 +1,16 @@
+{
+  "scale": "Moorish",
+  "root": "F#",
+  "tempo": 160,
+  "description": "In a surreal office, *job sim sickos* are fueled by coffee and mariachi music on the moon :full",
+  "chords": [
+    "F#m7",
+    "C#m7",
+    "G#7",
+    "D#m7"
+  ],
+  "melody_instrument": 13,
+  "chord_instrument": 0,
+  "temperature": 1.2,
+  "date": "2026-11-27"
+}
